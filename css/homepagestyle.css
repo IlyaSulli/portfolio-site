@@ -1465,7 +1465,7 @@ section#WidgetDribbbleContainer {
         grid-template-columns: repeat(3, 25dvw);
         grid-template-rows: repeat(6, 50dvw);
         grid-gap: 10px;
-        margin-top: 80px;
+        margin-top: 30px;
         margin-bottom: 60px;
         display: grid;
         margin-left: auto;
@@ -1516,6 +1516,11 @@ section#WidgetDribbbleContainer {
         align-items: center;
         width: 100%;
         height: 100%;
+    }
+
+    #WidgetMapContainer {
+        height: 60%;
+        align-self: end;
     }
 
     #WavingPersonImg {

@@ -6,7 +6,7 @@ const darkMode = document.getElementById('themeSwitchContainer');
 function toggleTheme() {
     body.classList.toggle('darkTheme');
     darkMode.classList.toggle('active');
-
+    saveThemePreference();
 }
 
 // Apply the respective theme based on the device theme
@@ -28,3 +28,28 @@ themeToggle.addEventListener('click', () => {
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
     applyTheme();
 });
+
+// Save the user's theme preference to localStorage
+function saveThemePreference() {
+    localStorage.setItem('themePreference', body.classList.contains('darkTheme') ? 'dark' : 'light');
+}
+
+// Get the user's theme preference from localStorage
+function getThemePreference() {
+    return localStorage.getItem('themePreference');
+}
+
+// Set the user's theme preference to localStorage
+function setThemePreference() {
+    const themePreference = getThemePreference();
+    if (themePreference === 'dark') {
+        body.classList.add('darkTheme');
+        darkMode.classList.add('active');
+    } else {
+        body.classList.remove('darkTheme');
+        darkMode.classList.remove('active');
+    }
+}
+
+// Set the user's theme preference on load
+setThemePreference();
