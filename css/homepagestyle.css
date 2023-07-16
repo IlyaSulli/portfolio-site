@@ -223,12 +223,15 @@ p {
     --contact-widget-text: #231919;
 
     --linkedin-background: #0a66c2;
+    --linkedin-background-hover: #0a5abf;
     --linkedin-text: #f9f9f9;
 
     --github-background: #25292f;
+    --github-background-hover: #1e2228;
     --github-text: #ffffff;
 
     --dribbble-background: #F483AB;
+    --dribbble-background-hover: #e26f9e;
 
     --option-one-hover-background: #6D2C2C;
     --option-one-hover-text: #FFCBCB;
@@ -293,12 +296,15 @@ p {
     --contact-widget-text: #231919;
 
     --linkedin-background: #0a66c2;
+    --linkedin-background-hover: #0a5abf;
     --linkedin-text: #f9f9f9;
 
     --github-background: #25292f;
+    --github-background-hover: #1e2228;
     --github-text: #ffffff;
 
     --dribbble-background: #F483AB;
+    --dribbble-background-hover: #e26f9e;
 
     --option-one-hover-background: #FFCBCB;
     --option-one-hover-text: #6D2C2C;
@@ -514,7 +520,7 @@ h3 {
     background-color: var(--option-one-hover-background);
 }
 
-#OptionOneToolDescription:hover {
+#OptionOneToolContainer:hover>#OptionOneToolTextContainer>#OptionOneToolDescription {
     color: var(--option-one-hover-text);
 }
 
@@ -526,7 +532,7 @@ h3 {
     background-color: var(--option-two-hover-background);
 }
 
-#OptionTwoToolDescription:hover {
+#OptionTwoToolContainer:hover>#OptionTwoToolTextContainer>#OptionTwoToolDescription {
     color: var(--option-two-hover-text);
 }
 
@@ -538,7 +544,7 @@ h3 {
     background-color: var(--option-three-hover-background);
 }
 
-#OptionThreeToolDescription:hover {
+#OptionThreeToolContainer:hover>#OptionThreeToolTextContainer>#OptionThreeToolDescription {
     color: var(--option-three-hover-text);
 }
 
@@ -550,7 +556,7 @@ h3 {
     background-color: var(--option-four-hover-background);
 }
 
-#OptionFourToolDescription:hover {
+#OptionFourToolContainer:hover>#OptionFourToolTextContainer>#OptionFourToolDescription {
     color: var(--option-four-hover-text);
 }
 
@@ -565,27 +571,54 @@ h3 {
 
 
 /* Style the "View All" button */
+#ViewAllToolsContainer {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
 .ViewAllButton {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-    margin: 10px;
-    background-color: #f5f5f5;
+    justify-content: center;
+    padding-left: 16px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: 20px;
+    background-color: var(--background-layer3);
     cursor: pointer;
+    width: auto;
+    height: auto;
+    border-radius: var(--radius-layer4);
 }
 
 .ViewAllButton:hover {
-    background-color: #e0e0e0;
+    background-color: var(--background-layer4);
 }
 
 .ViewAllButton p {
     margin: 0;
 }
 
+.ViewAllButtonText {
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    color: var(--font-layer3);
+    transition: color 0.3s ease;
+}
+
 .ViewAllButtonIcon {
-    width: 16px;
-    height: 16px;
+    margin-left: 25px;
+}
+
+.ViewAllButtonIcon>svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--font-layer3);
 }
 
 /* TODO: Complete the View All Button */
@@ -674,9 +707,8 @@ h3 {
         align-items: start;
         justify-content: start;
         padding-left: 0px;
-
+        list-style-type: none;
     }
-
 
     .MobileAcordianLine {
         background-color: var(--background-layer3);
@@ -733,76 +765,8 @@ h3 {
         position: relative;
     }
 
-    /* .NavItem {
-        padding-left: 20px;
-        padding-right: 20px;
-        margin-top: 5px;
-        margin-bottom: 5px;
-    }
-
-    .NavItem:last-child {
-        margin-bottom: 10px;
-    }
-
-    .NavItem:first-child {
-        margin-top: 10px;
-    }
-
-    .SelectedNavItem::after {
-        height: 35px;
-        width: 2px;
-        display: block;
-        content: "";
-        position: absolute;
-        right: 0;
-        top: 0;
-        background-color: var(--primary);
-        margin-top: 30px
-    }
-
-    .SelectedNavItem:hover::after {
-        height: 20px;
-        width: 2px;
-        display: block;
-        content: "";
-        position: absolute;
-        right: 0;
-        top: 0;
-        background-color: var(--primary);
-        margin-top: 30px
-    }
-
-    .NavItem::after {
-        height: 0px;
-        width: 2px;
-        display: block;
-        content: "";
-        position: absolute;
-        right: 0;
-        top: 0;
-        background-color: var(--primary);
-        margin-top: 30px
-    }
-
-    .NavItem:hover::after {
-        height: 15px;
-        width: 2px;
-        display: block;
-        content: "";
-        position: absolute;
-        right: 0;
-        top: 0;
-        background-color: var(--primary);
-        margin-top: 30px
-    } */
-
 }
 
-
-
-
-
-/* TODO: Complete the mobile nav menu */
 
 
 /* Main Content */
@@ -1073,6 +1037,11 @@ h3 {
     justify-content: start;
 }
 
+.SocialWidgetContainer:hover {
+    /*Change pointer to pointer*/
+    cursor: pointer;
+}
+
 section#WidgetGamesContainer {
     grid-area: WidgetGames;
     background-color: var(--games-widget-background);
@@ -1085,42 +1054,63 @@ section#WidgetLinkedInContainer {
     border-radius: var(--radius-layer2);
 }
 
+section#WidgetLinkedInContainer:hover {
+    background-color: var(--linkedin-background-hover);
+    transition: all 0.3s ease;
+}
+
 section#WidgetMapContainer {
     grid-area: WidgetMap;
     background-image: url("../assets/images/homepage/maps-image.png");
     background-size: cover;
     background-position: center;
     border-radius: var(--radius-layer2);
+    transition: all 0.3s ease;
 }
 
 section#WidgetGithubContianer {
     grid-area: WidgetGithub;
     background-color: var(--github-background);
     border-radius: var(--radius-layer2);
+    transition: all 0.3s ease;
+}
+
+section#WidgetGithubContianer:hover {
+    background-color: var(--github-background-hover);
+    transition: all 0.3s ease;
 }
 
 section#WidgetToolsContainer {
     grid-area: WidgetTools;
     background-color: var(--tools-widget-background);
     border-radius: var(--radius-layer2);
+    transition: all 0.3s ease;
 }
 
 section#WidgetProjectsContainer {
     grid-area: WidgetProjects;
     background-color: var(--projects-widget-background);
     border-radius: var(--radius-layer2);
+    transition: all 0.3s ease;
 }
 
 section#WidgetContactContainer {
     grid-area: WidgetContact;
     background-color: var(--contact-widget-background);
     border-radius: var(--radius-layer2);
+    transition: all 0.3s ease;
 }
 
 section#WidgetDribbbleContainer {
     grid-area: WidgetDribbble;
     background-color: var(--dribbble-background);
     border-radius: var(--radius-layer2);
+    transition: all 0.3s ease;
+}
+
+section#WidgetDribbbleContainer:hover {
+    background-color: var(--dribbble-background-hover);
+    transition: all 0.3s ease;
 }
 
 /* Grid Container */

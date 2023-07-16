@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <title>Personal Portfolio - Homepage</title>
@@ -31,7 +31,7 @@
         </div>
         <div id="navContainer">
             <ul>
-                <li><a href="?ref=menu">
+                <li><a href="?ref=menu" aria-label="Go to home page">
                         <div id="HomeButtonContainer" class="NavItem SelectedNavItem">
                             <div id="HomeButtonIconContainer" class="NavIconContainer">
                                 <svg id="HomeButtonIcon" class="NavButtonIcon" fill="none" viewBox="0 0 24 24"
@@ -44,7 +44,7 @@
                                 <p id="HomeButtonText" class="NavButtonText">Home</p>
                             </div>
                     </a></li>
-                <li><a href="/projects/?ref=menu">
+                <li><a href="/projects/?ref=menu" aria-label="Go to projects page">
                         <div id="ProjectsButtonContainer" class="NavItem">
                             <div id="ProjectsButtonIconContainer" class="NavIconContainer">
                                 <svg id="ProjectsButtonIcon" class="NavButtonIcon" fill="none" viewBox="0 0 24 24"
@@ -57,7 +57,7 @@
                                 <p id="ProjectsButtonText" class="NavButtonText">Projects</p>
                             </div>
                     </a></li>
-                <li><a href="/games/?ref=menu">
+                <li><a href="/games/?ref=menu" aria-label="Go to games page">
                         <div id="GamesButtonContainer" class="NavItem">
                             <div id="GamesButtonIconContainer" class="NavIconContainer">
                                 <svg id="GamesButtonIcon" class="NavButtonIcon" fill="none" viewBox="0 0 24 24"
@@ -70,7 +70,7 @@
                                 <p id="GamesButtonText" class="NavButtonText">Games</p>
                             </div>
                     </a></li>
-                <li><a href="/Tools/?ref=menu">
+                <li><a href="/Tools/?ref=menu" aria-label="Go to tools page">
                         <div id="ToolsButtonContainer" class="NavItem">
                             <div id="ToolsButtonIconContainer" class="NavIconContainer">
                                 <svg id="ToolsButtonIcon" class="NavButtonIcon" fill="none" viewBox="0 0 24 24"
@@ -134,8 +134,11 @@
                                     <div class="ViewAllButtonText" class="NavButtonText">
                                         <p>View All</p>
                                     </div>
-                                    <div class="ViewAllButtonIcon" class="NavButtonIcon">
-                                        <img src="assets/icons/arrow_right_24_regular.svg">
+                                    <div class="ViewAllButtonIcon NavButtonIcon">
+                                        <svg fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M13.267 4.209a.75.75 0 0 0-1.034 1.086l6.251 5.955H3.75a.75.75 0 0 0 0 1.5h14.734l-6.251 5.954a.75.75 0 0 0 1.034 1.087l7.42-7.067a.996.996 0 0 0 .3-.58.758.758 0 0 0-.001-.29.995.995 0 0 0-.3-.578l-7.419-7.067Z" />
+                                        </svg>
                                     </div>
                                 </div>
                             </div>
@@ -259,7 +262,8 @@
                         design and program websites and apps based around the user.</p>
                 </div>
                 <div id="homepageHeroImageContainer">
-                    <img id="homepageHeroImage" src="assets/images/homepage/ilya-downsize.jpg">
+                    <img id="homepageHeroImage" src="assets/images/homepage/ilya-downsize.jpg"
+                        alt="Ilya Sullivan Profile Image">
                 </div>
             </section>
             <section id="homepageGrid">
@@ -365,13 +369,16 @@
                 </section>
                 <section id="WidgetMapContainer" class="WidgetContainer">
                     <div id="WidgetMap" class="WidgetSubContainer">
-                        <img id="WavingPersonImg" src="assets/images/homepage/waving_person.png">
+                        <img id="WavingPersonImg" src="assets/images/homepage/waving_person.png"
+                            alt="Person waving in front of map">
                     </div>
                 </section>
-                <section id="WidgetLinkedInContainer" class="WidgetContainer SocialWidgetContainer">
+                <section id="WidgetLinkedInContainer" class="WidgetContainer SocialWidgetContainer"
+                    onclick="window.open('https://www.linkedin.com/in/ilya-sullivan/', '_blank')"
+                    aria-label="Open LinkedIn profile in new tab">
                     <div id="WidgetLinkedIn" class="SocialWidget WidgetSubContainer">
                         <img id="WidgetLinkedInIcon" class="WidgetIcon"
-                            src="assets/icons/linkedin_business_network_social_icon.svg">
+                            src="assets/icons/linkedin_business_network_social_icon.svg" alt="LinkedIn logo">
                     </div>
                     <div class="WidgetRedirectContainer">
                         <div class="WidgetRedirect">
@@ -382,10 +389,12 @@
                         </div>
                     </div>
                 </section>
-                <section id="WidgetGithubContianer" class="WidgetContainer SocialWidgetContainer">
+                <section id="WidgetGithubContianer" class="WidgetContainer SocialWidgetContainer"
+                    onclick="window.open('https://github.com/IlyaSulli/', '_blank')"
+                    aria-label="Open Github profile in new tab">
                     <div id="WidgetGithub" class="SocialWidget WidgetSubContainer">
                         <img id="WidgetGithubIcon" class="WidgetIcon"
-                            src="assets/icons/github_repository_resource_icon.svg">
+                            src="assets/icons/github_repository_resource_icon.svg" alt="Github logo">
                     </div>
                     <div class="WidgetRedirectContainer">
                         <div class="WidgetRedirect">
@@ -396,10 +405,12 @@
                         </div>
                     </div>
                 </section>
-                <section id="WidgetDribbbleContainer" class="WidgetContainer SocialWidgetContainer">
+                <section id="WidgetDribbbleContainer" class="WidgetContainer SocialWidgetContainer"
+                    onclick="window.open('https://dribbble.com/IlyaSullivan', '_blank')"
+                    aria-label="Open Dirbbble profile in new tab">
                     <div id="WidgetDribbble" class="SocialWidget WidgetSubContainer">
                         <img id="WidgetDribbbleIcon" class="WidgetIcon"
-                            src="assets/icons/dribbble_social media_icon.svg">
+                            src="assets/icons/dribbble_social media_icon.svg" alt="Dribbble logo">
                     </div>
                     <div class="WidgetRedirectContainer">
                         <div class="WidgetRedirect">
@@ -417,7 +428,7 @@
                 <div id="FooterContainer">
                     <h4 id="FooterTitle">Made with ♥️ by Ilya Sullivan</h4>
                     <div id="themeSwitchContainerWrapper">
-                        <button id="themeToggle" type="button">
+                        <button id="themeToggle" type="button" aria-label="Theme switch button">
                             <div id="themeSwitchContainer">
                                 <div id="DarkModeIcon">
                                     <svg fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
