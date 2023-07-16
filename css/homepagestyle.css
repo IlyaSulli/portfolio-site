@@ -132,8 +132,14 @@
     #MobileNavContainer {
         visibility: visible;
         display: flex;
-        justify-content: flex-end;
-        align-items: flex-end;
+        justify-content: start;
+        align-items: start;
+    }
+
+    #MobileNavContainer>ul {
+        align-items: start;
+        justify-content: start;
+        display: flex;
     }
 
     .NavItem::after {
@@ -586,101 +592,148 @@ h3 {
 
 /* Mobile Nav */
 
-.ham8 .top {
-    stroke-dasharray: 40 160;
-}
-
-.ham8 .middle {
-    stroke-dasharray: 40 142;
-    transform-origin: 50%;
-    transition: transform 400ms;
-}
-
-.ham8 .bottom {
-    stroke-dasharray: 40 85;
-    transform-origin: 50%;
-    transition: transform 400ms, stroke-dashoffset 400ms;
-}
-
-.ham8.activeMenu .top {
-    stroke-dashoffset: -64px;
-}
-
-.ham8.activeMenu .middle {
-    transform: rotate(90deg);
-}
-
-.ham8.activeMenu .bottom {
-    stroke-dashoffset: -64px;
-}
-
-.line {
-    fill: none;
-    transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
-    stroke: var(--font-layer1);
-    stroke-width: 5.5;
-    stroke-linecap: round;
-}
-
-.ham {
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-    transition: transform 400ms;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-.hamRotate.activeMenu {
-    transform: rotate(45deg);
-}
-
-#HamburgerIcon {
-    width: 38px;
-    margin-right: 10px;
-}
-
-#HamburgerIcon>path {
-    stroke: var(--font-layer1)
-}
-
-
-#MobileNavMenuContainer {
-    display: none;
-}
-
-.active>#MobileNavMenuContainer {
-    display: block;
-    position: absolute;
-    top: 65px;
-    right: 10px;
-    width: auto;
-    height: auto;
-    margin-top: 20px;
-    border-radius: var(--radius-layer3);
-    background-color: var(--background-layer2);
-}
-
-#MobileNavMenuContainer>ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.MobileAcordianLine {
-    background-color: var(--background-layer3);
-    height: 2px;
-    border-width: 0px;
-    width: 100%;
-}
 
 @media screen and (max-width: 859px) {
 
+    .ham8 .top {
+        stroke-dasharray: 40 160;
+    }
+
+    .ham8 .middle {
+        stroke-dasharray: 40 142;
+        transform-origin: 50%;
+        transition: transform 400ms;
+    }
+
+    .ham8 .bottom {
+        stroke-dasharray: 40 85;
+        transform-origin: 50%;
+        transition: transform 400ms, stroke-dashoffset 400ms;
+    }
+
+    .ham8.activeMenu .top {
+        stroke-dashoffset: -64px;
+    }
+
+    .ham8.activeMenu .middle {
+        transform: rotate(90deg);
+    }
+
+    .ham8.activeMenu .bottom {
+        stroke-dashoffset: -64px;
+    }
+
+    .line {
+        fill: none;
+        transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+        stroke: var(--font-layer1);
+        stroke-width: 5.5;
+        stroke-linecap: round;
+    }
+
+    .ham {
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        transition: transform 400ms;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .hamRotate.activeMenu {
+        transform: rotate(45deg);
+    }
+
+    #HamburgerIcon {
+        width: 38px;
+        margin-right: 10px;
+    }
+
+    #HamburgerIcon>path {
+        stroke: var(--font-layer1)
+    }
+
+    #MobileNavMenuContainer {
+        display: none;
+    }
+
+    .active>#MobileNavMenuContainer {
+        display: block;
+        position: absolute;
+        top: 65px;
+        right: 10px;
+        width: 150px;
+        height: auto;
+        margin-top: 20px;
+        border-radius: var(--radius-layer3);
+        background-color: var(--background-layer2);
+    }
+
+    #MobileNavMenuContainer>ul {
+        align-items: start;
+        justify-content: start;
+        padding-left: 0px;
+
+    }
+
+
+    .MobileAcordianLine {
+        background-color: var(--background-layer3);
+        height: 2px;
+        border-width: 0px;
+        width: 100px;
+    }
+
+    .NavItem>a {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        padding-left: 25px;
+        padding-top: 13px;
+        padding-bottom: 15px;
+        padding-right: 30px;
+        width: 100px;
+        text-decoration: none;
+    }
+
+    .NavButtonText {
+        font-size: 16px;
+        line-height: 0px;
+        font-family: 'Inter', sans-serif;
+        color: var(--font-layer3);
+        transition: color 0.3s ease;
+    }
+
+    .NavItem::after {
+        content: "";
+        position: absolute;
+        bottom: 50%;
+        left: calc(100%-2px);
+        width: 2;
+        transform: translateY(-50%);
+        height: 0;
+        background-color: var(--primary);
+        transition: height 0.3s ease;
+    }
+
+    .NavItem:hover::after {
+        height: 30%;
+    }
+
+    .SelectedNavItem::after {
+        height: 50%;
+    }
+
+    .SelectedNavItem:hover::after {
+        height: 40%;
+    }
+
     .NavItem {
+        position: relative;
+    }
+
+    /* .NavItem {
         padding-left: 20px;
         padding-right: 20px;
         margin-top: 5px;
@@ -741,7 +794,7 @@ h3 {
         top: 0;
         background-color: var(--primary);
         margin-top: 30px
-    }
+    } */
 
 }
 
