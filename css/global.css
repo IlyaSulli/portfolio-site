@@ -1,0 +1,848 @@
+/* Thanks you Mikael Ainalem for the hamburger menu animation: https://codepen.io/ainalem/pen/LJYRxz */
+
+/* Desktop Only */
+@media screen and (min-width: 1024px) {
+
+    #logoContainer,
+    #logoSpacer {
+        width: auto;
+        height: initial;
+    }
+
+    #logoSpacerContainer {
+        padding-left: 25px;
+        padding-right: 25px;
+        width: 100px;
+        height: 65px;
+    }
+
+
+    #logoSpacerContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #navContainer {
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        align-items: center;
+        align-self: end;
+    }
+
+    #MobileNavContainer {
+        visibility: hidden;
+        display: none;
+    }
+
+    .NavItem::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        transform: translateX(-50%);
+        height: 2px;
+        background-color: var(--primary);
+        transition: width 0.3s ease;
+    }
+
+    .NavItem:hover::after {
+        width: 50%;
+    }
+
+    .SelectedNavItem::after {
+        width: 100%;
+    }
+
+    .SelectedNavItem:hover::after {
+        width: 85%;
+    }
+
+    .NavItem {
+        position: relative;
+    }
+}
+
+/* Tablet Only */
+
+@media screen and (max-width: 1023px) and (min-width: 860px) {
+
+    #navContainer {
+        flex-grow: 1;
+        display: flex;
+        justify-content: flex-end;
+        align-items: end;
+        align-self: end;
+    }
+
+    #logoSpacerContainer {
+        display: none;
+        visibility: hidden;
+    }
+
+    #MobileNavContainer {
+        visibility: hidden;
+        display: none;
+    }
+
+    .NavItem::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        transform: translateX(-50%);
+        height: 2px;
+        background-color: var(--primary);
+        transition: width 0.3s ease;
+    }
+
+    .NavItem:hover::after {
+        width: 50%;
+    }
+
+    .SelectedNavItem::after {
+        width: 100%;
+    }
+
+    .SelectedNavItem:hover::after {
+        width: 85%;
+    }
+
+    .NavItem {
+        position: relative;
+    }
+}
+
+/* Mobile Only */
+@media screen and (max-width: 859px) {
+
+    #logoSpacerContainer {
+        display: none;
+        visibility: hidden;
+    }
+
+    #navContainer {
+        display: none;
+    }
+
+    #MobileNavContainer {
+        visibility: visible;
+        display: flex;
+        justify-content: start;
+        align-items: start;
+    }
+
+    #MobileNavContainer>ul {
+        align-items: start;
+        justify-content: start;
+        display: flex;
+    }
+
+    .NavItem::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 0;
+        height: 0;
+        transform: translateY(-50%);
+        width: 2px;
+        background-color: var(--primary-color);
+        transition: height 0.3s ease;
+    }
+
+    .SelectedNavItem::after {
+        height: 100%;
+    }
+}
+
+/* General */
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../assets/fonts/Inter-VariableFont.ttf') format('truetype');
+}
+
+body {
+    margin: 0;
+    background-color: var(--background-color);
+    transition: background-color 0.3s ease;
+}
+
+p {
+    color: var(--font-layer1);
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+}
+
+h3 {
+    margin-bottom: 0px;
+    margin-top: 0;
+}
+
+::selection {
+    background-color: var(--selection-background);
+    color: var(--selection-text);
+}
+
+.darkTheme {
+    --primary: #58EAD5;
+    --onPrimary: #002621;
+    --secondary: #1F1F1F;
+    --onSecondary: #F9F9F9;
+    --accent: #FFA562;
+    --onAccent: #261305;
+
+    --primary-button: var(--primary);
+    --primary-button-text: var(--onPrimary);
+
+    --secondary-button: var(--secondary);
+    --secondary-button-text: var(--onSecondary);
+
+    --background-layer1: #282828;
+    --background-layer2: #363636;
+    --background-layer3: #424242;
+    --background-layer4: #4E4E4E;
+    --background-layer5: #545454;
+
+    --background-color: var(--background-layer1);
+    --header-background-color: var(--background-layer2);
+
+    --font-layer1: #EBEFF0;
+    --font-layer2: #E1E9EC;
+    --font-layer3: #D6DDE0;
+    --font-layer4: #C6CED1;
+    --font-layer5: #BAC2C6;
+
+    --radius-layer1: 48px;
+    --radius-layer2: 24px;
+    --radius-layer3: 12px;
+    --radius-layer4: 6px;
+    --radius-layer5: 3px;
+
+    --option-one-hover-background: #6D2C2C;
+    --option-one-hover-text: #FFCBCB;
+    --option-one-icon-background: #C15252;
+
+    --option-two-hover-background: #512D62;
+    --option-two-hover-text: #E2C9FF;
+    --option-two-icon-background: #9A53BC;
+
+    --option-three-hover-background: #2D5C6E;
+    --option-three-hover-text: #B3E6F0;
+    --option-three-icon-background: #52AAC6;
+
+    --option-four-hover-background: #2B6D3A;
+    --option-four-hover-text: #B3F0C1;
+    --option-four-icon-background: #49B561;
+}
+
+:root {
+    --primary: #00BFA5;
+    --onPrimary: #012520;
+    --secondary: #DADADA;
+    --onSecondary: #141414;
+    --accent: #FFA059;
+    --onAccent: #261305;
+
+    --primary-button: var(--primary);
+    --primary-button-text: var(--onPrimary);
+
+    --secondary-button: var(--secondary);
+    --secondary-button-text: var(--onSecondary);
+
+    --background-layer1: #EBEFF0;
+    --background-layer2: #E1E9EC;
+    --background-layer3: #D6DDE0;
+    --background-layer4: #C6CED1;
+    --background-layer5: #BAC2C6;
+
+    --background-color: var(--background-layer1);
+    --header-background-color: var(--background-layer2);
+
+    --font-layer1: #192225;
+    --font-layer2: #293336;
+    --font-layer3: #333F43;
+    --font-layer4: #424F54;
+    --font-layer5: #4B5B61;
+
+    --radius-layer1: 48px;
+    --radius-layer2: 24px;
+    --radius-layer3: 12px;
+    --radius-layer4: 6px;
+    --radius-layer5: 3px;
+
+    --option-one-hover-background: #FFCBCB;
+    --option-one-hover-text: #6D2C2C;
+    --option-one-icon-background: #C15252;
+
+    --option-two-hover-background: #E2C9FF;
+    --option-two-hover-text: #512D62;
+    --option-two-icon-background: #9A53BC;
+
+    --option-three-hover-background: #B3E6F0;
+    --option-three-hover-text: #2D5C6E;
+    --option-three-icon-background: #52AAC6;
+
+    --option-four-hover-background: #B3F0C1;
+    --option-four-hover-text: #2B6D3A;
+    --option-four-icon-background: #49B561;
+
+    --selection-background: #008d7a;
+    --selection-text: #ffffff;
+}
+
+/* Header */
+
+#MainHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    top: 0;
+    left: 0;
+    height: 65px;
+    width: 100%;
+    background-color: var(--header-background-color);
+    border-bottom: var(--background-layer3) solid 1px;
+}
+
+#logoContainer {
+    padding-left: 25px;
+    padding-right: 25px;
+    height: 100%;
+    display: flex;
+}
+
+#logoContainer>svg {
+    width: 100px;
+    height: auto;
+}
+
+
+.LogoFill {
+    fill: var(--font-layer1);
+}
+
+/* Big Nav */
+
+#navContainer ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+#navContainer ul li {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.NavItem>a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    text-decoration: none;
+}
+
+.NavButtonIcon {
+    width: 20px;
+    height: 20px;
+    padding-right: 10px;
+    fill: var(--font-layer1);
+}
+
+.NavButtonIcon>path {
+    fill: var(--font-layer1);
+}
+
+.SelectedNavItem>a>.NavIconContainer>.NavButtonIcon>path {
+    fill: var(--primary);
+    stroke-width: 0.3px;
+    stroke: var(--primary);
+}
+
+.NavButtonText {
+    font-size: 16px;
+    line-height: 15px;
+    font-family: 'Inter', sans-serif;
+    color: var(--font-layer3);
+    transition: color 0.3s ease;
+}
+
+.NavItem:hover>a>div>.NavButtonText {
+    color: var(--font-layer1);
+    transition: color 0.3s ease;
+}
+
+
+
+
+/* Tools Hover Menu */
+
+/* Position the dropdown container */
+
+#ExpandedToolsContainer {
+    display: none;
+    width: 350px;
+    background-color: var(--background-layer2);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--background-layer3);
+    border-radius: var(--radius-layer3);
+}
+
+#ToolsButtonContainer:hover #ExpandedToolsContainer:not(.left-aligned) {
+    left: 0;
+    right: auto;
+}
+
+#ToolsButtonContainer:hover #ExpandedToolsContainer.left-aligned {
+    left: auto;
+    right: 0;
+}
+
+#ToolsButtonContainer:hover #ExpandedToolsContainer {
+    display: block;
+}
+
+#ExpandedToolsContainer {
+    position: absolute;
+    top: 100%;
+    z-index: 999;
+}
+
+#ExpandedToolsContainerWrapper {
+    position: absolute;
+    display: block;
+    min-width: 350px;
+    z-index: 998;
+    height: 10px;
+}
+
+/* Style the dropdown items */
+.OptionToolContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 15px;
+    padding-top: 0px;
+    padding-bottom: 10px;
+    padding-right: 30px;
+    border-radius: var(--radius-layer3);
+    margin: 10px;
+    transition: background-color 0.15s ease;
+}
+
+.DropdownIconContainer {
+    margin-right: 25px;
+    padding: 10px;
+    height: 30px;
+    border-radius: var(--radius-layer4);
+}
+
+.OptionToolIcon {
+    width: 30px;
+    height: 30px;
+    filter: invert();
+}
+
+.OptionToolHeadline {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 16px;
+    line-height: 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+.OptionToolDescription {
+    margin: 0;
+    padding-top: 6px;
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'Inter', sans-serif;
+    transition: color 0.15s ease;
+}
+
+#OptionOneToolIconContainer {
+    background-color: var(--option-one-icon-background);
+}
+
+#OptionOneToolContainer:hover {
+    background-color: var(--option-one-hover-background);
+}
+
+#OptionOneToolContainer:hover>#OptionOneToolTextContainer>#OptionOneToolDescription {
+    color: var(--option-one-hover-text);
+}
+
+#OptionTwoToolIconContainer {
+    background-color: var(--option-two-icon-background);
+}
+
+#OptionTwoToolContainer:hover {
+    background-color: var(--option-two-hover-background);
+}
+
+#OptionTwoToolContainer:hover>#OptionTwoToolTextContainer>#OptionTwoToolDescription {
+    color: var(--option-two-hover-text);
+}
+
+#OptionThreeToolIconContainer {
+    background-color: var(--option-three-icon-background);
+}
+
+#OptionThreeToolContainer:hover {
+    background-color: var(--option-three-hover-background);
+}
+
+#OptionThreeToolContainer:hover>#OptionThreeToolTextContainer>#OptionThreeToolDescription {
+    color: var(--option-three-hover-text);
+}
+
+#OptionFourToolIconContainer {
+    background-color: var(--option-four-icon-background);
+}
+
+#OptionFourToolContainer:hover {
+    background-color: var(--option-four-hover-background);
+}
+
+#OptionFourToolContainer:hover>#OptionFourToolTextContainer>#OptionFourToolDescription {
+    color: var(--option-four-hover-text);
+}
+
+#OptionToolContainer:hover {
+    transition: background-color 0.15s ease;
+}
+
+#OptionToolDescription:hover {
+    transition: color 0.15s ease;
+}
+
+
+
+/* Style the "View All" button */
+#ViewAllToolsContainer {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.ViewAllButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 16px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: 20px;
+    background-color: var(--background-layer3);
+    cursor: pointer;
+    width: auto;
+    height: auto;
+    border-radius: var(--radius-layer4);
+}
+
+.ViewAllButton:hover {
+    background-color: var(--background-layer4);
+}
+
+.ViewAllButton p {
+    margin: 0;
+}
+
+.ViewAllButtonText {
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    color: var(--font-layer3);
+    transition: color 0.3s ease;
+}
+
+.ViewAllButtonIcon {
+    margin-left: 25px;
+}
+
+.ViewAllButtonIcon>svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--font-layer3);
+}
+
+/* TODO: Complete the View All Button */
+
+/* Mobile Nav */
+
+
+@media screen and (max-width: 859px) {
+
+    .ham8 .top {
+        stroke-dasharray: 40 160;
+    }
+
+    .ham8 .middle {
+        stroke-dasharray: 40 142;
+        transform-origin: 50%;
+        transition: transform 400ms;
+    }
+
+    .ham8 .bottom {
+        stroke-dasharray: 40 85;
+        transform-origin: 50%;
+        transition: transform 400ms, stroke-dashoffset 400ms;
+    }
+
+    .ham8.activeMenu .top {
+        stroke-dashoffset: -64px;
+    }
+
+    .ham8.activeMenu .middle {
+        transform: rotate(90deg);
+    }
+
+    .ham8.activeMenu .bottom {
+        stroke-dashoffset: -64px;
+    }
+
+    .line {
+        fill: none;
+        transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+        stroke: var(--font-layer1);
+        stroke-width: 5.5;
+        stroke-linecap: round;
+    }
+
+    .ham {
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        transition: transform 400ms;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .hamRotate.activeMenu {
+        transform: rotate(45deg);
+    }
+
+    #HamburgerIcon {
+        width: 38px;
+        margin-right: 10px;
+    }
+
+    #HamburgerIcon>path {
+        stroke: var(--font-layer1)
+    }
+
+    #MobileNavMenuContainer {
+        display: none;
+    }
+
+    .active>#MobileNavMenuContainer {
+        display: block;
+        position: absolute;
+        top: 65px;
+        right: 10px;
+        width: 150px;
+        height: auto;
+        margin-top: 20px;
+        border-radius: var(--radius-layer3);
+        background-color: var(--background-layer2);
+    }
+
+    #MobileNavMenuContainer>ul {
+        align-items: start;
+        justify-content: start;
+        padding-left: 0px;
+        list-style-type: none;
+    }
+
+    .MobileAcordianLine {
+        background-color: var(--background-layer3);
+        height: 2px;
+        border-width: 0px;
+        width: 100px;
+    }
+
+    .NavItem>a {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        padding-left: 25px;
+        padding-top: 13px;
+        padding-bottom: 15px;
+        padding-right: 30px;
+        width: 100px;
+        text-decoration: none;
+    }
+
+    .NavButtonText {
+        font-size: 16px;
+        line-height: 0px;
+        font-family: 'Inter', sans-serif;
+        color: var(--font-layer3);
+        transition: color 0.3s ease;
+    }
+
+    .NavItem::after {
+        content: "";
+        position: absolute;
+        bottom: 50%;
+        left: calc(100%-2px);
+        width: 2;
+        transform: translateY(-50%);
+        height: 0;
+        background-color: var(--primary);
+        transition: height 0.3s ease;
+    }
+
+    .NavItem:hover::after {
+        height: 30%;
+    }
+
+    .SelectedNavItem::after {
+        height: 50%;
+    }
+
+    .SelectedNavItem:hover::after {
+        height: 40%;
+    }
+
+    .NavItem {
+        position: relative;
+    }
+
+}
+
+
+@media screen and (max-height: 600px) {
+
+    #ExpandedToolsContainerWrapper {
+        display: none;
+    }
+}
+
+/* Footer */
+
+#mainFooter {
+    width: 100%;
+}
+
+#FooterDivider {
+    background-color: var(--background-layer3);
+    height: 2px;
+    border-width: 0px;
+    width: 100%;
+}
+
+#FooterWrapper {
+    display: flex;
+    justify-content: center;
+    background-color: var(--background-layer2);
+    border-top: var(--background-layer3) solid 1px;
+    transition: all 0.3s ease;
+}
+
+#FooterTitle {
+    font-size: 14px;
+    font-weight: 400;
+    font-family: 'Inter', sans-serif;
+    color: var(--font-layer1);
+    margin-bottom: 10px;
+    align-self: center;
+    padding-right: 30px;
+}
+
+#FooterContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 90%;
+
+}
+
+#themeSwitchContainerWrapper {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#themeSwitchContainer {
+    background-color: var(--background-layer3);
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    margin-right: 30px;
+    z-index: 999;
+}
+
+#themeSwitchContainer>div>svg>path {
+    fill: var(--font-layer1);
+}
+
+#themeSwitchContainer>div>svg {
+    height: 24px;
+    width: 24px;
+}
+
+#themeSwitchContainer>div {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+#themeSwitchContainer.active>#DarkModeIcon,
+#themeSwitchContainer:not(active)>#LightModeIcon {
+    scale: 0;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+#themeSwitchContainer:not(active)>#DarkModeIcon {
+    margin-right: -23px;
+}
+
+#themeSwitchContainer.active>#DarkModeIcon {
+    margin-right: 0px;
+}
+
+#themeSwitchContainer.active>#LightModeIcon {
+    margin-left: -23px;
+    transform: rotate(90deg);
+}
+
+#themeSwitchContainer:not(active)>#LightModeIcon {
+    margin-left: 0px;
+}
+
+#themeSwitchContainer.active>#LightModeIcon,
+#themeSwitchContainer:not(active)>#DarkModeIcon {
+    display: flex;
+    scale: 1;
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+
+#themeToggle {
+    all: unset;
+    cursor: pointer;
+    align-self: center;
+}
+
+#themeToggle:focus {
+    outline: revert;
+}
