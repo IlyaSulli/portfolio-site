@@ -1,0 +1,44 @@
+.wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#FourOhFourContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 30dvh;
+    margin-top: 15dvh;
+}
+
+#FourOhFourHeadline {
+    font-size: 10rem;
+    font-weight: 700;
+    color: var(--font-layer1);
+    text-shadow: 0 0 5px;
+    margin-bottom: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+#FourOhFourDescription {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--font-layer2);
+    margin-top: 0;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+}
+
+#FourOhFourPS {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--font-layer5);
+    margin-top: 0;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+}
