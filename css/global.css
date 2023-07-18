@@ -169,7 +169,6 @@
 body {
     margin: 0;
     background-color: var(--background-color);
-    transition: background-color 0.3s ease;
 }
 
 p {
@@ -307,6 +306,7 @@ h3 {
     width: 100%;
     background-color: var(--header-background-color);
     border-bottom: var(--background-layer3) solid 1px;
+
 }
 
 #logoContainer {
@@ -578,8 +578,6 @@ h3 {
     fill: var(--font-layer3);
 }
 
-/* TODO: Complete the View All Button */
-
 /* Mobile Nav */
 
 
@@ -750,7 +748,7 @@ h3 {
     justify-content: center;
     background-color: var(--background-layer2);
     border-top: var(--background-layer3) solid 1px;
-    transition: all 0.3s ease;
+
 }
 
 #FooterTitle {
@@ -809,7 +807,7 @@ h3 {
 #themeSwitchContainer:not(active)>#LightModeIcon {
     scale: 0;
     opacity: 0;
-    transition: all 0.3s ease;
+    transition: all 0.5s ease;
 }
 
 #themeSwitchContainer:not(active)>#DarkModeIcon {
@@ -834,7 +832,7 @@ h3 {
     display: flex;
     scale: 1;
     opacity: 1;
-    transition: all 0.3s ease;
+    transition: all 0.5s ease;
 }
 
 #themeToggle {

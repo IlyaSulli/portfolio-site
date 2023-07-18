@@ -1,7 +1,5 @@
-
-
 .darkTheme {
-    
+
     --games-widget-background: #c0fccd;
     --games-widget-text: #19261C;
     --tools-widget-background: #FDFFB6;
@@ -483,16 +481,16 @@ section#WidgetDribbbleContainer:hover {
 }
 
 #WidgetProjectsTitleText {
-    color: var(--Projects-widget-text);
+    color: var(--projects-widget-text);
 }
 
 
 #WidgetContactTitleIcon>svg {
-    fill: var(--Contact-widget-text);
+    fill: var(--contact-widget-text);
 }
 
 #WidgetContactTitleText {
-    color: var(--Contact-widget-text);
+    color: var(--contact-widget-text);
 }
 
 

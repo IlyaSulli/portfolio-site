@@ -4,10 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Projects</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css\projectsstyle.css">
+    <link rel="preload" href="css\global.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 </head>
 
 <body>
+    <script src="js/theme.js"></script>
     <header id="MainHeader">
         <div id="logoContainer">
             <?xml version="1.0" encoding="UTF-8"?>
@@ -31,8 +33,8 @@
         </div>
         <div id="navContainer">
             <ul>
-                <li><a href="?ref=menu" aria-label="Go to home page">
-                        <div id="HomeButtonContainer" class="NavItem SelectedNavItem">
+                <li><a href="/index.html?ref=menu" aria-label="Go to home page">
+                        <div id="HomeButtonContainer" class="NavItem">
                             <div id="HomeButtonIconContainer" class="NavIconContainer">
                                 <svg id="HomeButtonIcon" class="NavButtonIcon" fill="none" viewBox="0 0 24 24"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -44,8 +46,8 @@
                                 <p id="HomeButtonText" class="NavButtonText">Home</p>
                             </div>
                     </a></li>
-                <li><a href="/projects.html/?ref=menu" aria-label="Go to projects page">
-                        <div id="ProjectsButtonContainer" class="NavItem">
+                <li><a href="?ref=self" aria-label="Go to projects page">
+                        <div id="ProjectsButtonContainer" class="NavItem SelectedNavItem">
                             <div id="ProjectsButtonIconContainer" class="NavIconContainer">
                                 <svg id="ProjectsButtonIcon" class="NavButtonIcon" fill="none" viewBox="0 0 24 24"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -57,7 +59,7 @@
                                 <p id="ProjectsButtonText" class="NavButtonText">Projects</p>
                             </div>
                     </a></li>
-                <li><a href="/games.html/?ref=menu" aria-label="Go to games page">
+                <li><a href="/games.html?ref=menu" aria-label="Go to games page">
                         <div id="GamesButtonContainer" class="NavItem">
                             <div id="GamesButtonIconContainer" class="NavIconContainer">
                                 <svg id="GamesButtonIcon" class="NavButtonIcon" fill="none" viewBox="0 0 24 24"
@@ -70,7 +72,7 @@
                                 <p id="GamesButtonText" class="NavButtonText">Games</p>
                             </div>
                     </a></li>
-                <li><a href="/tools.html/?ref=menu" aria-label="Go to tools page">
+                <li><a href="/tools.html?ref=menu" aria-label="Go to tools page">
                         <div id="ToolsButtonContainer" class="NavItem">
                             <div id="ToolsButtonIconContainer" class="NavIconContainer">
                                 <svg id="ToolsButtonIcon" class="NavButtonIcon" fill="none" viewBox="0 0 24 24"
@@ -145,7 +147,7 @@
                         </div>
                     </div>
                 </li>
-                <li><a href="/contact.html/?ref=menu">
+                <li><a href="/contact.html?ref=menu">
                         <div id="ContactButtonContainer" class="NavItem">
                             <div id="ContactButtonIconContainer" class="NavIconContainer">
                                 <svg id="ContactButtonIcon" class="NavButtonIcon" fill="none" viewBox="0 0 24 24"
@@ -173,7 +175,7 @@
             </div>
             <div id="MobileNavMenuContainer">
                 <ul>
-                    <li><a href="?ref=menu">
+                    <li><a href="/index.html?ref=mobilemenu">
                             <div id="HomeButtonContainer" class="NavItem SelectedNavItem">
                                 <div id="HomeButtonIconContainer" class="NavIconContainer">
                                     <svg id="HomeButtonIcon" class="NavButtonIcon" fill="none" viewBox="0 0 24 24"
@@ -185,10 +187,11 @@
                                 <div id="HomeButtonTextContainer">
                                     <p id="HomeButtonText" class="NavButtonText">Home</p>
                                 </div>
+                            </div>
                         </a>
                         <hr class="MobileAcordianLine">
                     </li>
-                    <li><a href="/projects/?ref=menu">
+                    <li><a href="?ref=selfmobile">
                             <div id="ProjectsButtonContainer" class="NavItem">
                                 <div id="ProjectsButtonIconContainer" class="NavIconContainer">
                                     <svg id="ProjectsButtonIcon" class="NavButtonIcon" fill="none" viewBox="0 0 24 24"
@@ -200,10 +203,11 @@
                                 <div id="ProjectsButtonTextContainer">
                                     <p id="ProjectsButtonText" class="NavButtonText">Projects</p>
                                 </div>
+                            </div>
                         </a>
                         <hr class="MobileAcordianLine">
                     </li>
-                    <li><a href="/games/?ref=menu">
+                    <li><a href="/games.html?ref=mobilemenu">
                             <div id="GamesButtonContainer" class="NavItem">
                                 <div id="GamesButtonIconContainer" class="NavIconContainer">
                                     <svg id="GamesButtonIcon" class="NavButtonIcon" fill="none" viewBox="0 0 24 24"
@@ -215,10 +219,11 @@
                                 <div id="GamesButtonTextContainer">
                                     <p id="GamesButtonText" class="NavButtonText">Games</p>
                                 </div>
+                            </div>
                         </a>
                         <hr class="MobileAcordianLine">
                     </li>
-                    <li><a href="/tools/?ref=menu">
+                    <li><a href="/tools.html?ref=mobilemenu">
                             <div id="ToolsButtonContainer" class="NavItem">
                                 <div id="ToolsButtonIconContainer" class="NavIconContainer">
                                     <svg id="ToolsButtonIcon" class="NavButtonIcon" fill="none" viewBox="0 0 24 24"
@@ -230,10 +235,11 @@
                                 <div id="ToolsButtonTextContainer">
                                     <p id="ToolsButtonText" class="NavButtonText">Tools</p>
                                 </div>
+                            </div>
                         </a>
                         <hr class="MobileAcordianLine">
                     </li>
-                    <li><a href="/Contact/?ref=menu">
+                    <li><a href="/contact.html?ref=mobilemenu">
                             <div id="ContactButtonContainer" class="NavItem">
                                 <div id="ContactButtonIconContainer" class="NavIconContainer">
                                     <svg id="ContactButtonIcon" class="NavButtonIcon" fill="none" viewBox="0 0 24 24"
@@ -245,7 +251,9 @@
                                 <div id="ContactButtonTextContainer">
                                     <p id="ContactButtonText" class="NavButtonText">Contact</p>
                                 </div>
-                        </a></li>
+                            </div>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
