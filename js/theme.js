@@ -14,8 +14,14 @@ document.addEventListener('DOMContentLoaded', function () {
     // Apply the respective theme based on the device theme
     function applyTheme() {
         const isDarkThemePreferred = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        body.classList.toggle('darkTheme', isDarkThemePreferred);
-        darkMode.classList.toggle('active');
+
+        if (isDarkThemePreferred) {
+            body.classList.add('darkTheme');
+            darkMode.classList.add('active');
+        } else {
+            body.classList.remove('darkTheme');
+            darkMode.classList.remove('active');
+        }
     }
 
     // Initial application of theme
