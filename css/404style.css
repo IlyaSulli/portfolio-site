@@ -7,23 +7,38 @@
 }
 
 #FourOhFourContainer {
-    width: 100%;
+    width: 100dvw;
+    height: 90dvh;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-bottom: 30dvh;
-    margin-top: 20dvh;
+
 }
 
 #FourOhFourHeadline {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#FourOhFourHeadline>span {
     font-size: 10rem;
     font-weight: 700;
-    color: var(--font-layer1);
+    color: var(--primary);
     text-shadow: 0 0 5px;
     margin-bottom: 0;
     font-family: 'Inter', sans-serif;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
+
+#flicker.active {
+    opacity: 0.2;
+}
+
 
 #FourOhFourDescription {
     font-size: 16px;

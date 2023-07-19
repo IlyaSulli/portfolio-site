@@ -426,7 +426,7 @@ h3 {
 }
 
 /* Style the dropdown items */
-.OptionToolContainer {
+.OptionToolContainer>a {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -439,6 +439,7 @@ h3 {
     transition: background-color 0.15s ease;
 }
 
+
 .DropdownIconContainer {
     margin-right: 25px;
     padding: 10px;
@@ -449,7 +450,10 @@ h3 {
 .OptionToolIcon {
     width: 30px;
     height: 30px;
-    filter: invert();
+}
+
+.OptionToolIcon>path {
+    fill: var(--font-layer1);
 }
 
 .OptionToolHeadline {
@@ -473,11 +477,11 @@ h3 {
     background-color: var(--option-one-icon-background);
 }
 
-#OptionOneToolContainer:hover {
+#OptionOneToolContainer:hover>a {
     background-color: var(--option-one-hover-background);
 }
 
-#OptionOneToolContainer:hover>#OptionOneToolTextContainer>#OptionOneToolDescription {
+#OptionOneToolContainer:hover>a>#OptionOneToolTextContainer>#OptionOneToolDescription {
     color: var(--option-one-hover-text);
 }
 
@@ -485,11 +489,11 @@ h3 {
     background-color: var(--option-two-icon-background);
 }
 
-#OptionTwoToolContainer:hover {
+#OptionTwoToolContainer:hover>a {
     background-color: var(--option-two-hover-background);
 }
 
-#OptionTwoToolContainer:hover>#OptionTwoToolTextContainer>#OptionTwoToolDescription {
+#OptionTwoToolContainer:hover>a>#OptionTwoToolTextContainer>#OptionTwoToolDescription {
     color: var(--option-two-hover-text);
 }
 
@@ -497,11 +501,11 @@ h3 {
     background-color: var(--option-three-icon-background);
 }
 
-#OptionThreeToolContainer:hover {
+#OptionThreeToolContainer:hover>a {
     background-color: var(--option-three-hover-background);
 }
 
-#OptionThreeToolContainer:hover>#OptionThreeToolTextContainer>#OptionThreeToolDescription {
+#OptionThreeToolContainer:hover>a>#OptionThreeToolTextContainer>#OptionThreeToolDescription {
     color: var(--option-three-hover-text);
 }
 
@@ -509,15 +513,15 @@ h3 {
     background-color: var(--option-four-icon-background);
 }
 
-#OptionFourToolContainer:hover {
+#OptionFourToolContainer:hover>a {
     background-color: var(--option-four-hover-background);
 }
 
-#OptionFourToolContainer:hover>#OptionFourToolTextContainer>#OptionFourToolDescription {
+#OptionFourToolContainer:hover>a>#OptionFourToolTextContainer>#OptionFourToolDescription {
     color: var(--option-four-hover-text);
 }
 
-#OptionToolContainer:hover {
+#OptionToolContainer:hover>a {
     transition: background-color 0.15s ease;
 }
 
@@ -525,6 +529,10 @@ h3 {
     transition: color 0.15s ease;
 }
 
+#ToolsQuickOptions>div>a,
+#ExpandedToolsContainer>div>a {
+    text-decoration: none;
+}
 
 
 /* Style the "View All" button */
@@ -636,18 +644,16 @@ h3 {
     #HamburgerIcon {
         width: 38px;
         margin-right: 10px;
+        display: flex;
     }
 
     #HamburgerIcon>path {
-        stroke: var(--font-layer1)
+        stroke: var(--font-layer1);
+        visibility: visible;
     }
 
     #MobileNavMenuContainer {
-        display: none;
-    }
-
-    .active>#MobileNavMenuContainer {
-        display: block;
+        opacity: 0;
         position: absolute;
         top: 65px;
         right: 10px;
@@ -656,6 +662,22 @@ h3 {
         margin-top: 20px;
         border-radius: var(--radius-layer3);
         background-color: var(--background-layer2);
+        transform: translateY(-2000px);
+        transition: all 0.3s ease;
+    }
+
+    .active>#MobileNavMenuContainer {
+        display: block;
+        opacity: 1;
+        position: absolute;
+        top: 65px;
+        right: 10px;
+        width: 150px;
+        height: auto;
+        margin-top: 20px;
+        border-radius: var(--radius-layer3);
+        background-color: var(--background-layer2);
+        transform: translateY(0);
     }
 
     #MobileNavMenuContainer>ul {
@@ -672,7 +694,11 @@ h3 {
         width: 100px;
     }
 
-    .NavItem>a {
+    #MobileNavMenuContainer>ul>li>a {
+        text-decoration: none;
+    }
+
+    a>.NavItem {
         display: flex;
         justify-content: start;
         align-items: center;
@@ -680,7 +706,7 @@ h3 {
         padding-top: 13px;
         padding-bottom: 15px;
         padding-right: 30px;
-        width: 100px;
+        width: 95px;
         text-decoration: none;
     }
 
@@ -696,7 +722,7 @@ h3 {
         content: "";
         position: absolute;
         bottom: 50%;
-        left: calc(100%-2px);
+        left: calc(100%-6px);
         width: 2;
         transform: translateY(-50%);
         height: 0;

@@ -64,4 +64,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // TODO: Fix the theme toggle button not working on click due to the page being loaded after. Getting error "Uncaught TypeError: Cannot read properties of null (reading 'classList')"
 
+    document.getElementById('HamburgerIcon').addEventListener('click', function () {
+        const navActive = document.getElementById("MobileNavContainer");
+        navActive.classList.toggle("active");
+    });
 });
