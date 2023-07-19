@@ -9,9 +9,14 @@
     <meta name="viewport" content="width=device-width initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(function () {
-            $("#MainHeader").load("header.html");
-            $("#mainFooter").load("footer.html");
+        $(document).ready(function () {
+            $("#MainHeader").load("header.html", function () {
+                // Code to run after header.html is loaded
+            });
+
+            $("#mainFooter").load("footer.html", function () {
+                // Code to run after footer.html is loaded
+            });
         });
     </script>
 </head>
