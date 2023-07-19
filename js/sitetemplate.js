@@ -1,3 +1,5 @@
+
+
 // Function to fetch the header.html file
 function fetchHeader() {
     return fetch('header.html')

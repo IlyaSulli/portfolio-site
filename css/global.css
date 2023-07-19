@@ -261,6 +261,7 @@ h3 {
 
     --background-color: var(--background-layer1);
     --header-background-color: var(--background-layer2);
+    --header-tools-icon-color: #fff;
 
     --font-layer1: #192225;
     --font-layer2: #293336;
@@ -381,9 +382,6 @@ h3 {
     transition: color 0.3s ease;
 }
 
-
-
-
 /* Tools Hover Menu */
 
 /* Position the dropdown container */
@@ -453,7 +451,7 @@ h3 {
 }
 
 .OptionToolIcon>path {
-    fill: var(--background-layer2);
+    fill: var(--header-tools-icon-color);
 }
 
 .OptionToolHeadline {
