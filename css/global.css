@@ -453,7 +453,7 @@ h3 {
 }
 
 .OptionToolIcon>path {
-    fill: var(--font-layer1);
+    fill: var(--background-layer2);
 }
 
 .OptionToolHeadline {

@@ -415,7 +415,6 @@ section#WidgetDribbbleContainer:hover {
     justify-content: center;
     align-items: center;
     transition: background-color 0.05s ease-in-out;
-    z-index: 1000;
     margin-bottom: -40px;
     margin-right: 10px;
 }

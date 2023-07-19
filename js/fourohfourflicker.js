@@ -20,7 +20,7 @@ flickerElement.addEventListener('click', function () {
 
     if (now - lastClickTime < 5000) {
         clickCount++;
-        if (clickCount === 10) {
+        if (clickCount === 5) {
             const end = Date.now() + 0.5 * 1000;
 
             // go Buckeyes!
