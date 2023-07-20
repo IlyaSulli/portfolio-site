@@ -134,6 +134,18 @@
 
 /* Tablet Only */
 
+@media screen and (max-width: 1023px) and (min-width: 740px) {
+    .mainContainer {
+        width: 720px;
+    }
+}
+
+@media screen and (max-width: 739px) {
+    .mainContainer {
+        width: 90%;
+    }
+}
+
 @media screen and (max-width: 1023px) and (min-width: 600px) {
     .wrapper {
         width: 100%;
@@ -143,9 +155,7 @@
         flex-direction: column;
     }
 
-    .mainContainer {
-        width: 720px;
-    }
+
 
     #homepageHeroContainer {
         margin-top: 65px;

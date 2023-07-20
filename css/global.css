@@ -182,6 +182,14 @@ h3 {
     margin-top: 0;
 }
 
+.wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 ::selection {
     background-color: var(--selection-background);
     color: var(--selection-text);
@@ -652,6 +660,7 @@ h3 {
 
     #MobileNavMenuContainer {
         opacity: 0;
+        visibility: collapse;
         position: absolute;
         top: 65px;
         right: 10px;
@@ -660,12 +669,15 @@ h3 {
         margin-top: 20px;
         border-radius: var(--radius-layer3);
         background-color: var(--background-layer2);
-        transform: translateY(-2000px);
-        transition: all 0.3s ease;
+        transform: translateY(-20px);
+        transition: all 0.3s ease-in;
     }
+
+
 
     .active>#MobileNavMenuContainer {
         display: block;
+        visibility: visible;
         opacity: 1;
         position: absolute;
         top: 65px;
@@ -691,6 +703,7 @@ h3 {
         border-width: 0px;
         width: 100px;
     }
+
 
     #MobileNavMenuContainer>ul>li>a {
         text-decoration: none;
