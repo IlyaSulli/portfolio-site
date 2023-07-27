@@ -1,0 +1,191 @@
+:root {
+    --linkedin-background: #0D5CBA;
+    --github-background: #181616;
+    --dribbble-background: #C72263;
+}
+
+#homepageHero {
+    display: flex;
+    height: auto;
+    margin-top: -100px;
+    padding-top: 100px;
+    background-color: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#heroBlobAccent {
+    width: 15dvw;
+    left: 0;
+    height: auto;
+    position: absolute;
+    top: 60dvh;
+    opacity: 0.5;
+    filter: blur(100px);
+    overflow: hidden;
+}
+
+#heroBlobPrimary>path {
+    fill: var(--primary);
+}
+
+#heroBlobPrimary {
+    width: 30dvw;
+    height: auto;
+    position: absolute;
+    top: 30dvh;
+    right: 0;
+    opacity: 0.5;
+    filter: blur(170px);
+    overflow: hidden;
+}
+
+#heroBlobAccent>path {
+    fill: var(--accent);
+}
+
+/* Hero Title */
+
+#heroHeading {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.heroHeadingTitle {
+    color: var(--secondary);
+    font-size: 9dvw;
+    font-weight: 500;
+}
+
+#heroAsterisk {
+    width: 7dvw;
+    margin-left: 3dvw;
+    margin-right: 3dvw;
+}
+
+#heroAsterisk>path {
+    fill: var(--primary);
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spinAsterisk {
+    /* Set the origin to the center for smooth rotation */
+    transform-origin: center;
+    /* Apply the rotation animation */
+    animation: spin 5s infinite linear;
+}
+
+/* Content */
+
+#heroContentWrapper {
+    width: 100dvw;
+    display: flex;
+    flex-direction: row;
+    margin-top: 3dvw;
+}
+
+#heroContent {
+    width: 60dvw;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-top: 10dvh;
+}
+
+#heroContentContainer {
+    width: 550px;
+}
+
+#heroContentDescription {
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--secondary);
+    margin-top: 2rem;
+}
+
+#heroContentQuickLinksTitleWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 10dvh;
+}
+
+#heroContentQuickLinksTitle {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--secondary);
+}
+
+#heroContentQuickLinksIcon {
+    width: 28px;
+    height: 28px;
+    margin-left: 15px;
+}
+
+#heroContentQuickLinksIcon>path {
+    fill: var(--secondary);
+}
+
+#heroContentQuickLinksWidgetsWrapper {
+    display: flex;
+    flex-direction: row;
+    margin-top: 2rem;
+}
+
+.heroContentQuickLinksWidget {
+    width: 95px;
+    height: 95px;
+    border-radius: 15px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.heroContentQuickLinksWidget>svg {
+    width: 38px;
+    height: 38px;
+    display: block;
+    fill: var(--white);
+}
+
+#heroContentQuickLinksWidgetLinkedIn {
+    background-color: var(--linkedin-background);
+    cursor: pointer;
+    margin: 6px;
+}
+
+#heroContentQuickLinksWidgetGitHub {
+    background-color: var(--github-background);
+    margin: 6px;
+    cursor: pointer;
+}
+
+#heroContentQuickLinksWidgetDribbble {
+    background-color: var(--dribbble-background);
+    margin: 6px;
+    cursor: pointer;
+}
+
+
+
+#heroImage {
+    width: 40dvw;
+    height: 90dvh;
+    object-fit: cover;
+    z-index: 4;
+    border-radius: 10px;
+}
