@@ -3,15 +3,16 @@ document.addEventListener('DOMContentLoaded', function () {
     var hideCursorContainer = document.querySelectorAll('.hideCursor');
     var cursor = document.getElementById('cursor');
 
-    // Listen for hover on the footerItemContainer element
-    hideCursorContainer.addEventListener('mouseenter', function () {
-        console.log('hovered')
-        // On hover in, add the 'inactive' class to the 'cursor' element
-        cursor.classList.add('inactive');
-    });
 
-    hideCursorContainer.addEventListener('mouseleave', function () {
+
+    hideCursorContainer.addEventListener('mouseout', function () {
         // On hover out, remove the 'inactive' class from the 'cursor' element
         cursor.classList.remove('inactive');
+    });
+
+    // Listen for hover on the footerItemContainer element
+    hideCursorContainer.addEventListener('mousein', function () {
+        // On hover in, add the 'inactive' class to the 'cursor' element
+        cursor.classList.add('inactive');
     });
 });

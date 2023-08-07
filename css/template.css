@@ -10,6 +10,13 @@
 
     --black: #252525;
     --white: #E4E4E4;
+
+    --button-radius: 6px;
+    --image-radius: 10px;
+    --container-radius: 15px;
+    --sub-container-radius: 10px;
+    --container-L3-radius: 7px;
+    --container-L4-radius: 5px; 
 }
 
 .darkTheme {
@@ -26,6 +33,12 @@
 @font-face {
     font-family: 'Inter';
     src: url('../assets/fonts/Inter-VariableFont.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'IBMPlexSerif';
+    src: url('../assets/fonts/IBMPlexSerif-Medium.ttf') format('truetype');
+    font-weight: 700;
 }
 
 span {
