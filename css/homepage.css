@@ -9,7 +9,6 @@
     height: auto;
     margin-top: -100px;
     padding-top: 100px;
-    background-color: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -112,14 +111,13 @@
 #heroContent {
     width: 60dvw;
     justify-content: center;
-    align-items: start;
+    align-items: center;
     display: flex;
-    margin-top: 15dvh;
-    padding: 0px 50px;
+    padding: 50px 50px;
 }
 
 #heroContentContainer {
-    width: 550px;
+    max-width: 550px;
 }
 
 #heroContentDescription {
@@ -195,13 +193,18 @@
 
 #heroImage {
     width: 40dvw;
-    height: 90dvh;
+    height: auto;
+    aspect-ratio: 3/4;
     object-fit: cover;
     z-index: 4;
     border-radius: 10px;
 }
 
 /* Projects */
+
+#homepagePortfolio {
+    padding-top: 50px;
+}
 
 #portfolioHeading {
     display: flex;
@@ -247,7 +250,6 @@
     column-gap: 25px;
     margin-left: 25px;
     margin-right: 25px;
-    margin-top: 60px;
 }
 
 .portfolioImage {
@@ -343,7 +345,7 @@
     position: relative;
     z-index: 2;
     justify-content: end;
-    margin-left: 100px;
+    padding: 50px;
 }
 
 .portfolioHeadingWrapper {
@@ -518,11 +520,15 @@
     padding-bottom: 100px;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 549px) {
+    #headerOptions {
+        display: none;
+    }
+
     #heroContentWrapper {
         flex-direction: column-reverse;
-        width: 100dvw;
         align-items: start;
+        width: 100%;
     }
 
     #homepageHero {
@@ -534,30 +540,34 @@
     }
 
     #heroImage {
-        width: calc(100% - 50px);
-        aspect-ratio: 4/3;
+        width: 100%;
+        aspect-ratio: 1/1;
         height: auto;
+        margin: 60px 0px;
     }
 
     #heroContent {
         width: 100%;
-        margin-top: 10dvh;
-        padding: 25px;
+        justify-content: left;
+        align-items: center;
+        display: flex;
+        padding: 0px;
     }
 
-    #heroHeading {
-        flex-direction: column;
-        align-items: start;
-        padding-left: 0px;
-        padding-right: 0px;
+    .heroContentQuickLinksWidget {
+        width: 25%;
+        height: auto;
+        aspect-ratio: 1/1;
     }
 
-    .heroHeadingTitle {
-        font-size: 13dvw;
-    }
-
-    #heroAsterisk {
+    .heroContentQuickLinksWidget>svg {
         width: 10dvw;
+        height: 10dvw;
+    }
+
+    #heroContentDescription {
+        font-size: 18px;
+        width: 100%;
     }
 
     #portfolioImages {
@@ -576,6 +586,154 @@
         margin-right: 25px;
         margin-top: 60px;
     }
+
+    .allButtonText,
+    .toolsTitle {
+        font-size: 24px;
+    }
+
+    .toolsDescription {
+        display: flex;
+        opacity: 0.5;
+        font-size: 14px;
+        width: 100%;
+        padding-top: 25px;
+        transition: 0.4s ease-in-out;
+        margin-top: 0px;
+        transform: translateY(0px);
+        color: var(--secondary);
+    }
+
+    .toolsWrapper:hover>.toolsText {
+        padding-left: 0px;
+        transition: 0.3s ease-in-out;
+    }
+
+    .toolsWrapper:hover>.toolsText>.toolsTitle {
+        color: var(--secondary);
+        font-size: 24px;
+        font-weight: 600;
+        transition: 0.3s ease-in-out;
+    }
+
+    .toolsWrapper {
+        margin: 0px 25px;
+        padding: 30px;
+        align-items: center;
+    }
+
+    .toolsDivider {
+        margin: 0px 30px;
+    }
+
+    .toolIcon {
+        width: 30px;
+        height: 30px;
+    }
+
+    .toolsText {
+        padding-right: 30px;
+        width: auto;
+    }
+
+    #portfolioHeadingTitleWrapper {
+        padding: 25px;
+    }
+}
+
+
+@media screen and (max-width: 700px) and (min-width: 550px) {
+
+    #headerOptions {
+        display: none;
+    }
+
+    #heroContentWrapper {
+        flex-direction: column-reverse;
+        align-items: start;
+        width: auto;
+    }
+
+    #homepageHero {
+        align-items: start;
+        margin-top: -100px;
+        padding-top: 100px;
+        margin-left: 25px;
+        margin-right: 25px;
+    }
+
+    #heroImage {
+        width: 100%;
+        aspect-ratio: 1/1;
+        height: auto;
+        margin: 60px 0px;
+    }
+
+    #heroContent {
+        width: auto;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        padding: 0px;
+    }
+
+    #heroContentDescription {
+        font-size: 18px;
+    }
+
+    #portfolioImages {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(6, 1fr);
+        grid-template-areas: "DaysOfUIImage"
+            "IlyaSullivanImage"
+            "AllEatImage"
+            "KatSullivanImage"
+            "PassageToPoiseImage"
+            "CPURImage";
+        row-gap: 25px;
+        column-gap: 25px;
+        margin-left: 25px;
+        margin-right: 25px;
+        margin-top: 60px;
+    }
+
+    .allButtonText,
+    .toolsTitle {
+        font-size: 24px;
+    }
+
+    .toolsDescription {
+        display: flex;
+        opacity: 0.5;
+        width: 250px;
+        padding-top: 25px;
+        transition: 0.4s ease-in-out;
+        margin-top: 0px;
+        transform: translateY(0px);
+        color: var(--secondary);
+    }
+
+    .toolsWrapper:hover>.toolsText {
+        padding-left: 0px;
+        transition: 0.3s ease-in-out;
+    }
+
+    .toolsWrapper:hover>.toolsText>.toolsTitle {
+        color: var(--secondary);
+        font-size: 24px;
+        font-weight: 600;
+        transition: 0.3s ease-in-out;
+    }
+
+    .toolsWrapper {
+        margin: 0px 50px;
+    }
+
+    .toolsDivider {
+        margin: 0px 50px;
+    }
+
 
 }
 
@@ -609,6 +767,92 @@
         column-gap: 25px;
         margin-left: 25px;
         margin-right: 25px;
-        margin-top: 60px;
+    }
+
+    #portfolioHeadingTitleWrapper {
+        padding-left: 25px;
+    }
+
+    .heroContentQuickLinksWidget {
+        width: 85px;
+        height: 85px;
+    }
+
+    .allButtonText,
+    .toolsTitle {
+        font-size: 28px;
+    }
+
+    .toolsDescription {
+        display: flex;
+        opacity: 0.5;
+        width: 250px;
+        padding-top: 25px;
+        transition: 0.4s ease-in-out;
+        margin-top: 0px;
+        transform: translateY(0px);
+        color: var(--secondary);
+    }
+
+    .toolsWrapper:hover>.toolsText {
+        padding-left: 0px;
+        transition: 0.3s ease-in-out;
+    }
+
+    .toolsWrapper:hover>.toolsText>.toolsTitle {
+        color: var(--secondary);
+        font-size: 32px;
+        font-weight: 600;
+        transition: 0.3s ease-in-out;
+    }
+
+    .toolsWrapper {
+        margin: 0px 50px;
+    }
+
+    .toolsDivider {
+        margin: 0px 40px;
+    }
+
+}
+
+@media screen and (max-width: 1024px) and (min-width: 901px) {
+    #heroContentDescription {
+        font-size: 20px;
+    }
+
+    #heroContentQuickLinksTitleWrapper {
+        margin-top: 5dvh;
+    }
+
+    .heroContentQuickLinksWidget {
+        width: 85px;
+        height: 85px;
+    }
+}
+
+
+@media screen and (min-width: 550px) and (max-width: 700px) {
+    #heroHeading {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    #heroHeading {
+        flex-direction: column;
+        align-items: start;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .heroHeadingTitle {
+        font-size: 16dvw;
+    }
+
+    #heroAsterisk {
+        width: 12dvw;
+        margin-left: 20px;
     }
 }
