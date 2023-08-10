@@ -55,6 +55,18 @@
     padding-right: 20px;
 }
 
+#heroHeadingPartOne {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#heroHeadingPartTwo {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 .heroHeadingTitle {
     color: var(--secondary);
     font-size: 9dvw;
@@ -100,9 +112,10 @@
 #heroContent {
     width: 60dvw;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     display: flex;
-    margin-top: 10dvh;
+    margin-top: 15dvh;
+    padding: 0px 50px;
 }
 
 #heroContentContainer {
@@ -227,94 +240,375 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    grid-template-areas: "portfolioOneImage porfolioTwoImage"
-        "portfolioThreeImage portfolioFourImage"
-        "portfolioFiveImage portfolioMore";
-    grid-gap: 25px;
+    grid-template-areas: "DaysOfUIImage IlyaSullivanImage"
+        "AllEatImage KatSullivanImage"
+        "PassageToPoiseImage CPURImage";
+    row-gap: 25px;
+    column-gap: 25px;
     margin-left: 25px;
     margin-right: 25px;
-    margin-top: 100px;
+    margin-top: 60px;
 }
 
 .portfolioImage {
-    border-radius: var(--image-radius);
-    background-color: var(--background-L4);
-    align-items: start;
-    justify-content: end;
-    display: flex;
+    position: relative;
+    border-radius: 10px;
+    background-color: var(--background-L1);
     overflow: hidden;
     aspect-ratio: 1/1;
+    text-decoration: none;
 }
 
-#portfolioSlidesOne {
-    background-image: url("../assets/images/homepage/slides/test/img1.jpg");
-    width: auto;
-    height: auto;
+.portfolioSlides {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     z-index: 1;
 }
 
-#portfolioSlidesTwo {
-    background-image: url("../assets/images/homepage/slides/test/img1.jpg");
-    width: auto;
-    height: auto;
-    z-index: 1;
+.portfolioSlides li {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform-origin: center center;
+    transform: scale(0.9);
+    /* Initial scale for zoom-in effect */
+}
+
+.porfolioSlides li>img {
+    border-radius: 10px;
+}
+
+.portfolioSlides li:nth-child(1) {
+    opacity: 1;
+    transform: scale(1);
+    /* Initial scale for the first slide */
+}
+
+.portfolioImage:hover .portfolioSlides li {
+    opacity: 0;
+    transform: scale(0.9);
+    /* Apply zoom-out effect on hover */
+}
+
+.portfolioImage:hover .portfolioSlides li:nth-child(1) {
+    opacity: 1;
+    transform: scale(1);
+    /* Apply zoom-in effect on the first slide when hovering */
+}
+
+.portfolioSlides img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+#DaysOfUIImage {
+    grid-area: DaysOfUIImage;
+}
+
+#IlyaSullivanImage {
+    grid-area: IlyaSullivanImage;
+}
+
+#AllEatImage {
+    grid-area: AllEatImage;
+}
+
+#KatSullivanImage {
+    grid-area: KatSullivanImage;
+}
+
+#PassageToPoiseImage {
+    grid-area: PassageToPoiseImage;
+}
+
+#CPURImage {
+    grid-area: CPURImage;
+}
+
+#portfolioHeadingTitleWrapper {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 2;
+    justify-content: end;
+    margin-left: 100px;
+}
+
+.portfolioHeadingWrapper {
+    padding: 15px;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    z-index: 2;
+    justify-content: end;
+}
+
+.portfolioHeadingContainer {
+    background-color: var(--background-L1);
+    border-radius: var(--sub-container-radius);
+    padding: 10px 20px;
+    align-items: center;
+    display: flex;
+}
+
+.portfolioHeadingTitle {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--secondary);
+}
+
+.portfolioIcon {
+    width: 20px;
+    height: 20px;
+    margin-left: 15px;
+}
+
+.portfolioIcon>path {
+    fill: var(--secondary);
+}
+
+.allButtonWrapper {
+    width: 100dvw;
+    margin-top: 40px;
+    margin-bottom: 70px;
+    align-items: end;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.allButton {
+    margin-right: 25px;
+    display: inline-block;
+    text-decoration: none;
+    padding: 15px 30px;
+    border-radius: var(--sub-container-radius);
+    transition: 0.2s ease-in-out;
+}
+
+.allButtonContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.allButtonText {
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--secondary);
+}
+
+.allButtonIcon {
+    width: 40px;
+    height: 40px;
+    padding-left: 20px;
+    transition: 0.2s ease-in-out;
+}
+
+.allButtonIcon>path {
+    fill: var(--secondary);
+}
+
+.allButton:hover {
+    transition: 0.2s ease-in-out;
+}
+
+.allButton:hover>.allButtonContainer>.allButtonIcon {
+    transform: translateX(10px);
+    transition: 0.2s ease-in-out;
+}
+
+#homepageDivider {
+    width: 95dvw;
+    height: 2px;
+    background-color: var(--secondary);
+    border-radius: 2px;
+}
+
+#toolsHeading {
+    margin: 50px;
+    margin-bottom: 130px;
+}
+
+#toolsHeadingTitle {
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--secondary);
+    text-transform: uppercase;
+}
+
+.toolsDivider {
+    margin: 0px 100px;
+    border-color: var(--background-L5);
+}
+
+.toolsWrapper {
+    flex-direction: row;
+    display: flex;
+    justify-content: space-between;
+    padding: 50px;
+    margin: 0px 100px;
+    text-decoration: none;
+}
+
+.toolsText {
+    flex-direction: column;
+    display: flex;
+    transition: 0.5s ease-in-out;
+}
+
+.toolsTitle {
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--secondary);
+    transition: 0.5s ease-in-out;
+}
+
+.toolsDescription {
+    display: flex;
+    opacity: 0;
+    width: 250px;
+    padding-top: 25px;
+    transition: 0.4s ease-in-out;
+    margin-top: -60px;
+    transform: translateY(-10px);
+    color: var(--secondary);
+}
+
+.toolsWrapper:hover>.toolsText {
+    padding-left: 50px;
+    transition: 0.3s ease-in-out;
+}
+
+.toolsWrapper:hover>.toolsText>.toolsTitle {
+    color: var(--primary);
+    font-size: 48px;
+    font-weight: 600;
+    transition: 0.3s ease-in-out;
+}
+
+.toolsWrapper:hover>.toolsText>.toolsDescription {
+    opacity: 1;
+    margin-top: 0px;
+    transform: translateY(0px);
+    transition: 0.4s ease-in-out;
+}
+
+.toolIcon {
+    width: 45px;
+    height: 45px;
+}
+
+.toolIcon>path {
+    fill: var(--secondary);
+}
+
+#homepageTools {
+    padding-bottom: 100px;
+}
+
+@media screen and (max-width: 700px) {
+    #heroContentWrapper {
+        flex-direction: column-reverse;
+        width: 100dvw;
+        align-items: start;
+    }
+
+    #homepageHero {
+        align-items: start;
+        margin-top: -100px;
+        padding-top: 100px;
+        margin-left: 25px;
+        margin-right: 25px;
+    }
+
+    #heroImage {
+        width: calc(100% - 50px);
+        aspect-ratio: 4/3;
+        height: auto;
+    }
+
+    #heroContent {
+        width: 100%;
+        margin-top: 10dvh;
+        padding: 25px;
+    }
+
+    #heroHeading {
+        flex-direction: column;
+        align-items: start;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .heroHeadingTitle {
+        font-size: 13dvw;
+    }
+
+    #heroAsterisk {
+        width: 10dvw;
+    }
+
+    #portfolioImages {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(6, 1fr);
+        grid-template-areas: "DaysOfUIImage"
+            "IlyaSullivanImage"
+            "AllEatImage"
+            "KatSullivanImage"
+            "PassageToPoiseImage"
+            "CPURImage";
+        row-gap: 25px;
+        column-gap: 25px;
+        margin-left: 25px;
+        margin-right: 25px;
+        margin-top: 60px;
+    }
 
 }
 
-#portfolioSlidesThree {
-    background-image: url("../assets/images/homepage/slides/test/img1.jpg");
-    width: auto;
-    height: auto;
-    z-index: 1;
+@media screen and (max-width: 900px) and (min-width: 701px) {
+    #heroImage {
+        width: 50dvw;
+        overflow: hidden;
+    }
 
-}
+    #heroContent {
+        width: 50dvw;
+        margin-top: 10dvh;
+        padding: 25px;
+    }
 
-#portfolioSlidesFour {
-    background-image: url("../assets/images/homepage/slides/test/im1.jpg");
-    width: auto;
-    height: auto;
-    z-index: 1;
+    #heroContentDescription {
+        font-size: 18px;
+    }
 
-}
-
-#portfolioSlidesFive {
-    background-image: url("../assets/images/homepage/slides/test/img1.jpg");
-    width: auto;
-    height: auto;
-    z-index: 1;
-
-}
-
-#portfolioOneImage {
-    grid-area: portfolioOneImage;
-}
-
-#portfolioTwoImage {
-    grid-area: portfolioTwoImage;
-}
-
-#portfolioThreeImage {
-    grid-area: portfolioThreeImage;
-}
-
-#portfolioFourImage {
-    grid-area: portfolioFourImage;
-}
-
-#portfolioFiveImage {
-    grid-area: portfolioFiveImage;
-}
-
-#portfolioMore {
-    grid-area: portfolioMore;
-}
-
-
-
-
-
-.porfolioSlides {
-    display: none;
-    list-style-type: none;
-    z-index: 0;
+    #portfolioImages {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(6, 1fr);
+        grid-template-areas: "DaysOfUIImage"
+            "IlyaSullivanImage"
+            "AllEatImage"
+            "KatSullivanImage"
+            "PassageToPoiseImage"
+            "CPURImage";
+        row-gap: 25px;
+        column-gap: 25px;
+        margin-left: 25px;
+        margin-right: 25px;
+        margin-top: 60px;
+    }
 }

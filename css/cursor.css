@@ -2,6 +2,21 @@ body {
   cursor: none;
 }
 
+@media (pointer: coarse) {
+  #cursor {
+    display: none;
+    /* Hide on touch */
+  }
+}
+
+/* Media query for mouse input */
+@media (pointer: fine) {
+  #cursor {
+    display: block;
+    /* Show on mouse */
+  }
+}
+
 .Cursor {
   pointer-events: none;
   position: fixed;
@@ -49,4 +64,26 @@ body {
 #cursor.inactive {
   opacity: 0;
   transition: opacity 0.1s ease-in-out;
+}
+
+.CursorViewAll {
+  position: fixed;
+  display: none;
+  background-color: #f0f0f0;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  pointer-events: none;
+  z-index: 9999;
+  width: 100px;
+  height: 100px;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  transition: 0.5s ease-in-out;
+}
+
+#viewAllText {
+  display: flex;
+  margin: 0;
+  padding: 0;
 }
