@@ -417,6 +417,10 @@ body.disableScroll {
         transition: 0.3s ease-in-out;
     }
 
+    #hamburgerMenu {
+        display: none;
+    }
+
     #hamburgerMenu.active {
         display: block;
         position: absolute;
@@ -425,8 +429,9 @@ body.disableScroll {
         width: 100dvw;
         height: 100dvh;
         background-color: var(--background-L1);
-
     }
+
+
 
     #hamburgerMenuHeading {
         display: flex;
@@ -449,7 +454,6 @@ body.disableScroll {
         justify-content: start;
         align-items: start;
         padding: 0px 50px 60px 40px;
-        overflow-y: scroll;
     }
 
     .hamburgerMenuOption {
