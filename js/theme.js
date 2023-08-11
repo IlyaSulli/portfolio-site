@@ -1,12 +1,14 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const themeToggle = document.getElementById('themeToggle');
+    const themeToggle = document.querySelectorAll('.themeToggle');
     const body = document.body;
     const darkMode = document.getElementById('themeSwitchContainer');
+    const darkModeMobile = document.getElementById('themeSwitchContainerMobile');
 
     // Function to toggle the theme
     function toggleTheme() {
         body.classList.toggle('darkTheme');
         darkMode.classList.toggle('active');
+        darkModeMobile.classList.toggle('active');
         saveThemePreference();
     }
 
@@ -17,9 +19,11 @@ document.addEventListener('DOMContentLoaded', function () {
         if (isDarkThemePreferred) {
             body.classList.add('darkTheme');
             darkMode.classList.add('active');
+            darkModeMobile.classList.add('active');
         } else {
             body.classList.remove('darkTheme');
             darkMode.classList.remove('active');
+            darkModeMobile.classList.remove('active');
         }
     }
 
@@ -27,9 +31,12 @@ document.addEventListener('DOMContentLoaded', function () {
     applyTheme();
 
     // Event listener for the theme toggle button
-    themeToggle.addEventListener('click', () => {
-        toggleTheme();
+    themeToggle.forEach((themeToggleButtons) => {
+        themeToggleButtons.addEventListener('click', () => {
+            toggleTheme();
+        });
     });
+
 
     // Listen for changes in the user's preferred color scheme
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
@@ -52,9 +59,11 @@ document.addEventListener('DOMContentLoaded', function () {
         if (themePreference === 'dark') {
             body.classList.add('darkTheme');
             darkMode.classList.add('active');
+            darkModeMobile.classList.add('active');
         } else {
             body.classList.remove('darkTheme');
             darkMode.classList.remove('active');
+            darkModeMobile.classList.remove('active');
         }
     }
 
