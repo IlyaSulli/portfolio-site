@@ -2,6 +2,10 @@
     --primary: #18B593;
     --accent: #FFC59D;
     --secondary: #252525;
+
+    --secondary-R: 37;
+    --secondary-G: 37;
+    --secondary-B: 37;
     --background-L1: #E4E4E4;
     --background-L2: #D3D3D3;
     --background-L3: #BABABA;
@@ -23,6 +27,9 @@
     --primary: #73F9DC;
     --accent: #FFD7BB;
     --secondary: #E4E4E4;
+    --secondary-R: 228;
+    --secondary-G: 228;
+    --secondary-B: 228;
     --background-L1: #252525;
     --background-L2: #353535;
     --background-L3: #4F4F4F;
@@ -371,6 +378,10 @@ body.disableScroll {
         width: 100%;
         margin: 80px 125px;
     }
+
+    #headerOptions {
+        display: none;
+    }   
 
     .footerList {
         margin-left: 50px;
