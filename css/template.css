@@ -381,7 +381,7 @@ body.disableScroll {
 
     #headerOptions {
         display: none;
-    }   
+    }
 
     .footerList {
         margin-left: 50px;
@@ -503,4 +503,22 @@ body.disableScroll {
         opacity: 0.5;
         width: 100%
     }
+}
+
+/* Blur images initialy */
+
+.blur-up {
+    filter: blur(20px);
+    /* Apply initial blur effect */
+    opacity: 0;
+    /* Initially hide the image */
+    transition: filter 0.3s ease, opacity 0.3s ease;
+    /* Add transition effect */
+}
+
+.blur-up.loaded {
+    filter: none;
+    /* Remove the blur effect */
+    opacity: 1;
+    /* Show the image */
 }

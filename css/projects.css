@@ -42,6 +42,7 @@
 
 #projectsPortfolio {
     padding-top: 50px;
+    padding-bottom: 100px;
 }
 
 #portfolioHeading {
@@ -57,8 +58,7 @@
     flex-direction: column;
 }
 
-#porfolioHeadingLineOne,
-#portfolioHeadingLineTwo {
+#portfolioHeadingLineOne {
     display: flex;
     flex-direction: row;
     justify-content: start;
@@ -97,7 +97,7 @@
 }
 
 .layoutButton.active>svg>path {
-    fill: var(--background-L1);
+    fill: var(--black);
 }
 
 .layoutButton {
@@ -114,13 +114,31 @@
 
 .layoutButton:hover {
     background-color: var(--background-L3);
+    transition: 0.2s ease;
 }
 
 .layoutButton.active {
     background-color: var(--accent);
+    transition: 0.2s ease;
+}
+
+#portfolioList {
+    display: none;
+    transition: 2s ease-in-out;
+}
+
+#portfolioList.active {
+    display: block;
+    opacity: 1;
+    transition: tranform 2s ease-in-out;
 }
 
 #portfolioImages {
+    display: none;
+    transition: transform 2s ease-in-out;
+}
+
+#portfolioImages.active {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(3, 1fr);
@@ -167,7 +185,7 @@
     /* Initial scale for zoom-in effect */
 }
 
-.porfolioSlides li>img {
+.portfolioSlides li>img {
     border-radius: 10px;
 }
 
@@ -194,25 +212,27 @@
     height: 100%;
     object-fit: cover;
     border-radius: 10px;
+    background-color: var(--background-L2);
+
 }
 
-#DaysOfUIImage {
+#daysOfUIImage {
     grid-area: DaysOfUIImage;
 }
 
-#IlyaSullivanImage {
+#ilyaSullivanImage {
     grid-area: IlyaSullivanImage;
 }
 
-#AllEatImage {
+#allEatImage {
     grid-area: AllEatImage;
 }
 
-#KatSullivanImage {
+#katSullivanImage {
     grid-area: KatSullivanImage;
 }
 
-#PassageToPoiseImage {
+#passageToPoiseImage {
     grid-area: PassageToPoiseImage;
 }
 
@@ -262,6 +282,52 @@
     fill: var(--secondary);
 }
 
+.portfolioListDivider {
+    width: 95%;
+    height: 100%;
+    border-width: 2px;
+    border-color: var(--background-L4);
+}
+
+#portfolioList {
+    margin: 0px 50px;
+    align-items: center;
+}
+
+.portfolioList {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    z-index: 2;
+    justify-content: space-between;
+    padding: 50px 75px;
+    text-decoration: none;
+
+}
+
+.portfolioList:hover>.portfolioListTitle {
+    font-size: 36px;
+    transition: 0.2s ease-in;
+    font-weight: 600;
+}
+
+.portfolioListTitle {
+    font-weight: 500;
+    font-size: 28px;
+    color: var(--secondary);
+    transition: 0.2s ease-out;
+}
+
+.portfolioListIcon {
+    width: 35px;
+    height: 35px;
+    margin-left: 15px;
+}
+
+.portfolioListIcon>path {
+    fill: var(--secondary);
+}
+
 @media screen and (max-width: 700px) {
     #portfolioImages {
         display: grid;
@@ -286,6 +352,7 @@
 
     #projectsPortfolio {
         padding-top: 0px;
+        padding-bottom: 100px;
     }
 
     #heroAsterisk {

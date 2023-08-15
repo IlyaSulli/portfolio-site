@@ -315,23 +315,23 @@
     border-radius: 10px;
 }
 
-#DaysOfUIImage {
+#daysOfUIImage {
     grid-area: DaysOfUIImage;
 }
 
-#IlyaSullivanImage {
+#ilyaSullivanImage {
     grid-area: IlyaSullivanImage;
 }
 
-#AllEatImage {
+#allEatImage {
     grid-area: AllEatImage;
 }
 
-#KatSullivanImage {
+#katSullivanImage {
     grid-area: KatSullivanImage;
 }
 
-#PassageToPoiseImage {
+#passageToPoiseImage {
     grid-area: PassageToPoiseImage;
 }
 
