@@ -329,7 +329,7 @@
 }
 
 @media screen and (max-width: 700px) {
-    #portfolioImages {
+    #portfolioImages.active {
         display: grid;
         grid-template-columns: repeat(1, 1fr);
         grid-template-rows: repeat(6, 1fr);
@@ -360,6 +360,20 @@
         margin-left: 50px;
         margin-right: 3dvw;
     }
+
+    #portfolioList {
+        margin: 0px 25px;
+    }
+
+    .portfolioListTitle {
+        font-size: 24px;
+    }
+
+    .portfolioList {
+        padding: 50px 25px;
+    }
+
+
 
 
 }
