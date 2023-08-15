@@ -367,6 +367,13 @@
 
     .portfolioListTitle {
         font-size: 24px;
+        transition: 0.2s ease-in;
+    }
+
+    .portfolioList:hover>.portfolioListTitle {
+        font-size: 24px;
+        transition: 0.2s ease-in;
+        font-weight: 600;
     }
 
     .portfolioList {
