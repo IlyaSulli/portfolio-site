@@ -70,3 +70,5 @@ document.addEventListener('DOMContentLoaded', function () {
     // Set the user's theme preference on load
     setThemePreference();
 });
+
+console.log("%cHello developer 👋, I hope you enjoy the code!", "background-color: black; color:cyan; font-size:24px; padding: 30px 100px; align-text: center;")
