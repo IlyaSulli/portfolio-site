@@ -39,13 +39,15 @@
 
 @font-face {
     font-family: 'Inter';
-    src: url('../assets/fonts/Inter-VariableFont.ttf') format('truetype');
+    src: local('Inter'), url('../assets/fonts/Inter-VariableFont.ttf') format('truetype');
+    font-display: swap;
 }
 
 @font-face {
     font-family: 'IBMPlexSerif';
-    src: url('../assets/fonts/IBMPlexSerif-Medium.ttf') format('truetype');
+    src: local('IBMPlexSerif'), local('IBM-Plex-Serif'), url('../assets/fonts/IBMPlexSerif-Medium.ttf') format('truetype');
     font-weight: 700;
+    font-display: swap;
 }
 
 span {
