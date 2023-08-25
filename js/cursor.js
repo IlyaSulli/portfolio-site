@@ -61,6 +61,7 @@ class HoverButton {
                             });
 
                         }); this.hovered = false; this.animatingHover = false; this.forceOut = false; this.timing = 0.65; this.el = document.getElementById(id); this.bg = this.el.getElementsByClassName("bg")[0]; this.el.addEventListener("mouseenter", this.onMouseEnter); this.el.addEventListener("mouseleave", this.onMouseLeave);
+
     }
 }
 

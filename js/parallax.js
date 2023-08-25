@@ -1,1 +1,0 @@
-// TODO: Create Parallax effect for the footer
