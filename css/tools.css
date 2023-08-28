@@ -1,0 +1,258 @@
+#toolsHero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    background-color: var(--background-L1);
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+#toolsHeroTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+}
+
+#heroAsterisk {
+    width: 30px;
+    margin-right: 3dvw;
+}
+
+#heroAsterisk>path {
+    fill: var(--primary);
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spinAsterisk {
+    /* Set the origin to the center for smooth rotation */
+    transform-origin: center;
+    /* Apply the rotation animation */
+    animation: spin 5s infinite linear;
+}
+
+#heroHeadingTitle {
+    font-size: 112px;
+    font-weight: 400;
+    color: var(--secondary);
+}
+
+#toolsDescription {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 2;
+    justify-content: end;
+    padding-top: 150px;
+    padding-bottom: 50px;
+    max-width: 500px;
+
+}
+
+#toolsDescriptionText {
+    color: var(--secondary);
+    font-size: 24px;
+    font-weight: 300;
+}
+
+#toolsList {
+    padding-bottom: 100px;
+}
+
+.toolsDivider {
+    margin: 0px 100px;
+    border-color: var(--background-L5);
+}
+
+.toolsWrapper {
+    flex-direction: row;
+    display: flex;
+    justify-content: space-between;
+    padding: 50px;
+    margin: 0px 100px;
+    text-decoration: none;
+}
+
+.toolsText {
+    flex-direction: column;
+    display: flex;
+    transition: 0.5s ease-in-out;
+}
+
+.toolsTitle {
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--secondary);
+    transition: 0.5s ease-in-out;
+}
+
+.toolsDescription {
+    display: flex;
+    opacity: 0;
+    width: 250px;
+    padding-top: 25px;
+    transition: 0.4s ease-in-out;
+    margin-top: -60px;
+    transform: translateY(-10px);
+    color: var(--secondary);
+}
+
+.toolsWrapper:hover>.toolsText {
+    padding-left: 50px;
+    transition: 0.3s ease-in-out;
+}
+
+.toolsWrapper:hover>.toolsText>.toolsTitle {
+    color: var(--primary);
+    font-size: 48px;
+    font-weight: 600;
+    transition: 0.3s ease-in-out;
+}
+
+.toolsWrapper:hover>.toolsText>.toolsDescription {
+    opacity: 1;
+    margin-top: 0px;
+    transform: translateY(0px);
+    transition: 0.4s ease-in-out;
+}
+
+.toolIcon {
+    width: 45px;
+    height: 45px;
+}
+
+.toolIcon>path {
+    fill: var(--secondary);
+}
+
+#toolsHeroTitleArrowIcon {
+    width: 8vw;
+    height: 8vw;
+    margin-left: 5vw;
+    margin-right: 7vw;
+}
+
+#toolsHeroTitleArrowIcon>path {
+    fill: var(--secondary);
+    stroke: var(--secondary);
+}
+
+#toolsHeroTitleToolIcon {
+    width: 12vw;
+    height: 12vw;
+}
+
+#toolsHeroTitleToolIcon>path {
+    fill: var(--primary);
+}
+
+@media screen and (max-width: 1200px) and (min-width: 701px) {
+    #heroHeadingTitle {
+        font-size: 8dvw;
+    }
+}
+
+@media screen and (max-width: 900px) and (min-width: 701px) {
+    .toolsDescription {
+        display: flex;
+        opacity: 0.5;
+        width: 250px;
+        padding-top: 25px;
+        transition: 0.4s ease-in-out;
+        margin-top: 0px;
+        transform: translateY(0px);
+        color: var(--secondary);
+    }
+
+    .toolsWrapper:hover>.toolsText {
+        padding-left: 0px;
+        transition: 0.3s ease-in-out;
+    }
+
+    .toolsWrapper:hover>.toolsText>.toolsTitle {
+        color: var(--secondary);
+        font-size: 32px;
+        font-weight: 600;
+        transition: 0.3s ease-in-out;
+    }
+
+    .toolsWrapper {
+        margin: 0px 50px;
+    }
+
+    .toolsDivider {
+        margin: 0px 40px;
+    }
+
+    #toolsDescription {
+        padding-top: 100px;
+    }
+
+}
+
+@media screen and (max-width: 700px) {
+    .toolsDescription {
+        display: flex;
+        opacity: 0.5;
+        width: 250px;
+        padding-top: 25px;
+        transition: 0.4s ease-in-out;
+        margin-top: 0px;
+        transform: translateY(0px);
+        color: var(--secondary);
+    }
+
+    .toolsWrapper:hover>.toolsText {
+        padding-left: 0px;
+        transition: 0.3s ease-in-out;
+    }
+
+    .toolsWrapper:hover>.toolsText>.toolsTitle {
+        color: var(--secondary);
+        font-size: 24px;
+        font-weight: 600;
+        transition: 0.3s ease-in-out;
+    }
+
+    .toolsWrapper {
+        margin: 0px 50px;
+    }
+
+    .toolsDivider {
+        margin: 0px 50px;
+    }
+
+    #heroHeadingTitle {
+        font-size: 14dvw;
+    }
+
+    #toolsHeroTitle {
+        align-items: start;
+    }
+
+    #heroAsterisk {
+        margin-top: 5dvw;
+        width: 8dvw;
+        height: 8dvw;
+    }
+
+    #toolsHero {
+        margin-left: 50px;
+    }
+
+    #toolsDescription {
+        padding-top: 100px;
+    }
+}

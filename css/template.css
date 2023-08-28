@@ -181,6 +181,8 @@ body.disableScroll {
     text-transform: uppercase;
 }
 
+/* TODO: Fix the hamburger menu list spacing and allow for scrolling */
+
 #headerNavigation>ul {
     display: flex;
     flex-direction: row;
@@ -292,6 +294,8 @@ body.disableScroll {
     overflow: hidden;
     z-index: -1;
 }
+
+/* TODO: Fix the footer to take less space (especially on mobile) */
 
 #footerContent {
     width: 90dvw;

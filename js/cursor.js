@@ -1,7 +1,7 @@
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; } const cursor = document.getElementById("cursor");
-const amount = 20;
+const amount = 10;
 const sineDots = Math.floor(amount * 0.3);
-const width = 26;
+const width = 25;
 const idleTimeout = 150;
 let lastFrame = 0;
 let mousePosition = { x: 0, y: 0 };
