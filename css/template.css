@@ -62,11 +62,6 @@ body {
     overflow-y: scroll;
 }
 
-body.disableScroll {
-    overflow-y: hidden;
-}
-
-
 
 .rotate45 {
     transform: rotate(-45deg);
@@ -74,16 +69,16 @@ body.disableScroll {
 
 /* Scroll bar */
 
-::-webkit-scrollbar {
+body::-webkit-scrollbar {
     display: none;
 }
 
-::-webkit-scrollbar-track {
+body::-webkit-scrollbar-track {
     display: none;
 
 }
 
-::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar-thumb {
     display: none;
 }
 

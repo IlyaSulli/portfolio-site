@@ -1,0 +1,28 @@
+#redirectWrapper{
+    height: 100dvh;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 0px 50px;
+}
+
+#redirectTitleWrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#redirectTitle{
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 20px;
+}
+
+#redirectSubtitle{
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 20px;
+}
