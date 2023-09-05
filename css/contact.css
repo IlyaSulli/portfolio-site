@@ -236,3 +236,21 @@ textarea {
         font-size: 46px;
     }
 }
+
+@media screen and (max-width: 550px) {
+    #contactWrapper {
+        padding-left: 25px;
+    }
+
+    .quickLinkWidget>svg {
+        width: 6dvw;
+        height: 6dvw;
+    }
+
+    .quickLinkWidget {
+        width: 25%;
+        border-radius: 10px;
+        height: auto;
+        aspect-ratio: 1/1;
+    }
+}
