@@ -23,7 +23,7 @@ const dialogue = [
         name: "",
         text: "Night fell and with that so did the heat, bringing temperatures down with it. With the last burst of energy Malloreis glanced up to see the Enchanted Mycelium Grove, a glowing forest of healing mushrooms."
         , backgroundImage: "../assets/images/dnd/mushroomforest.png",
-        music: "../assets/audio/dnd/228_Mushroom_Forest.mp3"
+        music: ""
     },
     {
         userImage: "",

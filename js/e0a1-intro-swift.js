@@ -23,7 +23,7 @@ const dialogue = [
         name: "",
         text: "As the relentless sun beat down through the canopy, Swift wandered aimlessly through the forest, her path looping back on itself endlessly. Her growing thirst gnawed at her, her tongue dry and parched made her edge closer to madness.",
         backgroundImage: "../assets/images/dnd/forestriver.png",
-        music: "../assets/audio/dnd/223_Salt_Marsh.mp3"
+        music: ""
     },
     {
         userImage: "",
