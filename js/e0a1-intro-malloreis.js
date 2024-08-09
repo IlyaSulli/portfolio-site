@@ -102,3 +102,5 @@ const dialogue = [
         music: "../assets/audio/dnd/228_Mushroom_Forest.mp3"
     },
 ]
+
+const endPageUrl = 'e0-ticket.html';
