@@ -1,0 +1,129 @@
+body {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: grid;
+    height: 100dvh;
+    width: 100dvw;
+}
+
+#mute{
+    background-color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    transition: .2s ease;
+}
+
+#mute:hover > svg, #mute.active:hover > svg{
+    fill: lightcoral;
+    transition: .2s ease;
+}
+
+#mute.active > svg{
+    fill: darkred;
+    transition: .2s ease;
+}
+
+#mute > svg{
+    fill: darkgrey;
+    transition: .2s ease;
+}
+
+#ticket{
+    height: 0px;
+    width: 0px
+}
+
+
+#speakArea {
+    grid-row-start: 2;
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 900px;
+    min-height: 120px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    visibility: hidden;
+    z-index: 1000;
+}
+
+#speakingUser{
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    margin: -20px 20px -40px -20px;
+}
+
+#speakingImage {
+    width: 120px;
+    height: 120px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: gray;
+    border-radius: 10px;
+}
+
+#speakingNameBox {
+    background-color: #19647E;
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: -25px;
+    margin-right: -10px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+#speakingName {
+    font-size: 1.1em;
+    padding: 5px;
+    font-family: "Trebuchet MS", serif;
+}
+
+#speakingText {
+    flex: 1;
+    font-family: "Trebuchet MS", serif;
+}
+
+
+#continueHint {
+    display: none;
+    position: fixed;
+    bottom: 10px;
+    right: 20px;
+}
+
+#continueArrow {
+    width: 20px;
+    height: 20px;
+    fill: white;
+    animation: continueHint 1s infinite;
+}
+
+@keyframes continueHint {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(5px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+    
+}
