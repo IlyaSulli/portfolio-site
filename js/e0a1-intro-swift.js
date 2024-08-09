@@ -77,14 +77,14 @@ const dialogue = [
     },
     {
         userImage: "../assets/images/dnd/explorer.png",
-        name: "Explorer Automaton",
+        name: "Explorer Robot",
         text: "Fear not, I come in peace",
         backgroundImage: "../assets/images/dnd/forestriver.png",
         music: "../assets/audio/dnd/223_Salt_Marsh.mp3"
     },
     {
         userImage: "../assets/images/dnd/explorer.png",
-        name: "Explorer Automaton",
+        name: "Explorer Robot",
         text: "I am an explorer from The City of Gear Mark, seeking great talent to join our society, and I believe, you Swift of the Well are the one we seek.",
         backgroundImage: "../assets/images/dnd/forestriver.png",
         music: "../assets/audio/dnd/223_Salt_Marsh.mp3"
@@ -98,21 +98,21 @@ const dialogue = [
     },
     {
         userImage: "../assets/images/dnd/explorer.png",
-        name: "Explorer Automaton",
+        name: "Explorer Robot",
         text: "Ha Ha Ha! I haven't heard anyone say that in a long time!",
         backgroundImage: "../assets/images/dnd/forestriver.png",
         music: "../assets/audio/dnd/223_Salt_Marsh.mp3"
     },
     {
         userImage: "../assets/images/dnd/explorer.png",
-        name: "Explorer Automaton",
+        name: "Explorer Robot",
         text: "The City of Gear Mark is a place where the most talented inventors, engineers, and creators come together to share their knowledge and create the most amazing things. As a society we work together to create a better world for all, away from all the chaos and destruction of the outside world."
         , backgroundImage: "../assets/images/dnd/forestriver.png",
         music: "../assets/audio/dnd/223_Salt_Marsh.mp3"
     },
     {
         userImage: "../assets/images/dnd/explorer.png",
-        name: "Explorer Automaton",
+        name: "Explorer Robot",
         text: "We have been watching you Swift, and we believe you have the talent and the heart to join us. What do you say? I have to warn you that this will be the only chance you will ever get to enter"
         , backgroundImage: "../assets/images/dnd/forestriver.png",
         music: "../assets/audio/dnd/223_Salt_Marsh.mp3"
@@ -126,8 +126,8 @@ const dialogue = [
     },
     {
         userImage: "../assets/images/dnd/explorer.png",
-        name: "Explorer Automaton",
-        text: "Well, i'll let you think about it. This is your ticket to the city, when you decide to join, tear it and you will be brought to the city."
+        name: "Explorer Robot",
+        text: "Well, i'll let you think about it. This is your ticket to the city, when you decide to join, take it and I will bring you to the city."
         , backgroundImage: "../assets/images/dnd/forestriver.png",
         music: "../assets/audio/dnd/223_Salt_Marsh.mp3"
     },
