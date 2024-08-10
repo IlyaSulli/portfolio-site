@@ -64,7 +64,7 @@ const dialogue = [
     {
         userImage: "",
         name: "",
-        text: "Emerging from the shadows, a towering figure stepped into the clearing. The automaton stood at a daunting seven feet, its round, sturdy build adorned with vibrant red ribbons fluttering gently in the breeze. A large backpack slung over its shoulders, hinting at the extensive journey it had undertaken."
+        text: "Emerging from the shadows, a towering figure stepped into the clearing. The robot stood at a daunting seven feet, its round, sturdy build adorned with vibrant red ribbons fluttering gently in the breeze. A large backpack slung over its shoulders, hinting at the extensive journey it had undertaken."
         , backgroundImage: "../assets/images/dnd/forestriver.png",
         music: "../assets/audio/dnd/223_Salt_Marsh.mp3"
     },
