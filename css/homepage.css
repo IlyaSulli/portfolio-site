@@ -193,6 +193,18 @@
     cursor: pointer;
 }
 
+.heroContentQuickLinksWidgetIcon{
+    width: 38px;
+    height: 38px;
+    display: block;
+    fill: var(--white);
+}
+
+#heroContentQuickLinksWidgetLinkedIn .heroContentQuickLinksWidgetIcon path {
+    fill:white;
+}
+
+
 #heroImage {
     width: 40dvw;
     height: auto;

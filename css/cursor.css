@@ -1,5 +1,5 @@
 body {
-  cursor: none;
+  cursor: auto;
 }
 
 @media (pointer: coarse) {
