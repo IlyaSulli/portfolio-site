@@ -1,0 +1,322 @@
+/* Theme */
+
+:root {
+  /* Base Colors */
+  --color-primary: #1a8978;
+  --color-secondary: #ffc59d;
+  --color-success: #28a745;
+  --color-info: #17a2b8;
+  --color-warning: #ffc107;
+  --color-danger: #dc3545;
+  --color-light: #e4e4e4;
+  --color-dark: #252525;
+
+  /* Neutral Colors */
+  --color-white: #e4e4e4;
+  --color-black: #252525;
+  --color-gray-100: #e4e4e4;
+  --color-gray-200: #d3d3d3;
+  --color-gray-300: #dee2e6;
+  --color-gray-400: #bababa;
+  --color-gray-500: #a1a1a1;
+  --color-gray-600: #888888;
+  --color-gray-700: #6f6f6f;
+  --color-gray-800: #555555;
+  --color-gray-900: #3c3c3c;
+
+  /* Fonts */
+  --font-family-primary: "Inter", Arial, Helvetica, sans-serif;
+  --font-family-secondary: "IBMPlexSerif", Arial, Helvetica, sans-serif;
+  --font-family-monospace: "SpaceMono", Arial, Helvetica, sans-serif;
+
+  /* Breakpoints */
+  --breakpoint-xs: 480px;
+  --breakpoint-sm: 768px;
+  --breakpoint-md: 1024px;
+  --breakpoint-lg: 1200px;
+  --breakpoint-xl: 1440px;
+
+  /* Max Widths */
+  --max-width-container: 1200px;
+  --max-width-content: 800px;
+}
+
+.darkTheme {
+  --color-primary: #73f9dc;
+  --color-secondary: #ffd7bb;
+  --color-success: #28a745;
+  --color-info: #17a2b8;
+  --color-warning: #ffc107;
+  --color-danger: #dc3545;
+  --color-light: #252525;
+  --color-dark: #e4e4e4;
+
+  /* Neutral Colors */
+  --color-gray-100: #252525;
+  --color-gray-200: #353535;
+  --color-gray-300: #4f4f4f;
+  --color-gray-400: #686868;
+  --color-gray-500: #818181;
+  --color-gray-600: #9a9a9a;
+  --color-gray-700: #b3b3b3;
+  --color-gray-800: #cccccc;
+  --color-gray-900: #e4e4e4;
+}
+
+/* Fonts */
+
+@font-face {
+  font-family: "Inter";
+  src: local("Inter"), url("../fonts/Inter-VariableFont.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IBMPlexSerif";
+  src: local("IBMPlexSerif"), local("IBM-Plex-Serif"),
+    url("../fonts/IBMPlexSerif-Medium.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SpaceMono";
+  src: local("SpaceMono"),
+    url("../fonts/SpaceMono-Regular.ttf") format("truetype");
+  font-display: swap;
+  font-weight: 400;
+}
+
+span {
+  font-family: var(--font-family-primary);
+  color: var(--color-dark);
+  transition: all 0.2s ease;
+}
+
+a {
+  all: unset;
+  cursor: pointer;
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+}
+
+/* Templates */
+
+/* Header */
+
+#headerWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+
+#headerLogo {
+  width: 100px;
+  padding-left: 30px;
+  padding-right: 30px;
+  z-index: 10;
+  fill: var(--color-dark);
+}
+
+#headerOptions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding-right: 55px;
+}
+
+#headerNavigation {
+  margin-right: 25px;
+}
+
+.navItemtext {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+#headerNavigation > ul {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#headerNavigation > ul > li > a {
+  text-decoration: none;
+}
+
+.navItem {
+  padding-left: 17px;
+  padding-right: 17px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+.navItem:hover > .navItemtext {
+  color: var(--color-gray-600);
+}
+
+/* Cursor */
+
+@media (pointer: coarse) {
+  #cursor {
+    display: none;
+    /* Hide on touch */
+  }
+}
+
+/* Media query for mouse input */
+@media (pointer: fine) {
+  #cursor {
+    display: block;
+    /* Show on mouse */
+  }
+}
+
+#cursor {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background-color: var(--color-dark);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+  z-index: 999;
+  opacity: 1;
+  mix-blend-mode: difference;
+  transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease;
+}
+
+#cursor.hover {
+  width: 20px;
+  height: 20px;
+  background-color: var(--color-dark);
+  transition: width 0.2s ease-in-out, height 0.2s ease-in-out,
+    background-color 0.2s ease-in-out;
+}
+
+/* Theme Switcher */
+
+.themeSwitchContainerWrapper {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.themeSwitchContainer {
+  background-color: var(--color-dark);
+  width: 35px;
+  height: 35px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 999;
+}
+
+.themeSwitchContainer > div > svg > path {
+  fill: var(--color-light);
+}
+
+.themeSwitchContainer > div > svg {
+  height: 24px;
+  width: 24px;
+}
+
+.themeSwitchContainer > div {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.themeSwitchContainer.active > .darkModeIcon,
+.themeSwitchContainer:not(.active) > .lightModeIcon {
+  scale: 0;
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+.themeSwitchContainer:not(.active) > .darkModeIcon {
+  margin-right: -23px;
+}
+
+.themeSwitchContainer.active > .darkModeIcon {
+  margin-right: 0px;
+}
+
+.themeSwitchContainer.active > .lightModeIcon {
+  margin-left: -23px;
+  transform: rotate(90deg);
+}
+
+.themeSwitchContainer:not(.active) > .lightModeIcon {
+  margin-left: 0px;
+}
+
+.themeSwitchContainer.active > .lightModeIcon,
+.themeSwitchContainer:not(.active) > .darkModeIcon {
+  display: flex;
+  scale: 1;
+  opacity: 1;
+  transition: all 0.5s ease;
+}
+
+.themeToggle {
+  all: unset;
+  cursor: pointer;
+  align-self: center;
+}
+
+.themeToggle:focus {
+  outline: revert;
+}
+
+/* Buttons */
+
+/* Stick */
+
+.magnetic {
+  padding: 7px;
+  margin: -7px;
+  display: flex;
+}
+
+/* Body */
+
+body {
+  width: 100dvw;
+  margin: 0px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  background-color: var(--color-light);
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+body::-webkit-scrollbar-track {
+  display: none;
+}
+
+body::-webkit-scrollbar-thumb {
+  display: none;
+}
