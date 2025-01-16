@@ -57,7 +57,7 @@ dialogue = [
     {
         userImage: "../assets/images/dnd/explorer.png",
         name: "Explorer Robot",
-        text: "I'm glad you asked. My name is Aybel, a Series 12-4 robot. I was created by the finest engineers in Gear Mark, designed to explore, protect, and serve. My creators gave me a fascination for the world, a deep-seated curiosity that drives me to understand and protect all that I encounter.",
+        text: "I'm glad you asked. My name is Aybel, an S001-2R1 android. I was created by the finest engineers in Gear Mark, designed to explore, protect, and serve. My creators gave me a fascination for the world, a deep-seated curiosity that drives me to understand and protect all that I encounter.",
         backgroundImage: "../assets/images/dnd/walktocity.jpg",
         music: "../assets/audio/dnd/153_Secret_Garden.mp3"
     },
