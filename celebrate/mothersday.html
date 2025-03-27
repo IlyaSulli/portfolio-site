@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Happy Mother's Day</title>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/chroma-js@2.1.0/chroma.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      color: #000;
+      text-shadow: 1px 1px 1px #fff;
+
+      display: flex;
+      justify-content: center;
+    }
+    #svg {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      filter: drop-shadow(0 0 4px #000);
+    }
+    .flower path {
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .layer {
+      animation-fill-mode: both;
+      transform-box: fill-box;
+      transform-origin: center center;
+    }
+    .layer path {
+      stroke: rgba(0, 0, 0, 0.7);
+      stroke-width: 0.75px;
+    }
+    h1, p {
+      text-align: center;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: max-content;
+      background-color: white;
+      margin: 20px;
+      border-radius: 10px;
+      align-items: center;
+      padding: 20px;
+      text-align: center;
+      z-index: 10;
+      color: black;
+    }
+    @keyframes layerAnim5 {
+      from { opacity: 0; transform: scale3d(0.3, 0.3, 0.3); }
+      to { opacity: 1; transform: scale3d(1, 1, 1); }
+    }
+    .bungee-shade {
+  font-family: "Bungee Shade", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+    #grass{
+        width: 100dvw;
+        height: 100dvh;
+        display: block;
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: -99;
+        background: url("https://img.freepik.com/free-vector/seamless-textured-grass-natural-grass-pattern_172107-1308.jpg")
+        repeat;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="bungee-shade">Happy Mother's Day</h1>
+    <p><i>(Click the grass to start making flowers)</i></p>
+  </div>
+  <div id="grass"></div>
+  <svg id="svg"></svg>
+
+  <script type="text/babel">
+
+    const { random, PI, sin, cos, floor, ceil } = Math;
+
+    function clamp(v, min, max) {
+      return Math.min(Math.max(v, min), max);
+    }
+
+    function rnd(min, max) {
+      if (max === undefined) { max = min; min = 0; }
+      return random() * (max - min) + min;
+    }
+
+    function rndInt(min, max) {
+      if (max === undefined) { max = min; min = 0; }
+      min = ceil(min);
+      max = floor(max);
+      return floor(random() * (max - min)) + min;
+    }
+
+    class QCurve {
+      constructor({ sp, cp, ep }) {
+        this.sp = sp;
+        this.cp = cp;
+        this.ep = ep;
+      }
+      pathD() {
+        return `M${this.sp[0]} ${this.sp[1]} Q${this.cp[0]} ${this.cp[1]} ${this.ep[0]} ${this.ep[1]}`;
+      }
+    }
+
+    class Petal {
+      constructor({ parent, x, y, startA, endA, iRadius, oRadius, cpda, cpdr, fill }) {
+        const da = endA - startA;
+        const iRadius0 = iRadius / 5;
+        const sp = [x + cos(startA + da / 2) * iRadius0, y + sin(startA + da / 2) * iRadius0];
+        const cp1 = [x + cos(startA - cpda) * (iRadius + cpdr), y + sin(startA - cpda) * (iRadius + cpdr)];
+        const cp2 = [x + cos(endA + cpda) * (iRadius + cpdr), y + sin(endA + cpda) * (iRadius + cpdr)];
+        const ep = [x + cos(startA + da / 2) * oRadius, y + sin(startA + da / 2) * oRadius];
+
+        const curve1 = new QCurve({ sp, cp: cp1, ep });
+        const curve2 = new QCurve({ sp, cp: cp2, ep });
+
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', `${curve1.pathD()} ${curve2.pathD()}`);
+        path.style.fill = fill;
+
+        parent.appendChild(path);
+      }
+    }
+
+    class Flower {
+      constructor(conf) {
+        this.conf = {
+          alpha: 1,
+          angle: 0,
+          iRadius: 2,
+          iRadiusCoef: 5,
+          oRadius: 5,
+          oRadiusCoef: 10,
+          layerAnim: 'layerAnim5',
+          reverseDelay: false,
+          ...conf
+        };
+        this.create();
+      }
+
+      create() {
+        const { parent, x, y, petals, rings, step, colors, alpha, angle, iRadius, iRadiusCoef, oRadius, oRadiusCoef, layerAnim, reverseDelay } = this.conf;
+        this.group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        this.group.classList.add('flower');
+        parent.appendChild(this.group);
+
+        let finalColors = colors || [chroma.random(), chroma.random()];
+        if (!colors && rings > 6) finalColors.push(chroma.random());
+
+        const cscale = chroma.scale(finalColors);
+
+        for (let i = rings; i > 0; i--) {
+          const layer = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+          layer.classList.add('layer');
+          const np = Math.floor((i + step - 1) / step) * petals;
+          const color = cscale(i / rings).alpha(alpha);
+          const rotation = angle + (i % 2) * PI / np;
+          this.createPetalsRing(layer, x, y, np, iRadius + i * iRadiusCoef, oRadius + i * oRadiusCoef, rotation, color);
+
+          const delay = reverseDelay ? (rings - i + 1) : i;
+          layer.style.animationName = layerAnim;
+          layer.style.animationDuration = `${rings * 0.1}s`;
+          layer.style.animationDelay = `${delay * 0.15}s`;
+
+          this.group.appendChild(layer);
+        }
+      }
+
+      createPetalsRing(parent, x, y, n, iRadius, oRadius, angle, fill) {
+        const da = 2 * PI / n;
+        const dr = oRadius - iRadius;
+        const cpda = rnd(0.1 * da, 0.3 * da);
+        const cpdr = rnd(dr * 0.25, dr * 1.1);
+
+        for (let i = 0; i < n; i++) {
+          const a = angle + i * da;
+          new Petal({ parent, x, y, startA: a, endA: a + da, iRadius, oRadius, cpda, cpdr, fill });
+        }
+      }
+    }
+
+    function App() {
+      const svg = document.getElementById('svg');
+      let width, height, cx, cy;
+
+      function onResize() {
+        const r = svg.getBoundingClientRect();
+        width = r.width;
+        height = r.height;
+        cx = width / 2;
+        cy = height / 2;
+        svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+      }
+
+      function createFlower({ x, y }) {
+        const iRadiusCoef = rnd(1, 7);
+        const oRadiusCoef = rnd(iRadiusCoef, 7);
+        new Flower({
+          parent: svg,
+          petals: rndInt(4, 12),
+          rings: rndInt(3, 8),
+          step: rndInt(3, 8),
+          alpha: rnd(0.7, 1),
+          angle: rnd(PI),
+          iRadius: rnd(2, 5),
+          iRadiusCoef,
+          oRadius: rnd(5, 10),
+          oRadiusCoef,
+          x, y
+        });
+      }
+
+      svg.addEventListener('click', (e) => {
+        createFlower({ x: e.clientX, y: e.clientY });
+      });
+
+      window.addEventListener('resize', onResize);
+      onResize();
+    }
+
+    App();
+  </script>
+</body>
+</html>
