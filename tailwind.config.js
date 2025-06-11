@@ -1,11 +1,23 @@
-module.exports = {
-  purge: [],
-  darkMode: false, // or 'media' or 'class'
+import {heroui} from "@heroui/theme"
+
+/** @type {import('tailwindcss').Config} */
+const config = {
+  content: [
+    './layouts/**/*.{js,ts,jsx,tsx,mdx}',
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ["var(--font-sans)"],
+        mono: ["var(--font-mono)"],
+      },
+    },
   },
-  variants: {
-    extend: {},
-  },
-  plugins: [],
+  darkMode: "class",
+  plugins: [heroui()],
 }
+
+export default config;
