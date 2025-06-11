@@ -1,4 +1,4 @@
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem} from "@heroui/react";
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from "@nextui-org/react";
 import { Link, useLocation } from "react-router-dom";
 import ThemeSwitch from '../elements/ThemeSwitch';
 
