@@ -27,7 +27,7 @@ export const Navbar = () => {
         </NavbarBrand>
       </NavbarContent>
       <NavbarContent className="hidden sm:flex basis-auto" justify="end">
-        <div className="hidden lg:flex gap-8 justify-start ml-2">
+        <div className="lg:flex md:flex sm:hidden gap-8 justify-start ml-2">
           {siteConfig.navItems.map((item) => (
             <NavbarItem key={item.href}>
               <NextLink
@@ -42,10 +42,13 @@ export const Navbar = () => {
               </NextLink>
             </NavbarItem>
           ))}
+          <ThemeSwitch className="mx-4" />
         </div>
-        <ThemeSwitch className="mx-4" />
       </NavbarContent>
-      <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
+      <NavbarContent
+        className="lg:hidden md:hidden sm:flex basis-1 pl-4"
+        justify="end"
+      >
         <ThemeSwitch />
         <NavbarMenuToggle />
       </NavbarContent>
@@ -56,16 +59,16 @@ export const Navbar = () => {
             <NavbarMenuItem key={`${item}-${index}`}>
               <Link
                 color={
-                  index === 2
+                  index === 1
                     ? "primary"
-                    : index === siteConfig.navMenuItems.length - 1
+                    : index === siteConfig.navMenuItems.length - 2
                       ? "danger"
                       : "foreground"
                 }
                 href="#"
                 size="lg"
               >
-                {item.label}
+                {item.label.toUpperCase()}
               </Link>
             </NavbarMenuItem>
           ))}
