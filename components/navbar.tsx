@@ -38,7 +38,7 @@ export const Navbar = () => {
                 color="foreground"
                 href={item.href}
               >
-                {item.label.toUpperCase()}
+                {item.label.toLowerCase()}
               </NextLink>
             </NavbarItem>
           ))}
@@ -68,7 +68,7 @@ export const Navbar = () => {
                 href="#"
                 size="lg"
               >
-                {item.label.toUpperCase()}
+                {item.label.toLowerCase()}
               </Link>
             </NavbarMenuItem>
           ))}
