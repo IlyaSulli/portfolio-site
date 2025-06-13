@@ -4,26 +4,15 @@ import { Code } from "@heroui/code";
 import { button as buttonStyles } from "@heroui/theme";
 
 import { siteConfig } from "@/config/site";
-import { title, subtitle } from "@/components/primitives";
-import { GithubIcon } from "@/components/icons";
+import { GithubIcon, SpinnerIcon } from "@/components/icons";
 import DefaultLayout from "@/layouts/default";
+import ScrollingTitle from "@/sections/home/scrollingTitle";
 
 export default function IndexPage() {
   return (
     <DefaultLayout>
-      <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-        <div className="inline-block max-w-xl text-center justify-center">
-          <span className={title()}>Make&nbsp;</span>
-          <span className={title({ color: "violet" })}>beautiful&nbsp;</span>
-          <br />
-          <span className={title()}>
-            websites regardless of your design experience.
-          </span>
-          <div className={subtitle({ class: "mt-4" })}>
-            Beautiful, fast and modern React UI library.
-          </div>
-        </div>
-
+      <section className="flex flex-col items-center justify-between gap-4 py-8 md:py-10">
+        <ScrollingTitle />
         <div className="flex gap-3">
           <Link
             isExternal
@@ -32,7 +21,7 @@ export default function IndexPage() {
               radius: "full",
               variant: "shadow",
             })}
-            href={siteConfig.links.docs}
+            href={siteConfig.links.dribbble}
           >
             Documentation
           </Link>
