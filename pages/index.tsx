@@ -4,7 +4,7 @@ import { Code } from "@heroui/code";
 import { button as buttonStyles } from "@heroui/theme";
 
 import { siteConfig } from "@/config/site";
-import { GithubIcon, SpinnerIcon } from "@/components/icons";
+import { GithubIcon } from "@/components/icons";
 import DefaultLayout from "@/layouts/default";
 import ScrollingTitle from "@/sections/home/scrollingTitle";
 
