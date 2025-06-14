@@ -76,31 +76,6 @@ export const Logo: React.FC<IconSvgProps> = ({
   </svg>
 );
 
-export const SpinnerIcon: React.FC<IconSvgProps> = ({
-  size = 32,
-  width,
-  height,
-  ...props
-}) => {
-  return (
-    <svg
-      fill="none"
-      height={size || height}
-      viewBox="0 0 32 32"
-      width={size || width}
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
-      <g transform="translate(6.5, 0)">
-        <path
-          d="M13.875 3.719l1.156 1.938-4.938 1.813 4.938 1.875-1.156 1.938-4.031-3.375 0.875 5.219h-2.281l0.938-5.219-4.094 3.375-1.125-1.938 5-1.875-5-1.813 1.125-1.938 4.094 3.375-0.938-5.219h2.281l-0.875 5.219z"
-          fill="currentColor"
-        />
-      </g>
-    </svg>
-  );
-};
-
 export const DiscordIcon: React.FC<IconSvgProps> = ({
   size = 24,
   width,
