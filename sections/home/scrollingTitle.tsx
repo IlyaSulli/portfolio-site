@@ -1,6 +1,6 @@
 "use client";
-import { motion, useAnimationFrame, useMotionValue } from "motion/react";
-import { useRef } from "react";
+import { wrap, motion, useMotionValue, useAnimationFrame } from "motion/react";
+import { useRef, useEffect } from "react";
 
 export default function ScrollingTitle() {
   const phrases = [
@@ -17,18 +17,60 @@ export default function ScrollingTitle() {
   const containerRef = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
 
-  useAnimationFrame((t, delta) => {
+  const lastScrollY = useRef(0);
+  const scrollVelocity = useRef(0);
+  const lastTimestamp = useRef(performance.now());
+
+  // Track scroll velocity over time
+  useEffect(() => {
+    let animationFrameId: number;
+
+    const updateScrollVelocity = () => {
+      const currentY = window.scrollY;
+      const now = performance.now();
+      const dt = now - lastTimestamp.current;
+
+      const dy = currentY - lastScrollY.current;
+      const MAX_VELOCITY = 1; // px/ms cap
+
+      if (dt > 0) {
+        const v = Math.max(-MAX_VELOCITY, Math.min(MAX_VELOCITY, dy / dt));
+
+        scrollVelocity.current = v;
+      }
+
+      lastScrollY.current = currentY;
+      lastTimestamp.current = now;
+
+      animationFrameId = requestAnimationFrame(updateScrollVelocity);
+    };
+
+    animationFrameId = requestAnimationFrame(updateScrollVelocity);
+
+    return () => cancelAnimationFrame(animationFrameId);
+  }, []);
+
+  // Animate horizontal scroll
+  useAnimationFrame((_, delta) => {
     const container = containerRef.current;
 
     if (!container) return;
 
-    const velocity = 0.1; // 100px /sec
+    const baseVelocity = 0.05;
+    const scrollInfluence = scrollVelocity.current * 1.1;
 
+    scrollVelocity.current *= 0.9;
+
+    const totalVelocity = baseVelocity + scrollInfluence;
     const prev = x.get();
-    const next: number = prev - delta * velocity;
-    const resetAt: number = -container.scrollWidth / 2; // scroll back when 1 loop is out
+    const next = prev - delta * totalVelocity;
 
-    x.set(next <= resetAt ? 0 : next);
+    // Use modulo for seamless looping
+    const width = container.scrollWidth / 2;
+
+    const wrappedX = wrap(-width, 0, next);
+
+    x.set(wrappedX);
   });
 
   return (
