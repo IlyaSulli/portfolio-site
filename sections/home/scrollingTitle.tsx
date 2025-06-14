@@ -74,7 +74,7 @@ export default function ScrollingTitle() {
   });
 
   return (
-    <div className="relative w-full overflow-hidden py-4">
+    <div className="relative w-full overflow-hidden py-4 z-10">
       <motion.div
         ref={containerRef}
         className="flex whitespace-nowrap"

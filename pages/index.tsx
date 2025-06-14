@@ -9,17 +9,18 @@ import { siteConfig } from "@/config/site";
 import { DribbbleIcon, GithubIcon, LinkedInIcon } from "@/components/icons";
 import DefaultLayout from "@/layouts/default";
 import ScrollingTitle from "@/sections/home/scrollingTitle";
+import FadeText from "@/components/custom-text";
 
 export default function IndexPage() {
   return (
     <DefaultLayout>
       <section className="flex flex-col items-center justify-between gap-4 py-8 md:py-10">
         <ScrollingTitle />
-        <div className="flex flex-col md:flex-row-reverse">
+        <div className="flex flex-col md:flex-row-reverse z-0 w-full">
           <motion.div
-            animate={{ y: 0 }}
-            className="p-8 md:w-1/2"
-            initial={{ y: -20 }}
+            className="md:w-1/2 md:-mt-20 mr-5"
+            initial={{ y: 20 }}
+            whileInView={{ y: 0 }}
           >
             <Image
               isBlurred
@@ -29,13 +30,10 @@ export default function IndexPage() {
             />
           </motion.div>
           <div className="flex flex-col items-start md:w-1/2 py-20 px-8">
-            <span className="flex py-8 text-lg">
-              Ilya Sullivan is a results-driven software developer specialising
-              in crafting user-centric websites and applications. With a keen
-              eye for design and a strong programming background he strives to
-              build innovative digital products that provide exceptional user
-              experiences.
-            </span>
+            {FadeText(
+              "flex py-8 text-lg",
+              "Ilya Sullivan is a results-driven software developer specialising in crafting user-centric websites and applications. With a keen eye for design and a strong programming background he strives to build innovative digital products that provide exceptional user experiences.",
+            )}
             <span className="flex py-4 text-lg font-semibold">Quick Links</span>
             <div className="flex flex-row gap-2 flex-wrap">
               <Link
@@ -73,6 +71,7 @@ export default function IndexPage() {
               </Link>
             </div>
           </div>
+          <div />
         </div>
         <div className="mt-8">
           <Snippet hideCopyButton hideSymbol variant="bordered">
@@ -83,6 +82,7 @@ export default function IndexPage() {
           </Snippet>
         </div>
       </section>
+      <section className="h-screen" />
     </DefaultLayout>
   );
 }
