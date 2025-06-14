@@ -82,12 +82,12 @@ export default function ScrollingTitle() {
       >
         {longPhrases.map((phrase, index) => (
           <div key={index} className="flex items-center mx-8">
-            <span className="text-9xl font-medium text-[color:var(--secondary)]">
+            <span className="text-7xl md:text-8xl lg:text-9xl font-medium text-[color:var(--secondary)]">
               {phrase}
             </span>
             <motion.span
               animate={{ rotate: 360 }}
-              className="origin-center text-9xl font-medium text-primary flex items-center ml-16"
+              className="origin-center text-7xl md:text-8xl lg:text-9xl font-medium text-primary flex items-center ml-16"
               initial={{ rotate: 0 }}
               transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
             >
