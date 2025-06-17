@@ -24,7 +24,7 @@ export const projects = [
       "App Development",
     ],
     tools: ["Dart", "Flutter", "Figma"],
-    coverImage: "/image/placeholder.jpg",
+    coverImage: "/image/projects/alleat/slides/alleathomepageslide.webp",
   },
   {
     title: "Kat Sullivan",
@@ -34,7 +34,8 @@ export const projects = [
     endDate: "2020-05-01",
     tags: ["Work Project", "Web Development", "UI Design", "UX Design"],
     tools: ["WordPress", "Figma", "PHP"],
-    coverImage: "/image/placeholder.jpg",
+    coverImage:
+      "/image/projects/katsullivan/slides/katsullivanhomepageslide.webp",
   },
   {
     title: "Passagetopoise",
@@ -50,7 +51,8 @@ export const projects = [
       "E-commerce",
     ],
     tools: ["WordPress", "Figma", "PHP"],
-    coverImage: "/image/placeholder.jpg",
+    coverImage:
+      "/image/projects/passagetopoise/slides/passagetopoisehomepageslide.webp",
   },
   {
     title: "CPUR",
@@ -66,7 +68,7 @@ export const projects = [
       "E-commerce",
     ],
     tools: ["WordPress", "Figma", "PHP"],
-    coverImage: "/image/placeholder.jpg",
+    coverImage: "/image/projects/cpur/slides/cpurhomepageslide.webp",
   },
   {
     title: "SSH Cart",
@@ -140,5 +142,15 @@ export const projects = [
     ],
     tools: ["Java", "JavaFX", "PostgreSQL"],
     coverImage: "/image/placeholder.jpg",
+  },
+  {
+    title: "30 Days of UI",
+    description: "",
+    url: "",
+    startDate: "2025-08-01",
+    endDate: "2025-09-01",
+    tags: ["UI Design", "Challenge", "Personal Project"],
+    tools: ["Figma", "Adobe Photoshop", "Adobe Illustrator"],
+    coverImage: "image/projects/30daysofui/slides/30daysofuislide.webp",
   },
 ];
