@@ -18,7 +18,7 @@ export const siteConfig = {
     },
     {
       label: "Contact",
-      href: "/contact",
+      href: "https://tally.so/r/nrGl6M",
     },
   ],
   navMenuItems: [
@@ -36,7 +36,7 @@ export const siteConfig = {
     },
     {
       label: "Contact",
-      href: "/contact",
+      href: "https://tally.so/r/nrGl6M",
     },
   ],
   links: {
