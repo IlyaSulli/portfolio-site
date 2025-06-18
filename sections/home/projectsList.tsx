@@ -1,6 +1,6 @@
 import { Image } from "@heroui/react";
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 import { ArrowRight } from "@/components/icons";
 import { projects } from "@/config/projects";
@@ -37,11 +37,14 @@ export default function GridProjects({ nItems }: { nItems: number }) {
               aria-haspopup="dialog"
               className="p-2 w-full text-left relative"
               type="button"
+              onClick={() =>
+                (window.location.href = `../project/${project.url}`)
+              }
             >
               <Image
                 isBlurred
                 className="aspect-square object-cover"
-                src={project.coverImage}
+                src={project.thumbnailImage}
                 width={600}
               />
               <div className="absolute top-0 right-0 z-10 flex flex-row justify-end p-6">
@@ -82,7 +85,7 @@ export function ListProjects({ nItems }: { nItems: number }) {
           <motion.div initial="intial" whileHover="hover">
             <button className="flex flex-row justify-between w-full pl-10 pr-20 py-10 rounded group">
               <motion.span
-                transition={{ ease: "easeInOut", duration: "0.2" }}
+                transition={{ ease: "easeInOut", duration: 0.2 }}
                 variants={textVariants}
               >
                 <span className="font-medium text-3xl">{project.title}</span>
