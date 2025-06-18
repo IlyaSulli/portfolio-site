@@ -1,5 +1,5 @@
 import {
-  Navbar as HeroUINavbar,
+  Navbar,
   NavbarContent,
   NavbarMenu,
   NavbarMenuToggle,
@@ -16,12 +16,16 @@ import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { Logo } from "@/components/icons";
 
-export const Navbar = () => {
+export const AppNavbar = () => {
   return (
-    <HeroUINavbar maxWidth="xl" position="sticky">
+    <Navbar shouldHideOnScroll maxWidth="xl" position="sticky">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand className="gap-3 max-w-fit">
-          <NextLink className="flex justify-start items-center gap-1" href="/">
+          <NextLink
+            aria-label="Ilya Sullivan Logo"
+            className="flex justify-start items-center gap-1"
+            href="/"
+          >
             <Logo />
           </NextLink>
         </NavbarBrand>
@@ -74,6 +78,6 @@ export const Navbar = () => {
           ))}
         </div>
       </NavbarMenu>
-    </HeroUINavbar>
+    </Navbar>
   );
 };
