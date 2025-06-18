@@ -22,6 +22,7 @@
 # temp files
 *.TMP
 *.temp
+*.Identifier
 
 
 # debug
