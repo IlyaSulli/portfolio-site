@@ -14,7 +14,7 @@ import {
 import DefaultLayout from "@/layouts/default";
 import ScrollingTitle from "@/sections/home/scrollingTitle";
 import FadeText from "@/components/custom-text";
-import GridProjects from "@/sections/home/projects";
+import GridProjects from "@/sections/home/projectsList";
 
 export default function IndexPage() {
   return (
@@ -91,8 +91,10 @@ export default function IndexPage() {
         <GridProjects nItems={6} />
         <div className="w-full align-middle mt-8 justify-end flex px-4">
           <Button
+            as={Link}
             className=""
             endContent={<ArrowRight />}
+            href="/projects"
             radius="full"
             size="lg"
             variant="bordered"
