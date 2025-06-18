@@ -8,7 +8,7 @@ import { DribbbleIcon, GithubIcon, LinkedInIcon } from "@/components/icons";
 import DefaultLayout from "@/layouts/default";
 import ScrollingTitle from "@/sections/home/scrollingTitle";
 import FadeText from "@/components/custom-text";
-import GridProjects from "@/sections/home/projects";
+import GridProjects, { ListProjects } from "@/sections/home/projects";
 
 export default function IndexPage() {
   return (
@@ -25,7 +25,8 @@ export default function IndexPage() {
               isBlurred
               alt="Ilya Sullivan Profile"
               className="m-5"
-              src="/image/ilya-downsize.jpg"
+              fetchPriority="high"
+              src="/image/ilya.webp"
             />
           </motion.div>
           <div className="flex flex-col items-start md:w-1/2 py-20 px-8">
@@ -73,7 +74,10 @@ export default function IndexPage() {
         </div>
       </section>
       <section>
-        <GridProjects nItems={10} />
+        <span>
+          
+        </span>
+        <GridProjects nItems={6} />
       </section>
       <section className="h-screen" />
     </DefaultLayout>
