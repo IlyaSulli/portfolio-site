@@ -13,37 +13,47 @@ export default function GridProjects({ nItems }: { nItems: number }) {
     .slice(0, nItems);
 
   return (
-    <div className="grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 grid">
-      {sortedProjects.map((project, idx) => (
-        <motion.div
-          key={idx}
-          whileHover={{
-            rotateZ: 2,
-            rotateX: -2,
-            scale: 0.95,
-          }}
-        >
-          <button
-            aria-haspopup="dialog"
-            className="p-2 w-full text-left"
-            style={{ position: "relative" }}
-            type="button"
-          >
-            <Image
-              isBlurred
-              className="aspect-square object-cover"
-              src={project.coverImage}
-              width={600}
-            />
-            <div className="absolute top-0 right-0 z-10 flex flex-row justify-end p-6">
-              <div className="flex items-center gap-2 bg-background rounded-full px-4 py-2">
-                <span>{project.title}</span>
-                <ArrowRight />
-              </div>
+    <div className="grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 grid ">
+      {sortedProjects.length === 0 ? (
+        <div className="p-2 w-full text-left relative">
+          <div className="aspect-square object-cover bg-foreground rounded-xl opacity-50" />
+          <div className="absolute top-0 z-10 flex flex-row justify-center p-6">
+            <div className="flex items-center gap-2 bg-background rounded-full px-4 py-2">
+              <span className="text-foreground">No Items Found</span>
             </div>
-          </button>
-        </motion.div>
-      ))}
+          </div>
+        </div>
+      ) : (
+        sortedProjects.map((project: any, idx: number) => (
+          <motion.div
+            key={idx}
+            whileHover={{
+              rotateZ: 2,
+              rotateX: -2,
+              scale: 0.95,
+            }}
+          >
+            <button
+              aria-haspopup="dialog"
+              className="p-2 w-full text-left relative"
+              type="button"
+            >
+              <Image
+                isBlurred
+                className="aspect-square object-cover"
+                src={project.coverImage}
+                width={600}
+              />
+              <div className="absolute top-0 right-0 z-10 flex flex-row justify-end p-6">
+                <div className="flex items-center gap-2 bg-background rounded-full px-4 py-2">
+                  <span>{project.title}</span>
+                  <ArrowRight />
+                </div>
+              </div>
+            </button>
+          </motion.div>
+        ))
+      )}
     </div>
   );
 }
