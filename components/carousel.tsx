@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 import { Image } from "@heroui/react";
 
 import { ArrowLeft, ArrowRight } from "@/components/icons";
