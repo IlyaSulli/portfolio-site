@@ -10,6 +10,7 @@ export default function AllEatProject() {
         <Image src="/image/projects/alleat/slides/alleatconfirmedorderslide.webp" />
         <Image src="/image/projects/alleat/slides/alleathomepageslide.webp" />
         <Image src="/image/projects/alleat/slides/alleatitemslide.webp" />
+        <Image src="/image/projects/alleat/slides/alleatlogoslide.webp" />
       </div>
     </Project>
   );
