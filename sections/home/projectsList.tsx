@@ -42,7 +42,6 @@ export default function GridProjects({ nItems }: { nItems: number }) {
               }
             >
               <Image
-                isBlurred
                 className="aspect-square object-cover"
                 src={project.thumbnailImage}
                 width={600}
