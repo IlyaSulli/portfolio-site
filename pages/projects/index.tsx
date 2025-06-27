@@ -1,6 +1,6 @@
 import { title } from "@/components/primitives";
 import DefaultLayout from "@/layouts/default";
-import GridProjects from "@/sections/home/projectsList";
+import GridProjects, { ListProjects } from "@/sections/home/projectsList";
 
 export default function ProjectsPage() {
   return (

@@ -1,4 +1,5 @@
 import { Image } from "@heroui/image";
+import { Code } from "@heroui/code";
 
 import Project from "@/sections/projects/project";
 import SplitHeading from "@/components/split-heading";
@@ -268,7 +269,23 @@ export default function BlocDoc() {
           size="lg"
           subheading="Milestone 3"
         >
-          <p>The final milestone </p>
+          <p>
+            The final milestone, we were required to have our entity complete
+            and fully functional, with accessibility taken into full
+            consideration and the application, demonstrated in a short video
+            breaking down the entire app. In this time, I worked on the
+            exporting functionality, allowing for the downloading of the
+            document into 3 different types
+            <br /> <br />
+            <Code size="md">
+              <b>.blocdoc</b>
+            </Code>
+            <br />
+            <br />
+            This is a custom file type based off the json file type, storing the
+            document information stripped from the user to allow for sharing
+            across multiple users.
+          </p>
         </SplitHeading>
         <Image src="/image/projects/blocdoc/blocdocdocumentlightdark.webp" />
         <Image src="/image/projects/blocdoc/blocdoceditingmode.webp" />

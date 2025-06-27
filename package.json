@@ -2,11 +2,14 @@
   "name": "next-pages-template",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://ilyasullivan.com",
   "scripts": {
     "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint --fix"
+    "lint": "eslint --fix",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@heroui/button": "2.2.21",
