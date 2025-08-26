@@ -90,7 +90,7 @@ export const projects = [
     languages: ["HTML", "CSS", "JavaScript", "NodeJS"],
     tools: ["Visual Studio Code", "Docker", "MongoDB", "Figma"],
     coverImage: "/image/projects/sshcart/sshcart.png",
-    thumbnailImage: "/image/projects/sshcart/slides/sshcartslide.webp",
+    thumbnailImage: "/image/projects/sshcart/slides/sshslide.webp",
     imageGallery: ["/image/placeholder.jpg"],
   },
   {
@@ -157,5 +157,52 @@ export const projects = [
     thumbnailImage: "image/projects/30daysofui/slides/30daysofuislide.webp",
     coverImage: "/image/projects/30daysofui/30daysofui.png",
     imageGallery: ["/image/placeholder.jpg"],
+  },
+  {
+    title: "SyncMove",
+    description: "",
+    url: "syncmove",
+    startdate: "2025-06",
+    endDate: "2025-07",
+    classification: ["Work Project"],
+    thumbnailImage: "image/projects/syncmove/slides/syncmoveslide.webp",
+    type: "App Development & UI/UX Design",
+  },
+  {
+    title: "Roll for Answers",
+    description:
+      "Roll for Answers is a podcast that I wrote, hosted, and edited for the University of Birmingham's Tabletop Gaming Society. The podcast explored a new question every two weeks, focusing on breaking down different topics into their core mechanics, history, and impact within the world of tabletop role-playing games (TTRPGs). Over the course of the series, I brought in a variety of society members and guest speakers to create engaging discussions and provide diverse perspectives on the topics covered.\n\nAs the podcast's creator, my responsibilities included researching and scripting episodes to ensure they were well-structured and informative. I also acted as the lead host, guiding conversations and asking questions to keep discussions insightful and engaging. Additionally, I coordinated with guests to prepare them for their appearances and ensure smooth episode flow.\n\nI handled the audio recording, editing, and post-production for each episode, which strengthened my skills in sound design, pacing, and polishing dialogue to deliver a professional listening experience. Alongside production, I worked on promoting the podcast within the society, encouraging community participation and fostering greater engagement among members.",
+    url: "rollforanswers",
+    startDate: "2025-08",
+    endDate: "2026-06",
+    classification: ["Personal Project"],
+    type: "Podcast",
+    languages: [],
+    tools: ["Audacity", "RSS", "Adobe Illustrator"],
+    thumbnailImage:
+      "image/projects/rollforanswers/slides/rollforanswersslide.webp",
+  },
+  {
+    title: "The Great Beyond",
+    description:
+      "The game The Great Beyond was run as part of the Tabletop Gaming Society at the University of Birmingham, designing and developing a game for 10 people within the society in order to promote communication and story telling. Through the course of the development of the game, I gained experience in world-building and creating branching storylines that are easy to engage with and easy to follow. I also refined my map-making and environmental design skills, enhancing the overall experience for the players.\n\nWith storytelling, I focused on maintaining pacing in order to create memorable character-driven moments that stuck with the players and with the combined development of my voice acting skills, it brought the characters narrated through the storytelling aspects, to life. With constant feedback from the players, I learned how to adapt content dynamically and on the fly, strengthening my skills in creative design, communication and audience management.",
+    type: "Game Development",
+    url: "thegreatbeyond",
+    startDate: "2024-10",
+    endDate: "2025-07",
+    tools: ["Obsidian", "Adobe Illustrator", "D&D Beyond", "Roll20"],
+    thumbnailImage:
+      "image/projects/thegreatbeyond/slides/thegreatbeyondslide.webp",
+  },
+  {
+    title: "Take Ctrl",
+    description:
+      "Take Ctrl was a mock marketing campaign I developed during a work experience program with Acer UK. The goal was to create a marketing strategy aimed at engaging younger audiences and improving Acer’s outreach on social platforms. During this time, I gained hands-on experience in market research, competitor analysis, and identifying effective marketing strategies tailored to emerging trends.\n\nAt the time, Acer was preparing to launch the Acer Vero, and our team was tasked with designing a concept advertising campaign for their Instagram platform. I successfully delivered a campaign proposal to a high standard, and several of my ideas were taken on board by the team to inform their future marketing direction.\n\nThroughout the work experience, I had the opportunity to engage directly with key departments across Acer UK, including marketing, finance, product design, sales, and the field operations team - This gave me valuable insights into how different areas of the business collaborate to bring products to market and strengthened my understanding of cross-departmental communication and strategic planning.",
+    type: "Marketing",
+    url: "takectrl",
+    tools: ["Figma", "Microsoft Word"],
+    startDate: "2022-07-11",
+    endDate: "2022-07-15",
+    thumbnailImage: "image/projects/takectrl/slides/takectrlslide.webp",
   },
 ];
