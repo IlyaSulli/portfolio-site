@@ -40,14 +40,15 @@ export const projects = [
   },
   {
     title: "Passagetopoise",
-    description: "",
+    description:
+      "Passagetopoise is a fashion-focused portfolio website that I designed and developed in collaboration with the client. Using Adobe XD, I created multiple design iterations based on client feedback to ensure alignment with their brand.\n\nThe final design was implemented in WordPress, enabling the client to manage and update content independently. Upon launch, site maintenance was transitioned to an external agency.\n\nThe design phase took approximately two months, followed by three months of development. In the months following release, I continued to deliver additional features, including an e-commerce integration to support online sales.",
     url: "passagetopoise",
     startDate: "2019-11",
     endDate: "2020-12",
     classification: ["Work Project"],
     type: "Web Development",
     languages: ["PHP"],
-    tools: ["WordPress", "Figma"],
+    tools: ["WordPress", "Adobe XD"],
     thumbnailImage:
       "/image/projects/passagetopoise/slides/passagetopoisehomepageslide.webp",
     coverImage: "/image/projects/passagetopoise/passagetopoisehomepage.png",
@@ -59,7 +60,8 @@ export const projects = [
   },
   {
     title: "CPUR",
-    description: "",
+    description:
+      "CPUR is a phone repair company that I ran for four years. As the business expanded, I designed and built multiple versions of the website in order to simplify and streamline the booking process. During early versions, I initially implemented a basic form, which was later replaced with a multi-step version that could calculate repair estimates and determine what was wrong with the device in question. \n \nAlongside technical development, I worked on core business operations including building queue management systems and developing APIs that automated the process of ordering replacement parts. I also explored A/B marketing strategies, running targeted campaigns to reach customers in the local area effectively.\n \nTo provide more value and trust in the business, I maintained a blog that educated users about common problems with their devices and solutions to many of them and how to prevent many of these issues from occurring again and provided a free service to do over the phone troubleshooting help.\n \nThis project strengthened my skills in web development, automation, user experience design, marketing, customer communication, and business management, all while operating in a fast paced, client-facing environment",
     url: "cpur",
     startDate: "2019-03",
     endDate: "2022-12",
@@ -78,7 +80,8 @@ export const projects = [
   },
   {
     title: "SSH Cart",
-    description: "",
+    description:
+      "SSH Cart is a web-based collaborative cart system designed for shared households to split the cost of delivery by ordering as a single delivery while allowing each member to have their own virtual carts, ensuring that each person's order remains private and protected from interference\n\nThis project done as part of the module Software Engineering and Professional Practice at the University of Birmingham.  Through this module, we were taught about the fundamentals of GitHub and servers, learning how to generate and pitch ideas using an Engineering Design Review (EDR). After pitching our individual ideas, we formed teams of four and used the EDR framework to collaboratively design the product.\n\nAs the team lead, I was responsible for delegating tasks based on each member's strengths and managing the project's progress. I handled the frontend development for the cart system, ensuring a clean and intuitive user interface while coordinating with the rest of the team to integrate our work seamlessly. By performing it this way, each person was responsible with communicating with 2 people instead of the entire team while also allowing for mutual interaction.\n\nThroughout the project, we used our skills learnt in the lectures, to use GitHub effectively for task management and tracking issues. On top of this, our weekly meetings allowed each of us to talk about the project and aid each other in areas we were struggling at. This allowed us to get the project completed to a high standard and as a result we got a First in this module.",
     url: "sshcart",
     startDate: "2024-11-18",
     endDate: "2024-12-11",
@@ -107,7 +110,8 @@ export const projects = [
   },
   {
     title: "Advanced News Classifier",
-    description: "",
+    description:
+      "Advanced News Classifier was a project developed as part of a first-year module at the University of Birmingham, designed to assess our understanding of the Java language using natural language processing techniques. We were provided with some base code to start us off and by using the documentation of the library for NLPs, we built a classifier that could categorise new articles by genre based solely on the articles' text content. Through feature extraction, training and evaluation of multiple models and performance tuning the final model achieved an accuracy of 85% on the test database.",
     url: "newsclassifier",
     startDate: "2023-11-27",
     endDate: "2023-12-11",
@@ -122,7 +126,8 @@ export const projects = [
   },
   {
     title: "Record Shop",
-    description: "",
+    description:
+      "Record Shop was a first-year assignment at the University of Birmingham, designed to test my ability to create, manage, and query databases using SQL. The project involved performing data analysis on provided datasets and writing efficient SQL statements to extract  data. To further test our skills, it additionally asked us to develop a 3-tier TCP based networking multi-threaded client-server application that is used to store data on a chain store and their vinyl records. With the use of Java, JavaFX and a database of PostgreSQL, I was able to successfully do this and get a score of 92/100.",
     url: "recordshop",
     startDate: "2024-03-14",
     endDate: "2024-05-02",
@@ -140,7 +145,8 @@ export const projects = [
   },
   {
     title: "30 Days of UI",
-    description: "",
+    description:
+      "This project is upcoming 😭. Come back later to see the full breakdown",
     url: "30daysofui",
     startDate: "2025-08",
     endDate: "2025-09",
