@@ -8,9 +8,13 @@ export default function BlocDoc() {
   return (
     <Project url="blocdoc">
       <>
-        <Image
-          alt="Image of BlocDoc Homepage"
-          src="/image/projects/blocdoc/blocdochomepage.webp"
+        <iframe
+          allowFullScreen
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          className="w-full aspect-video my-4 rounded-2xl"
+          referrerPolicy="strict-origin-when-cross-origin"
+          src="https://www.youtube.com/embed/cz-BtdbynIU?si=mBRx3J1uikXVUoe8"
+          title="YouTube video player"
         />
         <SplitHeading heading="Ideation" size="lg" subheading="Milestone 1">
           <p>
@@ -284,13 +288,67 @@ export default function BlocDoc() {
             <br />
             This is a custom file type based off the json file type, storing the
             document information stripped from the user to allow for sharing
-            across multiple users.
+            across multiple users. By doing it in this form, it allowed for the
+            application to store more information than other types could handle
+            like a PDF or markdown, facilitating the import function in the
+            application.
+            <br /> <br />
+            <Code size="md">
+              <b>.markdown</b>
+            </Code>
+            <br />
+            <br />
+            Markdown is an open-source file type that allows the document to
+            exported from BlocDoc to any other note taking application that
+            supports it. By adding this, it allows for the freedom of the users
+            to move their files between mutliple application and means that if
+            the service gets shut down, it will be able to kept locally. This
+            worked by taking the elements stored in the database and converting
+            it to a markdown safe format, using the formatting options that
+            markdown supports to represent some of the features that aren&#39;t
+            on markdown. Any documents that contain images are zipped together
+            the image to once again give the user freedom to alter it however
+            they wish.
+            <br /> <br />
+            <Code size="md">
+              <b>.pdf</b>
+            </Code>
+            <br />
+            <br />
+            The PDF function makes use of the built in print functionality of
+            the browser, opening the print modal whilst simulataneously
+            formatting the document to format the page to only include the
+            document details. The implementation allows for a more open
+            exporting method and gives different options including resizing how
+            big pages can be and the orientation. Pages are split by blocks to
+            prevent uneven splits and flashcards are given their own pages for
+            each side to allow for creating printout flashcards to test yourself
+            with physical paper.
           </p>
         </SplitHeading>
-        <Image src="/image/projects/blocdoc/blocdocdocumentlightdark.webp" />
-        <Image src="/image/projects/blocdoc/blocdoceditingmode.webp" />
-        <Image src="/image/projects/blocdoc/blocdocflashcard.webp" />
-        <Image src="/image/projects/blocdoc/blocdocimport.webp" />
+        <iframe
+          allowFullScreen
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          className="w-full aspect-video my-4 rounded-2xl"
+          referrerPolicy="strict-origin-when-cross-origin"
+          src="https://www.youtube.com/embed/j2GhaW4xE2w?si=piaC_QpfVIVHpr0r"
+          title="YouTube video player"
+        />
+        <Image
+          alt="Image of BlocDoc document with content in it"
+          className="my-4"
+          src="/image/projects/blocdoc/blocdoceditingmode.webp"
+        />
+        <Image
+          alt="Image of BlocDoc flashcard found within a document"
+          className="my-4"
+          src="/image/projects/blocdoc/blocdocflashcard.webp"
+        />
+        <Image
+          alt="Image of BlocDoc importing feature"
+          className="my-4"
+          src="/image/projects/blocdoc/blocdocimport.webp"
+        />
       </>
     </Project>
   );
