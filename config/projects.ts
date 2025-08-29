@@ -9,7 +9,12 @@ export const projects = [
     classification: ["A-Level Project"],
     type: "App Development",
     languages: ["Dart", "Flutter", "MySQL", "PHP"],
-    tools: ["Adobe Illustrator", "Figma", "Visual Studio Code"],
+    tools: [
+      "Adobe Illustrator",
+      "Figma",
+      "Visual Studio Code",
+      "Android Studio",
+    ],
     thumbnailImage: "/image/projects/alleat/slides/alleathomepageslide.webp",
     coverImage: "/image/projects/alleat/alleathomepage.png",
     imageGallery: [
@@ -162,10 +167,11 @@ export const projects = [
     title: "SyncMove",
     description: "",
     url: "syncmove",
-    startdate: "2025-06",
-    endDate: "2025-07",
+    startDate: "2025-07",
+    endDate: "2025-08",
     classification: ["Work Project"],
     thumbnailImage: "image/projects/syncmove/slides/syncmoveslide.webp",
+    coverImage: "/image/projects/syncmove/syncmovehomescreen.jpeg",
     type: "App Development & UI/UX Design",
   },
   {
@@ -197,7 +203,7 @@ export const projects = [
   {
     title: "Take Ctrl",
     description:
-      "Take Ctrl was a mock marketing campaign I developed during a work experience program with Acer UK. The goal was to create a marketing strategy aimed at engaging younger audiences and improving Acer’s outreach on social platforms. During this time, I gained hands-on experience in market research, competitor analysis, and identifying effective marketing strategies tailored to emerging trends.\n\nAt the time, Acer was preparing to launch the Acer Vero, and our team was tasked with designing a concept advertising campaign for their Instagram platform. I successfully delivered a campaign proposal to a high standard, and several of my ideas were taken on board by the team to inform their future marketing direction.\n\nThroughout the work experience, I had the opportunity to engage directly with key departments across Acer UK, including marketing, finance, product design, sales, and the field operations team - This gave me valuable insights into how different areas of the business collaborate to bring products to market and strengthened my understanding of cross-departmental communication and strategic planning.",
+      "Take Ctrl was a mock marketing campaign I developed during a work experience program with Acer UK. The goal was to create a marketing strategy aimed at engaging younger audiences and improving Acer's outreach on social platforms. During this time, I gained hands-on experience in market research, competitor analysis, and identifying effective marketing strategies tailored to emerging trends.\n\nAt the time, Acer was preparing to launch the Acer Vero, and our team was tasked with designing a concept advertising campaign for their Instagram account. I successfully delivered a campaign proposal to a high standard, and several of my ideas were taken on board by the team to inform their future marketing direction.\n\nThroughout the work experience, I had the opportunity to engage directly with key departments across Acer UK, including marketing, finance, product design, sales, and the field operations team - This gave me valuable insights into how different areas of the business collaborate to bring products to market and strengthened my understanding of cross-departmental communication and strategic planning.",
     type: "Marketing",
     url: "takectrl",
     tools: ["Figma", "Microsoft Word"],
