@@ -167,12 +167,15 @@ export const projects = [
   },
   {
     title: "SyncMove",
-    description: "",
+    description:
+      "SyncMove is a startup company that has made an app designed to help students connect with gym partners, build fitness-based friendships, and stay motivated through challenges. With a focus on wellbeing and community, SyncMove aims itself at students to find other people to workout with.\n\nDuring July and August, I worked with them for an internship, working initially as an app developer, with the responsibilities to help rebuild the application for version 2.0's release, with new features and design style. During the development of the app, I spent my free time working on an updated mockup of version 2.0 and presented it in front of the CEO, with my new ideas and thoughts on ways to improve the design for better user experience. He agreed with my plan and assigned me as lead visual designer, working on continuing my progress on the mockup and helping innovate new potential features.",
     url: "syncmove",
     startDate: "2025-07",
     endDate: "2025-08",
     featured: true,
     classification: ["Work Project"],
+    tools: ["Figma", "Visual Studio Code", "Android Studio", "Postman"],
+    languages: ["TypeScript", "HTML", "CSS", "JavaScript", "Java"],
     thumbnailImage: "image/projects/syncmove/slides/syncmoveslide.webp",
     coverImage: "/image/projects/syncmove/syncmovehomescreen.jpeg",
     type: "App Development & UI/UX Design",
