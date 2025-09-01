@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import {
   Spacer,
   Breadcrumbs,
@@ -7,6 +7,7 @@ import {
   Image,
 } from "@heroui/react";
 
+import BackToTop from "@/components/back-to-top";
 import SplitHeading from "@/components/split-heading";
 import { languageIcons } from "@/config/languageIcons";
 import { title } from "@/components/primitives";
@@ -140,6 +141,7 @@ export default function Project({ url, children }: ProjectProps) {
         </SplitHeading>
       </header>
       <main>{children}</main>
+      <BackToTop />
     </DefaultLayout>
   );
 }
