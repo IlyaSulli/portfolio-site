@@ -193,6 +193,7 @@ export const projects = [
     tools: ["Audacity", "RSS", "Adobe Illustrator"],
     thumbnailImage:
       "image/projects/rollforanswers/slides/rollforanswersslide.webp",
+    coverImage: "/image/projects/rollforanswers/rollforanswerscover.webp",
   },
   {
     title: "The Great Beyond",
@@ -205,6 +206,7 @@ export const projects = [
     tools: ["Obsidian", "Adobe Illustrator", "D&D Beyond", "Roll20"],
     thumbnailImage:
       "image/projects/thegreatbeyond/slides/thegreatbeyondslide.webp",
+    coverImage: "/image/projects/thegreatbeyond/sessionquest.png",
   },
   {
     title: "Take Ctrl",
