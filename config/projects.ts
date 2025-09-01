@@ -219,4 +219,19 @@ export const projects = [
     endDate: "2022-07-15",
     thumbnailImage: "image/projects/takectrl/slides/takectrlslide.webp",
   },
+  {
+    title: "Ilya Sullivan",
+    description: "",
+    type: "Web Development",
+    url: "ilyasullivan",
+    tools: [
+      "Figma",
+      "Visual Studio Code",
+      "Adobe Illustrator",
+      "Adobe Photoshop",
+    ],
+    startDate: "2024-07",
+    endDate: "2025-09",
+    thumbnailImage: "image/placeholder.jpg",
+  },
 ];
