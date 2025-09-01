@@ -5,8 +5,15 @@ import { motion } from "motion/react";
 import { ArrowRight } from "@/components/icons";
 import { projects } from "@/config/projects";
 
-export default function GridProjects({ nItems }: { nItems: number }) {
+export default function GridProjects({
+  nItems,
+  featuredOnly = false,
+}: {
+  nItems: number;
+  featuredOnly?: boolean;
+}) {
   const sortedProjects = projects
+    .filter((project) => !featuredOnly || project.featured)
     .sort(
       (a, b) => new Date(b.endDate).getTime() - new Date(a.endDate).getTime(),
     )
@@ -60,8 +67,15 @@ export default function GridProjects({ nItems }: { nItems: number }) {
   );
 }
 
-export function ListProjects({ nItems }: { nItems: number }) {
+export function ListProjects({
+  nItems,
+  featuredOnly = false,
+}: {
+  nItems: number;
+  featuredOnly?: boolean;
+}) {
   const sortedProjects = projects
+    .filter((project) => !featuredOnly || project.featured)
     .sort(
       (a, b) => new Date(b.endDate).getTime() - new Date(a.endDate).getTime(),
     )

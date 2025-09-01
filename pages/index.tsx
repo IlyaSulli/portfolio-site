@@ -88,7 +88,7 @@ export default function IndexPage() {
             </span>
           </span>
         </div>
-        <GridProjects nItems={6} />
+        <GridProjects featuredOnly nItems={6} />
         <div className="w-full align-middle mt-8 justify-end flex px-4">
           <Button
             as={Link}
