@@ -221,7 +221,7 @@ export const projects = [
   },
   {
     title: "Ilya Sullivan",
-    description: "",
+    description: "COMING SOON",
     type: "Web Development",
     url: "ilyasullivan",
     tools: [
