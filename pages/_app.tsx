@@ -18,7 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <HeroUIProvider navigate={navigate}>
-      <NextThemesProvider>
+      <NextThemesProvider attribute="class">
         <Component {...pageProps} />
       </NextThemesProvider>
     </HeroUIProvider>
