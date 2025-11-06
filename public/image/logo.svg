@@ -1,11 +1,10 @@
 <svg
     enableBackground="new 0 0 148 48.7"
     fill="none"
-    height={height}
+    height="48.7"
     version="1.1"
     viewBox="0 0 148 48.7"
-    width={width}
-    {...props}
+    width="148"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
