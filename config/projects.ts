@@ -98,6 +98,11 @@ export const projects = [
     coverImage: "/image/projects/sshcart/sshcart.png",
     thumbnailImage: "/image/projects/sshcart/slides/sshslide.webp",
     imageGallery: ["/image/placeholder.jpg"],
+    contributors: [
+      {"name": "Sultan Alturki", "linkedin": "https://www.linkedin.com/in/sultan-alturki-539b54259/", "github": "https://github.com/Rokkema"},
+      {"name": "Coll MacCulloch", "linkedin": "https://www.linkedin.com/in/coll-macculloch-9b831b2b4/", "github": "https://github.com/cdmacc"},
+      {"name": "Hector Warner", "linkedin": "https://www.linkedin.com/in/hector-warner-7ba283328/", "github": "https://github.com/Hector-Warner"}
+    ]
   },
   {
     title: "BlocDoc",
@@ -114,6 +119,13 @@ export const projects = [
     languages: ["TypeScript", "CSS", "Java"],
     tools: ["JHipster", "Docker", "Figma", "Visual Studio Code"],
     imageGallery: ["/image/placeholder.jpg"],
+    contributors: [
+      {"name": "George Henderson", "linkedin": "https://www.linkedin.com/in/george-henderson-a06960235/", "github": "https://github.com/G-Henderson"},
+      {"name": "Luke Honey", "linkedin": null, "github": "https://github.com/Luke-Honey"},
+      {"name": "Oliver Jones", "linkedin": "https://www.linkedin.com/in/oliver-jones-226119181/", "github": "https://github.com/oxj383"},
+      {"name": "Harvey Nicholson", "linkedin": null, "github": "https://github.com/deserted-operative"},
+      {"name": "Hector Warner", "linkedin": "https://www.linkedin.com/in/hector-warner-7ba283328/", "github": "https://github.com/Hector-Warner"}
+    ]
   },
   {
     title: "Advanced News Classifier",
@@ -218,6 +230,9 @@ export const projects = [
     startDate: "2022-07-11",
     endDate: "2022-07-15",
     thumbnailImage: "image/projects/takectrl/slides/takectrlslide.webp",
+    contributors: [
+      {"name": "Toby Knight", "linkedin": "https://www.linkedin.com/in/toby-knight-5b528123a/", "github": "https://github.com/16KnighT"}, 
+    ]
   },
   {
     title: "Ilya Sullivan",
@@ -234,4 +249,21 @@ export const projects = [
     endDate: "2025-09",
     thumbnailImage: "image/placeholder.jpg",
   },
+  {
+    title: "PrismConnect",
+    description: "Learn More Soon",
+    type: "Product Development",
+    url: "prismconnect",
+    tools: ["Affinity Studio"],
+    startDate: "2025-10-27",
+    endDate: "2025-12-05",
+    thumbnailImage: "image/placeholder.jpg",
+    coverImage: "/image/projects/prismconnect/prismconnectbillboard.png",
+    contributors: [
+      {"name": "Asia Petrie", "linkedin": "https://www.linkedin.com/in/asia-petrie-29a46129a/"}, 
+      {"name": "Danny Wayles", "linkedin": "https://www.linkedin.com/in/danny-wayles-a625681b2/"}, 
+      {"name": "Stephanie Franks", "linkedin": "https://www.linkedin.com/in/stephaniefranks7/"}, 
+      {"name": "Ava Boomla", "linkedin": "https://www.linkedin.com/in/ava-b-591b9422a/"},
+    ]
+  }
 ];

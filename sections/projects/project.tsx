@@ -5,6 +5,7 @@ import {
   BreadcrumbItem,
   Chip,
   Image,
+  Link,
 } from "@heroui/react";
 
 import BackToTop from "@/components/back-to-top";
@@ -14,6 +15,7 @@ import { title } from "@/components/primitives";
 import { formatDate } from "@/components/formatDate";
 import { projects } from "@/config/projects";
 import DefaultLayout from "@/layouts/default";
+import { GithubIcon, LinkedInIcon } from "@/components/icons";
 
 interface ProjectProps {
   url: string;
@@ -81,6 +83,69 @@ export default function Project({ url, children }: ProjectProps) {
               <span>{project.type}</span>
             </div>
           </div>
+          {project.contributors && project.contributors.length !== 0 && (
+            <>
+              <div className="my-4">
+                <hr className="border-1 h-0" />
+              </div>
+              <div className="flex flex-row justify-between text-right">
+                <span className="text-lg font-semibold">contributors</span>
+                {(() => {
+                  const hasAnyGithub = project.contributors.some(
+                    (c) => "github" in c && c.github
+                  );
+                  const hasAnyLinkedin = project.contributors.some(
+                    (c) => c.linkedin
+                  );
+                  return (
+                    <div className="flex flex-col w-2/3 items-end gap-2">
+                      {project.contributors.map((contributor, idx) => (
+                        <div key={idx} className="flex items-center gap-1">
+                          <Chip
+                            className="font-normal"
+                            color="default"
+                            radius="full"
+                            size="lg"
+                            variant="dot"
+                          >
+                            {contributor.name}
+                          </Chip>
+                          {hasAnyGithub && (
+                            "github" in contributor && contributor.github ? (
+                              <Link
+                                isExternal
+                                href={contributor.github}
+                                aria-label={`${contributor.name}'s GitHub`}
+                                className="flex items-center justify-center w-7 h-7 rounded-full bg-[#24292e] hover:bg-[#1b1f23] transition-colors"
+                              >
+                                <GithubIcon size={16} className="text-white" />
+                              </Link>
+                            ) : (
+                              <div className="w-7 h-7" />
+                            )
+                          )}
+                          {hasAnyLinkedin && (
+                            contributor.linkedin ? (
+                              <Link
+                                isExternal
+                                href={contributor.linkedin}
+                                aria-label={`${contributor.name}'s LinkedIn`}
+                                className="flex items-center justify-center w-7 h-7 rounded-full bg-[#0A66C2] hover:bg-[#004182] transition-colors"
+                              >
+                                <LinkedInIcon size={16} className="text-white" />
+                              </Link>
+                            ) : (
+                              <div className="w-7 h-7" />
+                            )
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  );
+                })()}
+              </div>
+            </>
+          )}
           {project.languages && project.languages.length !== 0 && (
             <>
               <div className="my-4">
