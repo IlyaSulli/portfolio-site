@@ -659,7 +659,7 @@ export default function AllEatProject() {
           for full functionality
         </i>
       </SplitHeading>
-      <div className="w-full md:aspect-[2/1] aspect-[1/2]">
+      <div className="w-full md:aspect-[2/1] aspect-[1/2] px-20">
         <iframe
           allowFullScreen
           className="w-full h-full"
