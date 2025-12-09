@@ -257,7 +257,7 @@ export const projects = [
     tools: ["Affinity Studio"],
     startDate: "2025-10-27",
     endDate: "2025-12-05",
-    thumbnailImage: "image/placeholder.jpg",
+    thumbnailImage: "image/projects/prismconnect/slides/prismconnectslide.webp",
     coverImage: "/image/projects/prismconnect/prismconnectbillboard.png",
     contributors: [
       {"name": "Asia Petrie", "linkedin": "https://www.linkedin.com/in/asia-petrie-29a46129a/"}, 
