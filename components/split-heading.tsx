@@ -46,7 +46,7 @@ export default function SplitHeading({
   return (
     <div
       ref={containerRef}
-      className="flex flex-col md:flex-row w-full sm:my-16 relative"
+      className="flex flex-col md:flex-row w-full sm:my-16 relative mb-8"
     >
       <div className="md:w-2/5 lg:w-1/2 pr-16">
         <div className="md:sticky md:top-0">
