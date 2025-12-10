@@ -16,7 +16,7 @@ export default function PrismConnect() {
       <Image src="/image/projects/prismconnect/prismconnectposter.png" />
       <SplitHeading heading={"Development"} size="lg">
         <p>
-          The project itself was intended as an assignment to test our ability to work as a team to work from a single overarching problem, and narrowing down the issue through interviews, questionnaries and market research to create a product - from there, we worked iteratively to ideate concepts and prototype the best idea. Below is the full breakdown:
+          The project itself was intended as an assignment to test our ability to work as a team to work from a single overarching problem, and narrowing down the issue through interviews, questionnaries and market research to create a product - to show evidence of this, we made a presentation to show the full process and present the features of the product in detail:
         </p>
       </SplitHeading>
       <div className="mb-16">

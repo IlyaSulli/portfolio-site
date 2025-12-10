@@ -251,10 +251,11 @@ export const projects = [
   },
   {
     title: "PrismConnect",
-    description: "Learn More Soon",
+    description: "PrismConnect was the product designed for the module Human Computer Interaction at the University of Birmingham. The aim was to test our ability to work at a team of five to develop a something to \"help people address a problematic behaviour\". Through market research including questionnaires, interviews and analysing existing products, we decided on the follwing problem statement: \n\n People struggle to reliably identify and respond to real-time scam attempts as they often make rushed oremotionally charged decisions. As a result they often missthe warning signs of a scam putting themselves at risk oflosing data or money. People who do notice signs oftenonly do so in a reactive way. With increasinglypersonalised AI driven scams emerging, it is becomingharder to distinguish between scams and genuinecommunication. \n\n From this, we went through multiple stages of ideation and refinement to come up with an all-in-one communication app designed to stop scammers and protect the user through authentication and real-time analysis. Using third party research papers, we looked at ways to detect scams including the latest generation of deepfake technology to mitigate and pre-emptively stop scammers.",
     type: "Product Development",
     url: "prismconnect",
     tools: ["Affinity Studio"],
+    classification: ["University Project"],
     startDate: "2025-10-27",
     endDate: "2025-12-05",
     thumbnailImage: "image/projects/prismconnect/slides/prismconnectslide.webp",
