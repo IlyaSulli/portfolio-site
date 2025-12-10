@@ -244,10 +244,14 @@ export const projects = [
       "Visual Studio Code",
       "Adobe Illustrator",
       "Adobe Photoshop",
+      "Affinity Studio",
+      "Vercel"
     ],
+    languages: ["TypeScript", "HTML", "CSS",],
     startDate: "2024-07",
     endDate: "2025-09",
     thumbnailImage: "image/projects/ilyasullivan/slides/ilyasullivanslide.webp",
+    coverImage: "/image/projects/ilyasullivan/ilyasullivancover.png"
   },
   {
     title: "PrismConnect",
