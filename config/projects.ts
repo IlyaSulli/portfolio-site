@@ -247,7 +247,7 @@ export const projects = [
     ],
     startDate: "2024-07",
     endDate: "2025-09",
-    thumbnailImage: "image/placeholder.jpg",
+    thumbnailImage: "image/projects/ilyasullivan/slides/ilyasullivanslide.webp",
   },
   {
     title: "PrismConnect",
