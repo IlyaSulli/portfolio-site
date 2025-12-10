@@ -262,6 +262,7 @@ export const projects = [
     classification: ["University Project"],
     startDate: "2025-10-27",
     endDate: "2025-12-05",
+    featured: true,
     thumbnailImage: "image/projects/prismconnect/slides/prismconnectslide.webp",
     coverImage: "/image/projects/prismconnect/prismconnectbillboard.png",
     contributors: [
