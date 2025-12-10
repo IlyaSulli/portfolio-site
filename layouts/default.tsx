@@ -1,4 +1,5 @@
 import { Head } from "./head";
+import { Analytics } from "@vercel/analytics/next"
 
 import { AppNavbar } from "@/components/navbar";
 
@@ -9,6 +10,7 @@ export default function DefaultLayout({
 }) {
   return (
     <div className="relative flex flex-col h-screen">
+      <Analytics />
       <Head />
       <AppNavbar />
       <main className="container mx-auto max-w-7xl px-6 flex-grow pt-16">
