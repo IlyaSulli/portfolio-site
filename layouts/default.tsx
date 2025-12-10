@@ -1,8 +1,21 @@
 import { Head } from "./head";
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import dynamic from "next/dynamic";
 
 import { AppNavbar } from "@/components/navbar";
+
+// Load Vercel components on client to avoid hydration issues
+
+const ClientAnalytics = dynamic(
+  () => import("@vercel/analytics/next").then((mod) => mod.Analytics),
+  { ssr: false }
+);
+
+const ClientSpeedInsights = dynamic(
+  () => import("@vercel/speed-insights/next").then((mod) => mod.SpeedInsights),
+  { ssr: false }
+);
 
 export default function DefaultLayout({
   children,
@@ -11,8 +24,8 @@ export default function DefaultLayout({
 }) {
   return (
     <div className="relative flex flex-col h-screen">
-      <Analytics />
-      <SpeedInsights />
+      <ClientAnalytics />
+      <ClientSpeedInsights />
       <Head />
       <AppNavbar />
       <main className="container mx-auto max-w-7xl px-6 flex-grow pt-16">
