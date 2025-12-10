@@ -31,7 +31,6 @@ export default function IndexPage() {
               isBlurred
               alt="Ilya Sullivan Profile"
               className="m-5"
-              fetchPriority="high"
               src="/image/ilya.webp"
             />
           </motion.div>

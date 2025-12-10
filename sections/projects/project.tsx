@@ -57,7 +57,6 @@ export default function Project({ url, children }: ProjectProps) {
           <Image
             alt={"Cover image for project " + project.title}
             className="object-cover w-full h-fit max-h-min aspect-square md:aspect-video"
-            fetchPriority="high"
             height={600}
             src={
               project.coverImage && project.coverImage !== ""
