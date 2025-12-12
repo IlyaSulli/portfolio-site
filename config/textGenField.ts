@@ -1,0 +1,26 @@
+import { BadgeCheck, User, Users, Smile, AtSign, Cake, Image, MapPinned, BriefcaseBusiness, ToolCase, Ruler, Weight, Eye, KeyRound, SquareAsterisk, Building2, GraduationCap, Phone, ToggleRight, CircleCheck, SquareCheck, Hash } from "lucide-react";
+
+export const TextGenField = {
+    username: { name: "Username", icon: BadgeCheck },
+    firstname: { name: "First Name", icon: User },
+    lastname: { name: "Last Name", icon: Users },
+    pronouns: { name: "Pronouns", icon: Smile },
+    email: { name: "Email", icon: AtSign },
+    dob: { name: "Date of Birth", icon: Cake },
+    profilepic: { name: "Profile Picture", icon: Image },
+    location: { name: "Location", icon: MapPinned },
+    occupation: { name: "Occupation", icon: BriefcaseBusiness },
+    hobby: { name: "Hobby", icon: ToolCase },
+    height: { name: "Height", icon: Ruler },
+    weight: { name: "Weight", icon: Weight },
+    active: { name: "Last Active", icon: Eye },
+    password: { name: "Password", icon: KeyRound },
+    hash: { name: "Hash", icon: SquareAsterisk },
+    company: { name: "Company Name", icon: Building2 },
+    education: { name: "Education Level", icon: GraduationCap },
+    phone: { name: "Phone Number", icon: Phone },
+    toggle: { name: "Toggle Field", icon: ToggleRight },
+    select: { name: "Select Field", icon: CircleCheck },
+    multiselect: { name: "Multi-Select Field", icon: SquareCheck },
+    number: { name: "Number Field", icon: Hash },
+};
