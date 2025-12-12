@@ -31,8 +31,8 @@ export default function DefaultLayout({
       <main className="container mx-auto max-w-7xl px-6 flex-grow pt-16">
         {children}
       </main>
-      <footer className="w-full flex items-center justify-center py-3">
-        <span className="text-default-600">designed and made with 💖</span>
+      <footer className="w-full flex items-center justify-center py-3 flex-col">
+        <span className="text-default-600">Designed and made with 💖 || This site uses annonymous usage statistics</span>
       </footer>
     </div>
   );
