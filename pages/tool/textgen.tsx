@@ -3,6 +3,7 @@ import { title } from "@/components/primitives";
 import {Tabs, Tab} from "@heroui/tabs";
 import { Button } from "@heroui/button";
 import { GitCompare } from "lucide-react";
+import TextGenTemplateList from "@/components/text-gen-template-list";
 
 
 export default function TextGenerator(){
@@ -15,12 +16,12 @@ export default function TextGenerator(){
                 </div>
                 <Tabs aria-label="Generator Types" className="mt-16 p-2">
                     <Tab key="builder" title="Builder">
-                        <div className="flex flex-col">
-                            <div className="justify-between flex bg-zinc-900 px-8 py-8 rounded-lg">
+                        <div className="flex flex-col dark:bg-zinc-900 bg-zinc-100 px-8 py-8 rounded-2xl">
+                            <div className="justify-between flex pb-4">
                                 <span className="text-2xl font-semibold">Templates</span>
                                 <Button color="primary" variant="flat" startContent={<GitCompare size={16} />}>Advanced Builder</Button>
-                                
                             </div>
+                            <TextGenTemplateList />
                         </div>
                     </Tab>
                     <Tab key="filter" title="Filter">
