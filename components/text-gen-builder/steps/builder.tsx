@@ -104,6 +104,27 @@ export default function StepBuilder({ template, onTemplateChange }: StepBuilderP
         setIsDraggingOver(false);
     };
 
+    // Handle drop on available fields list to remove from template
+    const handleDropOnAvailable = (e: DragEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        if (draggedIndex !== null && draggedField) {
+            // Remove the field from template
+            const newFields = templateFields.filter((_, index) => index !== draggedIndex);
+            setTemplateFields(newFields);
+        }
+        setDraggedField(null);
+        setDraggedIndex(null);
+        setDropTargetIndex(null);
+    };
+
+    // Handle drag over available fields list
+    const handleDragOverAvailable = (e: DragEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        if (draggedIndex !== null) {
+            e.dataTransfer.dropEffect = "move";
+        }
+    };
+
     // Handle click to add field
     const handleAddField = (field: typeof TextGenField[keyof typeof TextGenField]) => {
         const newField: TemplateField = {
@@ -126,6 +147,8 @@ export default function StepBuilder({ template, onTemplateChange }: StepBuilderP
                 onAddField={handleAddField}
                 onDragStart={handleDragStartFromAvailable}
                 onDragEnd={handleDragEnd}
+                onDragOver={handleDragOverAvailable}
+                onDrop={handleDropOnAvailable}
             />
             <TemplateFieldsList
                 templateName={template.name}
