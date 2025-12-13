@@ -8,7 +8,7 @@ export const templates = [
             {
                 key: "username",
                 filters: {
-                    type: ["social-media"],
+                    type: ["Social Media"],
                     minLength: "4",
                     maxLength: "14",
                     allowedChar: "[a-zA-Z0-9_.-]"
@@ -17,7 +17,7 @@ export const templates = [
             {
                 key: "firstname",
                 filters: {
-                    gender: ["male", "female", "unisex"],
+                    gender: ["Male", "Female", "Unisex"],
                     minLength: "2",
                 }
             },
@@ -36,13 +36,13 @@ export const templates = [
             {
                 key: "email",
                 filters: {
-                    type: ["casual", "professional"]
+                    type: ["Casual", "Professional"]
                 },
             },
             {
                 key: "profilepic",
                 filters: {
-                    type: ["face", "pet", "gaming"]
+                    type: ["Face", "Pet", "Gaming"]
                 }
             }
         ]
