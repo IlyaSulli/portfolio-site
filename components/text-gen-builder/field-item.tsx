@@ -50,14 +50,14 @@ export default function FieldItem({
                 </div>
             )}
             <div
-                className={`bg-zinc-100 dark:bg-zinc-700 border-zinc-300 dark:border-zinc-600 border-2 px-4 py-3 rounded-lg flex flex-row justify-between items-center cursor-grab active:cursor-grabbing transition-all ${isDragging ? 'opacity-50' : ''}`}
+                className={`backdrop-blur-sm bg-white/30 dark:bg-white/10 border border-white/40 dark:border-white/20 px-4 py-3 rounded-lg flex flex-row justify-between items-center cursor-grab active:cursor-grabbing transition-all shadow-sm ${isDragging ? 'opacity-50' : ''}`}
                 draggable={!isEditing}
                 onDragStart={(e) => onDragStart(e, index)}
                 onDragOver={(e) => onDragOver(e, index)}
                 onDragEnd={onDragEnd}
             >
                 <div className="flex flex-row items-center flex-1">
-                    <GripVertical size={16} className="text-zinc-400 mr-2 flex-shrink-0" />
+                    <GripVertical size={16} className="text-white/50 mr-2 flex-shrink-0" />
                     <span className="flex-shrink-0">
                         <field.icon size={20} color="hsl(var(--heroui-primary))"/>
                     </span>
@@ -83,7 +83,7 @@ export default function FieldItem({
                                     {field.name}
                                 </span>
                                 {field.name !== field.originalName && (
-                                    <span className="text-xs italic text-zinc-500 dark:text-zinc-400">
+                                    <span className="text-xs italic text-white/50">
                                         {field.originalName}
                                     </span>
                                 )}
@@ -96,23 +96,23 @@ export default function FieldItem({
                         <>
                             <button 
                                 onClick={() => onSaveFieldName(field.id)}
-                                className="p-1 hover:bg-green-100 dark:hover:bg-green-900/30 rounded transition-colors"
+                                className="p-1 hover:bg-white/20 dark:hover:bg-white/15 rounded transition-colors"
                             >
-                                <Check size={16} className="text-green-500"/>
+                                <Check size={16} className="text-green-400"/>
                             </button>
                             <button 
                                 onClick={onCancelEdit}
-                                className="p-1 hover:bg-gray-100 dark:hover:bg-gray-900/30 rounded transition-colors"
+                                className="p-1 hover:bg-white/20 dark:hover:bg-white/15 rounded transition-colors"
                             >
-                                <X size={16} className="text-gray-500"/>
+                                <X size={16} className="text-gray-300"/>
                             </button>
                         </>
                     ) : (
                         <button 
                             onClick={() => onDelete(field.id)}
-                            className="p-1 hover:bg-red-100 dark:hover:bg-red-900/30 rounded transition-colors"
+                            className="p-1 hover:bg-white/20 dark:hover:bg-white/15 rounded transition-colors"
                         >
-                            <Trash2 size={16} className="text-red-500"/>
+                            <Trash2 size={16} className="text-red-400"/>
                         </button>
                     )}
                 </div>

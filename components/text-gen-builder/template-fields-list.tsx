@@ -94,7 +94,7 @@ export default function TemplateFieldsList({
 
     return (
         <div 
-            className={`flex flex-col bg-zinc-200 dark:bg-zinc-800 p-4 rounded-lg w-2/3 h-[500px] transition-colors ${isDraggingOver ? 'ring-2 ring-primary ring-offset-2' : ''}`}
+            className={`flex flex-col backdrop-blur-md bg-white/20 dark:bg-black/20 border border-white/30 dark:border-white/10 p-4 rounded-lg w-2/3 h-[500px] transition-colors shadow-lg ${isDraggingOver ? 'ring-2 ring-primary ring-offset-2' : ''}`}
             onDragOver={onDragOver}
             onDragLeave={onDragLeave}
             onDrop={onDrop}
@@ -110,9 +110,9 @@ export default function TemplateFieldsList({
             {/* Template fields */}
             <div className="relative flex-1 min-h-0">
                 {/* Top fade gradient */}
-                <div className={`absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-zinc-200 dark:from-zinc-800 to-transparent z-10 pointer-events-none rounded-t-lg transition-opacity duration-200 ${scrollState.atTop ? 'opacity-0' : 'opacity-100'}`} />
+                <div className={`absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-white/30 dark:from-black/30 to-transparent z-10 pointer-events-none rounded-t-lg transition-opacity duration-200 ${scrollState.atTop ? 'opacity-0' : 'opacity-100'}`} />
                 {/* Bottom fade gradient */}
-                <div className={`absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-zinc-200 dark:from-zinc-800 to-transparent z-10 pointer-events-none rounded-b-lg transition-opacity duration-200 ${scrollState.atBottom ? 'opacity-0' : 'opacity-100'}`} />
+                <div className={`absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-white/30 dark:from-black/30 to-transparent z-10 pointer-events-none rounded-b-lg transition-opacity duration-200 ${scrollState.atBottom ? 'opacity-0' : 'opacity-100'}`} />
                 <div ref={listRef} className="flex flex-col gap-y-2 h-full overflow-y-auto py-2 pr-3 scrollbar-thin scrollbar-thumb-zinc-400 dark:scrollbar-thumb-zinc-600">
                     {templateFields.length === 0 ? (
                         <div className={`h-full min-h-[200px] flex items-center justify-center border-2 border-dashed rounded-lg transition-colors ${isDraggingOver ? 'border-primary bg-primary/10' : 'border-zinc-400 dark:border-zinc-600'}`}>

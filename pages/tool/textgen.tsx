@@ -3,7 +3,7 @@ import { title } from "@/components/primitives";
 import {Tabs, Tab} from "@heroui/tabs";
 import { Button } from "@heroui/button";
 import { Plus, ArrowLeft } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TextGenTemplateList from "@/components/text-gen-template-list";
 import TextGenFilter from "@/components/text-gen-filter";
 import { templates } from "@/config/textGenTemplates";
@@ -13,42 +13,102 @@ import TemplateBuilder from "@/components/text-gen-builder";
 export default function TextGenerator(){
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
     const [useAdvancedBuilder, setUseAdvancedBuilder] = useState(false);
+    const [scrollY, setScrollY] = useState(0);
     const selectedTemplate = selectedIndex !== null ? templates[selectedIndex] : null;
+
+    useEffect(() => {
+        const handleScroll = () => setScrollY(window.scrollY);
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     return(
         <DefaultLayout>
-            <>
-                <div className="flex-col flex align-middle">
-                    <h1 className={`${title()} text-center`}>Text Generator</h1>
-                    <span className="mt-4 text-center">Create high quality text, names and more for your designs.</span>
+            <div className="relative min-h-screen">
+                {/* Moving blur blobs background */}
+                <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 1 }}>
+                    <div 
+                        className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl opacity-60"
+                        style={{
+                            background: 'radial-gradient(circle, rgb(59 130 246), rgb(37 99 235))',
+                            animation: 'floatPrimary 60s ease-in-out infinite',
+                            mixBlendMode: 'multiply',
+                            transform: `translateY(${scrollY * 0.1}px)`
+                        }}
+                    />
+                    <div 
+                        className="absolute top-1/2 right-1/3 w-80 h-80 rounded-full blur-3xl opacity-55"
+                        style={{
+                            background: 'radial-gradient(circle, rgb(239 68 68), rgb(220 38 38))',
+                            animation: 'floatDanger 38s ease-in-out infinite',
+                            mixBlendMode: 'multiply',
+                            transform: `translateY(${scrollY * -0.15}px)`
+                        }}
+                    />
+                    <div 
+                        className="absolute bottom-1/3 left-1/2 w-72 h-72 rounded-full blur-3xl opacity-50"
+                        style={{
+                            background: 'radial-gradient(circle, rgb(37 99 235), rgb(29 78 216))',
+                            animation: 'floatPrimary2 40s ease-in-out infinite',
+                            mixBlendMode: 'multiply',
+                            transform: `translateY(${scrollY * 0.08}px)`
+                        }}
+                    />
                 </div>
-                <Tabs aria-label="Generator Types" className="mt-16 p-2">
-                    <Tab key="templates" title="Templates">
-                        {!useAdvancedBuilder ? (
-                            <div className="flex flex-col dark:bg-zinc-900 bg-zinc-100 px-8 py-8 rounded-2xl">
-                                <div className="justify-between flex pb-4">
-                                    <span className="text-2xl font-semibold">Templates</span>
-                                    <Button 
-                                        color="primary" 
-                                        variant="flat" 
-                                        startContent={<Plus size={16} />}
-                                        onClick={() => setUseAdvancedBuilder(true)}
-                                    >
-                                        New Template
-                                    </Button>
+                
+                <style jsx global>{`
+                    @keyframes floatPrimary {
+                        0%, 100% { transform: translate(0, 0) scale(1); }
+                        25% { transform: translate(300px, -200px) scale(1.2); }
+                        50% { transform: translate(-150px, 300px) scale(0.8); }
+                        75% { transform: translate(400px, 150px) scale(1.1); }
+                    }
+                    @keyframes floatDanger {
+                        0%, 100% { transform: translate(0, 0) scale(1); }
+                        25% { transform: translate(-250px, 300px) scale(0.9); }
+                        50% { transform: translate(350px, -100px) scale(1.3); }
+                        75% { transform: translate(-200px, -250px) scale(1); }
+                    }
+                    @keyframes floatPrimary2 {
+                        0%, 100% { transform: translate(0, 0) scale(1); }
+                        33% { transform: translate(-300px, -100px) scale(1.1); }
+                        66% { transform: translate(200px, 250px) scale(0.9); }
+                    }
+                `}</style>
+                
+                <div className="relative" style={{ zIndex: 10 }}>
+                    <div className="flex-col flex align-middle">
+                        <h1 className={`${title()} text-center`}>Text Generator</h1>
+                        <span className="mt-4 text-center">Create high quality text, names and more for your designs.</span>
+                    </div>
+                    <Tabs aria-label="Generator Types" className="mt-16 p-2 opacity-90">
+                        <Tab key="templates" title="Templates">
+                            {!useAdvancedBuilder ? (
+                                <div className="flex flex-col dark:bg-zinc-900/40 bg-zinc-100/40 backdrop-blur-lg px-8 py-8 rounded-2xl border border-white/10 dark:border-white/5">
+                                    <div className="justify-between flex pb-4">
+                                        <span className="text-2xl font-semibold">Templates</span>
+                                        <Button 
+                                            color="primary" 
+                                            variant="flat" 
+                                            startContent={<Plus size={16} />}
+                                            onPress={() => setUseAdvancedBuilder(true)}
+                                        >
+                                            New Template
+                                        </Button>
+                                    </div>
+                                    <TextGenTemplateList selectedIndex={selectedIndex} onSelectIndex={setSelectedIndex} />
                                 </div>
-                                <TextGenTemplateList selectedIndex={selectedIndex} onSelectIndex={setSelectedIndex} />
-                            </div>
-                        ) : (
-                            <TemplateBuilder />
-                        )}
-                    </Tab>
-                    
-                    <Tab key="output" title="Output">
-                        <p>Output here</p>
-                    </Tab>
-                </Tabs>
-            </>
-        </DefaultLayout>
+                            ) : (
+                                <TemplateBuilder onCancel={() => setUseAdvancedBuilder(false)} />
+                            )}
+                        </Tab>
+                        
+                        <Tab key="output" title="Output">
+                            <p>Output here</p>
+                        </Tab>
+                    </Tabs>
+                </div>
+            </div>
+        </DefaultLayout> 
     )
 }

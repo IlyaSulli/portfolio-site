@@ -62,16 +62,16 @@ export default function AvailableFieldsList({
                 value={searchQuery}
                 onValueChange={setSearchQuery}
             />
-            <div className="relative h-[400px]">
+            <div className="relative h-[400px] backdrop-blur-md bg-white/20 dark:bg-black/20 border border-white/30 dark:border-white/10 rounded-lg p-3 shadow-lg">
                 {/* Top fade gradient */}
-                <div className={`absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-zinc-100 dark:from-zinc-900 to-transparent z-10 pointer-events-none transition-opacity duration-200 ${scrollState.atTop ? 'opacity-0' : 'opacity-100'}`} />
+                <div className={`absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-white/30 dark:from-black/30 to-transparent z-10 pointer-events-none rounded-t-lg transition-opacity duration-200 ${scrollState.atTop ? 'opacity-0' : 'opacity-100'}`} />
                 {/* Bottom fade gradient */}
-                <div className={`absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-zinc-100 dark:from-zinc-900 to-transparent z-10 pointer-events-none transition-opacity duration-200 ${scrollState.atBottom ? 'opacity-0' : 'opacity-100'}`} />
-                <div ref={listRef} className="flex flex-col gap-y-2 h-full overflow-y-auto py-2 pr-3 scrollbar-thin scrollbar-thumb-zinc-400 dark:scrollbar-thumb-zinc-600">
+                <div className={`absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-white/30 dark:from-black/30 to-transparent z-10 pointer-events-none rounded-b-lg transition-opacity duration-200 ${scrollState.atBottom ? 'opacity-0' : 'opacity-100'}`} />
+                <div ref={listRef} className="flex flex-col gap-y-2 h-full overflow-y-auto py-2 pr-3 scrollbar-thin scrollbar-thumb-white/30 dark:scrollbar-thumb-white/20">
                     {filteredFields.map(field => (
                         <div 
                             key={field.name} 
-                            className="bg-zinc-200 dark:bg-zinc-800 border-zinc-300 dark:border-zinc-700 border-2 px-4 py-3 rounded-lg flex flex-row justify-between items-center cursor-grab active:cursor-grabbing hover:border-primary transition-colors"
+                            className="backdrop-blur-sm bg-white/30 dark:bg-white/10 border border-white/40 dark:border-white/20 px-4 py-3 rounded-lg flex flex-row justify-between items-center cursor-grab active:cursor-grabbing hover:border-primary hover:bg-white/40 dark:hover:bg-white/15 transition-all shadow-sm"
                             draggable
                             onDragStart={(e) => onDragStart(e, field)}
                             onDragEnd={onDragEnd}
