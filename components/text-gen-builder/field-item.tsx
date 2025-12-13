@@ -91,18 +91,18 @@ export default function FieldItem({
                         )}
                     </div>
                 </div>
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-2 -m-2">
                     {isEditing ? (
                         <>
                             <button 
                                 onClick={() => onSaveFieldName(field.id)}
-                                className="p-1 hover:bg-white/20 dark:hover:bg-white/15 rounded transition-colors"
+                                className="p-2 hover:bg-white/20 dark:hover:bg-white/15 rounded transition-colors"
                             >
                                 <Check size={16} className="text-green-400"/>
                             </button>
                             <button 
                                 onClick={onCancelEdit}
-                                className="p-1 hover:bg-white/20 dark:hover:bg-white/15 rounded transition-colors"
+                                className="p-2 hover:bg-white/20 dark:hover:bg-white/15 rounded transition-colors"
                             >
                                 <X size={16} className="text-gray-300"/>
                             </button>
@@ -110,7 +110,7 @@ export default function FieldItem({
                     ) : (
                         <button 
                             onClick={() => onDelete(field.id)}
-                            className="p-1 hover:bg-white/20 dark:hover:bg-white/15 rounded transition-colors"
+                            className="p-2 hover:bg-white/20 dark:hover:bg-white/15 rounded transition-colors"
                         >
                             <Trash2 size={16} className="text-red-400"/>
                         </button>
