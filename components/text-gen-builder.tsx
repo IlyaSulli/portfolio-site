@@ -1,4 +1,5 @@
 import { Button } from "@heroui/button";
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter } from "@heroui/modal";
 import { useState } from "react";
 import { Template } from "./text-gen-builder/types";
 import StepBuilder from "./text-gen-builder/steps/builder";
@@ -12,12 +13,17 @@ const STEPS: { key: Step; title: string }[] = [
     { key: 'filters', title: 'Filters' },
 ];
 
-export default function TemplateBuilder() {
+interface TemplateBuilderProps {
+    onCancel?: () => void;
+}
+
+export default function TemplateBuilder({ onCancel }: TemplateBuilderProps) {
     const [currentStep, setCurrentStep] = useState<Step>('builder');
     const [template, setTemplate] = useState<Template>({
         name: "Untitled Template",
         fields: [],
     });
+    const [showConfirmModal, setShowConfirmModal] = useState(false);
 
     const currentStepIndex = STEPS.findIndex(s => s.key === currentStep);
     const isFirstStep = currentStepIndex === 0;
@@ -36,9 +42,21 @@ export default function TemplateBuilder() {
     };
 
     const handleCancel = () => {
-        // Reset template and go back to first step
-        setTemplate({ name: "Untitled Template", fields: [] });
-        setCurrentStep('builder');
+        // Show confirmation modal
+        setShowConfirmModal(true);
+    };
+
+    const handleConfirmCancel = () => {
+        // Close modal and call the onCancel callback to go back to templates page
+        setShowConfirmModal(false);
+        if (onCancel) {
+            onCancel();
+        }
+    };
+
+    const handleCancelModal = () => {
+        // Just close the modal without canceling
+        setShowConfirmModal(false);
     };
 
     const handleSave = () => {
@@ -47,7 +65,7 @@ export default function TemplateBuilder() {
     };
 
     return (
-        <div className="flex flex-col dark:bg-zinc-900 bg-zinc-100 px-8 py-8 rounded-2xl">
+        <div className="flex flex-col backdrop-blur-md bg-white/20 dark:bg-black/20 border border-white/30 dark:border-white/10 px-8 py-8 rounded-2xl shadow-lg">
             {/* Header */}
             <div className="flex flex-row justify-between items-center">
                 <div className="flex flex-col">
@@ -105,7 +123,7 @@ export default function TemplateBuilder() {
                         className={`flex-1 h-1 rounded-full transition-colors ${
                             index <= currentStepIndex 
                                 ? 'bg-primary' 
-                                : 'bg-zinc-300 dark:bg-zinc-700'
+                                : 'bg-white/20 dark:bg-white/10'
                         }`}
                     />
                 ))}
@@ -121,6 +139,28 @@ export default function TemplateBuilder() {
             {currentStep === 'filters' && (
                 <StepFilters template={template} />
             )}
+
+            {/* Confirmation Modal */}
+            <Modal isOpen={showConfirmModal} onOpenChange={setShowConfirmModal} backdrop="blur" hideCloseButton>
+                <ModalContent className="backdrop-blur-md bg-white/20 dark:bg-black/20 border border-white/30 dark:border-white/10 shadow-lg">
+                    <ModalHeader className="flex flex-col gap-1 text-white">
+                        Discard Template?
+                    </ModalHeader>
+                    <ModalBody>
+                        <p className="text-white/90">
+                            Are you sure you want to leave without saving? All your changes to the template will be lost.
+                        </p>
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button color="default" variant="light" onPress={handleCancelModal}>
+                            Keep Editing
+                        </Button>
+                        <Button color="danger" onPress={handleConfirmCancel}>
+                            Discard
+                        </Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
         </div>
     );
 }
