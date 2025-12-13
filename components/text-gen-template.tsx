@@ -17,6 +17,7 @@ export default function TextGenTemplate({
                     <Icon size={24} color="white"/>
                 </div>
             </div>
+            
             <span className="font-semibold text-lg pt-4 pb-2">{name}</span>
             <span className="font-regular text-medium opacity-70">{description}</span>
         </div>
