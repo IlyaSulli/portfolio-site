@@ -60,7 +60,7 @@ export default function TemplateBuilder() {
                     <Button 
                         color="default" 
                         variant="flat"
-                        onClick={handleCancel}
+                        onPress={handleCancel}
                     >
                         Cancel
                     </Button>
@@ -68,7 +68,7 @@ export default function TemplateBuilder() {
                         <Button 
                             color="default" 
                             variant="flat"
-                            onClick={handleBack}
+                            onPress={handleBack}
                             startContent={<ChevronLeft size={16} />}
                         >
                             Back
@@ -78,7 +78,7 @@ export default function TemplateBuilder() {
                         <Button 
                             color="primary" 
                             variant="flat"
-                            onClick={handleSave}
+                            onPress={handleSave}
                             isDisabled={template.fields.length === 0}
                         >
                             Save Template
@@ -87,7 +87,7 @@ export default function TemplateBuilder() {
                         <Button 
                             color="primary" 
                             variant="flat"
-                            onClick={handleNext}
+                            onPress={handleNext}
                             endContent={<ChevronRight size={16} />}
                             isDisabled={template.fields.length === 0}
                         >

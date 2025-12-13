@@ -120,7 +120,7 @@ export default function TextGenFilter({ template }: TextGenFilterProps) {
                         color="primary"
                         className="mt-4 w-full"
                         startContent={<Check size={16} />}
-                        onClick={handleApplyFilters}
+                        onPress={handleApplyFilters}
                     >
                         Apply Filters
                     </Button>
