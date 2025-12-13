@@ -8,12 +8,16 @@ interface AvailableFieldsListProps {
     onAddField: (field: typeof TextGenField[keyof typeof TextGenField]) => void;
     onDragStart: (e: DragEvent<HTMLDivElement>, field: typeof TextGenField[keyof typeof TextGenField]) => void;
     onDragEnd: () => void;
+    onDragOver: (e: DragEvent<HTMLDivElement>) => void;
+    onDrop: (e: DragEvent<HTMLDivElement>) => void;
 }
 
 export default function AvailableFieldsList({
     onAddField,
     onDragStart,
     onDragEnd,
+    onDragOver,
+    onDrop,
 }: AvailableFieldsListProps) {
     const [searchQuery, setSearchQuery] = useState("");
     const [scrollState, setScrollState] = useState<ScrollState>({ atTop: true, atBottom: false });
@@ -62,7 +66,7 @@ export default function AvailableFieldsList({
                 value={searchQuery}
                 onValueChange={setSearchQuery}
             />
-            <div className="relative h-[400px] backdrop-blur-md bg-white/20 dark:bg-black/20 border border-white/30 dark:border-white/10 rounded-lg p-3 shadow-lg">
+            <div className="relative h-[400px] backdrop-blur-md bg-white/20 dark:bg-black/20 border border-white/30 dark:border-white/10 rounded-lg p-3 shadow-lg" onDragOver={onDragOver} onDrop={onDrop}>
                 {/* Top fade gradient */}
                 <div className={`absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-white/30 dark:from-black/30 to-transparent z-10 pointer-events-none rounded-t-lg transition-opacity duration-200 ${scrollState.atTop ? 'opacity-0' : 'opacity-100'}`} />
                 {/* Bottom fade gradient */}
