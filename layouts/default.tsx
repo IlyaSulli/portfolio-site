@@ -32,7 +32,7 @@ export default function DefaultLayout({
         {children}
       </main>
       <footer className="w-full flex items-center justify-center py-3 flex-col relative z-10">
-        <span className="text-default-600">Designed and made with 💖 || This site uses annonymous usage statistics</span>
+        <span className="text-default-600 px-8">Designed and made with 💖 || This site uses annonymous usage statistics</span>
       </footer>
     </div>
   );
