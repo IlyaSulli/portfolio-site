@@ -14,13 +14,15 @@ export const TextGenField = {
             minLength: {
                 name: "Minimum Length",
                 type: "integer",
-                min: 0,
+                default: 1,
+                min: 1,
                 max: 15,
                 tooltip: "Minimum length of the username",
             },
             maxLength: {
                 name: "Maximum Length",
                 type: "integer",
+                default: 1,
                 min: 1,
                 max: 32,
                 tooltip: "Maximum length of the username",
@@ -45,16 +47,18 @@ export const TextGenField = {
             minLength: {
                 name: "Minimum Length",
                 type: "integer",
-                min: 0,
+                default: 1,
+                min: 1,
                 max: 14,
-                tooltip: "Minimum length of the username",
+                tooltip: "Minimum length of the first name",
             },
             maxLength: {
                 name: "Maximum Length",
                 type: "integer",
+                default: 1,
                 min: 1,
                 max: 15,
-                tooltip: "Maximum length of the username",
+                tooltip: "Maximum length of the first name",
             },
         }
     },
@@ -65,16 +69,16 @@ export const TextGenField = {
             minLength: {
                 name: "Minimum Length",
                 type: "integer",
-                min: 0,
+                min: 1,
                 max: 16,
-                tooltip: "Minimum length of the username",
+                tooltip: "Minimum length of the last name",
             },
             maxLength: {
                 name: "Maximum Length",
                 type: "integer",
                 min: 1,
                 max: 17,
-                tooltip: "Maximum length of the username",
+                tooltip: "Maximum length of the last name",
             },
             nationality: {
                 name: "Nationality",
@@ -120,12 +124,12 @@ export const TextGenField = {
         filterSchema: {
             minDate: {
                 name: "Minimum Date",
-                type: "string",
+                type: "date",
                 tooltip: "DoB after this date"
             },
             maxDate: {
                 name: "Maximum Date",
-                type: "string",
+                type: "date",
                 tooltip: "DoB before this date"
             }
         }
@@ -287,11 +291,6 @@ export const TextGenField = {
         name: "Toggle Field", 
         icon: ToggleRight,
         filterSchema: {
-            defaultValue: {
-                name: "Default Value",
-                type: "boolean",
-                tooltip: "Default state of the toggle"
-            }
         }
     },
     select: { 
