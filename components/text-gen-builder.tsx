@@ -1,9 +1,9 @@
 import { Button } from "@heroui/button";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter } from "@heroui/modal";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Template, FieldFilters } from "./text-gen-builder/types";
 import StepBuilder from "./text-gen-builder/steps/builder";
-import StepFilters from "./text-gen-builder/steps/filters";
+import StepFilters, { validateRequiredFilters } from "./text-gen-builder/steps/filters";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 type Step = 'builder' | 'filters';
@@ -29,6 +29,10 @@ export default function TemplateBuilder({ onCancel }: TemplateBuilderProps) {
     const currentStepIndex = STEPS.findIndex(s => s.key === currentStep);
     const isFirstStep = currentStepIndex === 0;
     const isLastStep = currentStepIndex === STEPS.length - 1;
+
+    // Validate required filters
+    const filtersValidation = useMemo(() => validateRequiredFilters(template), [template]);
+    const canSave = template.fields.length > 0 && filtersValidation.isValid;
 
     const handleFiltersChange = (filters: FieldFilters) => {
         setTemplate(prev => ({ ...prev, filters }));
@@ -103,7 +107,7 @@ export default function TemplateBuilder({ onCancel }: TemplateBuilderProps) {
                             color="success" 
                             variant="flat"
                             onPress={handleSave}
-                            isDisabled={template.fields.length === 0}
+                            isDisabled={!canSave}
                         >
                             Save
                         </Button>
@@ -175,7 +179,7 @@ export default function TemplateBuilder({ onCancel }: TemplateBuilderProps) {
                         color="success" 
                         variant="flat"
                         onPress={handleSave}
-                        isDisabled={template.fields.length === 0}
+                        isDisabled={!canSave}
                         className="flex-1"
                     >
                         Save

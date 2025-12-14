@@ -6,6 +6,7 @@ import { Tooltip } from "@heroui/tooltip";
 import { Button } from "@heroui/button";
 import { DatePicker } from "@heroui/date-picker";
 import { ScrollShadow } from "@heroui/scroll-shadow";
+import { Switch } from "@heroui/switch";
 import { X, Info } from "lucide-react";
 import { Template, TemplateField, FieldFilters, FilterValue } from "../types";
 import { TextGenField } from "@/config/textGenField";
@@ -27,6 +28,59 @@ function getFilterSchemaForField(field: TemplateField) {
     return {};
 }
 
+// Helper function to check if a filter value is considered "filled"
+function isFilterValueFilled(value: any): boolean {
+    if (value === undefined || value === null) return false;
+    if (typeof value === "string") return value.trim().length > 0;
+    if (Array.isArray(value)) return value.length > 0;
+    if (typeof value === "number") return true;
+    if (typeof value === "boolean") return true;
+    // Range type check
+    if (typeof value === "object" && "min" in value && "max" in value) {
+        // For date range, check if both dates are filled
+        if (typeof value.min === "string" || typeof value.max === "string") {
+            return value.min !== "" || value.max !== "";
+        }
+        // For numeric range, it's always considered filled if we have the object
+        return true;
+    }
+    return false;
+}
+
+// Validation function to check if all required filters are filled
+export function validateRequiredFilters(template: Template): { isValid: boolean; missingFields: string[] } {
+    const missingFields: string[] = [];
+    const fieldFilters = template.filters || {};
+
+    for (const field of template.fields) {
+        const schema = getFilterSchemaForField(field);
+        const requiredFilterKeys = Object.entries(schema)
+            .filter(([_, filterDef]) => (filterDef as any).required === true)
+            .map(([key]) => key);
+
+        for (const filterKey of requiredFilterKeys) {
+            const filterValue = fieldFilters[field.id]?.find(f => f.filterKey === filterKey);
+            if (!filterValue || !isFilterValueFilled(filterValue.value)) {
+                const filterSchema = schema[filterKey as keyof typeof schema] as { name?: string };
+                missingFields.push(`${field.name}: ${filterSchema?.name || filterKey}`);
+            }
+        }
+    }
+
+    return {
+        isValid: missingFields.length === 0,
+        missingFields
+    };
+}
+
+// Helper to get required filter keys for a field
+function getRequiredFilters(field: TemplateField): string[] {
+    const schema = getFilterSchemaForField(field);
+    return Object.entries(schema)
+        .filter(([_, filterDef]) => (filterDef as any).required === true)
+        .map(([key]) => key);
+}
+
 export default function StepFilters({ template, onFiltersChange }: StepFiltersProps) {
     const fieldFilters = template.filters || {};
 
@@ -36,12 +90,75 @@ export default function StepFilters({ template, onFiltersChange }: StepFiltersPr
         }
     };
 
-    // Get available filters for a field (excluding already added ones)
+    // Auto-add required filters for all fields on mount and when fields change
+    useEffect(() => {
+        let needsUpdate = false;
+        const newFilters = { ...fieldFilters };
+
+        template.fields.forEach((field) => {
+            const requiredFilterKeys = getRequiredFilters(field);
+            const existingFilterKeys = (newFilters[field.id] || []).map(f => f.filterKey);
+            const schema = getFilterSchemaForField(field);
+
+            requiredFilterKeys.forEach((filterKey) => {
+                if (!existingFilterKeys.includes(filterKey)) {
+                    const filterSchema = schema[filterKey as keyof typeof schema] as {
+                        type?: string;
+                        default?: any;
+                        defaultMin?: number;
+                        defaultMax?: number;
+                        min?: number;
+                        max?: number;
+                    };
+
+                    let defaultValue;
+                    if (filterSchema?.type === "date") {
+                        defaultValue = "";
+                    } else if (filterSchema?.type === "dateRange") {
+                        defaultValue = { min: "", max: "" };
+                    } else if (filterSchema?.type === "range") {
+                        defaultValue = { 
+                            min: filterSchema?.defaultMin ?? filterSchema?.min ?? 0, 
+                            max: filterSchema?.defaultMax ?? filterSchema?.max ?? 100 
+                        };
+                    } else if (filterSchema?.type === "array") {
+                        defaultValue = filterSchema?.default && Array.isArray(filterSchema.default) ? filterSchema.default : [];
+                    } else {
+                        defaultValue = filterSchema?.default !== undefined ? filterSchema.default : (filterSchema?.type === "array" ? [] : "");
+                    }
+
+                    if (!newFilters[field.id]) {
+                        newFilters[field.id] = [];
+                    }
+                    newFilters[field.id] = [
+                        ...newFilters[field.id],
+                        { filterKey, value: defaultValue }
+                    ];
+                    needsUpdate = true;
+                }
+            });
+        });
+
+        if (needsUpdate) {
+            updateFilters(newFilters);
+        }
+    }, [template.fields]);
+
+    // Get available filters for a field (excluding already added ones and required filters)
     const getAvailableFilters = useCallback((field: TemplateField) => {
         const schema = getFilterSchemaForField(field);
         const existingFilterKeys = (fieldFilters[field.id] || []).map(f => f.filterKey);
-        return Object.entries(schema).filter(([key]) => !existingFilterKeys.includes(key));
+        return Object.entries(schema).filter(([key, filterDef]) => 
+            !existingFilterKeys.includes(key) && !(filterDef as any).required
+        );
     }, [fieldFilters]);
+
+    // Check if a filter is required
+    const isFilterRequired = useCallback((field: TemplateField, filterKey: string): boolean => {
+        const schema = getFilterSchemaForField(field);
+        const filterSchema = schema[filterKey as keyof typeof schema] as { required?: boolean };
+        return filterSchema?.required === true;
+    }, []);
 
     // Add a new filter to a field
     const handleAddFilter = (fieldId: string, filterKey: string) => {
@@ -52,12 +169,23 @@ export default function StepFilters({ template, onFiltersChange }: StepFiltersPr
         const filterSchema = schema[filterKey as keyof typeof schema] as {
             type?: string;
             default?: any;
+            defaultMin?: number;
+            defaultMax?: number;
+            min?: number;
+            max?: number;
         };
         
         // Set appropriate default value based on filter type
         let defaultValue;
         if (filterSchema?.type === "date") {
             defaultValue = ""; // Empty string for dates
+        } else if (filterSchema?.type === "dateRange") {
+            defaultValue = { min: "", max: "" };
+        } else if (filterSchema?.type === "range") {
+            defaultValue = { 
+                min: filterSchema?.defaultMin ?? filterSchema?.min ?? 0, 
+                max: filterSchema?.defaultMax ?? filterSchema?.max ?? 100 
+            };
         } else if (filterSchema?.type === "array") {
             defaultValue = filterSchema?.default && Array.isArray(filterSchema.default) ? filterSchema.default : [];
         } else {
@@ -82,7 +210,7 @@ export default function StepFilters({ template, onFiltersChange }: StepFiltersPr
     };
 
     // Update filter value
-    const handleUpdateFilterValue = (fieldId: string, filterKey: string, value: string | string[] | number | boolean) => {
+    const handleUpdateFilterValue = (fieldId: string, filterKey: string, value: any) => {
         updateFilters({
             ...fieldFilters,
             [fieldId]: (fieldFilters[fieldId] || []).map(f => 
@@ -119,11 +247,130 @@ export default function StepFilters({ template, onFiltersChange }: StepFiltersPr
             min?: number;
             max?: number;
             default?: any;
+            defaultMin?: number;
+            defaultMax?: number;
+            required?: boolean;
         };
 
         if (!filterSchema) return null;
 
         const currentValue = filter.value;
+        const isRequired = filterSchema.required === true;
+
+        // Range type - two number inputs for min/max
+        if (filterSchema.type === "range") {
+            const rangeValue = (currentValue && typeof currentValue === "object" && !Array.isArray(currentValue)) 
+                ? currentValue as { min: number; max: number }
+                : { min: filterSchema.defaultMin ?? filterSchema.min ?? 0, max: filterSchema.defaultMax ?? filterSchema.max ?? 100 };
+            
+            return (
+                <div className="inline-flex items-center gap-2 flex-wrap sm:flex-nowrap">
+                    <Input
+                        type="number"
+                        aria-label={`${filterSchema.name} minimum`}
+                        placeholder="Min"
+                        variant="bordered"
+                        size="sm"
+                        isRequired={isRequired}
+                        min={filterSchema.min}
+                        max={rangeValue.max}
+                        value={rangeValue.min?.toString() ?? ""}
+                        onValueChange={(val) => {
+                            const newMin = parseInt(val) || 0;
+                            const clampedMin = Math.min(newMin, rangeValue.max);
+                            handleUpdateFilterValue(field.id, filter.filterKey, { ...rangeValue, min: clampedMin });
+                        }}
+                        classNames={{
+                            base: "w-auto",
+                            inputWrapper: "bg-zinc-800/50 border-white/20 w-24 h-10",
+                        }}
+                        startContent={<span className="text-xs text-zinc-500">Min</span>}
+                    />
+                    <span className="text-zinc-500">—</span>
+                    <Input
+                        type="number"
+                        aria-label={`${filterSchema.name} maximum`}
+                        placeholder="Max"
+                        variant="bordered"
+                        size="sm"
+                        isRequired={isRequired}
+                        min={rangeValue.min}
+                        max={filterSchema.max}
+                        value={rangeValue.max?.toString() ?? ""}
+                        onValueChange={(val) => {
+                            const newMax = parseInt(val) || 0;
+                            const clampedMax = Math.max(newMax, rangeValue.min);
+                            handleUpdateFilterValue(field.id, filter.filterKey, { ...rangeValue, max: clampedMax });
+                        }}
+                        classNames={{
+                            base: "w-auto",
+                            inputWrapper: "bg-zinc-800/50 border-white/20 w-24 h-10",
+                        }}
+                        startContent={<span className="text-xs text-zinc-500">Max</span>}
+                    />
+                </div>
+            );
+        }
+
+        // Date Range type - two DatePickers for min/max dates
+        if (filterSchema.type === "dateRange") {
+            const dateRangeValue = (currentValue && typeof currentValue === "object" && !Array.isArray(currentValue))
+                ? currentValue as { min: string; max: string }
+                : { min: "", max: "" };
+
+            const parseDateValue = (dateStr: string): any => {
+                if (!dateStr) return null;
+                try {
+                    const parts = dateStr.split('/');
+                    if (parts.length === 3) {
+                        const [day, month, year] = parts;
+                        return parseDate(`${year}-${month}-${day}`);
+                    }
+                } catch (e) {}
+                return null;
+            };
+
+            const formatDate = (val: any) => {
+                if (!val) return "";
+                return `${String(val.day).padStart(2, '0')}/${String(val.month).padStart(2, '0')}/${val.year}`;
+            };
+
+            return (
+                <div className="inline-flex items-center gap-2 flex-wrap sm:flex-nowrap">
+                    <DatePicker
+                        aria-label={`${filterSchema.name} from`}
+                        variant="bordered"
+                        size="sm"
+                        showMonthAndYearPickers
+                        isRequired={isRequired}
+                        value={parseDateValue(dateRangeValue.min) as any}
+                        onChange={(val) => {
+                            handleUpdateFilterValue(field.id, filter.filterKey, { ...dateRangeValue, min: formatDate(val) });
+                        }}
+                        classNames={{
+                            base: "w-auto",
+                            inputWrapper: "bg-zinc-800/50 border-white/20 w-36 h-10",
+                        }}
+                    />
+                    <span className="text-zinc-500">—</span>
+                    <DatePicker
+                        aria-label={`${filterSchema.name} to`}
+                        variant="bordered"
+                        size="sm"
+                        showMonthAndYearPickers
+                        isRequired={isRequired}
+                        value={parseDateValue(dateRangeValue.max) as any}
+                        onChange={(val) => {
+                            handleUpdateFilterValue(field.id, filter.filterKey, { ...dateRangeValue, max: formatDate(val) });
+                        }}
+                        classNames={{
+                            base: "w-auto",
+                            inputWrapper: "bg-zinc-800/50 border-white/20 w-36 h-10",
+                        }}
+                    />
+                </div>
+            );
+        }
 
         // Date type - use DatePicker for calendar selection
         if (filterSchema.type === "date") {
@@ -147,6 +394,7 @@ export default function StepFilters({ template, onFiltersChange }: StepFiltersPr
                     variant="bordered"
                     size="sm"
                     showMonthAndYearPickers
+                    isRequired={isRequired}
                     value={dateValue}
                     onChange={(val) => {
                         if (val) {
@@ -176,6 +424,7 @@ export default function StepFilters({ template, onFiltersChange }: StepFiltersPr
                     variant="bordered"
                     size="sm"
                     isMultiline={true}
+                    isRequired={isRequired}
                     selectedKeys={new Set(selectedValues)}
                     onSelectionChange={(keys) => {
                         const selected = Array.from(keys) as string[];
@@ -200,6 +449,37 @@ export default function StepFilters({ template, onFiltersChange }: StepFiltersPr
                             ))}
                         </div>
                     )}
+                >
+                    {filterSchema.allowedValues.map((option: string) => (
+                        <SelectItem key={option}>
+                            {option}
+                        </SelectItem>
+                    ))}
+                </Select>
+            );
+        }
+
+        // Select type - single selection dropdown
+        if (filterSchema.type === "select" && filterSchema.allowedValues && filterSchema.allowedValues.length > 0) {
+            const defaultValue = filterSchema.default !== undefined ? filterSchema.default : "";
+            const selectedValue = currentValue !== undefined && currentValue !== "" ? String(currentValue) : defaultValue;
+            return (
+                <Select
+                    aria-label={`Select ${filterSchema.name}`}
+                    placeholder="Select an option"
+                    variant="bordered"
+                    size="sm"
+                    isRequired={isRequired}
+                    selectedKeys={selectedValue ? [selectedValue] : []}
+                    onSelectionChange={(keys) => {
+                        const selected = Array.from(keys)[0] as string;
+                        handleUpdateFilterValue(field.id, filter.filterKey, selected || "");
+                    }}
+                    classNames={{
+                        base: "w-auto min-w-[150px]",
+                        trigger: "bg-zinc-800/50 border-white/20 h-10",
+                        popoverContent: "bg-zinc-900 border-white/10",
+                    }}
                 >
                     {filterSchema.allowedValues.map((option: string) => (
                         <SelectItem key={option}>
@@ -252,6 +532,7 @@ export default function StepFilters({ template, onFiltersChange }: StepFiltersPr
                     aria-label={filterSchema.name}
                     variant="bordered"
                     size="sm"
+                    isRequired={isRequired}
                     min={filterSchema.min}
                     max={filterSchema.max}
                     value={displayValue}
@@ -263,28 +544,23 @@ export default function StepFilters({ template, onFiltersChange }: StepFiltersPr
             );
         }
 
-        // Boolean type - use Select
+        // Boolean type - use Switch
         if (filterSchema.type === "boolean") {
-            const defaultValue = filterSchema.default !== undefined ? filterSchema.default : undefined;
-            const displayValue = currentValue !== undefined ? currentValue : defaultValue;
+            const defaultValue = filterSchema.default !== undefined ? filterSchema.default : false;
+            const displayValue = currentValue !== undefined ? Boolean(currentValue) : defaultValue;
             return (
-                <Select
-                    aria-label={filterSchema.name}
-                    variant="bordered"
-                    size="sm"
-                    selectedKeys={displayValue !== undefined ? [String(displayValue)] : []}
-                    onSelectionChange={(keys) => {
-                        const selected = Array.from(keys)[0] as string;
-                        handleUpdateFilterValue(field.id, filter.filterKey, selected === "true");
-                    }}
-                    classNames={{
-                        trigger: "bg-zinc-800/50 border-white/20 w-32 h-10",
-                        popoverContent: "bg-zinc-900 border-white/10",
-                    }}
-                >
-                    <SelectItem key="true">Yes</SelectItem>
-                    <SelectItem key="false">No</SelectItem>
-                </Select>
+                <div className="flex items-center h-10">
+                    <Switch
+                        aria-label={filterSchema.name}
+                        size="sm"
+                        color="success"
+                        isSelected={displayValue}
+                        onValueChange={(val) => handleUpdateFilterValue(field.id, filter.filterKey, val)}
+                        classNames={{
+                            wrapper: "bg-zinc-700",
+                        }}
+                    />
+                </div>
             );
         }
 
@@ -297,6 +573,7 @@ export default function StepFilters({ template, onFiltersChange }: StepFiltersPr
                 placeholder={`Enter ${filterSchema.name.toLowerCase()}`}
                 variant="bordered"
                 size="sm"
+                isRequired={isRequired}
                 value={displayValue}
                 onValueChange={(val) => handleUpdateFilterValue(field.id, filter.filterKey, val)}
                 classNames={{
@@ -354,59 +631,49 @@ export default function StepFilters({ template, onFiltersChange }: StepFiltersPr
                                             type?: string;
                                             tooltip?: string;
                                             description?: string;
+                                            required?: boolean;
                                         };
                                         const tooltipContent = filterSchema?.tooltip || filterSchema?.description || "";
+                                        const isRequired = filterSchema?.required === true;
 
                                         return (
                                             <div key={filter.filterKey} className="flex flex-col gap-2">
                                                 {/* Desktop: single row layout */}
                                                 <div className="hidden sm:flex items-start gap-2">
                                                     <span className="text-sm text-zinc-400 whitespace-nowrap mt-2.5">where</span>
-                                                    <Tooltip 
-                                                        content={tooltipContent}
-                                                        isDisabled={!tooltipContent}
-                                                        placement="top"
-                                                    >
-                                                        <div className="flex items-start gap-1">
-                                                            <Select
-                                                                aria-label="Filter type"
-                                                                variant="bordered"
-                                                                size="sm"
-                                                                isDisabled
-                                                                selectedKeys={[filter.filterKey]}
-                                                                classNames={{
-                                                                    trigger: "bg-zinc-800/50 border-white/20 h-10 min-w-[200px]",
-                                                                    popoverContent: "bg-zinc-900 border-white/10",
-                                                                    innerWrapper: "truncate",
-                                                                }}
-                                                            >
-                                                                <SelectItem 
-                                                                    key={filter.filterKey}
-                                                                    endContent={tooltipContent ? (
-                                                                        <Tooltip content={tooltipContent} placement="right">
-                                                                            <Info size={12} className="text-zinc-500" />
-                                                                        </Tooltip>
-                                                                    ) : null}
-                                                                >
+                                                    <div className="flex items-center gap-1">
+                                                        <Tooltip 
+                                                            content={tooltipContent}
+                                                            isDisabled={!tooltipContent}
+                                                            placement="top"
+                                                        >
+                                                            <div className={`flex items-center gap-1 px-3 py-2 rounded-lg border bg-zinc-800/50 h-10 min-w-[220px] ${
+                                                                isRequired ? 'border-amber-500/50' : 'border-white/20'
+                                                            }`}>
+                                                                <span className="text-sm truncate">
                                                                     {filterSchema?.name || filter.filterKey}
-                                                                </SelectItem>
-                                                            </Select>
-                                                        </div>
-                                                    </Tooltip>
+                                                                </span>
+                                                                {isRequired && <span className="text-amber-500">*</span>}
+                                                                {tooltipContent && <Info size={12} className="text-zinc-500 ml-auto flex-shrink-0" />}
+                                                            </div>
+                                                        </Tooltip>
+                                                    </div>
                                                     <span className="text-sm text-zinc-400 mt-2.5">is</span>
                                                     <div className="flex-1 min-w-0">
                                                         {renderFilterValueInput(field, filter)}
                                                     </div>
-                                                    <Button
-                                                        isIconOnly
-                                                        size="sm"
-                                                        variant="light"
-                                                        className="text-danger mt-2"
-                                                        onPress={() => handleRemoveFilter(field.id, filter.filterKey)}
-                                                        aria-label="Remove filter"
-                                                    >
-                                                        <X size={16} />
-                                                    </Button>
+                                                    {!isRequired && (
+                                                        <Button
+                                                            isIconOnly
+                                                            size="sm"
+                                                            variant="light"
+                                                            className="text-danger mt-2"
+                                                            onPress={() => handleRemoveFilter(field.id, filter.filterKey)}
+                                                            aria-label="Remove filter"
+                                                        >
+                                                            <X size={16} />
+                                                        </Button>
+                                                    )}
                                                 </div>
 
                                                 {/* Mobile: two row layout */}
@@ -414,47 +681,35 @@ export default function StepFilters({ template, onFiltersChange }: StepFiltersPr
                                                     {/* First row: where [filter] + delete button */}
                                                     <div className="flex items-center gap-2">
                                                         <span className="text-sm text-zinc-400 whitespace-nowrap">where</span>
-                                                        <Tooltip 
-                                                            content={tooltipContent}
-                                                            isDisabled={!tooltipContent}
-                                                            placement="top"
-                                                        >
-                                                            <div className="flex-1">
-                                                                <Select
-                                                                    aria-label="Filter type"
-                                                                    variant="bordered"
-                                                                    size="sm"
-                                                                    isDisabled
-                                                                    selectedKeys={[filter.filterKey]}
-                                                                    classNames={{
-                                                                        trigger: "bg-zinc-800/50 border-white/20 h-10 w-full",
-                                                                        popoverContent: "bg-zinc-900 border-white/10",
-                                                                        innerWrapper: "truncate",
-                                                                    }}
-                                                                >
-                                                                    <SelectItem 
-                                                                        key={filter.filterKey}
-                                                                        endContent={tooltipContent ? (
-                                                                            <Tooltip content={tooltipContent} placement="right">
-                                                                                <Info size={12} className="text-zinc-500" />
-                                                                            </Tooltip>
-                                                                        ) : null}
-                                                                    >
+                                                        <div className="flex-1">
+                                                            <Tooltip 
+                                                                content={tooltipContent}
+                                                                isDisabled={!tooltipContent}
+                                                                placement="top"
+                                                            >
+                                                                <div className={`flex items-center gap-1 px-3 py-2 rounded-lg border bg-zinc-800/50 h-10 w-full ${
+                                                                    isRequired ? 'border-amber-500/50' : 'border-white/20'
+                                                                }`}>
+                                                                    <span className="text-sm truncate">
                                                                         {filterSchema?.name || filter.filterKey}
-                                                                    </SelectItem>
-                                                                </Select>
-                                                            </div>
-                                                        </Tooltip>
-                                                        <Button
-                                                            isIconOnly
-                                                            size="sm"
-                                                            variant="light"
-                                                            className="text-danger"
-                                                            onPress={() => handleRemoveFilter(field.id, filter.filterKey)}
-                                                            aria-label="Remove filter"
-                                                        >
-                                                            <X size={16} />
-                                                        </Button>
+                                                                    </span>
+                                                                    {isRequired && <span className="text-amber-500">*</span>}
+                                                                    {tooltipContent && <Info size={12} className="text-zinc-500 ml-auto flex-shrink-0" />}
+                                                                </div>
+                                                            </Tooltip>
+                                                        </div>
+                                                        {!isRequired && (
+                                                            <Button
+                                                                isIconOnly
+                                                                size="sm"
+                                                                variant="light"
+                                                                className="text-danger"
+                                                                onPress={() => handleRemoveFilter(field.id, filter.filterKey)}
+                                                                aria-label="Remove filter"
+                                                            >
+                                                                <X size={16} />
+                                                            </Button>
+                                                        )}
                                                     </div>
                                                     {/* Second row: is [options] */}
                                                     <div className="flex items-start gap-2">
