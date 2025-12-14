@@ -1,9 +1,34 @@
 import { Input } from "@heroui/input";
 import { Button } from "@heroui/button";
-import { useRef, useEffect, useCallback, useState, DragEvent } from "react";
+import { Popover, PopoverTrigger, PopoverContent } from "@heroui/popover";
+import { useRef, useEffect, useCallback, useState, DragEvent, ComponentType, createElement } from "react";
 import { TemplateField, ScrollState } from "./types";
 import FieldItem from "./field-item";
-import { Plus, Layers } from "lucide-react";
+import { 
+    Plus, 
+    Layers, 
+    FileText, 
+    Star, 
+    Heart, 
+    Bookmark, 
+    Tag, 
+    Clock, 
+    User, 
+    Settings, 
+    Folder, 
+    Image, 
+    Music, 
+    Video, 
+    Download, 
+    Upload, 
+    Mail, 
+    Phone, 
+    MapPin, 
+    Globe, 
+    Camera, 
+    Calendar,
+    Palette
+} from "lucide-react";
 
 interface TemplateFieldsListProps {
     templateName: string;
@@ -21,6 +46,19 @@ interface TemplateFieldsListProps {
     onDragEnd: () => void;
     onAddFieldClick?: () => void;
 }
+
+// Icon categories and options
+const ALL_ICONS = [FileText, Star, Heart, Bookmark, Tag, Clock, Calendar, User, Mail, Phone, MapPin, Image, Music, Video, Camera, Download, Upload, Settings, Globe, Folder] as const;
+
+const COLOR_OPTIONS = [
+    { name: "Blue", value: "text-blue-500", bg: "bg-blue-100 dark:bg-blue-900/30" },
+    { name: "Green", value: "text-green-500", bg: "bg-green-100 dark:bg-green-900/30" },
+    { name: "Red", value: "text-red-500", bg: "bg-red-100 dark:bg-red-900/30" },
+    { name: "Purple", value: "text-purple-500", bg: "bg-purple-100 dark:bg-purple-900/30" },
+    { name: "Orange", value: "text-orange-500", bg: "bg-orange-100 dark:bg-orange-900/30" },
+    { name: "Pink", value: "text-pink-500", bg: "bg-pink-100 dark:bg-pink-900/30" },
+    { name: "Indigo", value: "text-indigo-500", bg: "bg-indigo-100 dark:bg-indigo-900/30" },
+] as const;
 
 export default function TemplateFieldsList({
     templateName,
@@ -41,6 +79,9 @@ export default function TemplateFieldsList({
     const [scrollState, setScrollState] = useState<ScrollState>({ atTop: true, atBottom: false });
     const [editingFieldId, setEditingFieldId] = useState<string | null>(null);
     const [editingFieldName, setEditingFieldName] = useState("");
+    const [selectedIcon, setSelectedIcon] = useState<ComponentType<{ size?: number }>>(FileText);
+    const [selectedColor, setSelectedColor] = useState<(typeof COLOR_OPTIONS)[number]>(COLOR_OPTIONS[0]);
+    const [isIconPopoverOpen, setIsIconPopoverOpen] = useState(false);
     const listRef = useRef<HTMLDivElement>(null);
 
     // Check scroll position and update fade visibility
@@ -96,6 +137,17 @@ export default function TemplateFieldsList({
         setTemplateFields(templateFields.filter(field => field.id !== id));
     };
 
+    // Handle icon selection
+    const handleIconSelect = (IconComponent: ComponentType<{ size?: number }>) => {
+        setSelectedIcon(IconComponent);
+        setIsIconPopoverOpen(false);
+    };
+
+    // Handle color selection
+    const handleColorSelect = (color: typeof COLOR_OPTIONS[number]) => {
+        setSelectedColor(color);
+    };
+
     return (
         <div 
             className={`flex flex-col backdrop-blur-md bg-white/20 dark:bg-black/20 border border-white/30 dark:border-white/10 p-4 rounded-lg w-full md:w-2/3 h-[500px] transition-colors shadow-lg ${isDraggingOver ? 'ring-2 ring-primary ring-offset-2' : ''}`}
@@ -103,14 +155,78 @@ export default function TemplateFieldsList({
             onDragLeave={onDragLeave}
             onDrop={onDrop}
         >
-            <Input 
-                size="lg" 
-                placeholder="Untitled Template" 
-                value={templateName}
-                onValueChange={onTemplateNameChange}
-                variant="underlined" 
-                className="pt-4 mb-4" 
-            />
+            <div className="flex items-center gap-3 pt-4 mb-4">
+                {/* Icon Selector */}
+                <Popover 
+                    isOpen={isIconPopoverOpen} 
+                    onOpenChange={setIsIconPopoverOpen}
+                    placement="bottom-start"
+                >
+                    <PopoverTrigger>
+                        <Button
+                            isIconOnly
+                            variant="flat"
+                            size="lg"
+                            className={`${selectedColor.bg} ${selectedColor.value} hover:scale-105 transition-all`}
+                            aria-label="Select template icon"
+                        >
+                            {selectedIcon && createElement(selectedIcon, { size: 20 })}
+                        </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-80">
+                        <div className="px-2 py-3">
+                            <h4 className="text-lg font-semibold mb-3">Choose Icon</h4>
+                            
+                            {/* Colour Selection */}
+                            <div className="mb-4">
+                                <div className="flex flex-wrap gap-2">
+                                    {COLOR_OPTIONS.map((color: typeof COLOR_OPTIONS[number]) => (
+                                        <Button
+                                            key={color.name}
+                                            isIconOnly
+                                            size="sm"
+                                            variant={selectedColor.name === color.name ? "solid" : "flat"}
+                                            className={`${color.bg} ${color.value} min-w-8 h-8`}
+                                            onPress={() => handleColorSelect(color)}
+                                            aria-label={`Select ${color.name} color`}
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Icon Selection */}
+                            <div>
+                                <p className="text-sm font-medium mb-2">Icon:</p>
+                                <div className="flex flex-wrap gap-1 max-h-64 overflow-y-auto">
+                                    {ALL_ICONS.map((IconComponent, index) => (
+                                        <Button
+                                            key={index}
+                                            isIconOnly
+                                            size="sm"
+                                            variant={selectedIcon === IconComponent ? "solid" : "flat"}
+                                            className={`${selectedColor.bg} ${selectedColor.value} min-w-8 h-8`}
+                                            onPress={() => handleIconSelect(IconComponent)}
+                                            aria-label="Select icon"
+                                        >
+                                            {createElement(IconComponent, { size: 14 })}
+                                        </Button>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </PopoverContent>
+                </Popover>
+
+                {/* Template Name Input */}
+                <Input 
+                    size="lg" 
+                    placeholder="Untitled Template" 
+                    value={templateName}
+                    onValueChange={onTemplateNameChange}
+                    variant="underlined" 
+                    className="flex-1"
+                />
+            </div>
             {/* Template fields */}
             <div className="relative flex-1 min-h-0">
                 {/* Top fade gradient */}
