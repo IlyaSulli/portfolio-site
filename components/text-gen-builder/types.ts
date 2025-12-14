@@ -7,9 +7,19 @@ export interface TemplateField {
     icon: React.ComponentType<{ size?: number; color?: string }>;
 }
 
+export interface RangeValue {
+    min: number;
+    max: number;
+}
+
+export interface DateRangeValue {
+    min: string;
+    max: string;
+}
+
 export interface FilterValue {
     filterKey: string;
-    value: string | string[] | number | boolean;
+    value: string | string[] | number | boolean | RangeValue | DateRangeValue;
 }
 
 export interface FieldFilters {
