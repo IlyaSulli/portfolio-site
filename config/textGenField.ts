@@ -37,6 +37,7 @@ export const TextGenField = {
             gender: {
                 name: "Gender",
                 type: "array",
+                default: ["Male", "Female", "Unisex"],
                 allowedValues: ["Male", "Female", "Unisex"],
                 description: "Desired gender basis for the name",
             },
@@ -67,6 +68,7 @@ export const TextGenField = {
             nationality: {
                 name: "Nationality",
                 type: "array",
+                default: ["English"],
                 allowedValues: ["English", "Russian", "Arabic", "Japanese", "Italian", "German", "Czech", "Spanish", "Dutch", "French", "Chinese", "Irish", "Greek", "Korean", "Scotish"],
                 tooltip: "Country of origin for the name"
             },
