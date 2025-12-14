@@ -1,7 +1,7 @@
 import { Button } from "@heroui/button";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter } from "@heroui/modal";
 import { useState } from "react";
-import { Template } from "./text-gen-builder/types";
+import { Template, FieldFilters } from "./text-gen-builder/types";
 import StepBuilder from "./text-gen-builder/steps/builder";
 import StepFilters from "./text-gen-builder/steps/filters";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -22,12 +22,17 @@ export default function TemplateBuilder({ onCancel }: TemplateBuilderProps) {
     const [template, setTemplate] = useState<Template>({
         name: "Untitled Template",
         fields: [],
+        filters: {},
     });
     const [showConfirmModal, setShowConfirmModal] = useState(false);
 
     const currentStepIndex = STEPS.findIndex(s => s.key === currentStep);
     const isFirstStep = currentStepIndex === 0;
     const isLastStep = currentStepIndex === STEPS.length - 1;
+
+    const handleFiltersChange = (filters: FieldFilters) => {
+        setTemplate(prev => ({ ...prev, filters }));
+    };
 
     const handleNext = () => {
         if (!isLastStep) {
@@ -95,12 +100,12 @@ export default function TemplateBuilder({ onCancel }: TemplateBuilderProps) {
                     )}
                     {isLastStep ? (
                         <Button 
-                            color="primary" 
+                            color="success" 
                             variant="flat"
                             onPress={handleSave}
                             isDisabled={template.fields.length === 0}
                         >
-                            Save Template
+                            Save
                         </Button>
                     ) : (
                         <Button 
@@ -138,7 +143,10 @@ export default function TemplateBuilder({ onCancel }: TemplateBuilderProps) {
                 />
             )}
             {currentStep === 'filters' && (
-                <StepFilters template={template} />
+                <StepFilters 
+                    template={template} 
+                    onFiltersChange={handleFiltersChange}
+                />
             )}
 
             {/* Mobile bottom buttons */}
