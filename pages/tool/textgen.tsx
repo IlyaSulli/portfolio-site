@@ -4,21 +4,39 @@ import {Tabs, Tab} from "@heroui/tabs";
 import { Button } from "@heroui/button";
 import { Plus, ArrowLeft } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useTheme } from "next-themes";
 import TextGenTemplateList from "@/components/text-gen-template-list";
 import TextGenFilter from "@/components/text-gen-filter";
 import { templates } from "@/config/textGenTemplates";
 import TemplateBuilder from "@/components/text-gen-builder";
 
+const GRADIENTS = {
+    light: {
+        primary: 'radial-gradient(circle, rgb(96 165 250), rgb(59 130 246))',
+        danger: 'radial-gradient(circle, rgb(248 113 113), rgb(239 68 68))',
+        primary2: 'radial-gradient(circle, rgb(59 130 246), rgb(37 99 235))',
+    },
+    dark: {
+        primary: 'radial-gradient(circle, rgb(59 130 246), rgb(37 99 235))',
+        danger: 'radial-gradient(circle, rgb(239 68 68), rgb(220 38 38))',
+        primary2: 'radial-gradient(circle, rgb(37 99 235), rgb(29 78 216))',
+    }
+};
 
 export default function TextGenerator(){
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
     const [useAdvancedBuilder, setUseAdvancedBuilder] = useState(false);
     const [scrollY, setScrollY] = useState(0);
+    const [isMounted, setIsMounted] = useState(false);
+    const { theme } = useTheme();
     const selectedTemplate = selectedIndex !== null ? templates[selectedIndex] : null;
+    const isDark = theme === 'dark';
+    const gradients = isDark ? GRADIENTS.dark : GRADIENTS.light;
 
     useEffect(() => {
         const handleScroll = () => setScrollY(window.scrollY);
         window.addEventListener('scroll', handleScroll);
+        setIsMounted(true);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
@@ -27,33 +45,40 @@ export default function TextGenerator(){
             <div className="relative min-h-screen">
                 {/* Moving blur blobs background */}
                 <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 1 }}>
-                    <div 
-                        className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl opacity-60"
-                        style={{
-                            background: 'radial-gradient(circle, rgb(59 130 246), rgb(37 99 235))',
-                            animation: 'floatPrimary 60s ease-in-out infinite',
-                            mixBlendMode: 'multiply',
-                            transform: `translateY(${scrollY * 0.1}px)`
-                        }}
-                    />
-                    <div 
-                        className="absolute top-1/2 right-1/3 w-80 h-80 rounded-full blur-3xl opacity-55"
-                        style={{
-                            background: 'radial-gradient(circle, rgb(239 68 68), rgb(220 38 38))',
-                            animation: 'floatDanger 38s ease-in-out infinite',
-                            mixBlendMode: 'multiply',
-                            transform: `translateY(${scrollY * -0.15}px)`
-                        }}
-                    />
-                    <div 
-                        className="absolute bottom-1/3 left-1/2 w-72 h-72 rounded-full blur-3xl opacity-50"
-                        style={{
-                            background: 'radial-gradient(circle, rgb(37 99 235), rgb(29 78 216))',
-                            animation: 'floatPrimary2 40s ease-in-out infinite',
-                            mixBlendMode: 'multiply',
-                            transform: `translateY(${scrollY * 0.08}px)`
-                        }}
-                    />
+                    {isMounted && (
+                        <>
+                            <div 
+                                className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl opacity-60"
+                                style={{
+                                    background: gradients.primary,
+                                    animation: 'floatPrimary 60s ease-in-out infinite',
+                                    mixBlendMode: 'multiply',
+                                    transform: `translateY(${scrollY * 0.1}px)`,
+                                    transition: 'background 0.3s ease-in-out'
+                                }}
+                            />
+                            <div 
+                                className="absolute top-1/2 right-1/3 w-80 h-80 rounded-full blur-3xl opacity-55"
+                                style={{
+                                    background: gradients.danger,
+                                    animation: 'floatDanger 38s ease-in-out infinite',
+                                    mixBlendMode: 'multiply',
+                                    transform: `translateY(${scrollY * -0.15}px)`,
+                                    transition: 'background 0.3s ease-in-out'
+                                }}
+                            />
+                            <div 
+                                className="absolute bottom-1/3 left-1/2 w-72 h-72 rounded-full blur-3xl opacity-50"
+                                style={{
+                                    background: gradients.primary2,
+                                    animation: 'floatPrimary2 40s ease-in-out infinite',
+                                    mixBlendMode: 'multiply',
+                                    transform: `translateY(${scrollY * 0.08}px)`,
+                                    transition: 'background 0.3s ease-in-out'
+                                }}
+                            />
+                        </>
+                    )}
                 </div>
                 
                 <style jsx global>{`
@@ -81,12 +106,17 @@ export default function TextGenerator(){
                         <h1 className={`${title()} text-center`}>Text Generator</h1>
                         <span className="mt-4 text-center">Create high quality text, names and more for your designs.</span>
                     </div>
-                    <Tabs aria-label="Generator Types" className="mt-16 p-2 opacity-90">
+                    <Tabs 
+                        aria-label="Generator Types"
+                        classNames={{
+                            tabList: "mt-16 p-2 opacity-90 backdrop-blur-md bg-white/20 dark:bg-black/20 border border-white/30 dark:border-white/10 shadow-lg",
+                        }}
+                    >
                         <Tab key="templates" title="Templates">
                             {!useAdvancedBuilder ? (
                                 <div className="flex flex-col dark:bg-zinc-900/40 bg-zinc-100/40 backdrop-blur-lg px-8 py-8 rounded-2xl border border-white/10 dark:border-white/5">
-                                    <div className="justify-between flex pb-4">
-                                        <span className="text-2xl font-semibold">Templates</span>
+                                    <div className="justify-between flex-col sm:flex-row flex pb-4">
+                                        <span className="text-2xl font-semibold pb-4 sm:pb-0">Templates</span>
                                         <Button 
                                             color="primary" 
                                             variant="flat" 
