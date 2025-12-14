@@ -25,7 +25,9 @@ const GRADIENTS = {
 
 export default function TextGenerator(){
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+    const [selectedUserTemplate, setSelectedUserTemplate] = useState<string | null>(null);
     const [useAdvancedBuilder, setUseAdvancedBuilder] = useState(false);
+    const [editingTemplate, setEditingTemplate] = useState<any>(null);
     const [scrollY, setScrollY] = useState(0);
     const [isMounted, setIsMounted] = useState(false);
     const { theme } = useTheme();
@@ -39,6 +41,16 @@ export default function TextGenerator(){
         setIsMounted(true);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    const handleEditTemplate = (template: any) => {
+        setEditingTemplate(template);
+        setUseAdvancedBuilder(true);
+    };
+
+    const handleCancelBuilder = () => {
+        setUseAdvancedBuilder(false);
+        setEditingTemplate(null);
+    };
 
     return(
         <DefaultLayout>
@@ -126,10 +138,19 @@ export default function TextGenerator(){
                                             New Template
                                         </Button>
                                     </div>
-                                    <TextGenTemplateList selectedIndex={selectedIndex} onSelectIndex={setSelectedIndex} />
+                                    <TextGenTemplateList 
+                                        selectedIndex={selectedIndex} 
+                                        onSelectIndex={setSelectedIndex} 
+                                        selectedUserTemplate={selectedUserTemplate}
+                                        onSelectUserTemplate={setSelectedUserTemplate}
+                                        onEditTemplate={handleEditTemplate}
+                                    />
                                 </div>
                             ) : (
-                                <TemplateBuilder onCancel={() => setUseAdvancedBuilder(false)} />
+                                <TemplateBuilder 
+                                    onCancel={handleCancelBuilder} 
+                                    editingTemplate={editingTemplate}
+                                />
                             )}
                         </Tab>
                         
