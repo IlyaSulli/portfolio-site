@@ -2,6 +2,7 @@ export const templates = [
     {
         name: "Social Media Profile",
         description: "Create unique and complete and consistent profiles",
+        category: ["Social"],
         icon: "User",
         color: "EA2121",
         parameters: [
@@ -50,6 +51,7 @@ export const templates = [
     {
         name: "Phone Contact",
         description: "Contact pages with realistic phone numbers and profiles",
+        category: ["Social"],
         icon: "BookUser",
         color: "21AF19",
         parameters: [
@@ -84,6 +86,7 @@ export const templates = [
     {
         name: "Fitness Tracking Profile",
         description: "Generate fitness profiles with realistic trackable metrics",
+        category: ["Social", "Fitness"],
         icon: "Activity",
         color: "AF198A",
         parameters: [
@@ -107,7 +110,7 @@ export const templates = [
                         maxHeight: 200,
                         step: 5,
                         measurement: "metric",
-                        granularity: ["cm"]
+                        granularity: "cm"
                     }
                 ]
             },
