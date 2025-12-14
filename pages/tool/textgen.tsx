@@ -101,8 +101,8 @@ export default function TextGenerator(){
                     }
                 `}</style>
                 
-                <div className="relative" style={{ zIndex: 10 }}>
-                    <div className="flex-col flex align-middle">
+                <div className="relative -mx-4" style={{ zIndex: 10 }}>
+                    <div className="flex-col flex align-middle px-4">
                         <h1 className={`${title()} text-center`}>Text Generator</h1>
                         <span className="mt-4 text-center">Create high quality text, names and more for your designs.</span>
                     </div>

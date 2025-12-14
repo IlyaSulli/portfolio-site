@@ -65,10 +65,10 @@ export default function TemplateBuilder({ onCancel }: TemplateBuilderProps) {
     };
 
     return (
-        <div className="flex flex-col backdrop-blur-md bg-white/20 dark:bg-black/20 border border-white/30 dark:border-white/10 px-4 md:px-8 py-6 md:py-8 rounded-2xl shadow-lg">
+        <div className="flex flex-col backdrop-blur-md bg-white/20 dark:bg-black/20 border border-white/30 dark:border-white/10 px-2 md:px-8 py-6 md:py-8 rounded-2xl shadow-lg">
             {/* Header */}
             <div className="flex flex-col md:flex-row justify-between md:items-center gap-4">
-                <div className="flex flex-col">
+                <div className="flex flex-col px-2 md:px-0">
                     <span className="text-xl md:text-2xl font-semibold">Template Builder</span>
                     <span className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">
                         Step {currentStepIndex + 1} of {STEPS.length}: {STEPS[currentStepIndex].title}
@@ -117,7 +117,7 @@ export default function TemplateBuilder({ onCancel }: TemplateBuilderProps) {
             </div>
 
             {/* Step indicator */}
-            <div className="flex flex-row gap-2 mt-4">
+            <div className="flex flex-row gap-2 mt-4 px-2 md:px-0">
                 {STEPS.map((step, index) => (
                     <div 
                         key={step.key}
