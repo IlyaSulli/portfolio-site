@@ -8,29 +8,25 @@ export const TextGenField = {
             type: { 
                 name: "Type",
                 type: "array",
+                default: ["Gaming", "Work", "Social Media"],
                 allowedValues: ["Gaming", "Work", "Social Media"],
                 tooltip: "Type of username generation method"
             },
-            minLength: {
-                name: "Minimum Length",
-                type: "integer",
-                default: 1,
-                min: 1,
-                max: 15,
-                tooltip: "Minimum length of the username",
-            },
-            maxLength: {
-                name: "Maximum Length",
-                type: "integer",
-                default: 1,
+            length: {
+                name: "Length",
+                type: "range",
                 min: 1,
                 max: 32,
-                tooltip: "Maximum length of the username",
+                defaultMin: 3,
+                defaultMax: 15,
+                tooltip: "Length range of the username",
             },
             allowedChar: {
                 name: "Allowed Characters",
-                type: "string",
-                tooltip: "Characters allowed to be in the username"
+                type: "array",
+                default: ["Lowercase (abc)", "Numbers (123)"],
+                allowedValues: ["Lowercase (abc)", "Uppercase (ABC)", "Numbers (123)", "Underscores (_)", "Hyphens (-)", "Dots (.)"],
+                tooltip: "Character types allowed in the username"
             },
         }
     },
@@ -44,21 +40,14 @@ export const TextGenField = {
                 allowedValues: ["Male", "Female", "Unisex"],
                 description: "Desired gender basis for the name",
             },
-            minLength: {
-                name: "Minimum Length",
-                type: "integer",
-                default: 1,
-                min: 1,
-                max: 14,
-                tooltip: "Minimum length of the first name",
-            },
-            maxLength: {
-                name: "Maximum Length",
-                type: "integer",
-                default: 1,
+            length: {
+                name: "Length",
+                type: "range",
                 min: 1,
                 max: 15,
-                tooltip: "Maximum length of the first name",
+                defaultMin: 2,
+                defaultMax: 10,
+                tooltip: "Length range of the first name",
             },
         }
     },
@@ -66,19 +55,14 @@ export const TextGenField = {
         name: "Last Name", 
         icon: Users, 
         filterSchema: {
-            minLength: {
-                name: "Minimum Length",
-                type: "integer",
-                min: 1,
-                max: 16,
-                tooltip: "Minimum length of the last name",
-            },
-            maxLength: {
-                name: "Maximum Length",
-                type: "integer",
+            length: {
+                name: "Length",
+                type: "range",
                 min: 1,
                 max: 17,
-                tooltip: "Maximum length of the last name",
+                defaultMin: 2,
+                defaultMax: 12,
+                tooltip: "Length range of the last name",
             },
             nationality: {
                 name: "Nationality",
@@ -122,15 +106,13 @@ export const TextGenField = {
         name: "Date of Birth", 
         icon: Cake,
         filterSchema: {
-            minDate: {
-                name: "Minimum Date",
-                type: "date",
-                tooltip: "DoB after this date"
-            },
-            maxDate: {
-                name: "Maximum Date",
-                type: "date",
-                tooltip: "DoB before this date"
+            dateRange: {
+                name: "Date Range",
+                type: "dateRange",
+                tooltip: "Date of birth range",
+                defaultMin: "1940-01-01",
+                defaultMax: "2010-01-01",
+                min: "1900-01-01",
             }
         }
     },
@@ -141,15 +123,14 @@ export const TextGenField = {
         name: "Hobby", 
         icon: ToolCase ,
         filterSchema: {
-            minQuantity: {
-                name: "Minimum Quantity",
-                type: "integer",
-                tooltip: "Minimum number of hobbies"
-            },
-            maxQuantity: {
-                name: "Maximum Quantity",
-                type: "integer",
-                tooltip: "Maximum number of hobbies"
+            quantity: {
+                name: "Quantity",
+                type: "range",
+                min: 1,
+                max: 20,
+                defaultMin: 1,
+                defaultMax: 5,
+                tooltip: "Number of hobbies range"
             },
         }
     },
@@ -159,19 +140,19 @@ export const TextGenField = {
         filterSchema: {
             unit: {
                 name: "Unit",
-                type: "array",
+                type: "select",
+                default: "cm",
                 allowedValues: ["cm", "inches"],
                 tooltip: "Measurement unit for height"
             },
-            minHeight: {
-                name: "Minimum Height",
-                type: "integer",
-                tooltip: "Minimum height value"
-            },
-            maxHeight: {
-                name: "Maximum Height",
-                type: "integer",
-                tooltip: "Maximum height value"
+            heightRange: {
+                name: "Height Range",
+                type: "range",
+                min: 1,
+                max: 300,
+                defaultMin: 150,
+                defaultMax: 200,
+                tooltip: "Height value range"
             }
         }
     },
@@ -181,31 +162,19 @@ export const TextGenField = {
         filterSchema: {
             unit: {
                 name: "Unit",
-                type: "array",
+                type: "select",
+                default: "kg",
                 allowedValues: ["kg", "lbs"],
                 tooltip: "Measurement unit for weight"
             },
-            minWeight: {
-                name: "Minimum Weight",
-                type: "integer",
-                tooltip: "Minimum weight value"
-            },
-            maxWeight: {
-                name: "Maximum Weight",
-                type: "integer",
-                tooltip: "Maximum weight value"
-            }
-        }
-    },
-    active: { 
-        name: "Last Active", 
-        icon: Eye,
-        filterSchema: {
-            timeframe: {
-                name: "Timeframe",
-                type: "array",
-                allowedValues: ["Last 24 hours", "Last 7 days", "Last 30 days", "Last year"],
-                tooltip: "Timeframe for last active"
+            weightRange: {
+                name: "Weight Range",
+                type: "range",
+                min: 1,
+                max: 500,
+                defaultMin: 50,
+                defaultMax: 100,
+                tooltip: "Weight value range"
             }
         }
     },
@@ -213,37 +182,22 @@ export const TextGenField = {
         name: "Password", 
         icon: KeyRound,
         filterSchema: {
-            minLength: {
-                name: "Minimum Length",
-                type: "integer",
+            length: {
+                name: "Length",
+                type: "range",
                 min: 1,
-                tooltip: "Minimum password length"
+                max: 128,
+                defaultMin: 8,
+                defaultMax: 20,
+                tooltip: "Password length range"
             },
-            maxLength: {
-                name: "Maximum Length",
-                type: "integer",
-                tooltip: "Maximum password length"
+            allowedChar: {
+                name: "Allowed Characters",
+                type: "array",
+                default: ["Lowercase (abc)", "Uppercase (ABC)", "Numbers (123)", "Special ($@!)"],
+                allowedValues: ["Lowercase (abc)", "Uppercase (ABC)", "Numbers (123)", "Special ($@!)"],
+                tooltip: "Character types allowed in the password"
             },
-            includeUppercase: {
-                name: "Include Uppercase",
-                type: "boolean",
-                tooltip: "Include uppercase letters"
-            },
-            includeLowercase: {
-                name: "Include Lowercase",
-                type: "boolean",
-                tooltip: "Include lowercase letters"
-            },
-            includeNumbers: {
-                name: "Include Numbers",
-                type: "boolean",
-                tooltip: "Include numeric characters"
-            },
-            includeSpecial: {
-                name: "Include Special Characters",
-                type: "boolean",
-                tooltip: "Include special characters"
-            }
         }
     },
     // hash: { name: "Hash", icon: SquareAsterisk },
@@ -255,6 +209,7 @@ export const TextGenField = {
             levels: {
                 name: "Education Levels",
                 type: "array",
+                default: ["High School", "Associate", "Bachelor", "Master", "PhD", "Diploma"],
                 allowedValues: ["High School", "Associate", "Bachelor", "Master", "PhD", "Diploma"],
                 tooltip: "Desired education levels"
             }
@@ -265,11 +220,13 @@ export const TextGenField = {
         icon: Phone,
         filterSchema: {
             region: { 
-                type: "array", 
+                type: "select", 
+                default: "(+44) United Kingdom",
                 allowedValues: ["(+44) United Kingdom", "(+1) United States"],
                 description: "Geographical region for the phone number" },
             type: { 
-                type: "string", 
+                type: "array", 
+                default: ["Mobile", "Landline"],
                 allowedValues: ["Mobile", "Landline"], 
                 description: "Type of phone line." 
             }
@@ -281,7 +238,8 @@ export const TextGenField = {
         filterSchema: {
             format: {
                 name: "Format",
-                type: "array",
+                type: "select",
+                default: "UUID",
                 allowedValues: ["UUID", "Numeric", "Alphanumeric"],
                 tooltip: "Format of the ID"
             }
@@ -315,18 +273,15 @@ export const TextGenField = {
                 type: "array",
                 tooltip: "Options available for selection"
             },
-            minSelections: {
-                name: "Minimum Selections",
-                type: "integer",
+            selections: {
+                name: "Selection Count",
+                type: "range",
                 required: true,
                 min: 0,
-                tooltip: "Minimum number of selections"
-            },
-            maxSelections: {
-                name: "Maximum Selections",
-                type: "integer",
-                required: true,
-                tooltip: "Maximum number of selections"
+                max: 100,
+                defaultMin: 1,
+                defaultMax: 5,
+                tooltip: "Number of selections range"
             }
         }
     },
@@ -334,22 +289,21 @@ export const TextGenField = {
         name: "Number Field", 
         icon: Hash,
         filterSchema: {
-            minValue: {
-                name: "Minimum Value",
-                type: "integer",
+            valueRange: {
+                name: "Value Range",
+                type: "range",
                 required: true,
-                tooltip: "Minimum numeric value"
-            },
-            maxValue: {
-                name: "Maximum Value",
-                type: "integer",
-                required: true,
-                tooltip: "Maximum numeric value"
+                min: -999999,
+                max: 999999,
+                defaultMin: 0,
+                defaultMax: 100,
+                tooltip: "Numeric value range"
             },
             decimalPlaces: {
                 name: "Decimal Places",
                 type: "integer",
                 required: true,
+                default: 0,
                 min: 0,
                 max: 4,
                 tooltip: "Number of decimal places allowed"
