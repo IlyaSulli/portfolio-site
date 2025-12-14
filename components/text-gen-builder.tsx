@@ -22,6 +22,8 @@ interface TemplateBuilderProps {
         fields: any[];
         filters: any;
         isUserTemplate: boolean;
+        icon?: string;
+        color?: string;
     };
 }
 
@@ -29,7 +31,7 @@ export default function TemplateBuilder({ onCancel, editingTemplate }: TemplateB
     const [currentStep, setCurrentStep] = useState<Step>('builder');
     
     // Convert stored field data back to proper template fields with icon components
-    const restoreFields = (storedFields: any[]) => {
+    const restoreFields = (storedFields: any[] | undefined) => {
         if (!storedFields) return [];
         return storedFields.map(field => {
             // Find the original field definition to get the icon component
