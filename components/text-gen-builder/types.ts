@@ -29,8 +29,8 @@ export interface FieldFilters {
 export interface Template {
     name: string;
     fields: TemplateField[];
-    filters?: FieldFilters;
-}
+    filters?: FieldFilters;    icon?: string;
+    color?: string;}
 
 export interface ScrollState {
     atTop: boolean;

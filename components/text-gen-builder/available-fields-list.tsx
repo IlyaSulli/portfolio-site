@@ -1,7 +1,7 @@
 import { Input } from "@heroui/input";
 import { Plus, Search } from "lucide-react";
 import { TextGenField } from "@/config/textGenField";
-import { useRef, useEffect, useCallback, useState, DragEvent } from "react";
+import { useRef, useEffect, useCallback, useState, DragEvent, createElement } from "react";
 import { TemplateField, ScrollState } from "./types";
 
 interface AvailableFieldsListProps {
@@ -84,7 +84,7 @@ export default function AvailableFieldsList({
                             onClick={() => onAddField(field)}
                         >
                             <div className="flex flex-row items-center">
-                                <field.icon size={20} color="hsl(var(--heroui-primary))"/>
+                                {createElement(field.icon, { size: 20, color: "hsl(var(--heroui-primary))" })}
                                 <span className="font-medium pl-4">{field.name}</span>
                             </div>
                             <Plus size={16}/>
