@@ -7,9 +7,19 @@ export interface TemplateField {
     icon: React.ComponentType<{ size?: number; color?: string }>;
 }
 
+export interface FilterValue {
+    filterKey: string;
+    value: string | string[] | number | boolean;
+}
+
+export interface FieldFilters {
+    [fieldId: string]: FilterValue[];
+}
+
 export interface Template {
     name: string;
     fields: TemplateField[];
+    filters?: FieldFilters;
 }
 
 export interface ScrollState {
