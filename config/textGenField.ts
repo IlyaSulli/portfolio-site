@@ -300,6 +300,7 @@ export const TextGenField = {
             options: {
                 name: "Available Options",
                 type: "array",
+                required: true,
                 tooltip: "Options available for selection"
             }
         }
@@ -310,18 +311,21 @@ export const TextGenField = {
         filterSchema: {
             options: {
                 name: "Available Options",
+                required: true,
                 type: "array",
                 tooltip: "Options available for selection"
             },
             minSelections: {
                 name: "Minimum Selections",
                 type: "integer",
+                required: true,
                 min: 0,
                 tooltip: "Minimum number of selections"
             },
             maxSelections: {
                 name: "Maximum Selections",
                 type: "integer",
+                required: true,
                 tooltip: "Maximum number of selections"
             }
         }
@@ -333,17 +337,21 @@ export const TextGenField = {
             minValue: {
                 name: "Minimum Value",
                 type: "integer",
+                required: true,
                 tooltip: "Minimum numeric value"
             },
             maxValue: {
                 name: "Maximum Value",
                 type: "integer",
+                required: true,
                 tooltip: "Maximum numeric value"
             },
             decimalPlaces: {
                 name: "Decimal Places",
                 type: "integer",
+                required: true,
                 min: 0,
+                max: 4,
                 tooltip: "Number of decimal places allowed"
             }
         }
