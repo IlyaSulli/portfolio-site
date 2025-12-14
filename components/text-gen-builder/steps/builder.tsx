@@ -1,5 +1,5 @@
 import { TextGenField } from "@/config/textGenField";
-import { useState, DragEvent } from "react";
+import { useState, DragEvent, createElement } from "react";
 import { TemplateField, Template } from "./../types";
 import AvailableFieldsList from "./../available-fields-list";
 import TemplateFieldsList from "./../template-fields-list";
@@ -153,7 +153,15 @@ export default function StepBuilder({ template, onTemplateChange }: StepBuilderP
     const filteredFieldsForModal = Object.values(TextGenField).filter(field =>
         field.name.toLowerCase().includes(modalSearchQuery.toLowerCase())
     );
+    // Handle template icon change
+    const handleTemplateIconChange = (icon: string) => {
+        onTemplateChange({ ...template, icon });
+    };
 
+    // Handle template color change
+    const handleTemplateColorChange = (color: string) => {
+        onTemplateChange({ ...template, color });
+    };
     // Handle template name change
     const handleTemplateNameChange = (name: string) => {
         onTemplateChange({ ...template, name });
@@ -172,6 +180,10 @@ export default function StepBuilder({ template, onTemplateChange }: StepBuilderP
             <TemplateFieldsList
                 templateName={template.name}
                 onTemplateNameChange={handleTemplateNameChange}
+                templateIcon={template.icon}
+                templateColor={template.color}
+                onTemplateIconChange={handleTemplateIconChange}
+                onTemplateColorChange={handleTemplateColorChange}
                 templateFields={templateFields}
                 setTemplateFields={setTemplateFields}
                 isDraggingOver={isDraggingOver}
@@ -220,7 +232,7 @@ export default function StepBuilder({ template, onTemplateChange }: StepBuilderP
                                     onClick={() => handleAddFieldFromModal(field)}
                                 >
                                     <div className="flex flex-row items-center">
-                                        <field.icon size={20} color="hsl(var(--heroui-primary))"/>
+                                        {createElement(field.icon, { size: 20, color: "hsl(var(--heroui-primary))" })}
                                         <span className="font-medium pl-4">{field.name}</span>
                                     </div>
                                     <Plus size={16}/>

@@ -1,7 +1,7 @@
 import { Input } from "@heroui/input";
 import { GripVertical, Check, X, Trash2 } from "lucide-react";
 import { TemplateField } from "./types";
-import { DragEvent } from "react";
+import { DragEvent, createElement } from "react";
 
 interface FieldItemProps {
     field: TemplateField;
@@ -59,7 +59,7 @@ export default function FieldItem({
                 <div className="flex flex-row items-center flex-1">
                     <GripVertical size={16} className="text-white/50 mr-2 flex-shrink-0" />
                     <span className="flex-shrink-0">
-                        <field.icon size={20} color="hsl(var(--heroui-primary))"/>
+                        {createElement(field.icon, { size: 20, color: "hsl(var(--heroui-primary))" })}
                     </span>
                     <div className="pl-4 flex-1">
                         {isEditing ? (
