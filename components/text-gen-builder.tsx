@@ -172,7 +172,7 @@ export default function TemplateBuilder({ onCancel }: TemplateBuilderProps) {
                 )}
                 {isLastStep ? (
                     <Button 
-                        color="primary" 
+                        color="success" 
                         variant="flat"
                         onPress={handleSave}
                         isDisabled={template.fields.length === 0}
