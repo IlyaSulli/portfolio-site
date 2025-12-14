@@ -27,12 +27,17 @@ import {
     Globe, 
     Camera, 
     Calendar,
-    Palette
+    Palette,
+    CircleCheck
 } from "lucide-react";
 
 interface TemplateFieldsListProps {
     templateName: string;
     onTemplateNameChange: (name: string) => void;
+    templateIcon?: string;
+    templateColor?: string;
+    onTemplateIconChange?: (icon: string) => void;
+    onTemplateColorChange?: (color: string) => void;
     templateFields: TemplateField[];
     setTemplateFields: React.Dispatch<React.SetStateAction<TemplateField[]>>;
     isDraggingOver: boolean;
@@ -48,21 +53,31 @@ interface TemplateFieldsListProps {
 }
 
 // Icon categories and options
-const ALL_ICONS = [FileText, Star, Heart, Bookmark, Tag, Clock, Calendar, User, Mail, Phone, MapPin, Image, Music, Video, Camera, Download, Upload, Settings, Globe, Folder] as const;
+const ALL_ICONS = [FileText, Star, Heart, Bookmark, Tag, Clock, Calendar, User, Mail, Phone, MapPin, Image, Music, Video, Camera, Download, Upload, Settings, Globe, Folder, CircleCheck] as const;
 
+// Icon name to component mapping
+const ICON_MAP = {
+    FileText, Star, Heart, Bookmark, Tag, Clock, Calendar, User, Mail, Phone, MapPin, Image, Music, Video, Camera, Download, Upload, Settings, Globe, Folder, CircleCheck
+} as const;
+
+// Color options with hex values for storage
 const COLOR_OPTIONS = [
-    { name: "Blue", value: "text-blue-500", bg: "bg-blue-100 dark:bg-blue-900/30" },
-    { name: "Green", value: "text-green-500", bg: "bg-green-100 dark:bg-green-900/30" },
-    { name: "Red", value: "text-red-500", bg: "bg-red-100 dark:bg-red-900/30" },
-    { name: "Purple", value: "text-purple-500", bg: "bg-purple-100 dark:bg-purple-900/30" },
-    { name: "Orange", value: "text-orange-500", bg: "bg-orange-100 dark:bg-orange-900/30" },
-    { name: "Pink", value: "text-pink-500", bg: "bg-pink-100 dark:bg-pink-900/30" },
-    { name: "Indigo", value: "text-indigo-500", bg: "bg-indigo-100 dark:bg-indigo-900/30" },
+    { name: "Blue", value: "3B82F6", tailwind: "text-blue-500" },
+    { name: "Green", value: "22C55E", tailwind: "text-green-500" },
+    { name: "Red", value: "EF4444", tailwind: "text-red-500" },
+    { name: "Purple", value: "A855F7", tailwind: "text-purple-500" },
+    { name: "Orange", value: "F97316", tailwind: "text-orange-500" },
+    { name: "Pink", value: "EC4899", tailwind: "text-pink-500" },
+    { name: "Indigo", value: "6366F1", tailwind: "text-indigo-500" },
 ] as const;
 
 export default function TemplateFieldsList({
     templateName,
     onTemplateNameChange,
+    templateIcon = "FileText",
+    templateColor = "3B82F6",
+    onTemplateIconChange,
+    onTemplateColorChange,
     templateFields,
     setTemplateFields,
     isDraggingOver,
@@ -79,10 +94,17 @@ export default function TemplateFieldsList({
     const [scrollState, setScrollState] = useState<ScrollState>({ atTop: true, atBottom: false });
     const [editingFieldId, setEditingFieldId] = useState<string | null>(null);
     const [editingFieldName, setEditingFieldName] = useState("");
-    const [selectedIcon, setSelectedIcon] = useState<ComponentType<{ size?: number }>>(FileText);
-    const [selectedColor, setSelectedColor] = useState<(typeof COLOR_OPTIONS)[number]>(COLOR_OPTIONS[0]);
     const [isIconPopoverOpen, setIsIconPopoverOpen] = useState(false);
     const listRef = useRef<HTMLDivElement>(null);
+    
+    // Get current template icon component and color
+    const getCurrentIconComponent = () => {
+        return ICON_MAP[templateIcon as keyof typeof ICON_MAP] || CircleCheck;
+    };
+    
+    const getCurrentColor = () => {
+        return COLOR_OPTIONS.find(color => color.value === templateColor) || COLOR_OPTIONS[0];
+    };
 
     // Check scroll position and update fade visibility
     const checkScrollPosition = useCallback(() => {
@@ -139,13 +161,20 @@ export default function TemplateFieldsList({
 
     // Handle icon selection
     const handleIconSelect = (IconComponent: ComponentType<{ size?: number }>) => {
-        setSelectedIcon(IconComponent);
+        const iconName = Object.keys(ICON_MAP).find(key => 
+            ICON_MAP[key as keyof typeof ICON_MAP] === IconComponent
+        );
+        if (iconName && onTemplateIconChange) {
+            onTemplateIconChange(iconName);
+        }
         setIsIconPopoverOpen(false);
     };
 
     // Handle color selection
     const handleColorSelect = (color: typeof COLOR_OPTIONS[number]) => {
-        setSelectedColor(color);
+        if (onTemplateColorChange) {
+            onTemplateColorChange(color.value);
+        }
     };
 
     return (
@@ -167,10 +196,11 @@ export default function TemplateFieldsList({
                             isIconOnly
                             variant="flat"
                             size="lg"
-                            className={`${selectedColor.bg} ${selectedColor.value} hover:scale-105 transition-all`}
+                            className={`hover:scale-105 transition-all`}
+                            style={{ color: `#${templateColor}` }}
                             aria-label="Select template icon"
                         >
-                            {selectedIcon && createElement(selectedIcon, { size: 20 })}
+                            {createElement(getCurrentIconComponent(), { size: 24 })}
                         </Button>
                     </PopoverTrigger>
                     <PopoverContent className="w-80">
@@ -179,14 +209,25 @@ export default function TemplateFieldsList({
                             
                             {/* Colour Selection */}
                             <div className="mb-4">
-                                <div className="flex flex-wrap gap-2">
+                                <p className="text-sm font-medium mb-2">Color:</p>
+                                <div className="flex flex-wrap gap-1">
                                     {COLOR_OPTIONS.map((color: typeof COLOR_OPTIONS[number]) => (
                                         <Button
                                             key={color.name}
                                             isIconOnly
                                             size="sm"
-                                            variant={selectedColor.name === color.name ? "solid" : "flat"}
-                                            className={`${color.bg} ${color.value} min-w-8 h-8`}
+                                            variant="flat"
+                                            className={`min-w-8 h-8 transition-all ${getCurrentColor().value === color.value ? 'ring-2 ring-offset-1' : ''}`}
+                                            style={{ 
+                                                backgroundColor: `#${color.value}`, 
+                                                color: 'transparent',
+                                                ...(getCurrentColor().value === color.value && {
+                                                    '--tw-ring-color': `#${color.value}`,
+                                                    filter: 'brightness(0.8)',
+                                                    borderColor: `#${color.value}`,
+                                                    borderWidth: '2px'
+                                                })
+                                            }}
                                             onPress={() => handleColorSelect(color)}
                                             aria-label={`Select ${color.name} color`}
                                         />
@@ -203,8 +244,11 @@ export default function TemplateFieldsList({
                                             key={index}
                                             isIconOnly
                                             size="sm"
-                                            variant={selectedIcon === IconComponent ? "solid" : "flat"}
-                                            className={`${selectedColor.bg} ${selectedColor.value} min-w-8 h-8`}
+                                            variant={getCurrentIconComponent() === IconComponent ? "solid" : "flat"}
+                                            style={{ 
+                                                backgroundColor: getCurrentIconComponent() === IconComponent ? `#${templateColor}` : undefined,
+                                                color: getCurrentIconComponent() === IconComponent ? 'white' : `#${templateColor}`
+                                            }}
                                             onPress={() => handleIconSelect(IconComponent)}
                                             aria-label="Select icon"
                                         >
@@ -223,6 +267,12 @@ export default function TemplateFieldsList({
                     placeholder="Untitled Template" 
                     value={templateName}
                     onValueChange={onTemplateNameChange}
+                    onBlur={() => {
+                        if (!templateName.trim()) {
+                            onTemplateNameChange("Untitled Template");
+                        }
+                    }}
+                    maxLength={64}
                     variant="underlined" 
                     className="flex-1"
                 />
