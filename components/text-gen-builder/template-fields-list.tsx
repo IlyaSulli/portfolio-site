@@ -1,7 +1,9 @@
 import { Input } from "@heroui/input";
+import { Button } from "@heroui/button";
 import { useRef, useEffect, useCallback, useState, DragEvent } from "react";
 import { TemplateField, ScrollState } from "./types";
 import FieldItem from "./field-item";
+import { Plus, Layers } from "lucide-react";
 
 interface TemplateFieldsListProps {
     templateName: string;
@@ -17,6 +19,7 @@ interface TemplateFieldsListProps {
     onDragOverItem: (e: DragEvent<HTMLDivElement>, index: number) => void;
     onDragStartFromTemplate: (e: DragEvent<HTMLDivElement>, index: number) => void;
     onDragEnd: () => void;
+    onAddFieldClick?: () => void;
 }
 
 export default function TemplateFieldsList({
@@ -33,6 +36,7 @@ export default function TemplateFieldsList({
     onDragOverItem,
     onDragStartFromTemplate,
     onDragEnd,
+    onAddFieldClick,
 }: TemplateFieldsListProps) {
     const [scrollState, setScrollState] = useState<ScrollState>({ atTop: true, atBottom: false });
     const [editingFieldId, setEditingFieldId] = useState<string | null>(null);
@@ -94,7 +98,7 @@ export default function TemplateFieldsList({
 
     return (
         <div 
-            className={`flex flex-col backdrop-blur-md bg-white/20 dark:bg-black/20 border border-white/30 dark:border-white/10 p-4 rounded-lg w-2/3 h-[500px] transition-colors shadow-lg ${isDraggingOver ? 'ring-2 ring-primary ring-offset-2' : ''}`}
+            className={`flex flex-col backdrop-blur-md bg-white/20 dark:bg-black/20 border border-white/30 dark:border-white/10 p-4 rounded-lg w-full md:w-2/3 h-[500px] transition-colors shadow-lg ${isDraggingOver ? 'ring-2 ring-primary ring-offset-2' : ''}`}
             onDragOver={onDragOver}
             onDragLeave={onDragLeave}
             onDrop={onDrop}
@@ -115,8 +119,20 @@ export default function TemplateFieldsList({
                 <div className={`absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-white/30 dark:from-black/30 to-transparent z-10 pointer-events-none rounded-b-lg transition-opacity duration-200 ${scrollState.atBottom ? 'opacity-0' : 'opacity-100'}`} />
                 <div ref={listRef} className="flex flex-col gap-y-2 h-full overflow-y-auto py-2 pr-3 scrollbar-thin scrollbar-thumb-zinc-400 dark:scrollbar-thumb-zinc-600">
                     {templateFields.length === 0 ? (
-                        <div className={`h-full min-h-[200px] flex items-center justify-center border-2 border-dashed rounded-lg transition-colors ${isDraggingOver ? 'border-primary bg-primary/10' : 'border-zinc-400 dark:border-zinc-600'}`}>
-                            <span className="text-zinc-500 dark:text-zinc-400">Drag fields here or click to add</span>
+                        <div className={`h-full min-h-[200px] flex flex-col items-center justify-center border-2 border-dashed rounded-lg transition-colors ${isDraggingOver ? 'border-primary bg-primary/10' : 'border-white/30 dark:border-white/20'}`}>
+                            <div className="hidden md:flex flex-col items-center gap-2 text-center px-4">
+                                <Layers size={32} className="text-white/40" />
+                                <span className="text-zinc-500 dark:text-zinc-400">Drag fields here or click to add</span>
+                            </div>
+                            <div className="flex md:hidden flex-col items-center gap-3 text-center px-4">
+                                <div className="w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center">
+                                    <Plus size={28} className="text-primary" />
+                                </div>
+                                <div className="flex flex-col gap-1">
+                                    <span className="font-medium">No fields yet</span>
+                                    <span className="text-sm text-zinc-500 dark:text-zinc-400">Tap the button below to add your first field</span>
+                                </div>
+                            </div>
                         </div>
                     ) : (
                         <>
@@ -150,6 +166,18 @@ export default function TemplateFieldsList({
                     )}
                 </div>
             </div>
+            {/* Mobile Add Field Button */}
+            {onAddFieldClick && (
+                <Button 
+                    color="primary" 
+                    variant="flat" 
+                    className="mt-4 w-full md:hidden"
+                    startContent={<Plus size={16} />}
+                    onPress={onAddFieldClick}
+                >
+                    Add Field
+                </Button>
+            )}
         </div>
     );
 }

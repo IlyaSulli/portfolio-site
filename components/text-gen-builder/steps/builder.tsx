@@ -3,6 +3,10 @@ import { useState, DragEvent } from "react";
 import { TemplateField, Template } from "./../types";
 import AvailableFieldsList from "./../available-fields-list";
 import TemplateFieldsList from "./../template-fields-list";
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter } from "@heroui/modal";
+import { Button } from "@heroui/button";
+import { Input } from "@heroui/input";
+import { Search, Plus } from "lucide-react";
 
 interface StepBuilderProps {
     template: Template;
@@ -14,6 +18,8 @@ export default function StepBuilder({ template, onTemplateChange }: StepBuilderP
     const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
     const [dropTargetIndex, setDropTargetIndex] = useState<number | null>(null);
     const [isDraggingOver, setIsDraggingOver] = useState(false);
+    const [showAddFieldModal, setShowAddFieldModal] = useState(false);
+    const [modalSearchQuery, setModalSearchQuery] = useState("");
 
     const templateFields = template.fields;
     const setTemplateFields = (fields: TemplateField[] | ((prev: TemplateField[]) => TemplateField[])) => {
@@ -136,19 +142,32 @@ export default function StepBuilder({ template, onTemplateChange }: StepBuilderP
         setTemplateFields([...templateFields, newField]);
     };
 
+    // Handle add field from modal (mobile)
+    const handleAddFieldFromModal = (field: typeof TextGenField[keyof typeof TextGenField]) => {
+        handleAddField(field);
+        setShowAddFieldModal(false);
+        setModalSearchQuery("");
+    };
+
+    // Filter available fields based on search query for modal
+    const filteredFieldsForModal = Object.values(TextGenField).filter(field =>
+        field.name.toLowerCase().includes(modalSearchQuery.toLowerCase())
+    );
+
     // Handle template name change
     const handleTemplateNameChange = (name: string) => {
         onTemplateChange({ ...template, name });
     };
 
     return (
-        <div className="mt-8 gap-8 flex flex-row w-full">
+        <div className="mt-8 gap-8 flex flex-col md:flex-row w-full">
             <AvailableFieldsList
                 onAddField={handleAddField}
                 onDragStart={handleDragStartFromAvailable}
                 onDragEnd={handleDragEnd}
                 onDragOver={handleDragOverAvailable}
                 onDrop={handleDropOnAvailable}
+                className="hidden md:flex md:w-1/3"
             />
             <TemplateFieldsList
                 templateName={template.name}
@@ -164,7 +183,66 @@ export default function StepBuilder({ template, onTemplateChange }: StepBuilderP
                 onDragOverItem={handleDragOverItem}
                 onDragStartFromTemplate={handleDragStartFromTemplate}
                 onDragEnd={handleDragEnd}
+                onAddFieldClick={() => setShowAddFieldModal(true)}
             />
+
+            {/* Mobile Add Field Modal */}
+            <Modal 
+                isOpen={showAddFieldModal} 
+                onOpenChange={setShowAddFieldModal} 
+                placement="bottom"
+                backdrop="blur"
+                hideCloseButton
+                classNames={{
+                    wrapper: "items-end",
+                    base: "rounded-b-none rounded-t-2xl m-0 max-h-[60vh]",
+                }}
+            >
+                <ModalContent className="backdrop-blur-md bg-white/20 dark:bg-black/20 border border-white/30 dark:border-white/10 shadow-lg">
+                    <ModalHeader className="flex flex-col gap-1">
+                        Add Field
+                    </ModalHeader>
+                    <ModalBody className="pb-0">
+                        <Input 
+                            placeholder="Search fields..." 
+                            variant="bordered" 
+                            isClearable 
+                            startContent={<Search size={16} />} 
+                            className="mb-4"
+                            value={modalSearchQuery}
+                            onValueChange={setModalSearchQuery}
+                        />
+                        <div className="flex flex-col gap-2 overflow-y-auto max-h-[30vh] pb-2">
+                            {filteredFieldsForModal.map(field => (
+                                <div 
+                                    key={field.name} 
+                                    className="backdrop-blur-sm bg-white/30 dark:bg-white/10 border border-white/40 dark:border-white/20 px-4 py-3 rounded-lg flex flex-row justify-between items-center hover:border-primary hover:bg-white/40 dark:hover:bg-white/15 transition-all shadow-sm cursor-pointer"
+                                    onClick={() => handleAddFieldFromModal(field)}
+                                >
+                                    <div className="flex flex-row items-center">
+                                        <field.icon size={20} color="hsl(var(--heroui-primary))"/>
+                                        <span className="font-medium pl-4">{field.name}</span>
+                                    </div>
+                                    <Plus size={16}/>
+                                </div>
+                            ))}
+                        </div>
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button 
+                            color="default" 
+                            variant="flat" 
+                            onPress={() => {
+                                setShowAddFieldModal(false);
+                                setModalSearchQuery("");
+                            }}
+                            className="w-full"
+                        >
+                            Cancel
+                        </Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
         </div>
     );
 }

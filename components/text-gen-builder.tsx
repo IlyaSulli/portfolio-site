@@ -65,16 +65,17 @@ export default function TemplateBuilder({ onCancel }: TemplateBuilderProps) {
     };
 
     return (
-        <div className="flex flex-col backdrop-blur-md bg-white/20 dark:bg-black/20 border border-white/30 dark:border-white/10 px-8 py-8 rounded-2xl shadow-lg">
+        <div className="flex flex-col backdrop-blur-md bg-white/20 dark:bg-black/20 border border-white/30 dark:border-white/10 px-4 md:px-8 py-6 md:py-8 rounded-2xl shadow-lg">
             {/* Header */}
-            <div className="flex flex-row justify-between items-center">
+            <div className="flex flex-col md:flex-row justify-between md:items-center gap-4">
                 <div className="flex flex-col">
-                    <span className="text-2xl font-semibold">Template Builder</span>
+                    <span className="text-xl md:text-2xl font-semibold">Template Builder</span>
                     <span className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">
                         Step {currentStepIndex + 1} of {STEPS.length}: {STEPS[currentStepIndex].title}
                     </span>
                 </div>
-                <div className="flex gap-2">
+                {/* Desktop buttons */}
+                <div className="hidden md:flex gap-2">
                     <Button 
                         color="default" 
                         variant="flat"
@@ -139,6 +140,51 @@ export default function TemplateBuilder({ onCancel }: TemplateBuilderProps) {
             {currentStep === 'filters' && (
                 <StepFilters template={template} />
             )}
+
+            {/* Mobile bottom buttons */}
+            <div className="flex md:hidden gap-2 mt-6">
+                <Button 
+                    color="default" 
+                    variant="flat"
+                    onPress={handleCancel}
+                    className="flex-1"
+                >
+                    Cancel
+                </Button>
+                {!isFirstStep && (
+                    <Button 
+                        color="default" 
+                        variant="flat"
+                        onPress={handleBack}
+                        startContent={<ChevronLeft size={16} />}
+                        className="flex-1"
+                    >
+                        Back
+                    </Button>
+                )}
+                {isLastStep ? (
+                    <Button 
+                        color="primary" 
+                        variant="flat"
+                        onPress={handleSave}
+                        isDisabled={template.fields.length === 0}
+                        className="flex-1"
+                    >
+                        Save
+                    </Button>
+                ) : (
+                    <Button 
+                        color="primary" 
+                        variant="flat"
+                        onPress={handleNext}
+                        endContent={<ChevronRight size={16} />}
+                        isDisabled={template.fields.length === 0}
+                        className="flex-1"
+                    >
+                        Next
+                    </Button>
+                )}
+            </div>
 
             {/* Confirmation Modal */}
             <Modal isOpen={showConfirmModal} onOpenChange={setShowConfirmModal} backdrop="blur" hideCloseButton>

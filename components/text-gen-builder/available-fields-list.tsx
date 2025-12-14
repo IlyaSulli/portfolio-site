@@ -10,6 +10,7 @@ interface AvailableFieldsListProps {
     onDragEnd: () => void;
     onDragOver: (e: DragEvent<HTMLDivElement>) => void;
     onDrop: (e: DragEvent<HTMLDivElement>) => void;
+    className?: string;
 }
 
 export default function AvailableFieldsList({
@@ -18,6 +19,7 @@ export default function AvailableFieldsList({
     onDragEnd,
     onDragOver,
     onDrop,
+    className,
 }: AvailableFieldsListProps) {
     const [searchQuery, setSearchQuery] = useState("");
     const [scrollState, setScrollState] = useState<ScrollState>({ atTop: true, atBottom: false });
@@ -54,7 +56,7 @@ export default function AvailableFieldsList({
     }, [filteredFields.length, checkScrollPosition]);
 
     return (
-        <div className="flex flex-col w-1/3">
+        <div className={`flex flex-col ${className || ''}`}>
             <span className="font-semibold">Available Fields</span>
             <span className="opacity-70 tracking-tight">Click or drag the fields to set up your template</span>
             <Input 
