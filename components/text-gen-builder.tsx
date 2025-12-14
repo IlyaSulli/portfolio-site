@@ -5,6 +5,7 @@ import { Template, FieldFilters } from "./text-gen-builder/types";
 import StepBuilder from "./text-gen-builder/steps/builder";
 import StepFilters, { validateRequiredFilters } from "./text-gen-builder/steps/filters";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { TextGenField } from "@/config/textGenField";
 
 type Step = 'builder' | 'filters';
 
@@ -15,14 +16,39 @@ const STEPS: { key: Step; title: string }[] = [
 
 interface TemplateBuilderProps {
     onCancel?: () => void;
+    editingTemplate?: {
+        id: string;
+        name: string;
+        fields: any[];
+        filters: any;
+        isUserTemplate: boolean;
+    };
 }
 
-export default function TemplateBuilder({ onCancel }: TemplateBuilderProps) {
+export default function TemplateBuilder({ onCancel, editingTemplate }: TemplateBuilderProps) {
     const [currentStep, setCurrentStep] = useState<Step>('builder');
+    
+    // Convert stored field data back to proper template fields with icon components
+    const restoreFields = (storedFields: any[]) => {
+        if (!storedFields) return [];
+        return storedFields.map(field => {
+            // Find the original field definition to get the icon component
+            const originalField = Object.values(TextGenField).find(
+                f => f.name === field.originalName
+            );
+            return {
+                ...field,
+                icon: originalField?.icon || field.icon,
+            };
+        });
+    };
+    
     const [template, setTemplate] = useState<Template>({
-        name: "Untitled Template",
-        fields: [],
-        filters: {},
+        name: editingTemplate?.name || "Untitled Template",
+        fields: restoreFields(editingTemplate?.fields) || [],
+        filters: editingTemplate?.filters || {},
+        icon: editingTemplate?.icon || "CircleCheck",
+        color: editingTemplate?.color || "3B82F6",
     });
     const [showConfirmModal, setShowConfirmModal] = useState(false);
 
@@ -69,8 +95,76 @@ export default function TemplateBuilder({ onCancel }: TemplateBuilderProps) {
     };
 
     const handleSave = () => {
-        // TODO: Implement save functionality
-        console.log('Saving template:', template);
+        // Get existing user templates from localStorage
+        const existingTemplates = localStorage.getItem('textGenUserTemplates');
+        let userTemplates = existingTemplates ? JSON.parse(existingTemplates) : [];
+        
+        // Prepare fields for storage (remove non-serializable icon component, keep originalName for restoration)
+        const serializableFields = template.fields.map(field => ({
+            id: field.id,
+            name: field.name,
+            originalName: field.originalName,
+            // Don't include icon - it will be restored from originalName when loading
+        }));
+        
+        if (editingTemplate && editingTemplate.isUserTemplate) {
+            // Update existing template
+            const templateToUpdate = {
+                id: editingTemplate.id,
+                name: template.name,
+                description: "", // Can be added later
+                category: ["Custom"],
+                icon: template.icon || "CircleCheck",
+                color: template.color || "3B82F6",
+                fields: serializableFields,
+                filters: template.filters,
+                isUserTemplate: true,
+                createdAt: editingTemplate.id.includes('user-') ? 
+                    userTemplates.find((t: any) => t.id === editingTemplate.id)?.createdAt || new Date().toISOString() : 
+                    new Date().toISOString(),
+                updatedAt: new Date().toISOString(),
+            };
+            
+            // Find and replace the existing template
+            const templateIndex = userTemplates.findIndex((t: any) => t.id === editingTemplate.id);
+            if (templateIndex !== -1) {
+                userTemplates[templateIndex] = templateToUpdate;
+            } else {
+                // If not found (shouldn't happen), add as new
+                userTemplates.push(templateToUpdate);
+            }
+            
+            console.log('Template updated:', templateToUpdate);
+        } else {
+            // Create new template
+            const templateId = `user-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+            
+            const templateToSave = {
+                id: templateId,
+                name: template.name,
+                description: "", // Can be added later
+                category: ["Custom"],
+                icon: template.icon || "CircleCheck",
+                color: template.color || "3B82F6",
+                fields: serializableFields,
+                filters: template.filters,
+                isUserTemplate: true,
+                createdAt: new Date().toISOString(),
+            };
+            
+            // Add the new template
+            userTemplates.push(templateToSave);
+            
+            console.log('Template saved:', templateToSave);
+        }
+        
+        // Save back to localStorage
+        localStorage.setItem('textGenUserTemplates', JSON.stringify(userTemplates));
+        
+        // Call onCancel to go back to templates view
+        if (onCancel) {
+            onCancel();
+        }
     };
 
     return (
@@ -109,7 +203,7 @@ export default function TemplateBuilder({ onCancel }: TemplateBuilderProps) {
                             onPress={handleSave}
                             isDisabled={!canSave}
                         >
-                            Save
+                            {editingTemplate ? 'Update' : 'Save'}
                         </Button>
                     ) : (
                         <Button 
@@ -182,7 +276,7 @@ export default function TemplateBuilder({ onCancel }: TemplateBuilderProps) {
                         isDisabled={!canSave}
                         className="flex-1"
                     >
-                        Save
+                        {editingTemplate ? 'Update' : 'Save'}
                     </Button>
                 ) : (
                     <Button 
