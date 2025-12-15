@@ -10,7 +10,8 @@ export const TextGenField = {
                 type: "array",
                 default: ["Gaming", "Work", "Social Media"],
                 allowedValues: ["Gaming", "Work", "Social Media"],
-                tooltip: "Type of username generation method"
+                tooltip: "Type of username generation method",
+                minItems: 1
             },
             length: {
                 name: "Length",
@@ -26,7 +27,8 @@ export const TextGenField = {
                 type: "array",
                 default: ["Lowercase (abc)", "Numbers (123)"],
                 allowedValues: ["Lowercase (abc)", "Uppercase (ABC)", "Numbers (123)", "Underscores (_)", "Hyphens (-)", "Dots (.)"],
-                tooltip: "Character types allowed in the username"
+                tooltip: "Character types allowed in the username",
+                minItems: 1
             },
         }
     },
@@ -40,6 +42,7 @@ export const TextGenField = {
                 default: ["Male", "Female", "Unisex"],
                 allowedValues: ["Male", "Female", "Unisex"],
                 description: "Desired gender basis for the name",
+                minItems: 1
             },
             length: {
                 name: "Length",
@@ -70,7 +73,8 @@ export const TextGenField = {
                 type: "array",
                 default: ["English"],
                 allowedValues: ["English", "Russian", "Arabic", "Japanese", "Italian", "German", "Czech", "Spanish", "Dutch", "French", "Chinese", "Irish", "Greek", "Korean", "Scotish"],
-                tooltip: "Country of origin for the name"
+                tooltip: "Country of origin for the name",
+                minItems: 1
             },
 
         }
@@ -84,6 +88,7 @@ export const TextGenField = {
                 type: "array",
                 allowedValues: ["he/him", "she/her", "they/them", "he/they", "she/they", "any"],
                 tooltip: "Pronoun options",
+                minItems: 1
             }
         }
     },
@@ -95,12 +100,21 @@ export const TextGenField = {
                 name: "Type",
                 type: "array", 
                 allowedValues: ["Casual", "Professional", "Suspicious"], 
-                tooltip: "Style of email format"
+                tooltip: "Style of email format",
+                minItems: 1
             },
-            customDomain: {
+            customDomains: {
                 name: "Custom Domains",
+                type: "array",
+                tooltip: "Add your own custom domains to the email pool"
+            },
+            exclusiveCustomDomains: {
+                name: "Use Only Custom Domains",
                 type: "boolean",
-                tooltip: "Are custom domains allowed?"
+                default: false,
+                tooltip: "If enabled, only the custom domains will be used (requires at least one custom domain)",
+                requires: ["customDomains"],
+                requiresMinItems: { "customDomains": 1 }
             }
         },
     },
@@ -198,7 +212,8 @@ export const TextGenField = {
                 type: "array",
                 default: ["Lowercase (abc)", "Uppercase (ABC)", "Numbers (123)", "Special ($@!)"],
                 allowedValues: ["Lowercase (abc)", "Uppercase (ABC)", "Numbers (123)", "Special ($@!)"],
-                tooltip: "Character types allowed in the password"
+                tooltip: "Character types allowed in the password",
+                minItems: 1
             },
         }
     },
@@ -213,7 +228,8 @@ export const TextGenField = {
                 type: "array",
                 default: ["High School", "Associate", "Bachelor", "Master", "PhD", "Diploma"],
                 allowedValues: ["High School", "Associate", "Bachelor", "Master", "PhD", "Diploma"],
-                tooltip: "Desired education levels"
+                tooltip: "Desired education levels",
+                minItems: 1
             }
         }
     },
@@ -230,7 +246,8 @@ export const TextGenField = {
                 type: "array", 
                 default: ["Mobile", "Landline"],
                 allowedValues: ["Mobile", "Landline"], 
-                description: "Type of phone line." 
+                description: "Type of phone line.",
+                minItems: 1
             }
         },
     },

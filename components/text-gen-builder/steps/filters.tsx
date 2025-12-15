@@ -29,10 +29,13 @@ function getFilterSchemaForField(field: TemplateField) {
 }
 
 // Helper function to check if a filter value is considered "filled"
-function isFilterValueFilled(value: any): boolean {
+function isFilterValueFilled(value: any, minItems?: number): boolean {
     if (value === undefined || value === null) return false;
     if (typeof value === "string") return value.trim().length > 0;
-    if (Array.isArray(value)) return value.length > 0;
+    if (Array.isArray(value)) {
+        const min = minItems ?? 1;
+        return value.length >= min;
+    }
     if (typeof value === "number") return true;
     if (typeof value === "boolean") return true;
     // Range type check
@@ -47,6 +50,36 @@ function isFilterValueFilled(value: any): boolean {
     return false;
 }
 
+// Check if a filter is conditionally required based on another filter's value
+function isFilterConditionallyRequired(
+    schema: Record<string, any>,
+    filterKey: string,
+    existingFilters: FilterValue[]
+): { required: boolean; minItems?: number } {
+    // Check if any boolean filter has this filter in its 'requires' array and is turned on
+    for (const [key, filterDef] of Object.entries(schema)) {
+        const def = filterDef as { type?: string; requires?: string[]; requiresMinItems?: Record<string, number> };
+        if (def.type === "boolean" && def.requires?.includes(filterKey)) {
+            const boolFilter = existingFilters.find(f => f.filterKey === key);
+            if (boolFilter?.value === true) {
+                const minItems = def.requiresMinItems?.[filterKey];
+                return { required: true, minItems };
+            }
+        }
+    }
+    
+    // Legacy support for requiredWhen
+    const filterSchema = schema[filterKey] as { requiredWhen?: string };
+    if (filterSchema?.requiredWhen) {
+        const dependentFilter = existingFilters.find(f => f.filterKey === filterSchema.requiredWhen);
+        if (dependentFilter?.value === true) {
+            return { required: true };
+        }
+    }
+    
+    return { required: false };
+}
+
 // Validation function to check if all required filters are filled
 export function validateRequiredFilters(template: Template): { isValid: boolean; missingFields: string[] } {
     const missingFields: string[] = [];
@@ -54,15 +87,42 @@ export function validateRequiredFilters(template: Template): { isValid: boolean;
 
     for (const field of template.fields) {
         const schema = getFilterSchemaForField(field);
+        const existingFilters = fieldFilters[field.id] || [];
+        
+        // Get statically required filters
         const requiredFilterKeys = Object.entries(schema)
             .filter(([_, filterDef]) => (filterDef as any).required === true)
             .map(([key]) => key);
+        
+        // Get conditionally required filters
+        const conditionalRequirements: Record<string, number | undefined> = {};
+        Object.keys(schema).forEach(key => {
+            const conditional = isFilterConditionallyRequired(schema, key, existingFilters);
+            if (conditional.required) {
+                conditionalRequirements[key] = conditional.minItems;
+            }
+        });
+        
+        const allRequiredKeys = Array.from(new Set([...requiredFilterKeys, ...Object.keys(conditionalRequirements)]));
 
-        for (const filterKey of requiredFilterKeys) {
-            const filterValue = fieldFilters[field.id]?.find(f => f.filterKey === filterKey);
-            if (!filterValue || !isFilterValueFilled(filterValue.value)) {
-                const filterSchema = schema[filterKey as keyof typeof schema] as { name?: string };
+        for (const filterKey of allRequiredKeys) {
+            const filterValue = existingFilters.find(f => f.filterKey === filterKey);
+            const filterSchema = schema[filterKey as keyof typeof schema] as { name?: string; minItems?: number };
+            const conditionalMinItems = conditionalRequirements[filterKey];
+            const minItems = conditionalMinItems ?? filterSchema?.minItems;
+            
+            if (!filterValue || !isFilterValueFilled(filterValue.value, minItems)) {
                 missingFields.push(`${field.name}: ${filterSchema?.name || filterKey}`);
+            }
+        }
+        
+        // Also validate minItems for non-required array filters that have values
+        for (const filter of existingFilters) {
+            const filterSchema = schema[filter.filterKey as keyof typeof schema] as { name?: string; type?: string; minItems?: number };
+            if (filterSchema?.type === "array" && filterSchema?.minItems && Array.isArray(filter.value)) {
+                if (filter.value.length < filterSchema.minItems && filter.value.length > 0) {
+                    missingFields.push(`${field.name}: ${filterSchema?.name || filter.filterKey} (minimum ${filterSchema.minItems} required)`);
+                }
             }
         }
     }
@@ -144,21 +204,51 @@ export default function StepFilters({ template, onFiltersChange }: StepFiltersPr
         }
     }, [template.fields]);
 
-    // Get available filters for a field (excluding already added ones and required filters)
+    // Get available filters for a field (excluding already added ones, required filters, and filters controlled by 'adds')
     const getAvailableFilters = useCallback((field: TemplateField) => {
         const schema = getFilterSchemaForField(field);
         const existingFilterKeys = (fieldFilters[field.id] || []).map(f => f.filterKey);
+        
+        // Get all filter keys that are controlled by 'adds' from other filters
+        const controlledByAdds = new Set<string>();
+        Object.entries(schema).forEach(([_, filterDef]) => {
+            const def = filterDef as { adds?: string[] };
+            if (def.adds) {
+                def.adds.forEach(key => controlledByAdds.add(key));
+            }
+        });
+        
         return Object.entries(schema).filter(([key, filterDef]) => 
-            !existingFilterKeys.includes(key) && !(filterDef as any).required
+            !existingFilterKeys.includes(key) && 
+            !(filterDef as any).required &&
+            !controlledByAdds.has(key)
         );
     }, [fieldFilters]);
 
-    // Check if a filter is required
+    // Check if a filter is required (either statically or conditionally)
     const isFilterRequired = useCallback((field: TemplateField, filterKey: string): boolean => {
         const schema = getFilterSchemaForField(field);
-        const filterSchema = schema[filterKey as keyof typeof schema] as { required?: boolean };
-        return filterSchema?.required === true;
-    }, []);
+        const filterSchema = schema[filterKey as keyof typeof schema] as { required?: boolean; requiredWhen?: string };
+        
+        // Check static required
+        if (filterSchema?.required === true) return true;
+        
+        // Check conditional required
+        const existingFilters = fieldFilters[field.id] || [];
+        const conditional = isFilterConditionallyRequired(schema, filterKey, existingFilters);
+        return conditional.required;
+    }, [fieldFilters]);
+    
+    // Get the dynamic minItems for a filter (from conditional requirements)
+    const getFilterMinItems = useCallback((field: TemplateField, filterKey: string): number | undefined => {
+        const schema = getFilterSchemaForField(field);
+        const filterSchema = schema[filterKey as keyof typeof schema] as { minItems?: number };
+        
+        const existingFilters = fieldFilters[field.id] || [];
+        const conditional = isFilterConditionallyRequired(schema, filterKey, existingFilters);
+        
+        return conditional.minItems ?? filterSchema?.minItems;
+    }, [fieldFilters]);
 
     // Add a new filter to a field
     const handleAddFilter = (fieldId: string, filterKey: string) => {
@@ -211,11 +301,116 @@ export default function StepFilters({ template, onFiltersChange }: StepFiltersPr
 
     // Update filter value
     const handleUpdateFilterValue = (fieldId: string, filterKey: string, value: any) => {
+        const field = template.fields.find(f => f.id === fieldId);
+        if (!field) {
+            updateFilters({
+                ...fieldFilters,
+                [fieldId]: (fieldFilters[fieldId] || []).map(f => 
+                    f.filterKey === filterKey ? { ...f, value } : f
+                )
+            });
+            return;
+        }
+        
+        const schema = getFilterSchemaForField(field);
+        const filterSchema = schema[filterKey as keyof typeof schema] as {
+            type?: string;
+            adds?: string[];
+            requires?: string[];
+            default?: any;
+            defaultMin?: number;
+            defaultMax?: number;
+            min?: number;
+            max?: number;
+        };
+        
+        let newFieldFilters = (fieldFilters[fieldId] || []).map(f => 
+            f.filterKey === filterKey ? { ...f, value } : f
+        );
+        
+        // Handle 'requires' property for boolean filters - add required filters when turned on
+        if (filterSchema?.type === "boolean" && filterSchema?.requires && value === true) {
+            const filtersToAdd = filterSchema.requires;
+            const existingFilterKeys = newFieldFilters.map(f => f.filterKey);
+            
+            for (const addFilterKey of filtersToAdd) {
+                if (!existingFilterKeys.includes(addFilterKey)) {
+                    const addFilterSchema = schema[addFilterKey as keyof typeof schema] as {
+                        type?: string;
+                        default?: any;
+                        defaultMin?: number;
+                        defaultMax?: number;
+                        min?: number;
+                        max?: number;
+                    };
+                    
+                    let defaultValue;
+                    if (addFilterSchema?.type === "date") {
+                        defaultValue = "";
+                    } else if (addFilterSchema?.type === "dateRange") {
+                        defaultValue = { min: "", max: "" };
+                    } else if (addFilterSchema?.type === "range") {
+                        defaultValue = { 
+                            min: addFilterSchema?.defaultMin ?? addFilterSchema?.min ?? 0, 
+                            max: addFilterSchema?.defaultMax ?? addFilterSchema?.max ?? 100 
+                        };
+                    } else if (addFilterSchema?.type === "array") {
+                        defaultValue = addFilterSchema?.default && Array.isArray(addFilterSchema.default) ? addFilterSchema.default : [];
+                    } else {
+                        defaultValue = addFilterSchema?.default !== undefined ? addFilterSchema.default : (addFilterSchema?.type === "array" ? [] : "");
+                    }
+                    
+                    newFieldFilters = [...newFieldFilters, { filterKey: addFilterKey, value: defaultValue }];
+                }
+            }
+        }
+        
+        // Handle legacy 'adds' property for boolean filters
+        if (filterSchema?.type === "boolean" && filterSchema?.adds) {
+            const filtersToAdd = filterSchema.adds;
+            const existingFilterKeys = newFieldFilters.map(f => f.filterKey);
+            
+            if (value === true) {
+                // Add the specified filters if they don't exist
+                for (const addFilterKey of filtersToAdd) {
+                    if (!existingFilterKeys.includes(addFilterKey)) {
+                        const addFilterSchema = schema[addFilterKey as keyof typeof schema] as {
+                            type?: string;
+                            default?: any;
+                            defaultMin?: number;
+                            defaultMax?: number;
+                            min?: number;
+                            max?: number;
+                        };
+                        
+                        let defaultValue;
+                        if (addFilterSchema?.type === "date") {
+                            defaultValue = "";
+                        } else if (addFilterSchema?.type === "dateRange") {
+                            defaultValue = { min: "", max: "" };
+                        } else if (addFilterSchema?.type === "range") {
+                            defaultValue = { 
+                                min: addFilterSchema?.defaultMin ?? addFilterSchema?.min ?? 0, 
+                                max: addFilterSchema?.defaultMax ?? addFilterSchema?.max ?? 100 
+                            };
+                        } else if (addFilterSchema?.type === "array") {
+                            defaultValue = addFilterSchema?.default && Array.isArray(addFilterSchema.default) ? addFilterSchema.default : [];
+                        } else {
+                            defaultValue = addFilterSchema?.default !== undefined ? addFilterSchema.default : (addFilterSchema?.type === "array" ? [] : "");
+                        }
+                        
+                        newFieldFilters = [...newFieldFilters, { filterKey: addFilterKey, value: defaultValue }];
+                    }
+                }
+            } else {
+                // Remove the specified filters when toggle is off
+                newFieldFilters = newFieldFilters.filter(f => !filtersToAdd.includes(f.filterKey));
+            }
+        }
+        
         updateFilters({
             ...fieldFilters,
-            [fieldId]: (fieldFilters[fieldId] || []).map(f => 
-                f.filterKey === filterKey ? { ...f, value } : f
-            )
+            [fieldId]: newFieldFilters
         });
     };
 
@@ -250,12 +445,14 @@ export default function StepFilters({ template, onFiltersChange }: StepFiltersPr
             defaultMin?: number;
             defaultMax?: number;
             required?: boolean;
+            requiredWhen?: string;
+            minItems?: number;
         };
 
         if (!filterSchema) return null;
 
         const currentValue = filter.value;
-        const isRequired = filterSchema.required === true;
+        const isRequired = isFilterRequired(field, filter.filterKey);
 
         // Range type - two number inputs for min/max
         if (filterSchema.type === "range") {
@@ -416,46 +613,54 @@ export default function StepFilters({ template, onFiltersChange }: StepFiltersPr
         if (filterSchema.type === "array" && filterSchema.allowedValues && filterSchema.allowedValues.length > 0) {
             const defaultValues = filterSchema.default && Array.isArray(filterSchema.default) ? filterSchema.default : [];
             const selectedValues = Array.isArray(currentValue) ? currentValue : defaultValues;
+            const dynamicMinItems = getFilterMinItems(field, filter.filterKey);
+            const minItems = dynamicMinItems ?? (isRequired ? 1 : 0);
+            const hasMinItemsError = minItems > 0 && selectedValues.length < minItems;
+            
             return (
-                <Select
-                    aria-label={`Select ${filterSchema.name}`}
-                    placeholder="Select options"
-                    selectionMode="multiple"
-                    variant="bordered"
-                    size="sm"
-                    isMultiline={true}
-                    isRequired={isRequired}
-                    selectedKeys={new Set(selectedValues)}
-                    onSelectionChange={(keys) => {
-                        const selected = Array.from(keys) as string[];
-                        handleUpdateFilterValue(field.id, filter.filterKey, selected);
-                    }}
-                    classNames={{
-                        base: "flex-1",
-                        trigger: "bg-zinc-800/50 border-white/20 h-auto min-h-10 py-2",
-                        popoverContent: "bg-zinc-900 border-white/10",
-                    }}
-                    renderValue={(items) => (
-                        <div className="flex flex-wrap gap-1">
-                            {Array.from(items).map((item) => (
-                                <Chip
-                                    key={item.key}
-                                    size="sm"
-                                    variant="flat"
-                                    onClose={() => handleRemoveChip(field.id, filter.filterKey, item.key as string)}
-                                >
-                                    {item.textValue}
-                                </Chip>
-                            ))}
-                        </div>
-                    )}
-                >
-                    {filterSchema.allowedValues.map((option: string) => (
-                        <SelectItem key={option}>
-                            {option}
-                        </SelectItem>
-                    ))}
-                </Select>
+                <div className="flex-1 flex flex-col gap-1">
+                    <Select
+                        aria-label={`Select ${filterSchema.name}`}
+                        placeholder="Select options"
+                        selectionMode="multiple"
+                        variant="bordered"
+                        size="sm"
+                        isMultiline={true}
+                        isRequired={isRequired}
+                        isInvalid={hasMinItemsError}
+                        errorMessage={hasMinItemsError ? `Select at least ${minItems} option${minItems > 1 ? 's' : ''}` : undefined}
+                        selectedKeys={new Set(selectedValues)}
+                        onSelectionChange={(keys) => {
+                            const selected = Array.from(keys) as string[];
+                            handleUpdateFilterValue(field.id, filter.filterKey, selected);
+                        }}
+                        classNames={{
+                            base: "flex-1",
+                            trigger: `bg-zinc-800/50 ${hasMinItemsError ? 'border-danger' : 'border-white/20'} h-auto min-h-10 py-2`,
+                            popoverContent: "bg-zinc-900 border-white/10",
+                        }}
+                        renderValue={(items) => (
+                            <div className="flex flex-wrap gap-1">
+                                {Array.from(items).map((item) => (
+                                    <Chip
+                                        key={item.key}
+                                        size="sm"
+                                        variant="flat"
+                                        onClose={() => handleRemoveChip(field.id, filter.filterKey, item.key as string)}
+                                    >
+                                        {item.textValue}
+                                    </Chip>
+                                ))}
+                            </div>
+                        )}
+                    >
+                        {filterSchema.allowedValues.map((option: string) => (
+                            <SelectItem key={option}>
+                                {option}
+                            </SelectItem>
+                        ))}
+                    </Select>
+                </div>
             );
         }
 
@@ -494,30 +699,39 @@ export default function StepFilters({ template, onFiltersChange }: StepFiltersPr
         if (filterSchema.type === "array" && (!filterSchema.allowedValues || filterSchema.allowedValues.length === 0)) {
             const defaultValues = filterSchema.default && Array.isArray(filterSchema.default) ? filterSchema.default : [];
             const selectedValues = Array.isArray(currentValue) ? currentValue : defaultValues;
+            const dynamicMinItems = getFilterMinItems(field, filter.filterKey);
+            const minItems = dynamicMinItems ?? (isRequired ? 1 : 0);
+            const hasMinItemsError = minItems > 0 && selectedValues.length < minItems;
+            
             return (
-                <div className="flex-1 border border-white/20 bg-zinc-800/50 rounded-lg p-2 flex flex-wrap gap-1 items-center">
-                    {selectedValues.map((val: string) => (
-                        <Chip
-                            key={val}
-                            size="sm"
-                            variant="flat"
-                            onClose={() => handleRemoveChip(field.id, filter.filterKey, val)}
-                        >
-                            {val}
-                        </Chip>
-                    ))}
-                    <input
-                        type="text"
-                        placeholder="Type and press Enter"
-                        className="bg-transparent text-sm text-white placeholder-zinc-500 outline-none flex-1 min-w-[120px]"
-                        onKeyDown={(e) => {
-                            if (e.key === "Enter") {
-                                const input = e.target as HTMLInputElement;
-                                handleAddChip(field.id, filter.filterKey, input.value);
-                                input.value = "";
-                            }
-                        }}
-                    />
+                <div className="flex-1 flex flex-col gap-1">
+                    <div className={`flex-1 border ${hasMinItemsError ? 'border-danger' : 'border-white/20'} bg-zinc-800/50 rounded-lg p-2 flex flex-wrap gap-1 items-center`}>
+                        {selectedValues.map((val: string) => (
+                            <Chip
+                                key={val}
+                                size="sm"
+                                variant="flat"
+                                onClose={() => handleRemoveChip(field.id, filter.filterKey, val)}
+                            >
+                                {val}
+                            </Chip>
+                        ))}
+                        <input
+                            type="text"
+                            placeholder="Type and press Enter"
+                            className="bg-transparent text-sm text-white placeholder-zinc-500 outline-none flex-1 min-w-[120px]"
+                            onKeyDown={(e) => {
+                                if (e.key === "Enter") {
+                                    const input = e.target as HTMLInputElement;
+                                    handleAddChip(field.id, filter.filterKey, input.value);
+                                    input.value = "";
+                                }
+                            }}
+                        />
+                    </div>
+                    {hasMinItemsError && (
+                        <span className="text-tiny text-danger">Add at least {minItems} item{minItems > 1 ? 's' : ''}</span>
+                    )}
                 </div>
             );
         }
@@ -632,9 +846,10 @@ export default function StepFilters({ template, onFiltersChange }: StepFiltersPr
                                             tooltip?: string;
                                             description?: string;
                                             required?: boolean;
+                                            requiredWhen?: string;
                                         };
                                         const tooltipContent = filterSchema?.tooltip || filterSchema?.description || "";
-                                        const isRequired = filterSchema?.required === true;
+                                        const isRequired = isFilterRequired(field, filter.filterKey);
 
                                         return (
                                             <div key={filter.filterKey} className="flex flex-col gap-2">
