@@ -230,6 +230,7 @@ export const projects = [
     startDate: "2022-07-11",
     endDate: "2022-07-15",
     thumbnailImage: "image/projects/takectrl/slides/takectrlslide.webp",
+    coverImage: "/image/projects/takectrl/cover.png",
     contributors: [
       {"name": "Toby Knight", "linkedin": "https://www.linkedin.com/in/toby-knight-5b528123a/", "github": "https://github.com/16KnighT"}, 
     ]
