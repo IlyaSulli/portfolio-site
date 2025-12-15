@@ -58,17 +58,6 @@ export default function IndexPage() {
                   variant: "bordered",
                   radius: "full",
                 })}
-                href={siteConfig.links.dribbble}
-              >
-                <DribbbleIcon size={20} />
-                Dribbble
-              </Link>
-              <Link
-                isExternal
-                className={buttonStyles({
-                  variant: "bordered",
-                  radius: "full",
-                })}
                 href={siteConfig.links.linkedin}
               >
                 <LinkedInIcon size={20} />
