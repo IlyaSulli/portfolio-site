@@ -41,7 +41,7 @@ export default function Project({ url, children }: ProjectProps) {
           </span>
           <span className="py-4 font-medium text-sm">
             {formatDate(project.startDate ?? "")} -{" "}
-            {formatDate(project.endDate ?? "")}
+            {project.endDate ? formatDate(project.endDate) : "Present Project"}
           </span>
           <div className="flex gap-2 flex-wrap">
             {project.classification?.sort().map((tag, idx) => (

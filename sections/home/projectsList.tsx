@@ -13,10 +13,15 @@ export default function GridProjects({
   featuredOnly?: boolean;
 }) {
   const sortedProjects = projects
-    .filter((project) => !featuredOnly || project.featured)
-    .sort(
-      (a, b) => new Date(b.endDate).getTime() - new Date(a.endDate).getTime(),
-    )
+    .filter((project) => !project.unlisted && (!featuredOnly || project.featured))
+    .sort((a, b) => {
+      // Ongoing projects (no end date) first
+      if (!a.endDate && b.endDate) return -1;
+      if (a.endDate && !b.endDate) return 1;
+      if (!a.endDate && !b.endDate) return 0;
+      // Then sort by end date (newest first)
+      return new Date(b.endDate!).getTime() - new Date(a.endDate!).getTime();
+    })
     .slice(0, nItems);
 
   return (
@@ -75,10 +80,15 @@ export function ListProjects({
   featuredOnly?: boolean;
 }) {
   const sortedProjects = projects
-    .filter((project) => !featuredOnly || project.featured)
-    .sort(
-      (a, b) => new Date(b.endDate).getTime() - new Date(a.endDate).getTime(),
-    )
+    .filter((project) => !project.unlisted && (!featuredOnly || project.featured))
+    .sort((a, b) => {
+      // Ongoing projects (no end date) first
+      if (!a.endDate && b.endDate) return -1;
+      if (a.endDate && !b.endDate) return 1;
+      if (!a.endDate && !b.endDate) return 0;
+      // Then sort by end date (newest first)
+      return new Date(b.endDate!).getTime() - new Date(a.endDate!).getTime();
+    })
     .slice(0, nItems);
 
   const arrowVariants = {

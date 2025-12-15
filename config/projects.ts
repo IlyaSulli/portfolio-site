@@ -176,6 +176,7 @@ export const projects = [
     thumbnailImage: "image/projects/30daysofui/slides/30daysofuislide.webp",
     coverImage: "/image/projects/30daysofui/30daysofui.png",
     imageGallery: ["/image/placeholder.jpg"],
+    unlisted: true,
   },
   {
     title: "SyncMove",
@@ -250,7 +251,6 @@ export const projects = [
     ],
     languages: ["TypeScript", "HTML", "CSS",],
     startDate: "2024-07",
-    endDate: "2025-09",
     thumbnailImage: "image/projects/ilyasullivan/slides/ilyasullivanslide.webp",
     coverImage: "/image/projects/ilyasullivan/ilyasullivancover.png"
   },
