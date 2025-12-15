@@ -2,7 +2,7 @@ import { Image } from "@heroui/image";
 
 import Project from "@/sections/projects/project";
 import SplitHeading from "@/components/split-heading";
-import BrandedCard from "@/components/ brandedCard";
+import BrandedCard from "@/components/brandedCard";
 
 export default function AllEatProject() {
   return (
