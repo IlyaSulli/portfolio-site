@@ -238,14 +238,18 @@ export const TextGenField = {
         icon: Phone,
         filterSchema: {
             region: { 
-                type: "select", 
+                name: "Region",
+                type: "select",
+                required: true,
                 default: "(+44) United Kingdom",
                 allowedValues: ["(+44) United Kingdom", "(+1) United States"],
                 description: "Geographical region for the phone number" },
             type: { 
-                type: "array", 
-                default: ["Mobile", "Landline"],
-                allowedValues: ["Mobile", "Landline"], 
+                name: "Phone Type",
+                type: "array",
+                required: true,
+                default: ["Mobile", "Landline", "Toll-free"],
+                allowedValues: ["Mobile", "Landline", "Toll-free"], 
                 description: "Type of phone line.",
                 minItems: 1
             }
@@ -258,6 +262,7 @@ export const TextGenField = {
             format: {
                 name: "Format",
                 type: "select",
+                required: true,
                 default: "UUID",
                 allowedValues: ["UUID", "Numeric", "Alphanumeric"],
                 tooltip: "Format of the ID"
