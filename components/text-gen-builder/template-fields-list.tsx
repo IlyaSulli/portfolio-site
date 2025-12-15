@@ -209,7 +209,6 @@ export default function TemplateFieldsList({
                             
                             {/* Colour Selection */}
                             <div className="mb-4">
-                                <p className="text-sm font-medium mb-2">Color:</p>
                                 <div className="flex flex-wrap gap-1">
                                     {COLOR_OPTIONS.map((color: typeof COLOR_OPTIONS[number]) => (
                                         <Button
