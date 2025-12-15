@@ -1,10 +1,12 @@
 import { Input } from "@heroui/input";
 import { Plus, Search } from "lucide-react";
 import { TextGenField } from "@/config/textGenField";
-import { useRef, useEffect, useCallback, useState, DragEvent, createElement } from "react";
-import { TemplateField, ScrollState } from "./types";
+import { useEffect, DragEvent, createElement } from "react";
+import { useScrollFade, ScrollFadeGradients } from "./useScrollFade";
 
 interface AvailableFieldsListProps {
+    searchQuery: string;
+    onSearchChange: (query: string) => void;
     onAddField: (field: typeof TextGenField[keyof typeof TextGenField]) => void;
     onDragStart: (e: DragEvent<HTMLDivElement>, field: typeof TextGenField[keyof typeof TextGenField]) => void;
     onDragEnd: () => void;
@@ -14,6 +16,8 @@ interface AvailableFieldsListProps {
 }
 
 export default function AvailableFieldsList({
+    searchQuery,
+    onSearchChange,
     onAddField,
     onDragStart,
     onDragEnd,
@@ -21,34 +25,11 @@ export default function AvailableFieldsList({
     onDrop,
     className,
 }: AvailableFieldsListProps) {
-    const [searchQuery, setSearchQuery] = useState("");
-    const [scrollState, setScrollState] = useState<ScrollState>({ atTop: true, atBottom: false });
-    const listRef = useRef<HTMLDivElement>(null);
+    const { scrollState, listRef, checkScrollPosition } = useScrollFade();
 
-    // Filter available fields based on search query
     const filteredFields = Object.values(TextGenField).filter(field =>
         field.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
-
-    // Check scroll position and update fade visibility
-    const checkScrollPosition = useCallback(() => {
-        const element = listRef.current;
-        if (!element) return;
-        const threshold = 10;
-        const atTop = element.scrollTop <= threshold;
-        const atBottom = element.scrollHeight - element.scrollTop - element.clientHeight <= threshold;
-        setScrollState({ atTop, atBottom });
-    }, []);
-
-    // Set up scroll listeners
-    useEffect(() => {
-        const list = listRef.current;
-        checkScrollPosition();
-        list?.addEventListener('scroll', checkScrollPosition);
-        return () => {
-            list?.removeEventListener('scroll', checkScrollPosition);
-        };
-    }, [checkScrollPosition]);
 
     // Re-check scroll positions when content changes
     useEffect(() => {
@@ -66,14 +47,18 @@ export default function AvailableFieldsList({
                 startContent={<Search />} 
                 className="pt-4 mb-4"
                 value={searchQuery}
-                onValueChange={setSearchQuery}
+                onValueChange={onSearchChange}
             />
-            <div className="relative h-[400px] backdrop-blur-md bg-white/20 dark:bg-black/20 border border-white/30 dark:border-white/10 rounded-lg p-3 shadow-lg" onDragOver={onDragOver} onDrop={onDrop}>
-                {/* Top fade gradient */}
-                <div className={`absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-white/30 dark:from-black/30 to-transparent z-10 pointer-events-none rounded-t-lg transition-opacity duration-200 ${scrollState.atTop ? 'opacity-0' : 'opacity-100'}`} />
-                {/* Bottom fade gradient */}
-                <div className={`absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-white/30 dark:from-black/30 to-transparent z-10 pointer-events-none rounded-b-lg transition-opacity duration-200 ${scrollState.atBottom ? 'opacity-0' : 'opacity-100'}`} />
-                <div ref={listRef} className="flex flex-col gap-y-2 h-full overflow-y-auto py-2 pr-3 scrollbar-thin scrollbar-thumb-white/30 dark:scrollbar-thumb-white/20">
+            <div 
+                className="relative h-[400px] backdrop-blur-md bg-white/20 dark:bg-black/20 border border-white/30 dark:border-white/10 rounded-lg p-3 shadow-lg" 
+                onDragOver={onDragOver} 
+                onDrop={onDrop}
+            >
+                <ScrollFadeGradients scrollState={scrollState} />
+                <div 
+                    ref={listRef} 
+                    className="flex flex-col gap-y-2 h-full overflow-y-auto py-2 pr-3 scrollbar-thin scrollbar-thumb-white/30 dark:scrollbar-thumb-white/20"
+                >
                     {filteredFields.map(field => (
                         <div 
                             key={field.name} 

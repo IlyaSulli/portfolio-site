@@ -1,6 +1,6 @@
 import { Input } from "@heroui/input";
 import { GripVertical, Check, X, Trash2 } from "lucide-react";
-import { TemplateField } from "./types";
+import { TemplateField } from "../../types";
 import { DragEvent, createElement } from "react";
 
 interface FieldItemProps {
