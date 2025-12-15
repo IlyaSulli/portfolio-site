@@ -154,8 +154,8 @@ export default function TextGenerator(){
                             )}
                         </Tab>
                         
-                        <Tab key="output" title="Output">
-                            <p>Output here</p>
+                        <Tab key="generate" title="Generate">
+                            <p>Generate here</p>
                         </Tab>
                     </Tabs>
                 </div>
