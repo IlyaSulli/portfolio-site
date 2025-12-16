@@ -1,0 +1,1068 @@
+{
+  "Management": [
+    "Accountant"
+  ],
+  "Accountancy": [
+    "Accountant",
+    "Accounting Technician"
+  ],
+  "Business, Management, Admin and Support": [
+    "Accountant",
+    "Business Adviser",
+    "Estimator",
+    "Human Resources Officer or Manager",
+    "Hydrogen Project Development Officer",
+    "Marketing Manager",
+    "PR and Communications Officer",
+    "Procurement Manager",
+    "Project Manager",
+    "Proposals Coordinator",
+    "Training and Competency Officer or Manager"
+  ],
+  "Private Practice": [
+    "Accountant"
+  ],
+  "Public Sector": [
+    "Accountant"
+  ],
+  "Financial Services": [
+    "Accounts Assistant",
+    "Actuary",
+    "Bank or Building Society Customer Adviser",
+    "Bank or Building Society Manager",
+    "Credit Manager",
+    "Financial Adviser",
+    "Insurance Account Manager",
+    "Insurance Broker",
+    "Insurance Claims Handler",
+    "Insurance Loss Adjuster",
+    "Insurance Risk Surveyor",
+    "Insurance Underwriter",
+    "Investment Analyst",
+    "Investment Banker",
+    "Investment Operations Administrator",
+    "Stockbroker"
+  ],
+  "Drama and Theatre Technology": [
+    "Actor",
+    "Costume Designer",
+    "Lighting Technician",
+    "Prop Maker",
+    "Scenic Artist",
+    "Set Designer",
+    "Stage Manager",
+    "Stagehand",
+    "Stunt Performer",
+    "Teacher - Secondary School - Drama",
+    "Wardrobe Assistant - Film, TV or Theatre"
+  ],
+  "Alternative Medicine": [
+    "Acupuncturist",
+    "Chiropractor",
+    "Herbalist",
+    "Homeopath",
+    "Hypnotherapist",
+    "Naturopath",
+    "Osteopath"
+  ],
+  "Legal Support Services": [
+    "Administrative Assistant or Officer - Courts",
+    "Advocates' Clerk",
+    "Clerk of Court",
+    "Paralegal",
+    "Sheriff Officer or Messenger-at-Arms"
+  ],
+  "Advertising, Marketing and PR": [
+    "Advertising Account Executive",
+    "Advertising Account Planner",
+    "Advertising Copywriter",
+    "Charity Fundraiser",
+    "Conference Producer",
+    "Digital Marketer",
+    "Events Manager",
+    "Fashion Model",
+    "Fundraising Manager",
+    "Market Research Executive",
+    "Market Research Interviewer",
+    "Marketing Manager",
+    "Picture Researcher",
+    "PR and Communications Officer",
+    "SEO Specialist"
+  ],
+  "Advisory Services": [
+    "Advice Worker",
+    "Careers Adviser"
+  ],
+  "Law (Professional)": [
+    "Advocate",
+    "Judge or Sheriff",
+    "Procurator Fiscal",
+    "Solicitor"
+  ],
+  "Aeronautical Engineering": [
+    "Aerospace Engineer",
+    "Aircraft Maintenance Technician"
+  ],
+  "Agriculture": [
+    "Agricultural Consultant",
+    "Agricultural Scientist",
+    "Estate or Land Manager",
+    "Farm Manager",
+    "Farm Worker or Stockperson"
+  ],
+  "Air Transport": [
+    "Air Cabin Crew",
+    "Air Traffic Controller",
+    "Airline or Airport Passenger Service Assistant",
+    "Airline Pilot",
+    "Drone Pilot",
+    "Flight Dispatcher",
+    "Helicopter Pilot",
+    "Ramp Agent"
+  ],
+  "Engineering General": [
+    "Air Conditioning Engineer",
+    "CAD Technician",
+    "Design Engineer",
+    "Ergonomist",
+    "Heating and Ventilation Engineer",
+    "Landbased Service Engineer",
+    "Plant Mechanic",
+    "Product Designer",
+    "Quarry Engineer",
+    "Refrigeration Engineer",
+    "Smart Meter Engineer",
+    "Teacher - Secondary School - Design and Technology/Technological Education"
+  ],
+  "Environmental Services": [
+    "Air Quality Consultant",
+    "Community Waste Officer",
+    "Environmental Consultant",
+    "Environmental Health Officer",
+    "Health and Safety Inspector",
+    "Health and Safety Officer",
+    "Pest Control Technician",
+    "Renewable Energy Consultant"
+  ],
+  "Ambulance Services": [
+    "Ambulance Care Assistant",
+    "Ambulance Technician",
+    "Emergency Call Handler",
+    "Paramedic"
+  ],
+  "Medical Technology": [
+    "Anatomical Pathology Technologist",
+    "Audiologist",
+    "Biomedical Scientist",
+    "Biomedical Support Worker",
+    "Cardiac Physiologist",
+    "Clinical and Biomedical Engineer",
+    "Clinical Perfusionist",
+    "Clinical Technologist (Clinical Engineering)",
+    "Decontamination Technician",
+    "Medical Physicist",
+    "Medical Representative",
+    "Neurophysiologist",
+    "Operating Department Practitioner",
+    "Prosthetic or Orthotic Support Worker",
+    "Prosthetist or Orthotist",
+    "Rehabilitation Engineering Technician",
+    "Respiratory Physiologist",
+    "Theatre Support Worker"
+  ],
+  "Work with Animals": [
+    "Animal Care Assistant",
+    "Animal Technician",
+    "Assistance Dog Trainer",
+    "Dog Groomer",
+    "Dog Handler",
+    "Farrier",
+    "Riding Instructor",
+    "Scottish SPCA Animal Rescue Officer",
+    "Scottish SPCA Inspector",
+    "Stablehand or Groom",
+    "Veterinary Nurse",
+    "Veterinary Surgeon",
+    "Zookeeper",
+    "Zoologist"
+  ],
+  "Science General": [
+    "Animal Technician",
+    "Embalmer",
+    "Laboratory Technician"
+  ],
+  "Fine Art or Graphic Design": [
+    "Animator",
+    "Character Artist",
+    "Fine Artist",
+    "Graphic Designer",
+    "Illustrator",
+    "Previsualisation Artist",
+    "Scenic Artist",
+    "Scientific or Technical Illustrator",
+    "Sculptor",
+    "Signwriter",
+    "Storyboard Artist",
+    "Teacher - Secondary School - Art and Design"
+  ],
+  "Programming and Development": [
+    "Applications Developer",
+    "Artificial Intelligence Specialist/Engineer",
+    "Blockchain Developer",
+    "Cloud Engineer",
+    "Database Administrator",
+    "Robotics Engineer",
+    "Software Engineer or Developer",
+    "Software Tester"
+  ],
+  "Web and Multimedia": [
+    "Applications Developer",
+    "Character Artist",
+    "Cloud Engineer",
+    "Front End Developer",
+    "Games Designer",
+    "Games Programmer",
+    "Games Tester",
+    "User Experience (UX) Designer",
+    "Virtual Reality/Augmented Reality Developer",
+    "Web Designer",
+    "Web Developer"
+  ],
+  "Horticulture and Landscaping": [
+    "Arborist",
+    "Botanist",
+    "Gardener",
+    "Groundsperson",
+    "Horticultural Scientist",
+    "Landscaper"
+  ],
+  "Culture and Heritage": [
+    "Archaeologist",
+    "Museum Assistant or Visitor Assistant",
+    "Museum Conservation Officer",
+    "Museum or Art Gallery Curator"
+  ],
+  "Architecture": [
+    "Architect",
+    "Architectural Technologist"
+  ],
+  "Libraries and Information Science": [
+    "Archivist",
+    "Librarian or Information Professional",
+    "Library or Information Assistant"
+  ],
+  "Media and Broadcasting": [
+    "Archivist",
+    "Broadcast Assistant",
+    "Broadcast Engineer",
+    "Broadcast Journalist",
+    "Camera Operator",
+    "Disc Jockey \u2013 DJ",
+    "Film or Video Editor",
+    "Floor Manager \u2013 Television",
+    "Lighting Technician",
+    "Producer \u2013 Radio",
+    "Producer \u2013 TV or Film",
+    "Production Assistant",
+    "Prop Maker",
+    "Runner",
+    "Sound Technician",
+    "Special Effects Technician",
+    "Stage Manager",
+    "Stagehand",
+    "TV or Film Director",
+    "TV or Radio Presenter",
+    "Wardrobe Assistant - Film, TV or Theatre"
+  ],
+  "Armed Services": [
+    "Army \u2013 Officer",
+    "Army \u2013 Soldier",
+    "Royal Air Force Airman or Airwoman",
+    "Royal Air Force Officer",
+    "Royal Marine",
+    "Royal Marines Officer",
+    "Royal Navy Officer",
+    "Royal Navy Rating"
+  ],
+  "Wellbeing": [
+    "Aromatherapist",
+    "Reflexologist"
+  ],
+  "Therapists": [
+    "Art Therapist",
+    "Dramatherapist",
+    "Music Therapist",
+    "Play Therapist"
+  ],
+  "Arts Administration": [
+    "Arts Administrator",
+    "Events Manager",
+    "Music Promotions Manager"
+  ],
+  "Electrical and Electronic Engineering": [
+    "Assembler - Electronics",
+    "Broadcast Engineer",
+    "Control and Instrumentation Engineer",
+    "Electrical Engineer",
+    "Electrical or Electronic Engineering Technician",
+    "Electrician",
+    "Electricity Distribution Worker",
+    "Electronics Engineer",
+    "Field Service Technician",
+    "Home Media Engineer",
+    "Railway Maintenance Engineering Technician - Distribution and Plant",
+    "Railway Maintenance Engineering Technician - Signalling",
+    "Railway Maintenance Engineering Technician - Telecoms",
+    "Robotics Engineer",
+    "Security Systems Installer",
+    "Telecommunications Engineer"
+  ],
+  "Physics": [
+    "Astronomer or Astrophysicist",
+    "Geophysicist",
+    "Nanotechnologist",
+    "Physicist",
+    "Teacher - Secondary School - Physics with Science"
+  ],
+  "Retail and Sales": [
+    "Auctioneer",
+    "Builders' Merchant",
+    "Butcher",
+    "Export Sales Manager",
+    "Florist",
+    "Garden Centre Worker",
+    "Jeweller - Retail",
+    "Medical Representative",
+    "Optical Assistant",
+    "Pet Shop Assistant",
+    "Retail Assistant",
+    "Retail Manager",
+    "Sales Representative",
+    "Supermarket Assistant",
+    "Vehicle Salesperson",
+    "Visual Merchandiser"
+  ],
+  "Mechanical and Manufacturing Engineering (including Fabrication and Welding)": [
+    "Automotive Engineer",
+    "Blacksmith",
+    "CNC Machinist",
+    "Engineering Operative",
+    "Fabricator or Plater",
+    "Field Service Technician",
+    "Manufacturing Systems Engineer",
+    "Mechanical Engineer",
+    "Mechanical Engineering Technician",
+    "Offshore Technician \u2013 Cable and Pipelay",
+    "Offshore Technician \u2013 Specialised Tools",
+    "Railway Maintenance Engineering Technician - Overhead Line",
+    "Railway Maintenance Engineering Technician - Track",
+    "Robotics Engineer",
+    "Sheet Metal Worker",
+    "Toolmaker",
+    "Welder"
+  ],
+  "Food and Drink Manufacturing": [
+    "Baker or Confectioner",
+    "Brewery Worker",
+    "Butcher",
+    "Distillery Worker",
+    "Food Scientist or Technologist",
+    "Meat Process Worker"
+  ],
+  "Hospitality": [
+    "Bar Worker",
+    "Catering Manager",
+    "Chef or Cook",
+    "Hotel General Manager",
+    "Hotel Porter",
+    "Hotel Receptionist",
+    "Housekeeping Manager",
+    "Kitchen Assistant",
+    "Restaurant Manager",
+    "Room Attendant",
+    "Waiter or Waitress"
+  ],
+  "Hairdressing": [
+    "Barber",
+    "Hair Stylist"
+  ],
+  "Beauty": [
+    "Beauty Therapist",
+    "Body Piercer",
+    "Make-up Artist",
+    "Nail Technician"
+  ],
+  "Building Technology and Management": [
+    "BIM Technician",
+    "Building Services Engineer",
+    "Building Technician",
+    "Clerk of Works",
+    "Construction Manager or Site Manager",
+    "Document Controller",
+    "Estimator"
+  ],
+  "Biology": [
+    "Biochemist",
+    "Biologist",
+    "Biotechnologist",
+    "Botanist",
+    "Forensic Scientist",
+    "Geneticist",
+    "Marine Biologist",
+    "Microbiologist",
+    "Pharmacologist",
+    "Teacher - Secondary School - Biology with Science",
+    "Zoologist"
+  ],
+  "Naval Architecture and Marine Engineering": [
+    "Boat or Ship Builder",
+    "Marine Engineer",
+    "Naval Architect"
+  ],
+  "Police and Security Work": [
+    "Border Force Officer",
+    "CCTV Operator",
+    "Community Warden",
+    "Forensic Scene Examiner",
+    "Government Intelligence Officer or Analyst",
+    "Immigration Enforcement Officer",
+    "Parking Warden",
+    "Police Officer",
+    "Security Officer or Guard",
+    "Store Detective",
+    "Vehicle Examiner"
+  ],
+  "Construction Crafts": [
+    "Bricklayer",
+    "Ceiling Fixer",
+    "Demolition Operative",
+    "Dryliner",
+    "Floor Layer or Carpet Fitter",
+    "Formworker",
+    "General Construction Operative",
+    "Glazier",
+    "Joiner or Carpenter",
+    "Loft and Cavity Insulation Technician",
+    "Mastic Asphalter",
+    "Painter and Decorator",
+    "Plant Operator",
+    "Plasterer",
+    "Plumber",
+    "Road Worker",
+    "Roof Sheeter and Cladder",
+    "Roofer",
+    "Roofer \u2013 Felt",
+    "Scaffolder",
+    "Shopfitter",
+    "Steeplejack/Lightning Protection Fitter",
+    "Stonemason",
+    "Thermal Insulation Engineer",
+    "Wall and Floor Tiler",
+    "Window Fitter"
+  ],
+  "Languages": [
+    "British Sign Language Interpreter",
+    "Interpreter",
+    "Teacher - Secondary School - Gaelic",
+    "Teacher - Secondary School - Modern Foreign Languages",
+    "Translator"
+  ],
+  "Journalism": [
+    "Broadcast Journalist",
+    "Journalist or Reporter",
+    "Sub-editor \u2014 Journalism"
+  ],
+  "Surveying": [
+    "Building Standards Surveyor",
+    "Cartographer",
+    "Surveyor",
+    "Surveyor - Building",
+    "Surveyor - Hydrographic",
+    "Surveyor - Land or Geomatics",
+    "Surveyor - Minerals or Waste Management",
+    "Surveyor - Planning and Development",
+    "Surveyor - Quantity",
+    "Surveyor - Rural Practice",
+    "Surveyor - Valuation",
+    "Technical Surveyor"
+  ],
+  "Road Transport": [
+    "Bus or Coach Driver",
+    "Driving Examiner",
+    "Driving Instructor",
+    "Motorcycle Instructor",
+    "Taxi or Car Driver"
+  ],
+  "Furniture": [
+    "Cabinet Maker",
+    "Upholsterer",
+    "Wood Machinist"
+  ],
+  "Call Centres": [
+    "Call Centre Agent"
+  ],
+  "Vehicle Related Services": [
+    "Car Valet"
+  ],
+  "Social Work or Social Care": [
+    "Care Assistant or Support Worker",
+    "Care Home Manager",
+    "Housing Officer",
+    "Social Worker",
+    "Warden or Housing Support Officer - Sheltered Housing"
+  ],
+  "Leisure": [
+    "Casino Dealer",
+    "Cinema or Theatre Assistant",
+    "Cinema or Theatre Manager"
+  ],
+  "General Services": [
+    "Cemetery Worker",
+    "Pest Control Technician",
+    "Recycling Operative",
+    "Refuse Collector",
+    "Street Cleaning Operative"
+  ],
+  "3 Dimensional Design": [
+    "Ceramic Designer",
+    "Craft Designer",
+    "Ergonomist",
+    "Florist",
+    "Furniture Designer",
+    "Glass Designer or Maker",
+    "Jewellery Designer",
+    "Model Maker",
+    "Picture Framer",
+    "Product Designer",
+    "Sculptor",
+    "Teacher - Secondary School - Design and Technology/Technological Education"
+  ],
+  "Offshore Based": [
+    "Chef or Cook",
+    "Derrickhand",
+    "Diver",
+    "Driller",
+    "Drilling Engineer",
+    "Life Support Technician \u2013 Saturation Divers",
+    "Mudlogger",
+    "Offshore Installation Manager",
+    "Offshore Medic",
+    "Offshore Service Technician",
+    "Roustabout",
+    "ROV Pilot Technician",
+    "Toolpusher"
+  ],
+  "Chemical and Materials Engineering": [
+    "Chemical Engineer",
+    "Chemical Engineering Technician",
+    "Chemical Plant Process Operative",
+    "Materials Scientist or Engineer"
+  ],
+  "Chemistry and Materials Science": [
+    "Chemist",
+    "Forensic Scientist",
+    "Materials Scientist or Engineer",
+    "Nanotechnologist",
+    "Offshore Chemist",
+    "Teacher - Secondary School - Chemistry with Science"
+  ],
+  "Childcare and Education": [
+    "Childminder",
+    "Children\u2019s Holiday Representative",
+    "Early Years Practitioner",
+    "Nanny",
+    "Playworker or Play Leader"
+  ],
+  "Travel and Tourism": [
+    "Children\u2019s Holiday Representative",
+    "Holiday Centre Worker",
+    "Museum Assistant or Visitor Assistant",
+    "Resort Representative",
+    "Tour Guide",
+    "Tour Leader or Manager",
+    "Travel Agency Manager",
+    "Travel Consultant"
+  ],
+  "Dance": [
+    "Choreographer",
+    "Dance Teacher",
+    "Dancer"
+  ],
+  "Civil and Structural Engineering": [
+    "Civil Engineer",
+    "Civil Engineering Technician",
+    "Structural Engineer",
+    "Structural Engineering Technician",
+    "Water or Waste Water Network Operative",
+    "Water or Waste Water Treatment Operative"
+  ],
+  "Public Services Administration": [
+    "Civil Service Administrative Assistant and Officer",
+    "Civil Service Administrator - Fast Stream",
+    "Diplomatic Service Operational Officer",
+    "Economic Development Officer",
+    "Health Records Staff",
+    "Health Service Manager",
+    "Local Government Administrative Assistant or Officer",
+    "Local Government Officer",
+    "Post Office Customer Service Consultant",
+    "Registrar of Births, Deaths, Marriages and Civil Partnerships",
+    "Revenue and Customs Officer",
+    "Tax Officer",
+    "Trade Union Official",
+    "Trading Standards Officer"
+  ],
+  "Education Support": [
+    "Classroom Assistant - Primary or Early Years",
+    "Learning Support Assistant",
+    "Teacher - Additional Support for Learning"
+  ],
+  "Property Services": [
+    "Cleaner",
+    "Estate Agent",
+    "Locksmith",
+    "Meter Reader"
+  ],
+  "Administration and Management General": [
+    "Clerical or Administrative Assistant",
+    "Company Secretary",
+    "Customer Service Administrator",
+    "Document Controller",
+    "Legal Secretary",
+    "Management Consultant",
+    "Medical Secretary",
+    "Office Manager",
+    "Personal Assistant",
+    "Project Manager",
+    "Receptionist",
+    "Recruitment Consultant",
+    "Risk Manager",
+    "Scrum Master",
+    "Teacher - Secondary School - Business Education",
+    "Virtual Assistant"
+  ],
+  "Photography": [
+    "Clinical Photographer",
+    "Photographer",
+    "Photographic Stylist"
+  ],
+  "Systems and Networks": [
+    "Cloud Engineer",
+    "Network Architect",
+    "Network Engineer",
+    "Systems Analyst"
+  ],
+  "Engineers and Engineering Operatives or Technicians": [
+    "CNC Machinist",
+    "Electrical Project Engineer",
+    "Field Engineer",
+    "Field Team Manager",
+    "Hydraulic Technician",
+    "Integrity Engineer",
+    "Offshore Technician \u2013 Cable and Pipelay",
+    "Offshore Technician \u2013 Specialised Tools",
+    "Project Engineer",
+    "Subsea Engineer",
+    "Technical Support Engineer (Onshore/Offshore)",
+    "Well Engineer",
+    "Wind Turbine Technician"
+  ],
+  "Emergency Services": [
+    "Coastguard",
+    "Firefighter"
+  ],
+  "Publishing and Writing": [
+    "Commissioning Editor",
+    "Copy Editor",
+    "Digital Content Editor",
+    "Literary Agent",
+    "Technical Author",
+    "Writer or Author"
+  ],
+  "Community Arts": [
+    "Community Arts Worker"
+  ],
+  "Community Work": [
+    "Community Learning and Development Officer",
+    "Youth Worker"
+  ],
+  "Music": [
+    "Composer or Songwriter",
+    "Musician - Classical",
+    "Musician - Popular",
+    "Teacher - Secondary School - Music"
+  ],
+  "Fashion or Textile Design": [
+    "Costume Designer",
+    "Fashion Designer",
+    "Tailor or Dressmaker",
+    "Teacher - Secondary School - Home Economics",
+    "Textile Designer"
+  ],
+  "Psychology and Counselling": [
+    "Counsellor",
+    "Dance Movement Psychotherapist",
+    "Psychologist",
+    "Psychologist - Clinical",
+    "Psychologist - Counselling",
+    "Psychologist - Educational",
+    "Psychologist - Forensic",
+    "Psychologist - Health",
+    "Psychologist - Occupational",
+    "Psychologist - Sport and Exercise",
+    "Psychotherapist"
+  ],
+  "Environmental and Rural Resource Management": [
+    "Countryside Ranger or Warden",
+    "Environmental Manager",
+    "Gamekeeper",
+    "Nature Conservationist"
+  ],
+  "Personal Services": [
+    "Crematorium Technician",
+    "Funeral Director",
+    "Shoe Repairer",
+    "Watch and Clock Maker or Repairer"
+  ],
+  "IT Security": [
+    "Cyber Security Analyst",
+    "Data Protection Officer",
+    "Forensic Computer Analyst"
+  ],
+  "Digital and Technology": [
+    "Cyber Security Analyst",
+    "Data Analyst",
+    "Data Scientist",
+    "Network Engineer",
+    "Software Engineer or Developer"
+  ],
+  "Vehicle Maintenance and Repair": [
+    "Cycle Mechanic",
+    "Glazing Technician",
+    "Motor Vehicle Technician",
+    "Motorcycle Technician",
+    "Tyre or Exhaust Fitter",
+    "Vehicle Body Repairer",
+    "Vehicle Breakdown Engineer",
+    "Vehicle Examiner",
+    "Vehicle MET Technician",
+    "Vehicle Parts Advisor",
+    "Vehicle Spray Painter"
+  ],
+  "Computing General": [
+    "Data Analyst",
+    "Data Scientist",
+    "Teacher - Secondary School - Computing"
+  ],
+  "Mathematics and Statistics": [
+    "Data Analyst",
+    "Data Scientist",
+    "Mathematician",
+    "Operational Researcher",
+    "Statistician",
+    "Teacher - Secondary School - Mathematics"
+  ],
+  "Distribution": [
+    "Delivery Driver",
+    "Forklift Truck Operator",
+    "Freight Forwarder",
+    "Logistics Manager",
+    "Lorry or LGV Driver",
+    "Postie",
+    "Removals Operative",
+    "Warehouse Operative"
+  ],
+  "Dentistry": [
+    "Dental Hygienist or Therapist",
+    "Dental Nurse",
+    "Dental Technician",
+    "Dentist",
+    "Orthodontist"
+  ],
+  "Offshore and Energy": [
+    "Derrickhand",
+    "Diver",
+    "Driller",
+    "Drilling Engineer",
+    "Gas Heating Engineer",
+    "Gas Service Engineer",
+    "Integrity Engineer",
+    "Mudlogger",
+    "Nuclear Engineer",
+    "Offshore Service Technician",
+    "Petroleum or Reservoir Engineer",
+    "Renewable Energy Engineer",
+    "Roustabout",
+    "ROV Pilot Technician",
+    "Subsea Engineer",
+    "Toolpusher",
+    "Waste Energy Engineer",
+    "Wind Turbine Technician"
+  ],
+  "Dietetics": [
+    "Dietetic Support Worker",
+    "Dietitian"
+  ],
+  "Music Technology": [
+    "Disc Jockey \u2013 DJ",
+    "Musical Instrument Technologist",
+    "Piano Tuner",
+    "Roadie",
+    "Sound Technician"
+  ],
+  "Ophthalmics and Orthoptics": [
+    "Dispensing Optician",
+    "Optometrist",
+    "Orthoptist"
+  ],
+  "Sport and Fitness": [
+    "Diver",
+    "Fitness Instructor",
+    "Gym Instructor",
+    "Lifeguard or Pool Attendant",
+    "Outdoor Activities Instructor or Leader",
+    "Personal Trainer",
+    "Sports Coach or Instructor",
+    "Sports Development Officer",
+    "Sports or Leisure Centre Assistant",
+    "Sports or Leisure Centre Manager",
+    "Swimming Teacher",
+    "Teacher - Secondary School - Physical Education",
+    "Yoga Teacher"
+  ],
+  "Medicine and Surgery": [
+    "Doctor \u2013 GP",
+    "Doctor \u2013 Hospital",
+    "Medical Pathologist",
+    "Surgeon"
+  ],
+  "Sea Transport": [
+    "Dynamic Positioning Operator",
+    "Merchant Navy Deck Officer",
+    "Merchant Navy Engineering Officer",
+    "Merchant Navy Rating",
+    "Port Operative",
+    "Waterway Operative"
+  ],
+  "Economics": [
+    "Economist"
+  ],
+  "Manufacturing General": [
+    "Engineering Operative",
+    "Optical Technician",
+    "Production Controller or Manager",
+    "Production Worker",
+    "Quality Control Technician"
+  ],
+  "Environment, Health and Safety": [
+    "Environment and Compliance Adviser",
+    "Environmental Specialist Decommissioning",
+    "ESG (Environmental, Social and Governance) Analyst",
+    "Health and Safety Officer"
+  ],
+  "Interior Design or Display": [
+    "Exhibition Designer",
+    "Interior Designer",
+    "Set Designer",
+    "Visual Merchandiser"
+  ],
+  "Clothing and Textiles": [
+    "Fabric Cutter",
+    "Garment or Textile Technologist",
+    "Pattern Cutter or Grader",
+    "Sewing Machinist",
+    "Textile Operative"
+  ],
+  "Facilities Management": [
+    "Facilities Manager",
+    "School Janitor"
+  ],
+  "Aquaculture and Fishing": [
+    "Fish Farm Manager",
+    "Fish Farm Worker",
+    "Fishing Vessel Worker"
+  ],
+  "Food Science and Technology": [
+    "Food Scientist or Technologist",
+    "Nutritionist",
+    "Teacher - Secondary School - Home Economics",
+    "Technical Brewer",
+    "Technical Distiller"
+  ],
+  "Arboriculture and Forestry": [
+    "Forest or Wildlife Manager",
+    "Forest or Wildlife Ranger",
+    "Forest Worker",
+    "Horticultural Scientist"
+  ],
+  "Earth Studies": [
+    "Geologist",
+    "Geoscientist",
+    "Meteorologist",
+    "Oceanographer",
+    "Teacher - Secondary School - Geography"
+  ],
+  "Subsurface Scientists": [
+    "Geologist",
+    "Geophysicist",
+    "Geoscientist",
+    "Offshore Chemist",
+    "Physicist",
+    "Reservoir Engineer (Energy)"
+  ],
+  "Nursing and Auxiliary Work": [
+    "Health Improvement Officer",
+    "Health Visitor or Public Health Nurse",
+    "Hospital Porter",
+    "Maternity Support Worker",
+    "Midwife",
+    "Nurse - Adult",
+    "Nurse - Child",
+    "Nurse - District",
+    "Nurse - General Practice",
+    "Nurse - Learning Disabilities",
+    "Nurse - Mental Health",
+    "Nursing Support Worker",
+    "Offshore Medic",
+    "Phlebotomist"
+  ],
+  "Transport and Logistics": [
+    "Helicopter Pilot",
+    "Logistics Manager"
+  ],
+  "Human Resource Management": [
+    "Human Resources Officer or Manager",
+    "Training and Competency Officer or Manager"
+  ],
+  "IT Support": [
+    "IT Helpdesk Analyst",
+    "IT Support Engineer"
+  ],
+  "Landscape Architecture": [
+    "Landscape Architect"
+  ],
+  "College or University Lecturing": [
+    "Lecturer - Further Education",
+    "Lecturer - Higher Education"
+  ],
+  "Printing": [
+    "Machine Printer",
+    "Pre-press Operator",
+    "Print Finisher or Bookbinder",
+    "Print Production Planner",
+    "Reprographic Assistant"
+  ],
+  "Politics": [
+    "Member of Parliament",
+    "Parliamentary Assistant",
+    "Teacher - Secondary School - Modern Studies"
+  ],
+  "Occupational Therapy": [
+    "Occupational Therapist",
+    "Occupational Therapy Support Worker"
+  ],
+  "Patent Work": [
+    "Patent Attorney",
+    "Patent Examiner"
+  ],
+  "Pharmacy": [
+    "Pharmacist",
+    "Pharmacy Support Worker",
+    "Pharmacy Technician"
+  ],
+  "Physiotherapy": [
+    "Physiotherapist",
+    "Physiotherapy Support Worker"
+  ],
+  "Podiatry": [
+    "Podiatrist",
+    "Podiatry Support Worker"
+  ],
+  "Prison Work": [
+    "Prison Officer"
+  ],
+  "Teaching": [
+    "Private Tutor",
+    "Teacher of English as a Foreign Language"
+  ],
+  "Other": [
+    "Private Tutor",
+    "Teacher of English as a Foreign Language"
+  ],
+  "Buying": [
+    "Procurement Administrator",
+    "Procurement Manager",
+    "Retail Buyer"
+  ],
+  "Radiography": [
+    "Radiographer - Diagnostic",
+    "Radiographer - Therapeutic",
+    "Radiography Support Worker"
+  ],
+  "Rail Transport": [
+    "Railway Customer Service Assistant",
+    "Railway Maintenance Engineering Technician - Distribution and Plant",
+    "Railway Maintenance Engineering Technician - Overhead Line",
+    "Railway Maintenance Engineering Technician - Signalling",
+    "Railway Maintenance Engineering Technician - Telecoms",
+    "Railway Maintenance Engineering Technician - Track",
+    "Signaller",
+    "Train Conductor",
+    "Train Driver",
+    "Train Maintenance Technician"
+  ],
+  "Category": [
+    "Occupation"
+  ],
+  "Speech Therapy": [
+    "Speech and Language Therapist",
+    "Speech and Language Therapy Support Worker"
+  ],
+  "Sports Science": [
+    "Sport and Exercise Scientist",
+    "Sports Therapist"
+  ],
+  "Sports Performance": [
+    "Sports Professional"
+  ],
+  "Primary School Teaching": [
+    "Teacher - Primary or Early Years"
+  ],
+  "Secondary School Teaching": [
+    "Teacher - Secondary School",
+    "Teacher - Secondary School - Art and Design",
+    "Teacher - Secondary School - Biology with Science",
+    "Teacher - Secondary School - Business Education",
+    "Teacher - Secondary School - Chemistry with Science",
+    "Teacher - Secondary School - Computing",
+    "Teacher - Secondary School - Design and Technology/Technological Education",
+    "Teacher - Secondary School - Drama",
+    "Teacher - Secondary School - English",
+    "Teacher - Secondary School - Gaelic",
+    "Teacher - Secondary School - Geography",
+    "Teacher - Secondary School - History",
+    "Teacher - Secondary School - Home Economics",
+    "Teacher - Secondary School - Mathematics",
+    "Teacher - Secondary School - Modern Foreign Languages",
+    "Teacher - Secondary School - Modern Studies",
+    "Teacher - Secondary School - Music",
+    "Teacher - Secondary School - Physical Education",
+    "Teacher - Secondary School - Physics with Science",
+    "Teacher - Secondary School - Religious Education"
+  ],
+  "English": [
+    "Teacher - Secondary School - English"
+  ],
+  "History": [
+    "Teacher - Secondary School - History"
+  ],
+  "Sociology": [
+    "Teacher - Secondary School - Modern Studies"
+  ],
+  "Religion": [
+    "Teacher - Secondary School - Religious Education"
+  ],
+  "Town and Regional Planning": [
+    "Town Planner"
+  ]
+}

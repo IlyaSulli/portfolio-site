@@ -3,11 +3,13 @@ import { FilterValue } from "@/components/text-gen-builder/types";
 export interface GeneratorContext {
     generatedFields: Record<string, any>;
     fieldFilters: Record<string, FilterValue[]>;
+    fieldMetadata: Record<string, Record<string, any>>; // Store extra info for linking fields
 }
 
 export interface GeneratorResult {
     value: any;
     displayValue?: string;
+    metadata?: Record<string, any>; // Extra info to pass to dependent generators
 }
 
 export function getFilterValue<T>(

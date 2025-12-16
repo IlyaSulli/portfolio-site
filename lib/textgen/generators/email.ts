@@ -1,9 +1,9 @@
 import { GeneratorContext, GeneratorResult, getFilterValue, randomElement, randomInt, generateHiddenName } from "./utils";
 
 // Default email domains by type
-const casualDomains = ["gmail.com", "yahoo.com", "outlook.com", "hotmail.com", "icloud.com", "protonmail.com"];
-const professionalDomains = ["company.com", "business.org", "corp.net", "enterprise.io", "professional.com"];
-const suspiciousDomains = ["temp-mail.xyz", "guerrillamail.com", "throwaway.email", "fakeinbox.com", "10minutemail.net", "mailinator.com"];
+const casualDomains = ["gmail.com","googlemail.com", "yahoo.com", "outlook.com", "hotmail.com", "icloud.com", "protonmail.com"];
+const professionalDomains = ["gmail.com", "outlook.com", "company.com", "business.org", "corp.net", "enterprise.io", "professional.com", "work.email", "office365.com", "business.net", "corporate.com", "company.org", "firm.com", "consultancy.co.uk", "agency.com", "solutions.io", "ventures.com", "group.net"];
+const suspiciousDomains = ["temp-mail.xyz", "guerrillamail.com", "throwaway.email", "fakeinbox.com", "10minutemail.net", "mailinator.com", "trashmail.com", "yopmail.com", "maildrop.cc", "sharklasers.com", "spam4.me", "tempmail.com", "minutemail.com", "guerrillamail.info", "tempmail.xyz", "fakeemail.net"];
 
 async function generateEmailPrefix(context: GeneratorContext, type: string): Promise<string> {
     // Get names from context or generate hidden ones for consistency

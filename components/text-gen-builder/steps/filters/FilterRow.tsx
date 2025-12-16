@@ -1,4 +1,4 @@
-import { createElement } from "react";
+import { createElement, useState, useEffect } from "react";
 import { Button } from "@heroui/button";
 import { Tooltip } from "@heroui/tooltip";
 import { X, Info } from "lucide-react";
@@ -14,11 +14,14 @@ import {
     BooleanInput,
     TextInput,
 } from "./FilterInputs";
+import { getCategoriesForClusters } from "@/lib/textgen/generators/occupation";
 
 interface FilterRowProps {
     field: TemplateField;
     filter: FilterValue;
     filterSchema: any;
+    allFilters: FilterValue[];
+    fullSchema: Record<string, any>;
     isRequired: boolean;
     minItems: number;
     onValueChange: (value: any) => void;
@@ -95,6 +98,8 @@ export default function FilterRow({
     field,
     filter,
     filterSchema,
+    allFilters,
+    fullSchema,
     isRequired,
     minItems,
     onValueChange,
@@ -103,6 +108,32 @@ export default function FilterRow({
     onAddChip,
 }: FilterRowProps) {
     const tooltipContent = filterSchema?.tooltip || filterSchema?.description || "";
+    const [dynamicAllowedValues, setDynamicAllowedValues] = useState<string[] | null>(null);
+
+    // Handle dynamic values based on other filters
+    useEffect(() => {
+        const loadDynamicValues = async () => {
+            if (filterSchema?.dynamicValues === 'cluster') {
+                // Get cluster filter value
+                const clusterFilter = allFilters.find(f => f.filterKey === 'cluster');
+                const selectedClusters = clusterFilter?.value as string[] || [];
+                
+                if (selectedClusters.length > 0) {
+                    const categories = await getCategoriesForClusters(selectedClusters);
+                    setDynamicAllowedValues(categories);
+                } else {
+                    setDynamicAllowedValues([]);
+                }
+            }
+        };
+        
+        loadDynamicValues();
+    }, [filterSchema?.dynamicValues, allFilters]);
+
+    // Merge dynamic values into filter schema if available
+    const effectiveFilterSchema = dynamicAllowedValues !== null
+        ? { ...filterSchema, allowedValues: dynamicAllowedValues }
+        : filterSchema;
 
     const RemoveButton = () => !isRequired ? (
         <Button
@@ -131,7 +162,7 @@ export default function FilterRow({
                 <span className="text-sm text-zinc-400 mt-2.5">is</span>
                 <div className="flex-1 min-w-0">
                     <FilterValueInput
-                        filterSchema={filterSchema}
+                        filterSchema={effectiveFilterSchema}
                         currentValue={filter.value}
                         isRequired={isRequired}
                         minItems={minItems}
@@ -163,7 +194,7 @@ export default function FilterRow({
                     <span className="text-sm text-zinc-400 whitespace-nowrap mt-2.5">is</span>
                     <div className="flex-1 min-w-0">
                         <FilterValueInput
-                            filterSchema={filterSchema}
+                            filterSchema={effectiveFilterSchema}
                             currentValue={filter.value}
                             isRequired={isRequired}
                             minItems={minItems}

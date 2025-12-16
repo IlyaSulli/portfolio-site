@@ -62,9 +62,27 @@ export function isFilterConditionallyRequired(
 // Get required filter keys for a field
 export function getRequiredFilters(field: TemplateField): string[] {
     const schema = getFilterSchemaForField(field);
-    return Object.entries(schema)
-        .filter(([_, filterDef]) => (filterDef as any).required === true)
-        .map(([key]) => key);
+    const required: string[] = [];
+    
+    for (const [key, filterDef] of Object.entries(schema)) {
+        const def = filterDef as { required?: boolean; adds?: string[] };
+        
+        // Direct required
+        if (def.required === true) {
+            required.push(key);
+        }
+        
+        // Also add filters from "adds" of required filters
+        if (def.required === true && def.adds) {
+            for (const addKey of def.adds) {
+                if (!required.includes(addKey)) {
+                    required.push(addKey);
+                }
+            }
+        }
+    }
+    
+    return required;
 }
 
 // Get default value for a filter based on its schema

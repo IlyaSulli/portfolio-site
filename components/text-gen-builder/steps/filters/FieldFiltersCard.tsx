@@ -59,6 +59,8 @@ export default function FieldFiltersCard({
                                 field={field}
                                 filter={filter}
                                 filterSchema={filterSchema}
+                                allFilters={existingFilters}
+                                fullSchema={schema}
                                 isRequired={isRequired}
                                 minItems={minItems}
                                 onValueChange={(value) => onUpdateFilterValue(filter.filterKey, value)}

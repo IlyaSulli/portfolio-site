@@ -17,6 +17,8 @@ import { generateToggle } from "./toggle";
 import { generateSelect } from "./select";
 import { generateMultiselect } from "./multiselect";
 import { generateNumber } from "./number";
+import { generateCompany } from "./company";
+import { generateOccupation } from "./occupation";
 
 // Map field original names to generator functions
 const generators: Record<string, (ctx: GeneratorContext, fieldId: string) => Promise<GeneratorResult>> = {
@@ -37,6 +39,8 @@ const generators: Record<string, (ctx: GeneratorContext, fieldId: string) => Pro
     "Select Field": generateSelect,
     "Multi-Select Field": generateMultiselect,
     "Number Field": generateNumber,
+    "Company": generateCompany,
+    "Occupation": generateOccupation,
 };
 
 // Field generation order - fields that depend on others come later
@@ -49,6 +53,8 @@ const generationOrder = [
     "Weight",
     "Hobby",
     "Education Level",
+    "Occupation",    // Independent, but generates cluster for Company
+    "Company",       // May use Occupation's cluster for industry linking
     "Username",      // May use firstname/lastname
     "Email",         // May use firstname/lastname
     "Phone Number",
@@ -85,6 +91,7 @@ export async function generateRow(
     const context: GeneratorContext = {
         generatedFields: {},
         fieldFilters: template.filters || {},
+        fieldMetadata: {},
     };
     
     const result: GeneratedRow = {
@@ -105,6 +112,11 @@ export async function generateRow(
                 
                 // Store in context for dependent fields
                 context.generatedFields[field.id] = generated.value;
+                
+                // Store metadata if provided (for field linking)
+                if (generated.metadata) {
+                    context.fieldMetadata[field.originalName] = generated.metadata;
+                }
                 
                 // Also store by original name for easier lookup
                 const originalNameKey = field.originalName.toLowerCase().replace(/\s+/g, '');
@@ -169,6 +181,7 @@ export async function regenerateField(
     const context: GeneratorContext = {
         generatedFields: {},
         fieldFilters: template.filters || {},
+        fieldMetadata: {},
     };
     
     // Populate context with existing values

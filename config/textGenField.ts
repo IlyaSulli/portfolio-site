@@ -1,4 +1,4 @@
-import { BadgeCheck, User, Users, Smile, AtSign, Cake, Image, MapPinned, BriefcaseBusiness, ToolCase, Ruler, Weight, Eye, KeyRound, SquareAsterisk, Building2, GraduationCap, Phone, ToggleRight, CircleCheck, SquareCheck, Hash, IdCardLanyard } from "lucide-react";
+import { BadgeCheck, User, Users, Smile, AtSign, Cake, Image, MapPinned, BriefcaseBusiness, Briefcase, Building2, ToolCase, Ruler, Weight, Eye, KeyRound, SquareAsterisk, GraduationCap, Phone, ToggleRight, CircleCheck, SquareCheck, Hash, IdCardLanyard } from "lucide-react";
 
 export const TextGenField = {
     username: { 
@@ -134,7 +134,73 @@ export const TextGenField = {
     },
     // profilepic: { name: "Profile Picture", icon: Image },
     // location: { name: "Location", icon: MapPinned },
-    // occupation: { name: "Occupation", icon: BriefcaseBusiness },
+    occupation: { 
+        name: "Occupation", 
+        icon: BriefcaseBusiness,
+        filterSchema: {
+            cluster: {
+                name: "Industry Cluster",
+                type: "array",
+                required: true,
+                default: [
+                    "Business & Administration",
+                    "Technology & Computing",
+                    "Healthcare & Medicine"
+                ],
+                allowedValues: [
+                    "Business & Administration",
+                    "Construction & Property",
+                    "Creative & Media",
+                    "Education & Public Services",
+                    "Energy & Offshore",
+                    "Healthcare & Medicine",
+                    "Manufacturing & Engineering",
+                    "Science & Environment",
+                    "Technology & Computing",
+                    "Transport & Hospitality"
+                ],
+                tooltip: "Industry clusters to select occupations from",
+                minItems: 1,
+                adds: ["category"] // Auto-adds category filter
+            },
+            category: {
+                name: "Category",
+                type: "array",
+                required: true,
+                tooltip: "Specific job categories within selected clusters",
+                dynamicValues: "cluster", // Values populated based on cluster selection
+                linkedTo: "cluster", // When all categories of a cluster are removed, remove the cluster
+                minItems: 1
+            }
+        }
+    },
+    company: {
+        name: "Company",
+        icon: Building2,
+        filterSchema: {
+            industry: {
+                name: "Industry",
+                type: "array",
+                default: ["General", "Tech", "Finance"],
+                allowedValues: ["General", "Tech", "Finance", "Healthcare", "Creative", "Manufacturing", "Consulting", "Retail", "Energy", "Education"],
+                tooltip: "Industry type for company name style",
+                minItems: 1
+            },
+            style: {
+                name: "Name Style",
+                type: "select",
+                default: "Mixed",
+                allowedValues: ["Mixed", "Prefix + Root", "Single Word", "Initials"],
+                tooltip: "Style of company name generation"
+            },
+            includeSuffix: {
+                name: "Include Suffix",
+                type: "boolean",
+                default: true,
+                tooltip: "Add business suffix (Inc, LLC, Ltd, etc.)"
+            }
+        }
+    },
     hobby: { 
         name: "Hobby", 
         icon: ToolCase ,

@@ -6,6 +6,7 @@ import {
     getDefaultFilterValue,
     isFilterConditionallyRequired,
 } from "./utils";
+import { getCategoriesForClusters } from "@/lib/textgen/generators/occupation";
 
 export function useFiltersManager(
     fields: TemplateField[],
@@ -14,34 +15,69 @@ export function useFiltersManager(
 ) {
     // Auto-add required filters for all fields on mount and when fields change
     useEffect(() => {
-        let needsUpdate = false;
-        const newFilters = { ...fieldFilters };
+        const initializeFilters = async () => {
+            let needsUpdate = false;
+            const newFilters = { ...fieldFilters };
 
-        fields.forEach((field) => {
-            const requiredFilterKeys = getRequiredFilters(field);
-            const existingFilterKeys = (newFilters[field.id] || []).map(f => f.filterKey);
-            const schema = getFilterSchemaForField(field);
+            for (const field of fields) {
+                const requiredFilterKeys = getRequiredFilters(field);
+                const schema = getFilterSchemaForField(field);
+                
+                if (!newFilters[field.id]) {
+                    newFilters[field.id] = [];
+                }
 
-            requiredFilterKeys.forEach((filterKey) => {
-                if (!existingFilterKeys.includes(filterKey)) {
+                // First pass: add all non-dynamicValues filters
+                for (const filterKey of requiredFilterKeys) {
+                    const existingFilterKeys = newFilters[field.id].map(f => f.filterKey);
+                    if (existingFilterKeys.includes(filterKey)) continue;
+                    
                     const filterSchema = schema[filterKey];
+                    // Skip dynamic filters in first pass
+                    if (filterSchema?.dynamicValues) continue;
+                    
                     const defaultValue = getDefaultFilterValue(filterSchema);
-
-                    if (!newFilters[field.id]) {
-                        newFilters[field.id] = [];
-                    }
                     newFilters[field.id] = [
                         ...newFilters[field.id],
                         { filterKey, value: defaultValue }
                     ];
                     needsUpdate = true;
                 }
-            });
-        });
 
-        if (needsUpdate) {
-            updateFilters(newFilters);
-        }
+                // Second pass: add dynamicValues filters (like category based on cluster)
+                for (const filterKey of requiredFilterKeys) {
+                    const existingFilterKeys = newFilters[field.id].map(f => f.filterKey);
+                    if (existingFilterKeys.includes(filterKey)) continue;
+                    
+                    const filterSchema = schema[filterKey];
+                    // Only process dynamic filters in second pass
+                    if (!filterSchema?.dynamicValues) continue;
+                    
+                    let defaultValue: any = [];
+                    
+                    // Get value from the linked filter
+                    const linkedFilterKey = filterSchema.dynamicValues;
+                    const linkedFilter = newFilters[field.id].find(f => f.filterKey === linkedFilterKey);
+                    const linkedValues = (linkedFilter?.value as string[]) || [];
+                    
+                    if (linkedValues.length > 0 && linkedFilterKey === 'cluster') {
+                        defaultValue = await getCategoriesForClusters(linkedValues);
+                    }
+                    
+                    newFilters[field.id] = [
+                        ...newFilters[field.id],
+                        { filterKey, value: defaultValue }
+                    ];
+                    needsUpdate = true;
+                }
+            }
+
+            if (needsUpdate) {
+                updateFilters(newFilters);
+            }
+        };
+        
+        initializeFilters();
     }, [fields]);
 
     // Get available filters for a field
@@ -57,11 +93,21 @@ export function useFiltersManager(
             }
         });
         
-        return Object.entries(schema).filter(([key, filterDef]) => 
-            !existingFilterKeys.includes(key) && 
-            !(filterDef as any).required &&
-            !controlledByAdds.has(key)
-        );
+        return Object.entries(schema).filter(([key, filterDef]) => {
+            const def = filterDef as { required?: boolean; requires?: string[] };
+            // Already added
+            if (existingFilterKeys.includes(key)) return false;
+            // Required filters auto-add, don't show in dropdown
+            if (def.required) return false;
+            // Controlled by adds
+            if (controlledByAdds.has(key)) return false;
+            // Has requires dependency - only show if all required filters exist
+            if (def.requires && def.requires.length > 0) {
+                const hasAllRequired = def.requires.every(req => existingFilterKeys.includes(req));
+                if (!hasAllRequired) return false;
+            }
+            return true;
+        });
     }, [fieldFilters]);
 
     // Check if a filter is required
@@ -114,8 +160,8 @@ export function useFiltersManager(
         });
     }, [fieldFilters, updateFilters]);
 
-    // Update filter value with special handling for boolean toggles
-    const handleUpdateFilterValue = useCallback((fieldId: string, filterKey: string, value: any) => {
+    // Update filter value with special handling for linked filters
+    const handleUpdateFilterValue = useCallback(async (fieldId: string, filterKey: string, value: any) => {
         const field = fields.find(f => f.id === fieldId);
         if (!field) {
             updateFilters({
@@ -132,6 +178,8 @@ export function useFiltersManager(
             type?: string;
             adds?: string[];
             requires?: string[];
+            linkedTo?: string;
+            dynamicValues?: string;
         };
         
         let newFieldFilters = (fieldFilters[fieldId] || []).map(f => 
@@ -154,6 +202,63 @@ export function useFiltersManager(
             } else if (value === false && filterSchema.adds) {
                 // Only remove for 'adds', not 'requires'
                 newFieldFilters = newFieldFilters.filter(f => !filterSchema.adds!.includes(f.filterKey));
+            }
+        }
+        
+        // When cluster changes, auto-add all categories for newly added clusters
+        if (filterKey === 'cluster') {
+            const newClusters = value as string[];
+            const oldClusterFilter = fieldFilters[fieldId]?.find(f => f.filterKey === 'cluster');
+            const oldClusters = (oldClusterFilter?.value as string[]) || [];
+            const categoryFilter = newFieldFilters.find(f => f.filterKey === 'category');
+            const currentCategories = (categoryFilter?.value as string[]) || [];
+            
+            // Find newly added clusters
+            const addedClusters = newClusters.filter(c => !oldClusters.includes(c));
+            
+            if (addedClusters.length > 0) {
+                // Get categories for newly added clusters and add them
+                const newCategories = await getCategoriesForClusters(addedClusters);
+                const updatedCategories = Array.from(new Set([...currentCategories, ...newCategories]));
+                
+                newFieldFilters = newFieldFilters.map(f => 
+                    f.filterKey === 'category' ? { ...f, value: updatedCategories } : f
+                );
+            }
+            
+            // Find removed clusters and remove their categories
+            const removedClusters = oldClusters.filter(c => !newClusters.includes(c));
+            if (removedClusters.length > 0) {
+                const removedCategories = await getCategoriesForClusters(removedClusters);
+                const filteredCategories = currentCategories.filter(c => !removedCategories.includes(c));
+                
+                newFieldFilters = newFieldFilters.map(f => 
+                    f.filterKey === 'category' ? { ...f, value: filteredCategories } : f
+                );
+            }
+        }
+        
+        // When category changes, check if any cluster has no categories left - if so, remove that cluster
+        if (filterKey === 'category' && filterSchema?.linkedTo === 'cluster') {
+            const selectedCategories = value as string[];
+            const clusterFilter = newFieldFilters.find(f => f.filterKey === 'cluster');
+            const selectedClusters = (clusterFilter?.value as string[]) || [];
+            
+            // Check each cluster to see if it still has at least one category selected
+            const clustersToKeep: string[] = [];
+            for (const cluster of selectedClusters) {
+                const clusterCategories = await getCategoriesForClusters([cluster]);
+                const hasSelectedCategory = clusterCategories.some(cat => selectedCategories.includes(cat));
+                if (hasSelectedCategory) {
+                    clustersToKeep.push(cluster);
+                }
+            }
+            
+            // Update clusters if any were removed
+            if (clustersToKeep.length !== selectedClusters.length) {
+                newFieldFilters = newFieldFilters.map(f => 
+                    f.filterKey === 'cluster' ? { ...f, value: clustersToKeep } : f
+                );
             }
         }
         
