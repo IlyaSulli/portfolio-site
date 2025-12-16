@@ -25,7 +25,7 @@ export const TextGenField = {
             allowedChar: {
                 name: "Allowed Characters",
                 type: "array",
-                default: ["Lowercase (abc)", "Numbers (123)"],
+                default: ["Lowercase (abc)", "Uppercase (ABC)", "Numbers (123)", "Underscores (_)", "Hyphens (-)", "Dots (.)"],
                 allowedValues: ["Lowercase (abc)", "Uppercase (ABC)", "Numbers (123)", "Underscores (_)", "Hyphens (-)", "Dots (.)"],
                 tooltip: "Character types allowed in the username",
                 minItems: 1
@@ -112,7 +112,7 @@ export const TextGenField = {
                 name: "Use Only Custom Domains",
                 type: "boolean",
                 default: false,
-                tooltip: "If enabled, only the custom domains will be used (requires at least one custom domain)",
+                tooltip: "Only the custom domains will be used",
                 requires: ["customDomains"],
                 requiresMinItems: { "customDomains": 1 }
             }
