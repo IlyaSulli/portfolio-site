@@ -28,11 +28,11 @@ export default function DefaultLayout({
       <ClientSpeedInsights />
       <Head />
       <AppNavbar />
-      <main className="container mx-auto max-w-7xl px-6 flex-grow pt-16">
+      <main className="container mx-auto max-w-7xl px-6 flex-grow pt-16 relative z-10">
         {children}
       </main>
-      <footer className="w-full flex items-center justify-center py-3">
-        <span className="text-default-600">designed and made with 💖</span>
+      <footer className="w-full flex items-center justify-center py-3 flex-col relative z-10">
+        <span className="text-default-600 px-8">Designed and made with 💖 || This site uses annonymous usage statistics</span>
       </footer>
     </div>
   );

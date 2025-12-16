@@ -1,0 +1,27 @@
+{
+  "prefixes": {
+    "Tech": ["Tech", "Digital", "Cyber", "Data", "Cloud", "Net", "Web", "Code", "Byte", "Pixel", "Logic", "Smart", "AI", "Quantum"],
+    "Finance": ["Capital", "Trust", "Wealth", "Asset", "Equity", "Prime", "Sterling", "Crown", "Summit", "Peak"],
+    "Healthcare": ["Health", "Med", "Care", "Life", "Vital", "Wellness", "Bio", "Cure", "Heal", "Pure"],
+    "Creative": ["Creative", "Design", "Art", "Bright", "Vision", "Studio", "Pixel", "Bold", "Fresh", "Vivid"],
+    "Manufacturing": ["Steel", "Iron", "Tech", "Pro", "Prime", "Core", "Build", "Forge", "Metal", "Power"],
+    "Consulting": ["Strategic", "Global", "Elite", "Premier", "Peak", "Prime", "Expert", "Pro", "Master", "Alpha"],
+    "Retail": ["Shop", "Store", "Market", "Trade", "Buy", "Deal", "Value", "Choice", "Best", "Top"],
+    "Energy": ["Power", "Energy", "Green", "Solar", "Wind", "Eco", "Clean", "Volt", "Fuel", "Grid"],
+    "Education": ["Learn", "Edu", "Academic", "Scholar", "Bright", "Mind", "Knowledge", "Skill", "Study", "Wise"],
+    "General": ["Global", "United", "Premier", "Elite", "First", "Prime", "Alpha", "Apex", "Nova", "Zenith"]
+  },
+  "roots": {
+    "Tech": ["Systems", "Solutions", "Labs", "Works", "Tech", "Soft", "Wave", "Link", "Hub", "Core", "Base", "Stack"],
+    "Finance": ["Financial", "Investments", "Partners", "Advisors", "Group", "Holdings", "Capital", "Fund", "Bank", "Trust"],
+    "Healthcare": ["Health", "Medical", "Pharma", "Care", "Sciences", "Therapeutics", "Clinic", "Labs", "Bio", "Diagnostics"],
+    "Creative": ["Media", "Studios", "Creative", "Design", "Agency", "Productions", "Arts", "Works", "Lab", "House"],
+    "Manufacturing": ["Industries", "Manufacturing", "Works", "Products", "Fabrication", "Engineering", "Systems", "Corp", "Mills", "Factory"],
+    "Consulting": ["Consulting", "Advisors", "Partners", "Associates", "Group", "Services", "Solutions", "Strategy", "Management", "Insights"],
+    "Retail": ["Retail", "Stores", "Market", "Trading", "Commerce", "Goods", "Supply", "Mart", "Outlet", "Direct"],
+    "Energy": ["Energy", "Power", "Renewables", "Resources", "Utilities", "Grid", "Electric", "Fuels", "Generation", "Systems"],
+    "Education": ["Education", "Academy", "Institute", "Learning", "Training", "School", "University", "College", "Center", "Foundation"],
+    "General": ["Group", "Corp", "Inc", "Enterprises", "Holdings", "Industries", "International", "Worldwide", "Associates", "Partners"]
+  },
+  "suffixes": ["Inc", "LLC", "Ltd", "Corp", "Co", "Group", "Holdings", "International", "Global", "Solutions", "Services", "Partners", "Associates", "Enterprises", "Industries", ""]
+}
