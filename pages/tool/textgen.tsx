@@ -9,6 +9,120 @@ import TextGenTemplateList from "@/components/text-gen-template-list";
 import TextGenFilter from "@/components/text-gen-filter";
 import { templates } from "@/config/textGenTemplates";
 import TemplateBuilder from "@/components/text-gen-builder";
+import StepGenerator from "@/components/text-gen-builder/steps/generator";
+import { TextGenField } from "@/config/textGenField";
+import { Template, TemplateField } from "@/components/text-gen-builder/types";
+
+// Helper function to convert stored template to generator Template format
+function convertToGeneratorTemplate(
+    templateData: any, 
+    isUserTemplate: boolean
+): Template | null {
+    if (!templateData) return null;
+    
+    let fields: TemplateField[] = [];
+    let filters: Record<string, any[]> = {};
+    
+    if (isUserTemplate) {
+        // User templates have fields array with id, name, originalName
+        fields = (templateData.fields || []).map((field: any) => {
+            const originalField = Object.values(TextGenField).find(
+                f => f.name === field.originalName
+            );
+            return {
+                id: field.id,
+                name: field.name,
+                originalName: field.originalName,
+                icon: originalField?.icon || TextGenField.username.icon,
+            };
+        });
+        filters = templateData.filters || {};
+    } else {
+        // Built-in templates have parameters array with key
+        fields = (templateData.parameters || []).map((param: any, index: number) => {
+            const fieldDef = TextGenField[param.key as keyof typeof TextGenField];
+            const fieldId = `${param.key}-${index}`;
+            
+            // Convert parameter filters to our filter format
+            if (param.filters && fieldDef) {
+                const filterValues: any[] = [];
+                Object.entries(param.filters).forEach(([filterKey, value]) => {
+                    filterValues.push({ filterKey, value });
+                });
+                if (filterValues.length > 0) {
+                    filters[fieldId] = filterValues;
+                }
+            }
+            
+            return {
+                id: fieldId,
+                name: fieldDef?.name || param.key,
+                originalName: fieldDef?.name || param.key,
+                icon: fieldDef?.icon || TextGenField.username.icon,
+            };
+        });
+    }
+    
+    return {
+        name: templateData.name || 'Untitled Template',
+        fields,
+        filters,
+        icon: templateData.icon,
+        color: templateData.color,
+    };
+}
+
+// Generate Tab Component
+function GenerateTab({ 
+    selectedIndex, 
+    selectedUserTemplate 
+}: { 
+    selectedIndex: number | null; 
+    selectedUserTemplate: string | null;
+}) {
+    const [userTemplates, setUserTemplates] = useState<any[]>([]);
+    
+    useEffect(() => {
+        // Load user templates from localStorage
+        const stored = localStorage.getItem('textGenUserTemplates');
+        if (stored) {
+            setUserTemplates(JSON.parse(stored));
+        }
+    }, []);
+    
+    // Determine which template to use
+    let templateData: any = null;
+    let isUserTemplate = false;
+    
+    if (selectedUserTemplate) {
+        templateData = userTemplates.find(t => t.id === selectedUserTemplate);
+        isUserTemplate = true;
+    } else if (selectedIndex !== null) {
+        templateData = templates[selectedIndex];
+        isUserTemplate = false;
+    }
+    
+    const template = convertToGeneratorTemplate(templateData, isUserTemplate);
+    
+    if (!template) {
+        return (
+            <div className="flex flex-col items-center justify-center py-16 backdrop-blur-md bg-white/20 dark:bg-black/20 border border-white/30 dark:border-white/10 rounded-2xl shadow-lg">
+                <div className="text-center">
+                    <h3 className="text-xl font-semibold mb-2">No Template Selected</h3>
+                    <p className="text-zinc-500 dark:text-zinc-400">
+                        Select a template from the Templates tab to start generating data.
+                    </p>
+                </div>
+            </div>
+        );
+    }
+    
+    return (
+        <div className="backdrop-blur-md bg-white/20 dark:bg-black/20 border border-white/30 dark:border-white/10 px-2 md:px-8 py-6 md:py-8 rounded-2xl shadow-lg">
+            <StepGenerator template={template} />
+        </div>
+    );
+}
 
 const GRADIENTS = {
     light: {
@@ -130,8 +244,7 @@ export default function TextGenerator(){
                                     <div className="justify-between flex-col sm:flex-row flex pb-4">
                                         <span className="text-2xl font-semibold pb-4 sm:pb-0">Templates</span>
                                         <Button 
-                                            color="primary" 
-                                            variant="flat" 
+                                            color="primary"  
                                             startContent={<Plus size={16} />}
                                             onPress={() => setUseAdvancedBuilder(true)}
                                         >
@@ -155,7 +268,10 @@ export default function TextGenerator(){
                         </Tab>
                         
                         <Tab key="generate" title="Generate">
-                            <p>Generate here</p>
+                            <GenerateTab 
+                                selectedIndex={selectedIndex}
+                                selectedUserTemplate={selectedUserTemplate}
+                            />
                         </Tab>
                     </Tabs>
                 </div>
