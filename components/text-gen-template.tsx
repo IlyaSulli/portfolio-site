@@ -15,8 +15,11 @@ export default function TextGenTemplate({
         return (
             <div className="flex flex-col p-4 align-top">
                 <div>
-                    <div className="inline-flex p-3 rounded-lg" style={{ backgroundColor: iconHexColor }}>
-                        <Icon size={24} color="white"/>
+                    <div 
+                        className="inline-flex p-3 rounded-lg" 
+                        style={{ backgroundColor: `${iconHexColor}20` }}
+                    >
+                        <Icon size={24} color={iconHexColor}/>
                     </div>
                 </div>
                 
@@ -28,8 +31,11 @@ export default function TextGenTemplate({
     return (
         <div className="flex flex-col p-4 align-top">
             <div>
-                <div className="inline-flex p-3 rounded-lg" style={{ backgroundColor: iconHexColor }}>
-                    <Icon size={24} color="white"/>
+                <div 
+                    className="inline-flex p-3 rounded-lg" 
+                    style={{ backgroundColor: `${iconHexColor}20` }}
+                >
+                    <Icon size={24} color={iconHexColor}/>
                 </div>
             </div>
             
