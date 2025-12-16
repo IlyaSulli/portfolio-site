@@ -1,15 +1,13 @@
 import DefaultLayout from "@/layouts/default";
 import { title } from "@/components/primitives";
-import {Tabs, Tab} from "@heroui/tabs";
 import { Button } from "@heroui/button";
-import { Plus, ArrowLeft } from "lucide-react";
+import { Plus, ArrowRight, ArrowLeft } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import TextGenTemplateList from "@/components/text-gen-template-list";
-import TextGenFilter from "@/components/text-gen-filter";
-import { templates } from "@/config/textGenTemplates";
 import TemplateBuilder from "@/components/text-gen-builder";
 import StepGenerator from "@/components/text-gen-builder/steps/generator";
+import { templates } from "@/config/textGenTemplates";
 import { TextGenField } from "@/config/textGenField";
 import { Template, TemplateField } from "@/components/text-gen-builder/types";
 
@@ -72,58 +70,6 @@ function convertToGeneratorTemplate(
     };
 }
 
-// Generate Tab Component
-function GenerateTab({ 
-    selectedIndex, 
-    selectedUserTemplate 
-}: { 
-    selectedIndex: number | null; 
-    selectedUserTemplate: string | null;
-}) {
-    const [userTemplates, setUserTemplates] = useState<any[]>([]);
-    
-    useEffect(() => {
-        // Load user templates from localStorage
-        const stored = localStorage.getItem('textGenUserTemplates');
-        if (stored) {
-            setUserTemplates(JSON.parse(stored));
-        }
-    }, []);
-    
-    // Determine which template to use
-    let templateData: any = null;
-    let isUserTemplate = false;
-    
-    if (selectedUserTemplate) {
-        templateData = userTemplates.find(t => t.id === selectedUserTemplate);
-        isUserTemplate = true;
-    } else if (selectedIndex !== null) {
-        templateData = templates[selectedIndex];
-        isUserTemplate = false;
-    }
-    
-    const template = convertToGeneratorTemplate(templateData, isUserTemplate);
-    
-    if (!template) {
-        return (
-            <div className="flex flex-col items-center justify-center py-16 backdrop-blur-md bg-white/20 dark:bg-black/20 border border-white/30 dark:border-white/10 rounded-2xl shadow-lg">
-                <div className="text-center">
-                    <h3 className="text-xl font-semibold mb-2">No Template Selected</h3>
-                    <p className="text-zinc-500 dark:text-zinc-400">
-                        Select a template from the Templates tab to start generating data.
-                    </p>
-                </div>
-            </div>
-        );
-    }
-    
-    return (
-        <div className="backdrop-blur-md bg-white/20 dark:bg-black/20 border border-white/30 dark:border-white/10 px-2 md:px-8 py-6 md:py-8 rounded-2xl shadow-lg">
-            <StepGenerator template={template} />
-        </div>
-    );
-}
-
 const GRADIENTS = {
     light: {
         primary: 'radial-gradient(circle, rgb(96 165 250), rgb(59 130 246))',
@@ -144,8 +90,9 @@ export default function TextGenerator(){
     const [editingTemplate, setEditingTemplate] = useState<any>(null);
     const [scrollY, setScrollY] = useState(0);
     const [isMounted, setIsMounted] = useState(false);
+    const [viewMode, setViewMode] = useState<'templates' | 'generate'>('templates');
+    const [userTemplates, setUserTemplates] = useState<any[]>([]);
     const { theme } = useTheme();
-    const selectedTemplate = selectedIndex !== null ? templates[selectedIndex] : null;
     const isDark = theme === 'dark';
     const gradients = isDark ? GRADIENTS.dark : GRADIENTS.light;
 
@@ -156,6 +103,14 @@ export default function TextGenerator(){
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // Load user templates from localStorage
+    useEffect(() => {
+        const stored = localStorage.getItem('textGenUserTemplates');
+        if (stored) {
+            setUserTemplates(JSON.parse(stored));
+        }
+    }, [viewMode]); // Reload when switching back to templates
+
     const handleEditTemplate = (template: any) => {
         setEditingTemplate(template);
         setUseAdvancedBuilder(true);
@@ -165,6 +120,24 @@ export default function TextGenerator(){
         setUseAdvancedBuilder(false);
         setEditingTemplate(null);
     };
+
+    // Get the selected template for the generator
+    const getGeneratorTemplate = () => {
+        let templateData: any = null;
+        let isUserTemplate = false;
+        
+        if (selectedUserTemplate) {
+            templateData = userTemplates.find(t => t.id === selectedUserTemplate);
+            isUserTemplate = true;
+        } else if (selectedIndex !== null) {
+            templateData = templates[selectedIndex];
+            isUserTemplate = false;
+        }
+        
+        return convertToGeneratorTemplate(templateData, isUserTemplate);
+    };
+
+    const generatorTemplate = getGeneratorTemplate();
 
     return(
         <DefaultLayout>
@@ -232,24 +205,30 @@ export default function TextGenerator(){
                         <h1 className={`${title()} text-center`}>Text Generator</h1>
                         <span className="mt-4 text-center">Create high quality text, names and more for your designs.</span>
                     </div>
-                    <Tabs 
-                        aria-label="Generator Types"
-                        classNames={{
-                            tabList: "mt-16 p-2 opacity-90 backdrop-blur-md bg-white/20 dark:bg-black/20 border border-white/30 dark:border-white/10 shadow-lg",
-                        }}
-                    >
-                        <Tab key="templates" title="Templates">
-                            {!useAdvancedBuilder ? (
+                    <div className="mt-16">
+                        {viewMode === 'templates' ? (
+                            !useAdvancedBuilder ? (
                                 <div className="flex flex-col dark:bg-zinc-900/40 bg-zinc-100/40 backdrop-blur-lg px-8 py-8 rounded-2xl border border-white/10 dark:border-white/5">
                                     <div className="justify-between flex-col sm:flex-row flex pb-4">
                                         <span className="text-2xl font-semibold pb-4 sm:pb-0">Templates</span>
-                                        <Button 
-                                            color="primary"  
-                                            startContent={<Plus size={16} />}
-                                            onPress={() => setUseAdvancedBuilder(true)}
-                                        >
-                                            New Template
-                                        </Button>
+                                        <div className="flex gap-2">
+                                            <Button 
+                                                color="default"  
+                                                variant="flat"
+                                                startContent={<Plus size={16} />}
+                                                onPress={() => setUseAdvancedBuilder(true)}
+                                            >
+                                                New Template
+                                            </Button>
+                                            <Button 
+                                                color="primary"  
+                                                endContent={<ArrowRight size={16} />}
+                                                onPress={() => setViewMode('generate')}
+                                                isDisabled={selectedIndex === null && !selectedUserTemplate}
+                                            >
+                                                Next
+                                            </Button>
+                                        </div>
                                     </div>
                                     <TextGenTemplateList 
                                         selectedIndex={selectedIndex} 
@@ -264,16 +243,27 @@ export default function TextGenerator(){
                                     onCancel={handleCancelBuilder} 
                                     editingTemplate={editingTemplate}
                                 />
-                            )}
-                        </Tab>
-                        
-                        <Tab key="generate" title="Generate">
-                            <GenerateTab 
-                                selectedIndex={selectedIndex}
-                                selectedUserTemplate={selectedUserTemplate}
-                            />
-                        </Tab>
-                    </Tabs>
+                            )
+                        ) : (
+                            <div className="flex flex-col dark:bg-zinc-900/40 bg-zinc-100/40 backdrop-blur-lg px-8 py-8 rounded-2xl border border-white/10 dark:border-white/5">
+                                {generatorTemplate ? (
+                                    <StepGenerator 
+                                        template={generatorTemplate} 
+                                        onBack={() => setViewMode('templates')} 
+                                    />
+                                ) : (
+                                    <div className="flex flex-col items-center justify-center py-16">
+                                        <div className="text-center">
+                                            <h3 className="text-xl font-semibold mb-2">No Template Selected</h3>
+                                            <p className="text-zinc-500 dark:text-zinc-400">
+                                                Go back and select a template to start generating data.
+                                            </p>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </DefaultLayout> 

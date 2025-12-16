@@ -22,7 +22,8 @@ import {
     FileJson,
     FileText,
     Table,
-    Sparkles
+    Sparkles,
+    ArrowLeft
 } from "lucide-react";
 import { ICON_MAP } from "../builder/constants";
 import { createElement } from "react";
@@ -33,7 +34,7 @@ interface StepGeneratorProps {
 
 type ExportFormat = 'json' | 'csv' | 'txt';
 
-export default function StepGenerator({ template }: StepGeneratorProps) {
+export default function StepGenerator({ template, onBack }: StepGeneratorProps & { onBack?: () => void }) {
     const [rows, setRows] = useState<GeneratedRow[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isInitialLoad, setIsInitialLoad] = useState(true);
@@ -281,67 +282,82 @@ export default function StepGenerator({ template }: StepGeneratorProps) {
     return (
         <div className="flex flex-col w-full">
             {/* Header */}
-            <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center gap-3">
-                    <div 
-                        className="w-10 h-10 rounded-lg flex items-center justify-center"
-                        style={{ backgroundColor: `#${template.color || '3B82F6'}20` }}
-                    >
-                        {createElement(IconComponent, { 
-                            size: 20, 
-                            color: `#${template.color || '3B82F6'}` 
-                        })}
-                    </div>
-                    <div>
-                        <h2 className="text-xl font-semibold">{template.name || 'Untitled Template'}</h2>
-                        <p className="text-sm text-zinc-500">{rows.length} entries generated</p>
-                    </div>
-                </div>
-                
-                <div className="flex items-center gap-2">
-                    <Button
-                        variant="flat"
-                        startContent={<RefreshCw size={16} />}
-                        onPress={() => handleGenerate(5)}
-                        isLoading={isLoading}
-                    >
-                        Regenerate
-                    </Button>
-                    
-                    <Dropdown>
-                        <DropdownTrigger>
+            <div className="mb-6">
+                {/* On desktop: icon, name, and buttons all inline. On mobile: buttons stack below. */}
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                    <div className="flex items-center gap-3">
+                        {onBack && (
                             <Button
-                                color="primary"
-                                startContent={!isExporting && <Download size={16} />}
-                                isLoading={isExporting}
+                                isIconOnly
+                                variant="flat"
+                                color="default"
+                                onPress={onBack}
+                                aria-label="Back to templates"
+                                className="mr-1"
                             >
-                                Export
+                                <ArrowLeft size={18} />
                             </Button>
-                        </DropdownTrigger>
-                        <DropdownMenu aria-label="Export options">
-                            <DropdownItem
-                                key="json"
-                                startContent={<FileJson size={16} />}
-                                onPress={() => handleExport('json')}
-                            >
-                                Export as JSON
-                            </DropdownItem>
-                            <DropdownItem
-                                key="csv"
-                                startContent={<Table size={16} />}
-                                onPress={() => handleExport('csv')}
-                            >
-                                Export as CSV
-                            </DropdownItem>
-                            <DropdownItem
-                                key="txt"
-                                startContent={<FileText size={16} />}
-                                onPress={() => handleExport('txt')}
-                            >
-                                Export as TXT
-                            </DropdownItem>
-                        </DropdownMenu>
-                    </Dropdown>
+                        )}
+                        <div 
+                            className="w-10 h-10 rounded-lg flex items-center justify-center"
+                            style={{ backgroundColor: `#${template.color || '3B82F6'}20` }}
+                        >
+                            {createElement(IconComponent, { 
+                                size: 20, 
+                                color: `#${template.color || '3B82F6'}` 
+                            })}
+                        </div>
+                        <div>
+                            <h2 className="text-xl font-semibold">{template.name || 'Untitled Template'}</h2>
+                            <p className="text-sm text-zinc-500">{rows.length} entries generated</p>
+                        </div>
+                    </div>
+                    <div className="flex flex-col sm:flex-row gap-2 sm:gap-2 mt-2 sm:mt-0 sm:items-center">
+                        <Button
+                            variant="flat"
+                            startContent={<RefreshCw size={16} />}
+                            onPress={() => handleGenerate(5)}
+                            isLoading={isLoading}
+                            className="w-full sm:w-auto"
+                        >
+                            Regenerate
+                        </Button>
+                        <Dropdown>
+                            <DropdownTrigger>
+                                <Button
+                                    color="primary"
+                                    startContent={!isExporting && <Download size={16} />}
+                                    isLoading={isExporting}
+                                    className="w-full sm:w-auto"
+                                >
+                                    Export
+                                </Button>
+                            </DropdownTrigger>
+                            <DropdownMenu aria-label="Export options">
+                                <DropdownItem
+                                    key="json"
+                                    startContent={<FileJson size={16} />}
+                                    onPress={() => handleExport('json')}
+                                >
+                                    Export as JSON
+                                </DropdownItem>
+                                <DropdownItem
+                                    key="csv"
+                                    startContent={<Table size={16} />}
+                                    onPress={() => handleExport('csv')}
+                                >
+                                    Export as CSV
+                                </DropdownItem>
+                                <DropdownItem
+                                    key="txt"
+                                    startContent={<FileText size={16} />}
+                                    onPress={() => handleExport('txt')}
+                                >
+                                    Export as TXT
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown>
+                    </div>
                 </div>
             </div>
 

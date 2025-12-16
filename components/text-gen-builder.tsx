@@ -1,18 +1,15 @@
 import { Button } from "@heroui/button";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter } from "@heroui/modal";
+import { Tabs, Tab } from "@heroui/tabs";
+import { Badge } from "@heroui/badge";
 import { useState, useMemo } from "react";
 import { Template, FieldFilters } from "./text-gen-builder/types";
 import StepBuilder from "./text-gen-builder/steps/builder";
 import StepFilters, { validateRequiredFilters } from "./text-gen-builder/steps/filters";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { AlertCircle } from "lucide-react";
 import { TextGenField } from "@/config/textGenField";
 
-type Step = 'builder' | 'filters';
-
-const STEPS: { key: Step; title: string }[] = [
-    { key: 'builder', title: 'Build Template' },
-    { key: 'filters', title: 'Filters' },
-];
+type TabKey = 'builder' | 'filters';
 
 interface TemplateBuilderProps {
     onCancel?: () => void;
@@ -28,7 +25,7 @@ interface TemplateBuilderProps {
 }
 
 export default function TemplateBuilder({ onCancel, editingTemplate }: TemplateBuilderProps) {
-    const [currentStep, setCurrentStep] = useState<Step>('builder');
+    const [activeTab, setActiveTab] = useState<TabKey>('builder');
     
     // Convert stored field data back to proper template fields with icon components
     const restoreFields = (storedFields: any[] | undefined) => {
@@ -54,28 +51,14 @@ export default function TemplateBuilder({ onCancel, editingTemplate }: TemplateB
     });
     const [showConfirmModal, setShowConfirmModal] = useState(false);
 
-    const currentStepIndex = STEPS.findIndex(s => s.key === currentStep);
-    const isFirstStep = currentStepIndex === 0;
-    const isLastStep = currentStepIndex === STEPS.length - 1;
-
     // Validate required filters
     const filtersValidation = useMemo(() => validateRequiredFilters(template), [template]);
-    const canSave = template.fields.length > 0 && filtersValidation.isValid;
+    const hasFields = template.fields.length > 0;
+    const needsFilterAttention = hasFields && !filtersValidation.isValid;
+    const canSave = hasFields && filtersValidation.isValid;
 
     const handleFiltersChange = (filters: FieldFilters) => {
         setTemplate(prev => ({ ...prev, filters }));
-    };
-
-    const handleNext = () => {
-        if (!isLastStep) {
-            setCurrentStep(STEPS[currentStepIndex + 1].key);
-        }
-    };
-
-    const handleBack = () => {
-        if (!isFirstStep) {
-            setCurrentStep(STEPS[currentStepIndex - 1].key);
-        }
     };
 
     const handleCancel = () => {
@@ -176,7 +159,7 @@ export default function TemplateBuilder({ onCancel, editingTemplate }: TemplateB
                 <div className="flex flex-col px-2 md:px-0">
                     <span className="text-xl md:text-2xl font-semibold">Template Builder</span>
                     <span className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">
-                        Step {currentStepIndex + 1} of {STEPS.length}: {STEPS[currentStepIndex].title}
+                        {editingTemplate ? 'Edit your template' : 'Create a new template'}
                     </span>
                 </div>
                 {/* Desktop buttons */}
@@ -188,61 +171,61 @@ export default function TemplateBuilder({ onCancel, editingTemplate }: TemplateB
                     >
                         Cancel
                     </Button>
-                    {!isFirstStep && (
-                        <Button 
-                            color="default" 
-                            variant="flat"
-                            onPress={handleBack}
-                            startContent={<ChevronLeft size={16} />}
-                        >
-                            Back
-                        </Button>
-                    )}
-                    {isLastStep ? (
-                        <Button 
-                            color="success" 
-                            variant="flat"
-                            onPress={handleSave}
-                            isDisabled={!canSave}
-                        >
-                            {editingTemplate ? 'Update' : 'Save'}
-                        </Button>
-                    ) : (
-                        <Button 
-                            color="primary" 
-                            variant="flat"
-                            onPress={handleNext}
-                            endContent={<ChevronRight size={16} />}
-                            isDisabled={template.fields.length === 0}
-                        >
-                            Next
-                        </Button>
-                    )}
+                    <Button 
+                        color="success" 
+                        variant="flat"
+                        onPress={handleSave}
+                        isDisabled={!canSave}
+                    >
+                        {editingTemplate ? 'Update' : 'Save'}
+                    </Button>
                 </div>
             </div>
 
-            {/* Step indicator */}
-            <div className="flex flex-row gap-2 mt-4 px-2 md:px-0">
-                {STEPS.map((step, index) => (
-                    <div 
-                        key={step.key}
-                        className={`flex-1 h-1 rounded-full transition-colors ${
-                            index <= currentStepIndex 
-                                ? 'bg-primary' 
-                                : 'bg-white/20 dark:bg-white/10'
-                        }`}
-                    />
-                ))}
-            </div>
+            {/* Tabs for Build and Filter */}
+            <Tabs 
+                aria-label="Builder Steps"
+                selectedKey={activeTab}
+                onSelectionChange={(key) => setActiveTab(key as TabKey)}
+                classNames={{
+                    tabList: "mt-4 p-1 backdrop-blur-md bg-white/10 dark:bg-black/20 border border-white/20 dark:border-white/10",
+                    tab: "data-[selected=true]:bg-white/20 dark:data-[selected=true]:bg-white/10",
+                }}
+            >
+                <Tab key="builder" title="Build" />
+                <Tab 
+                    key="filters" 
+                    title={
+                        <div className="flex items-center gap-2">
+                            <span>Filters</span>
+                            {needsFilterAttention && (
+                                <span className="flex items-center justify-center w-5 h-5 text-xs bg-warning-500 text-white rounded-full">
+                                    {filtersValidation.missingFields.length}
+                                </span>
+                            )}
+                        </div>
+                    }
+                />
+            </Tabs>
 
-            {/* Step content */}
-            {currentStep === 'builder' && (
+            {/* Validation message when on Build tab but filters need attention */}
+            {activeTab === 'builder' && needsFilterAttention && (
+                <div className="mt-4 mx-2 md:mx-0 flex items-center gap-2 px-4 py-3 rounded-lg bg-warning-500/20 border border-warning-500/30 text-warning-700 dark:text-warning-400">
+                    <AlertCircle size={18} />
+                    <span className="text-sm">
+                        {filtersValidation.missingFields.length} required filter{filtersValidation.missingFields.length > 1 ? 's' : ''} need{filtersValidation.missingFields.length === 1 ? 's' : ''} to be configured in the Filters tab before saving.
+                    </span>
+                </div>
+            )}
+
+            {/* Tab content */}
+            {activeTab === 'builder' && (
                 <StepBuilder 
                     template={template} 
                     onTemplateChange={setTemplate} 
                 />
             )}
-            {currentStep === 'filters' && (
+            {activeTab === 'filters' && (
                 <StepFilters 
                     template={template} 
                     onFiltersChange={handleFiltersChange}
@@ -259,39 +242,15 @@ export default function TemplateBuilder({ onCancel, editingTemplate }: TemplateB
                 >
                     Cancel
                 </Button>
-                {!isFirstStep && (
-                    <Button 
-                        color="default" 
-                        variant="flat"
-                        onPress={handleBack}
-                        startContent={<ChevronLeft size={16} />}
-                        className="flex-1"
-                    >
-                        Back
-                    </Button>
-                )}
-                {isLastStep ? (
-                    <Button 
-                        color="success" 
-                        variant="flat"
-                        onPress={handleSave}
-                        isDisabled={!canSave}
-                        className="flex-1"
-                    >
-                        {editingTemplate ? 'Update' : 'Save'}
-                    </Button>
-                ) : (
-                    <Button 
-                        color="primary" 
-                        variant="flat"
-                        onPress={handleNext}
-                        endContent={<ChevronRight size={16} />}
-                        isDisabled={template.fields.length === 0}
-                        className="flex-1"
-                    >
-                        Next
-                    </Button>
-                )}
+                <Button 
+                    color="success" 
+                    variant="flat"
+                    onPress={handleSave}
+                    isDisabled={!canSave}
+                    className="flex-1"
+                >
+                    {editingTemplate ? 'Update' : 'Save'}
+                </Button>
             </div>
 
             {/* Confirmation Modal */}
