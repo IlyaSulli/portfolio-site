@@ -18,7 +18,7 @@ import { Logo } from "@/components/icons";
 
 export const AppNavbar = () => {
   return (
-    <Navbar shouldHideOnScroll maxWidth="xl" position="sticky">
+    <Navbar maxWidth="xl" position="sticky">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand className="gap-3 max-w-fit">
           <NextLink
@@ -37,22 +37,20 @@ export const AppNavbar = () => {
               <NextLink
                 className={clsx(
                   linkStyles({ color: "foreground" }),
-                  "data-[active=true]:text-primary data-[active=true]:font-medium",
+                  "flex items-center gap-2 data-[active=true]:text-primary data-[active=true]:font-medium",
                 )}
                 color="foreground"
                 href={item.href}
               >
-                {item.label.toLowerCase()}
+                {item.icon && <item.icon aria-hidden="true" size={16} />}
+                {item.label}
               </NextLink>
             </NavbarItem>
           ))}
           <ThemeSwitch className="mx-4" />
         </div>
       </NavbarContent>
-      <NavbarContent
-        className="lg:hidden md:hidden sm:flex basis-1 pl-4"
-        justify="end"
-      >
+      <NavbarContent className="lg:hidden md:hidden sm:flex basis-1 pl-4" justify="end">
         <ThemeSwitch />
         <NavbarMenuToggle />
       </NavbarContent>
@@ -72,6 +70,7 @@ export const AppNavbar = () => {
                 href="#"
                 size="lg"
               >
+                {item.icon && <item.icon aria-hidden="true" size={16} />}
                 {item.label.toLowerCase()}
               </Link>
             </NavbarMenuItem>

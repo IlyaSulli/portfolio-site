@@ -10,12 +10,7 @@ export const projects = [
     classification: ["A-Level Project"],
     type: "App Development",
     languages: ["Dart", "Flutter", "MySQL", "PHP"],
-    tools: [
-      "Adobe Illustrator",
-      "Figma",
-      "Visual Studio Code",
-      "Android Studio",
-    ],
+    tools: ["Adobe Illustrator", "Figma", "Visual Studio Code", "Android Studio"],
     thumbnailImage: "/image/projects/alleat/slides/alleathomepageslide.webp",
     coverImage: "/image/projects/alleat/alleathomepage.png",
     imageGallery: [
@@ -36,8 +31,7 @@ export const projects = [
     classification: ["Work Project"],
     type: "Web Development",
     tools: ["WordPress", "Figma"],
-    thumbnailImage:
-      "/image/projects/katsullivan/slides/katsullivanhomepageslide.webp",
+    thumbnailImage: "/image/projects/katsullivan/slides/katsullivanhomepageslide.webp",
     coverImage: "/image/projects/katsullivan/katsullivanhomepage.png",
     imageGallery: [
       "/image/projects/katsullivan/slides/katsullivanaboutslide.webp",
@@ -55,8 +49,7 @@ export const projects = [
     type: "Web Development",
     languages: ["PHP"],
     tools: ["WordPress", "Adobe XD"],
-    thumbnailImage:
-      "/image/projects/passagetopoise/slides/passagetopoisehomepageslide.webp",
+    thumbnailImage: "/image/projects/passagetopoise/slides/passagetopoisehomepageslide.webp",
     coverImage: "/image/projects/passagetopoise/passagetopoisehomepage.png",
     imageGallery: [
       "/image/projects/passagetopoise/slides/passagetopoiseblogslide.webp",
@@ -99,10 +92,22 @@ export const projects = [
     thumbnailImage: "/image/projects/sshcart/slides/sshslide.webp",
     imageGallery: ["/image/placeholder.jpg"],
     contributors: [
-      {"name": "Sultan Alturki", "linkedin": "https://www.linkedin.com/in/sultan-alturki-539b54259/", "github": "https://github.com/Rokkema"},
-      {"name": "Coll MacCulloch", "linkedin": "https://www.linkedin.com/in/coll-macculloch-9b831b2b4/", "github": "https://github.com/cdmacc"},
-      {"name": "Hector Warner", "linkedin": "https://www.linkedin.com/in/hector-warner-7ba283328/", "github": "https://github.com/Hector-Warner"}
-    ]
+      {
+        name: "Sultan Alturki",
+        linkedin: "https://www.linkedin.com/in/sultan-alturki-539b54259/",
+        github: "https://github.com/Rokkema",
+      },
+      {
+        name: "Coll MacCulloch",
+        linkedin: "https://www.linkedin.com/in/coll-macculloch-9b831b2b4/",
+        github: "https://github.com/cdmacc",
+      },
+      {
+        name: "Hector Warner",
+        linkedin: "https://www.linkedin.com/in/hector-warner-7ba283328/",
+        github: "https://github.com/Hector-Warner",
+      },
+    ],
   },
   {
     title: "BlocDoc",
@@ -120,12 +125,24 @@ export const projects = [
     tools: ["JHipster", "Docker", "Figma", "Visual Studio Code"],
     imageGallery: ["/image/placeholder.jpg"],
     contributors: [
-      {"name": "George Henderson", "linkedin": "https://www.linkedin.com/in/george-henderson-a06960235/", "github": "https://github.com/G-Henderson"},
-      {"name": "Luke Honey", "linkedin": null, "github": "https://github.com/Luke-Honey"},
-      {"name": "Oliver Jones", "linkedin": "https://www.linkedin.com/in/oliver-jones-226119181/", "github": "https://github.com/oxj383"},
-      {"name": "Harvey Nicholson", "linkedin": null, "github": "https://github.com/deserted-operative"},
-      {"name": "Hector Warner", "linkedin": "https://www.linkedin.com/in/hector-warner-7ba283328/", "github": "https://github.com/Hector-Warner"}
-    ]
+      {
+        name: "George Henderson",
+        linkedin: "https://www.linkedin.com/in/george-henderson-a06960235/",
+        github: "https://github.com/G-Henderson",
+      },
+      { name: "Luke Honey", linkedin: null, github: "https://github.com/Luke-Honey" },
+      {
+        name: "Oliver Jones",
+        linkedin: "https://www.linkedin.com/in/oliver-jones-226119181/",
+        github: "https://github.com/oxj383",
+      },
+      { name: "Harvey Nicholson", linkedin: null, github: "https://github.com/deserted-operative" },
+      {
+        name: "Hector Warner",
+        linkedin: "https://www.linkedin.com/in/hector-warner-7ba283328/",
+        github: "https://github.com/Hector-Warner",
+      },
+    ],
   },
   {
     title: "Advanced News Classifier",
@@ -138,8 +155,7 @@ export const projects = [
     type: "Machine Learning Development",
     languages: ["Java"],
     tools: ["IntelliJ IDEA"],
-    thumbnailImage:
-      "/image/projects/newsclassifier/slides/newsclassifierslide.webp",
+    thumbnailImage: "/image/projects/newsclassifier/slides/newsclassifierslide.webp",
     coverImage: "/image/projects/newsclassifier/newsclassifier.png",
     imageGallery: [""],
   },
@@ -150,12 +166,7 @@ export const projects = [
     url: "recordshop",
     startDate: "2024-03-14",
     endDate: "2024-05-02",
-    tags: [
-      "Small Project",
-      "University Project",
-      "Backend Development",
-      "Database Development",
-    ],
+    tags: ["Small Project", "University Project", "Backend Development", "Database Development"],
     languages: ["Java", "JavaFX", "PostgreSQL"],
     tools: ["IntelliJ IDEA"],
     thumbnailImage: "/image/projects/recordshop/slides/recordshopslide.webp",
@@ -164,8 +175,7 @@ export const projects = [
   },
   {
     title: "30 Days of UI",
-    description:
-      "This project is upcoming 😭. Come back later to see the full breakdown",
+    description: "This project is upcoming 😭. Come back later to see the full breakdown",
     url: "30daysofui",
     startDate: "2025-08",
     endDate: "2025-09",
@@ -204,8 +214,7 @@ export const projects = [
     type: "Podcast",
     languages: [],
     tools: ["Audacity", "RSS", "Adobe Illustrator"],
-    thumbnailImage:
-      "image/projects/rollforanswers/slides/rollforanswersslide.webp",
+    thumbnailImage: "image/projects/rollforanswers/slides/rollforanswersslide.webp",
     coverImage: "/image/projects/rollforanswers/rollforanswerscover.webp",
   },
   {
@@ -217,8 +226,7 @@ export const projects = [
     startDate: "2024-10",
     endDate: "2025-07",
     tools: ["Obsidian", "Adobe Illustrator", "D&D Beyond", "Roll20"],
-    thumbnailImage:
-      "image/projects/thegreatbeyond/slides/thegreatbeyondslide.webp",
+    thumbnailImage: "image/projects/thegreatbeyond/slides/thegreatbeyondslide.webp",
     coverImage: "/image/projects/thegreatbeyond/sessionquest.png",
   },
   {
@@ -233,8 +241,12 @@ export const projects = [
     thumbnailImage: "image/projects/takectrl/slides/takectrlslide.webp",
     coverImage: "/image/projects/takectrl/cover.png",
     contributors: [
-      {"name": "Toby Knight", "linkedin": "https://www.linkedin.com/in/toby-knight-5b528123a/", "github": "https://github.com/16KnighT"}, 
-    ]
+      {
+        name: "Toby Knight",
+        linkedin: "https://www.linkedin.com/in/toby-knight-5b528123a/",
+        github: "https://github.com/16KnighT",
+      },
+    ],
   },
   {
     title: "Ilya Sullivan",
@@ -247,16 +259,17 @@ export const projects = [
       "Adobe Illustrator",
       "Adobe Photoshop",
       "Affinity Studio",
-      "Vercel"
+      "Vercel",
     ],
-    languages: ["TypeScript", "HTML", "CSS",],
+    languages: ["TypeScript", "HTML", "CSS"],
     startDate: "2024-07",
     thumbnailImage: "image/projects/ilyasullivan/slides/ilyasullivanslide.webp",
-    coverImage: "/image/projects/ilyasullivan/ilyasullivancover.png"
+    coverImage: "/image/projects/ilyasullivan/ilyasullivancover.png",
   },
   {
     title: "PrismConnect",
-    description: "PrismConnect was the product designed for the module Human Computer Interaction at the University of Birmingham. The aim was to test our ability to work at a team of five to develop a something to \"help people address a problematic behaviour\". Through market research including questionnaires, interviews and analysing existing products, we decided on the follwing problem statement: \n\n People struggle to reliably identify and respond to real-time scam attempts as they often make rushed oremotionally charged decisions. As a result they often missthe warning signs of a scam putting themselves at risk oflosing data or money. People who do notice signs oftenonly do so in a reactive way. With increasinglypersonalised AI driven scams emerging, it is becomingharder to distinguish between scams and genuinecommunication. \n\n From this, we went through multiple stages of ideation and refinement to come up with an all-in-one communication app designed to stop scammers and protect the user through authentication and real-time analysis. Using third party research papers, we looked at ways to detect scams including the latest generation of deepfake technology to mitigate and pre-emptively stop scammers.",
+    description:
+      'PrismConnect was the product designed for the module Human Computer Interaction at the University of Birmingham. The aim was to test our ability to work at a team of five to develop a something to "help people address a problematic behaviour". Through market research including questionnaires, interviews and analysing existing products, we decided on the follwing problem statement: \n\n People struggle to reliably identify and respond to real-time scam attempts as they often make rushed oremotionally charged decisions. As a result they often missthe warning signs of a scam putting themselves at risk oflosing data or money. People who do notice signs oftenonly do so in a reactive way. With increasinglypersonalised AI driven scams emerging, it is becomingharder to distinguish between scams and genuinecommunication. \n\n From this, we went through multiple stages of ideation and refinement to come up with an all-in-one communication app designed to stop scammers and protect the user through authentication and real-time analysis. Using third party research papers, we looked at ways to detect scams including the latest generation of deepfake technology to mitigate and pre-emptively stop scammers.',
     type: "Product Development",
     url: "prismconnect",
     tools: ["Affinity Studio"],
@@ -267,10 +280,10 @@ export const projects = [
     thumbnailImage: "image/projects/prismconnect/slides/prismconnectslide.webp",
     coverImage: "/image/projects/prismconnect/prismconnectbillboard.png",
     contributors: [
-      {"name": "Asia Petrie", "linkedin": "https://www.linkedin.com/in/asia-petrie-29a46129a/"}, 
-      {"name": "Danny Wayles", "linkedin": "https://www.linkedin.com/in/danny-wayles-a625681b2/"}, 
-      {"name": "Stephanie Franks", "linkedin": "https://www.linkedin.com/in/stephaniefranks7/"}, 
-      {"name": "Ava Boomla", "linkedin": "https://www.linkedin.com/in/ava-b-591b9422a/"},
-    ]
-  }
+      { name: "Asia Petrie", linkedin: "https://www.linkedin.com/in/asia-petrie-29a46129a/" },
+      { name: "Danny Wayles", linkedin: "https://www.linkedin.com/in/danny-wayles-a625681b2/" },
+      { name: "Stephanie Franks", linkedin: "https://www.linkedin.com/in/stephaniefranks7/" },
+      { name: "Ava Boomla", linkedin: "https://www.linkedin.com/in/ava-b-591b9422a/" },
+    ],
+  },
 ];

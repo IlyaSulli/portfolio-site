@@ -1,3 +1,5 @@
+import { Cuboid, FerrisWheel, House, Mail, WalletCards } from "lucide-react";
+
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
@@ -7,18 +9,22 @@ export const siteConfig = {
     {
       label: "Home",
       href: "/",
+      icon: House
     },
     {
-      label: "Projects",
+      label: "Showcase",
       href: "/projects",
+      icon: Cuboid
     },
     {
-      label: "Tools",
-      href: "/tools",
+      label: "Playground",
+      href: "/playground",
+      icon: FerrisWheel,
     },
     {
       label: "Contact",
-      href: "https://tally.so/r/nrGl6M",
+      href: "mailto:mail@ilyasullivan.com",
+      icon: Mail
     },
   ],
   navMenuItems: [
@@ -31,17 +37,20 @@ export const siteConfig = {
       href: "/projects",
     },
     {
-      label: "Tools",
-      href: "/tools",
+      label: "Playground",
+      href: "/playground",
+      icon: FerrisWheel,
     },
     {
       label: "Contact",
-      href: "https://tally.so/r/nrGl6M",
+      href: "mailto:mail@ilyasullivan.com",
     },
   ],
   links: {
     github: "https://github.com/IlyaSulli",
     linkedin: "https://www.linkedin.com/in/ilya-sullivan/",
+    instagram: "https://www.instagram.com/ilya.altered/",
+    email: "mailto:mail@ilyasullivan.com",
     dribbble: "https://dribbble.com/IlyaSullivan",
   },
 };

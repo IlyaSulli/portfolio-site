@@ -49,9 +49,7 @@ export default function GridProjects({
               aria-haspopup="dialog"
               className="p-2 w-full text-left relative"
               type="button"
-              onClick={() =>
-                (window.location.href = `../project/${project.url}`)
-              }
+              onClick={() => (window.location.href = `../project/${project.url}`)}
             >
               <Image
                 className="aspect-square object-cover"
@@ -113,10 +111,7 @@ export function ListProjects({
               >
                 <span className="font-medium text-3xl">{project.title}</span>
               </motion.span>
-              <motion.span
-                transition={{ type: "spring", stiffness: 100 }}
-                variants={arrowVariants}
-              >
+              <motion.span transition={{ type: "spring", stiffness: 100 }} variants={arrowVariants}>
                 <ArrowRight size={36} />
               </motion.span>
             </button>

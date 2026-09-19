@@ -44,11 +44,7 @@
     "Mechanical and Manufacturing Engineering (including Fabrication and Welding)",
     "Naval Architecture and Marine Engineering"
   ],
-  "Energy & Offshore": [
-    "Offshore and Energy",
-    "Offshore Based",
-    "Subsurface Scientists"
-  ],
+  "Energy & Offshore": ["Offshore and Energy", "Offshore Based", "Subsurface Scientists"],
   "Healthcare & Medicine": [
     "Alternative Medicine",
     "Ambulance Services",

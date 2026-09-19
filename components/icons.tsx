@@ -2,11 +2,7 @@ import * as React from "react";
 
 import { IconSvgProps } from "@/types";
 
-export const Logo: React.FC<IconSvgProps> = ({
-  height = 50,
-  width = 150,
-  ...props
-}) => (
+export const Logo: React.FC<IconSvgProps> = ({ height = 50, width = 150, ...props }) => (
   <svg
     enableBackground="new 0 0 148 48.7"
     fill="none"
@@ -27,21 +23,9 @@ export const Logo: React.FC<IconSvgProps> = ({
       d="m49.5 29c0 0.4 0.1 0.8 0.4 1.2s0.6 0.7 1 0.9 0.9 0.4 1.4 0.4 1-0.1 1.4-0.4c0.4-0.2 0.8-0.6 1-0.9 0.3-0.4 0.4-0.8 0.4-1.2v-8.4h2.6v8.4c0 1-0.2 1.8-0.7 2.6-0.5 0.7-1.1 1.3-1.9 1.8-0.8 0.4-1.7 0.6-2.7 0.6s-1.9-0.2-2.7-0.6-1.4-1-1.9-1.8-0.7-1.6-0.7-2.6v-8.4h2.6v8.4z"
       fill="currentColor"
     />
-    <path
-      className="st0"
-      d="M60.8,20.6h2.6v10.7h6.2v2.5h-8.8V20.6z"
-      fill="currentColor"
-    />
-    <path
-      className="st0"
-      d="M72.3,20.6H75v10.7h6.2v2.5h-8.8V20.6z"
-      fill="currentColor"
-    />
-    <path
-      className="st0"
-      d="M83.9,20.6h2.6v13.2h-2.6V20.6z"
-      fill="currentColor"
-    />
+    <path className="st0" d="M60.8,20.6h2.6v10.7h6.2v2.5h-8.8V20.6z" fill="currentColor" />
+    <path className="st0" d="M72.3,20.6H75v10.7h6.2v2.5h-8.8V20.6z" fill="currentColor" />
+    <path className="st0" d="M83.9,20.6h2.6v13.2h-2.6V20.6z" fill="currentColor" />
     <path
       className="st0"
       d="m91.9 20.6 3.9 9.5-1.5-0.3 3.5-9.2h3.1l-6 13.9-6-13.9h3z"
@@ -58,37 +42,15 @@ export const Logo: React.FC<IconSvgProps> = ({
       fill="currentColor"
     />
 
-    <path
-      className="st0"
-      d="M25.7,17.6h1.1v19.7h-1.1V17.6z"
-      fill="currentColor"
-    />
-    <path
-      className="st0"
-      d="m28.3 17.6v0.8h-4.2v-0.8h4.2z"
-      fill="currentColor"
-    />
-    <path
-      className="st0"
-      d="m28.3 36.4v0.8h-4.2v-0.8h4.2z"
-      fill="currentColor"
-    />
+    <path className="st0" d="M25.7,17.6h1.1v19.7h-1.1V17.6z" fill="currentColor" />
+    <path className="st0" d="m28.3 17.6v0.8h-4.2v-0.8h4.2z" fill="currentColor" />
+    <path className="st0" d="m28.3 36.4v0.8h-4.2v-0.8h4.2z" fill="currentColor" />
   </svg>
 );
 
-export const DiscordIcon: React.FC<IconSvgProps> = ({
-  size = 24,
-  width,
-  height,
-  ...props
-}) => {
+export const DiscordIcon: React.FC<IconSvgProps> = ({ size = 24, width, height, ...props }) => {
   return (
-    <svg
-      height={size || height}
-      viewBox="0 0 24 24"
-      width={size || width}
-      {...props}
-    >
+    <svg height={size || height} viewBox="0 0 24 24" width={size || width} {...props}>
       <path
         d="M14.82 4.26a10.14 10.14 0 0 0-.53 1.1 14.66 14.66 0 0 0-4.58 0 10.14 10.14 0 0 0-.53-1.1 16 16 0 0 0-4.13 1.3 17.33 17.33 0 0 0-3 11.59 16.6 16.6 0 0 0 5.07 2.59A12.89 12.89 0 0 0 8.23 18a9.65 9.65 0 0 1-1.71-.83 3.39 3.39 0 0 0 .42-.33 11.66 11.66 0 0 0 10.12 0q.21.18.42.33a10.84 10.84 0 0 1-1.71.84 12.41 12.41 0 0 0 1.08 1.78 16.44 16.44 0 0 0 5.06-2.59 17.22 17.22 0 0 0-3-11.59 16.09 16.09 0 0 0-4.09-1.35zM8.68 14.81a1.94 1.94 0 0 1-1.8-2 1.93 1.93 0 0 1 1.8-2 1.93 1.93 0 0 1 1.8 2 1.93 1.93 0 0 1-1.8 2zm6.64 0a1.94 1.94 0 0 1-1.8-2 1.93 1.93 0 0 1 1.8-2 1.92 1.92 0 0 1 1.8 2 1.92 1.92 0 0 1-1.8 2z"
         fill="currentColor"
@@ -97,19 +59,9 @@ export const DiscordIcon: React.FC<IconSvgProps> = ({
   );
 };
 
-export const TwitterIcon: React.FC<IconSvgProps> = ({
-  size = 24,
-  width,
-  height,
-  ...props
-}) => {
+export const TwitterIcon: React.FC<IconSvgProps> = ({ size = 24, width, height, ...props }) => {
   return (
-    <svg
-      height={size || height}
-      viewBox="0 0 24 24"
-      width={size || width}
-      {...props}
-    >
+    <svg height={size || height} viewBox="0 0 24 24" width={size || width} {...props}>
       <path
         d="M19.633 7.997c.013.175.013.349.013.523 0 5.325-4.053 11.461-11.46 11.461-2.282 0-4.402-.661-6.186-1.809.324.037.636.05.973.05a8.07 8.07 0 0 0 5.001-1.721 4.036 4.036 0 0 1-3.767-2.793c.249.037.499.062.761.062.361 0 .724-.05 1.061-.137a4.027 4.027 0 0 1-3.23-3.953v-.05c.537.299 1.16.486 1.82.511a4.022 4.022 0 0 1-1.796-3.354c0-.748.199-1.434.548-2.032a11.457 11.457 0 0 0 8.306 4.215c-.062-.3-.1-.611-.1-.923a4.026 4.026 0 0 1 4.028-4.028c1.16 0 2.207.486 2.943 1.272a7.957 7.957 0 0 0 2.556-.973 4.02 4.02 0 0 1-1.771 2.22 8.073 8.073 0 0 0 2.319-.624 8.645 8.645 0 0 1-2.019 2.083z"
         fill="currentColor"
@@ -118,19 +70,9 @@ export const TwitterIcon: React.FC<IconSvgProps> = ({
   );
 };
 
-export const GithubIcon: React.FC<IconSvgProps> = ({
-  size = 24,
-  width,
-  height,
-  ...props
-}) => {
+export const GithubIcon: React.FC<IconSvgProps> = ({ size = 24, width, height, ...props }) => {
   return (
-    <svg
-      height={size || height}
-      viewBox="0 0 24 24"
-      width={size || width}
-      {...props}
-    >
+    <svg height={size || height} viewBox="0 0 24 24" width={size || width} {...props}>
       <path
         clipRule="evenodd"
         d="M12.026 2c-5.509 0-9.974 4.465-9.974 9.974 0 4.406 2.857 8.145 6.821 9.465.499.09.679-.217.679-.481 0-.237-.008-.865-.011-1.696-2.775.602-3.361-1.338-3.361-1.338-.452-1.152-1.107-1.459-1.107-1.459-.905-.619.069-.605.069-.605 1.002.07 1.527 1.028 1.527 1.028.89 1.524 2.336 1.084 2.902.829.091-.645.351-1.085.635-1.334-2.214-.251-4.542-1.107-4.542-4.93 0-1.087.389-1.979 1.024-2.675-.101-.253-.446-1.268.099-2.64 0 0 .837-.269 2.742 1.021a9.582 9.582 0 0 1 2.496-.336 9.554 9.554 0 0 1 2.496.336c1.906-1.291 2.742-1.021 2.742-1.021.545 1.372.203 2.387.099 2.64.64.696 1.024 1.587 1.024 2.675 0 3.833-2.33 4.675-4.552 4.922.355.308.675.916.675 1.846 0 1.334-.012 2.41-.012 2.737 0 .267.178.577.687.479C19.146 20.115 22 16.379 22 11.974 22 6.465 17.535 2 12.026 2z"
@@ -141,12 +83,7 @@ export const GithubIcon: React.FC<IconSvgProps> = ({
   );
 };
 
-export const LinkedInIcon: React.FC<IconSvgProps> = ({
-  size = 24,
-  width,
-  height,
-  ...props
-}) => {
+export const LinkedInIcon: React.FC<IconSvgProps> = ({ size = 24, width, height, ...props }) => {
   return (
     <svg
       height={size || height}
@@ -604,12 +541,7 @@ export const LinkedInIcon: React.FC<IconSvgProps> = ({
   );
 };
 
-export const DribbbleIcon: React.FC<IconSvgProps> = ({
-  size = 22,
-  width,
-  height,
-  ...props
-}) => {
+export const DribbbleIcon: React.FC<IconSvgProps> = ({ size = 22, width, height, ...props }) => {
   return (
     <svg
       height={size || height}
@@ -637,12 +569,45 @@ export const DribbbleIcon: React.FC<IconSvgProps> = ({
   );
 };
 
-export const FlutterIcon: React.FC<IconSvgProps> = ({
-  size = 22,
-  width,
-  height,
-  ...props
-}) => {
+export const InstagramIcon: React.FC<IconSvgProps> = ({ size = 24, width, height, ...props }) => {
+  return (
+    <svg height={size || height} viewBox="0 0 24 24" width={size || width} {...props}>
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18ZM12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z"
+        fill="currentColor"
+      />
+      <path
+        d="M18 5C17.4477 5 17 5.44772 17 6C17 6.55228 17.4477 7 18 7C18.5523 7 19 6.55228 19 6C19 5.44772 18.5523 5 18 5Z"
+        fill="currentColor"
+      />
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M1.65396 4.27606C1 5.55953 1 7.23969 1 10.6V13.4C1 16.7603 1 18.4405 1.65396 19.7239C2.2292 20.8529 3.14708 21.7708 4.27606 22.346C5.55953 23 7.23969 23 10.6 23H13.4C16.7603 23 18.4405 23 19.7239 22.346C20.8529 21.7708 21.7708 20.8529 22.346 19.7239C23 18.4405 23 16.7603 23 13.4V10.6C23 7.23969 23 5.55953 22.346 4.27606C21.7708 3.14708 20.8529 2.2292 19.7239 1.65396C18.4405 1 16.7603 1 13.4 1H10.6C7.23969 1 5.55953 1 4.27606 1.65396C3.14708 2.2292 2.2292 3.14708 1.65396 4.27606ZM13.4 3H10.6C8.88684 3 7.72225 3.00156 6.82208 3.0751C5.94524 3.14674 5.49684 3.27659 5.18404 3.43597C4.43139 3.81947 3.81947 4.43139 3.43597 5.18404C3.27659 5.49684 3.14674 5.94524 3.0751 6.82208C3.00156 7.72225 3 8.88684 3 10.6V13.4C3 15.1132 3.00156 16.2777 3.0751 17.1779C3.14674 18.0548 3.27659 18.5032 3.43597 18.816C3.81947 19.5686 4.43139 20.1805 5.18404 20.564C5.49684 20.7234 5.94524 20.8533 6.82208 20.9249C7.72225 20.9984 8.88684 21 10.6 21H13.4C15.1132 21 16.2777 20.9984 17.1779 20.9249C18.0548 20.8533 18.5032 20.7234 18.816 20.564C19.5686 20.1805 20.1805 19.5686 20.564 18.816C20.7234 18.5032 20.8533 18.0548 20.9249 17.1779C20.9984 16.2777 21 15.1132 21 13.4V10.6C21 8.88684 20.9984 7.72225 20.9249 6.82208C20.8533 5.94524 20.7234 5.49684 20.564 5.18404C20.1805 4.43139 19.5686 3.81947 18.816 3.43597C18.5032 3.27659 18.0548 3.14674 17.1779 3.0751C16.2777 3.00156 15.1132 3 13.4 3Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+};
+
+export const EmailIcon: React.FC<IconSvgProps> = ({ size = 24, width, height, ...props }) => {
+  return (
+    <svg height={size || height} viewBox="0 0 24 24" width={size || width} {...props}>
+      <path
+        xmlns="http://www.w3.org/2000/svg"
+        d="M3 8L8.44992 11.6333C9.73295 12.4886 10.3745 12.9163 11.0678 13.0825C11.6806 13.2293 12.3194 13.2293 12.9322 13.0825C13.6255 12.9163 14.2671 12.4886 15.5501 11.6333L21 8M6.2 19H17.8C18.9201 19 19.4802 19 19.908 18.782C20.2843 18.5903 20.5903 18.2843 20.782 17.908C21 17.4802 21 16.9201 21 15.8V8.2C21 7.0799 21 6.51984 20.782 6.09202C20.5903 5.71569 20.2843 5.40973 19.908 5.21799C19.4802 5 18.9201 5 17.8 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V15.8C3 16.9201 3 17.4802 3.21799 17.908C3.40973 18.2843 3.71569 18.5903 4.09202 18.782C4.51984 19 5.07989 19 6.2 19Z"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
+};
+
+export const FlutterIcon: React.FC<IconSvgProps> = ({ size = 22, width, height, ...props }) => {
   return (
     <svg
       height={size || height}
@@ -692,12 +657,7 @@ export const FlutterIcon: React.FC<IconSvgProps> = ({
   );
 };
 
-export const DartIcon: React.FC<IconSvgProps> = ({
-  size = 22,
-  width,
-  height,
-  ...props
-}) => {
+export const DartIcon: React.FC<IconSvgProps> = ({ size = 22, width, height, ...props }) => {
   return (
     <svg
       height={size || height}
@@ -769,12 +729,7 @@ export const DartIcon: React.FC<IconSvgProps> = ({
   );
 };
 
-export const MySQLIcon: React.FC<IconSvgProps> = ({
-  size = 22,
-  width,
-  height,
-  ...props
-}) => {
+export const MySQLIcon: React.FC<IconSvgProps> = ({ size = 22, width, height, ...props }) => {
   return (
     <svg
       height={size || height}
@@ -797,12 +752,7 @@ export const MySQLIcon: React.FC<IconSvgProps> = ({
   );
 };
 
-export const PHPIcon: React.FC<IconSvgProps> = ({
-  size = 22,
-  width,
-  height,
-  ...props
-}) => {
+export const PHPIcon: React.FC<IconSvgProps> = ({ size = 22, width, height, ...props }) => {
   return (
     <svg
       height={size || height}
@@ -828,13 +778,7 @@ export const PHPIcon: React.FC<IconSvgProps> = ({
         </radialGradient>
       </defs>
       <g>
-        <ellipse
-          cx="128"
-          cy="67.3"
-          fill="url(#radialGradient-1)"
-          rx="128"
-          ry="67.3"
-        />
+        <ellipse cx="128" cy="67.3" fill="url(#radialGradient-1)" rx="128" ry="67.3" />
         <ellipse cx="128" cy="67.3" fill="#6181B6" rx="123" ry="62.3" />
         <g>
           <path
@@ -879,12 +823,7 @@ export const PHPIcon: React.FC<IconSvgProps> = ({
   );
 };
 
-export const CSSIcon: React.FC<IconSvgProps> = ({
-  size = 22,
-  width,
-  height,
-  ...props
-}) => {
+export const CSSIcon: React.FC<IconSvgProps> = ({ size = 22, width, height, ...props }) => {
   return (
     <svg
       height={size || height}
@@ -937,12 +876,7 @@ export const CSSIcon: React.FC<IconSvgProps> = ({
   );
 };
 
-export const HTMLIcon: React.FC<IconSvgProps> = ({
-  size = 22,
-  width,
-  height,
-  ...props
-}) => {
+export const HTMLIcon: React.FC<IconSvgProps> = ({ size = 22, width, height, ...props }) => {
   return (
     <svg
       height={size || height}
@@ -999,12 +933,7 @@ export const HTMLIcon: React.FC<IconSvgProps> = ({
   );
 };
 
-export const JavaScriptIcon: React.FC<IconSvgProps> = ({
-  size = 22,
-  width,
-  height,
-  ...props
-}) => {
+export const JavaScriptIcon: React.FC<IconSvgProps> = ({ size = 22, width, height, ...props }) => {
   return (
     <svg
       height={size || height}
@@ -1030,12 +959,7 @@ export const JavaScriptIcon: React.FC<IconSvgProps> = ({
   );
 };
 
-export const NodeJSIcon: React.FC<IconSvgProps> = ({
-  size = 22,
-  width,
-  height,
-  ...props
-}) => {
+export const NodeJSIcon: React.FC<IconSvgProps> = ({ size = 22, width, height, ...props }) => {
   return (
     <svg
       height={size || height}
@@ -1126,12 +1050,7 @@ export const NodeJSIcon: React.FC<IconSvgProps> = ({
   );
 };
 
-export const JavaIcon: React.FC<IconSvgProps> = ({
-  size = 22,
-  width,
-  height,
-  ...props
-}) => {
+export const JavaIcon: React.FC<IconSvgProps> = ({ size = 22, width, height, ...props }) => {
   return (
     <svg
       height={size || height}
@@ -1180,12 +1099,7 @@ export const JavaIcon: React.FC<IconSvgProps> = ({
   );
 };
 
-export const TypeScriptIcon: React.FC<IconSvgProps> = ({
-  size = 22,
-  width,
-  height,
-  ...props
-}) => {
+export const TypeScriptIcon: React.FC<IconSvgProps> = ({ size = 22, width, height, ...props }) => {
   return (
     <svg
       height={size || height}
@@ -1211,12 +1125,7 @@ export const TypeScriptIcon: React.FC<IconSvgProps> = ({
   );
 };
 
-export const MoonFilledIcon = ({
-  size = 24,
-  width,
-  height,
-  ...props
-}: IconSvgProps) => (
+export const MoonFilledIcon = ({ size = 24, width, height, ...props }: IconSvgProps) => (
   <svg
     aria-hidden="true"
     focusable="false"
@@ -1233,12 +1142,7 @@ export const MoonFilledIcon = ({
   </svg>
 );
 
-export const SunFilledIcon = ({
-  size = 24,
-  width,
-  height,
-  ...props
-}: IconSvgProps) => (
+export const SunFilledIcon = ({ size = 24, width, height, ...props }: IconSvgProps) => (
   <svg
     aria-hidden="true"
     focusable="false"
@@ -1255,12 +1159,7 @@ export const SunFilledIcon = ({
   </svg>
 );
 
-export const HeartFilledIcon = ({
-  size = 24,
-  width,
-  height,
-  ...props
-}: IconSvgProps) => (
+export const HeartFilledIcon = ({ size = 24, width, height, ...props }: IconSvgProps) => (
   <svg
     aria-hidden="true"
     focusable="false"
@@ -1280,12 +1179,7 @@ export const HeartFilledIcon = ({
   </svg>
 );
 
-export const ArrowRight = ({
-  size = 24,
-  width,
-  height,
-  ...props
-}: IconSvgProps) => (
+export const ArrowRight = ({ size = 24, width, height, ...props }: IconSvgProps) => (
   <svg
     aria-hidden="true"
     focusable="false"
@@ -1307,12 +1201,7 @@ export const ArrowRight = ({
   </svg>
 );
 
-export const ArrowLeft = ({
-  size = 24,
-  width,
-  height,
-  ...props
-}: IconSvgProps) => (
+export const ArrowLeft = ({ size = 24, width, height, ...props }: IconSvgProps) => (
   <svg
     aria-hidden="true"
     focusable="false"

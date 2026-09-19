@@ -54,9 +54,7 @@ export default function Carousel({ images }: { images: string[] }) {
         {images.map((_, i) => (
           <button
             key={i}
-            className={`w-3 h-3 rounded-full ${
-              i === currentIndex ? "bg-white" : "bg-white/50"
-            }`}
+            className={`w-3 h-3 rounded-full ${i === currentIndex ? "bg-white" : "bg-white/50"}`}
             onClick={() => setCurrentIndex(i)}
           />
         ))}

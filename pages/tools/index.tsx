@@ -25,7 +25,8 @@ export default function ProjectsPage() {
           <CardFooter className="flex flex-col items-start bg-white dark:bg-zinc-900 border-t border-black/10 dark:border-white/10 rounded-b-lg p-4 gap-2">
             <span className="text-lg font-semibold text-black dark:text-white">Text Generator</span>
             <p className="text-sm text-black/80 dark:text-white/80">
-              This tool is currently in beta. There may be some issues and will get updated in the future.
+              This tool is currently in beta. There may be some issues and will get updated in the
+              future.
             </p>
             <Button
               as="a"

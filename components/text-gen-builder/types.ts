@@ -1,38 +1,40 @@
 import { LucideIcon } from "lucide-react";
 
 export interface TemplateField {
-    id: string;
-    name: string;
-    originalName: string;
-    icon: React.ComponentType<{ size?: number; color?: string }>;
+  id: string;
+  name: string;
+  originalName: string;
+  icon: React.ComponentType<{ size?: number; color?: string }>;
 }
 
 export interface RangeValue {
-    min: number;
-    max: number;
+  min: number;
+  max: number;
 }
 
 export interface DateRangeValue {
-    min: string;
-    max: string;
+  min: string;
+  max: string;
 }
 
 export interface FilterValue {
-    filterKey: string;
-    value: string | string[] | number | boolean | RangeValue | DateRangeValue;
+  filterKey: string;
+  value: string | string[] | number | boolean | RangeValue | DateRangeValue;
 }
 
 export interface FieldFilters {
-    [fieldId: string]: FilterValue[];
+  [fieldId: string]: FilterValue[];
 }
 
 export interface Template {
-    name: string;
-    fields: TemplateField[];
-    filters?: FieldFilters;    icon?: string;
-    color?: string;}
+  name: string;
+  fields: TemplateField[];
+  filters?: FieldFilters;
+  icon?: string;
+  color?: string;
+}
 
 export interface ScrollState {
-    atTop: boolean;
-    atBottom: boolean;
+  atTop: boolean;
+  atBottom: boolean;
 }

@@ -8,13 +8,16 @@ import { siteConfig } from "@/config/site";
 import {
   ArrowRight,
   DribbbleIcon,
+  EmailIcon,
   GithubIcon,
+  InstagramIcon,
   LinkedInIcon,
 } from "@/components/icons";
 import DefaultLayout from "@/layouts/default";
 import ScrollingTitle from "@/sections/home/scrollingTitle";
 import FadeText from "@/components/custom-text";
 import GridProjects from "@/sections/home/projectsList";
+import { Instagram } from "lucide-react";
 
 export default function IndexPage() {
   return (
@@ -27,12 +30,7 @@ export default function IndexPage() {
             initial={{ y: 20 }}
             whileInView={{ y: 0 }}
           >
-            <Image
-              isBlurred
-              alt="Ilya Sullivan Profile"
-              className="m-5"
-              src="/image/ilya.webp"
-            />
+            <Image isBlurred alt="Ilya Sullivan Profile" className="m-5" src="/image/ilya.webp" />
           </motion.div>
           <div className="flex flex-col items-start md:w-1/2 py-20 px-8">
             {FadeText(
@@ -62,6 +60,28 @@ export default function IndexPage() {
               >
                 <LinkedInIcon size={20} />
                 LinkedIn
+              </Link>
+              <Link
+                isExternal
+                className={buttonStyles({
+                  variant: "bordered",
+                  radius: "full",
+                })}
+                href={siteConfig.links.instagram}
+              >
+                <InstagramIcon size={20} />
+                Instagram
+              </Link>
+              <Link
+                isExternal
+                className={buttonStyles({
+                  variant: "bordered",
+                  radius: "full",
+                })}
+                href={siteConfig.links.email}
+              >
+                <EmailIcon size={20} />
+                Email
               </Link>
             </div>
           </div>

@@ -14,12 +14,7 @@ const sizeToClass = {
   sm: "text-xl",
 };
 
-export default function SplitHeading({
-  size,
-  heading,
-  subheading,
-  children,
-}: SplitHeadingProps) {
+export default function SplitHeading({ size, heading, subheading, children }: SplitHeadingProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [containerHeight, setContainerHeight] = useState(0);
@@ -34,9 +29,7 @@ export default function SplitHeading({
       const containerRect = containerRef.current.getBoundingClientRect();
       const contentRect = contentRef.current.getBoundingClientRect();
 
-      setContainerHeight(
-        Math.max(0, contentRect.height - containerRect.height),
-      );
+      setContainerHeight(Math.max(0, contentRect.height - containerRect.height));
     }
   }, [children]);
 
@@ -44,19 +37,12 @@ export default function SplitHeading({
   const y = useTransform(scrollYProgress, [0, 1], [0, containerHeight]);
 
   return (
-    <div
-      ref={containerRef}
-      className="flex flex-col md:flex-row w-full sm:my-16 relative mb-8"
-    >
+    <div ref={containerRef} className="flex flex-col md:flex-row w-full sm:my-16 relative mb-8">
       <div className="md:w-2/5 lg:w-1/2 pr-16">
         <div className="md:sticky md:top-0">
           <motion.div className="flex flex-col py-8 md:-my-8" style={{ y }}>
-            <span className={`${sizeToClass[size]} font-semibold`}>
-              {heading}
-            </span>
-            <span className="text-sm font-normal pt-2">
-              {subheading?.toUpperCase()}
-            </span>
+            <span className={`${sizeToClass[size]} font-semibold`}>{heading}</span>
+            <span className="text-sm font-normal pt-2">{subheading?.toUpperCase()}</span>
           </motion.div>
         </div>
       </div>
