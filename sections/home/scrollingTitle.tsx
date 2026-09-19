@@ -4,13 +4,13 @@ import { useRef, useEffect } from "react";
 
 export default function ScrollingTitle() {
   const phrases = [
-    "Software Developer",
-    "App Developer",
-    "UI Designer",
+    "Product Designer",
+    "Software Engineer",
+    "UI/UX Designer",
+    "Graphic Designer",
+    "Artist",
     "Web Developer",
-    "Frontend Developer",
-    "UX Designer",
-    "Mobile Developer",
+    "Researcher",
   ];
   const longPhrases = Array(2).fill(phrases).flat();
 
