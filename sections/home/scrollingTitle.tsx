@@ -1,6 +1,7 @@
 "use client";
 import { wrap, motion, useMotionValue, useAnimationFrame } from "motion/react";
 import { useRef, useEffect } from "react";
+import { fontDisplay } from "@/config/fonts";
 
 export default function ScrollingTitle() {
   const phrases = [
@@ -74,7 +75,7 @@ export default function ScrollingTitle() {
   });
 
   return (
-    <div className="relative w-full overflow-hidden py-4 z-10">
+    <div className={`${fontDisplay.className} relative w-full overflow-hidden py-4 z-10`}>
       <motion.div
         ref={containerRef}
         className="flex whitespace-nowrap"
@@ -82,14 +83,14 @@ export default function ScrollingTitle() {
       >
         {longPhrases.map((phrase, index) => (
           <div key={index} className="flex items-center mx-8">
-            <span className="text-7xl md:text-8xl lg:text-9xl font-medium text-[color:var(--secondary)]">
+            <span className="text-7xl md:text-8xl lg:text-9xl font-black text-[color:var(--secondary)]">
               {phrase}
             </span>
             <motion.span
               animate={{ rotate: 360 }}
-              className="origin-center text-7xl md:text-8xl lg:text-9xl font-medium text-primary flex items-center ml-16"
+              className="origin-center text-7xl md:text-8xl lg:text-9xl font-black text-primary flex items-center ml-16"
               initial={{ rotate: 0 }}
-              transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
             >
               ✱
             </motion.span>
