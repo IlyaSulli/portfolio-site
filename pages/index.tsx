@@ -30,12 +30,12 @@ export default function IndexPage() {
             initial={{ y: 20 }}
             whileInView={{ y: 0 }}
           >
-            <Image isBlurred alt="Ilya Sullivan Profile" className="m-5" src="/image/ilya.webp" />
+            <Image isBlurred alt="Ilya Sullivan Profile" className="m-5" src="/image/ilya-x-canva.webp" />
           </motion.div>
           <div className="flex flex-col items-start md:w-1/2 py-20 px-8">
             {FadeText(
               "flex py-8 text-lg",
-              "Ilya Sullivan is a results-driven software developer specialising in crafting user-centric websites and applications. With a keen eye for design and a strong programming background he strives to build innovative digital products that provide exceptional user experiences.",
+              "Ilya Sullivan is a dedicated product designer specialising in creating personal, human-focused experiences. Everyone deserves to be included in design, thought of from the start.",
             )}
             <span className="flex py-4 text-lg font-semibold">Quick Links</span>
             <div className="flex flex-row gap-2 flex-wrap">
@@ -107,7 +107,7 @@ export default function IndexPage() {
             size="lg"
             variant="bordered"
           >
-            All Projects
+            All Pr ojects
           </Button>
         </div>
       </section>
