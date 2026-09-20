@@ -185,7 +185,7 @@ export const GridItem = ({
 
   // Apply styling differences based on the chosen grid variant.
   const gridItemStyles = clsx(
-    "overflow-hidden hover:cursor-pointer w-full h-auto self-start will-change-transform",
+    "overflow-hidden hover:cursor-pointer h-auto self-start will-change-transform",
     variant === "default" && "rounded-sm",
     variant === "masonry" && "break-inside-avoid mb-28 inline-block rounded-sm",
     variant === "polaroid" &&
