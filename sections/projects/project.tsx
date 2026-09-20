@@ -1,12 +1,5 @@
 import React, { ReactNode, useEffect, useState } from "react";
-import {
-  Spacer,
-  Breadcrumbs,
-  BreadcrumbItem,
-  Chip,
-  Image,
-  Link,
-} from "@heroui/react";
+import { Spacer, Breadcrumbs, BreadcrumbItem, Chip, Image, Link } from "@heroui/react";
 
 import BackToTop from "@/components/back-to-top";
 import SplitHeading from "@/components/split-heading";
@@ -25,8 +18,7 @@ interface ProjectProps {
 export default function Project({ url, children }: ProjectProps) {
   const project = projects.find((entry) => entry.url === url);
 
-  if (!project)
-    return <div className="text-warning">Project metadata not found</div>;
+  if (!project) return <div className="text-warning">Project metadata not found</div>;
 
   return (
     <DefaultLayout>
@@ -36,9 +28,7 @@ export default function Project({ url, children }: ProjectProps) {
           <BreadcrumbItem>{project.title}</BreadcrumbItem>
         </Breadcrumbs>
         <div className="flex flex-col items-center justify-center mt-32 mb-8">
-          <span className={title({ size: "xl", className: "text-center" })}>
-            {project.title}
-          </span>
+          <span className={title({ size: "xl", className: "text-center" })}>{project.title}</span>
           <span className="py-4 font-medium text-sm">
             {formatDate(project.startDate ?? "")} -{" "}
             {project.endDate ? formatDate(project.endDate) : "Present Project"}
@@ -77,7 +67,7 @@ export default function Project({ url, children }: ProjectProps) {
           </span>
           <Spacer y={16} />
           <div className="flex flex-row justify-between">
-            <span className="text-lg font-semibold">project type</span>
+            <span className="text-lg font-semibold">Project Type</span>
             <div className="flex flex-col text-lg font-normal">
               <span>{project.type}</span>
             </div>
@@ -88,14 +78,10 @@ export default function Project({ url, children }: ProjectProps) {
                 <hr className="border-1 h-0" />
               </div>
               <div className="flex flex-row justify-between text-right">
-                <span className="text-lg font-semibold">contributors</span>
+                <span className="text-lg font-semibold">Contributors</span>
                 {(() => {
-                  const hasAnyGithub = project.contributors.some(
-                    (c) => "github" in c && c.github
-                  );
-                  const hasAnyLinkedin = project.contributors.some(
-                    (c) => c.linkedin
-                  );
+                  const hasAnyGithub = project.contributors.some((c) => "github" in c && c.github);
+                  const hasAnyLinkedin = project.contributors.some((c) => c.linkedin);
                   return (
                     <div className="flex flex-col w-2/3 items-end gap-2">
                       {project.contributors.map((contributor, idx) => (
@@ -109,8 +95,8 @@ export default function Project({ url, children }: ProjectProps) {
                           >
                             {contributor.name}
                           </Chip>
-                          {hasAnyGithub && (
-                            "github" in contributor && contributor.github ? (
+                          {hasAnyGithub &&
+                            ("github" in contributor && contributor.github ? (
                               <Link
                                 isExternal
                                 href={contributor.github}
@@ -121,10 +107,9 @@ export default function Project({ url, children }: ProjectProps) {
                               </Link>
                             ) : (
                               <div className="w-7 h-7" />
-                            )
-                          )}
-                          {hasAnyLinkedin && (
-                            contributor.linkedin ? (
+                            ))}
+                          {hasAnyLinkedin &&
+                            (contributor.linkedin ? (
                               <Link
                                 isExternal
                                 href={contributor.linkedin}
@@ -135,8 +120,7 @@ export default function Project({ url, children }: ProjectProps) {
                               </Link>
                             ) : (
                               <div className="w-7 h-7" />
-                            )
-                          )}
+                            ))}
                         </div>
                       ))}
                     </div>
@@ -151,7 +135,7 @@ export default function Project({ url, children }: ProjectProps) {
                 <hr className="border-1 h-0" />
               </div>
               <div className="flex flex-row justify-between text-right">
-                <span className="text-lg font-semibold">languages</span>
+                <span className="text-lg font-semibold">Languages</span>
                 <div className="flex flex-row w-2/3 flex-wrap justify-end">
                   {project.languages?.sort().map((lang, idx) => (
                     <Chip
@@ -185,16 +169,11 @@ export default function Project({ url, children }: ProjectProps) {
                 <hr className="border-1 h-0" />
               </div>
               <div className="flex flex-row justify-between text-right">
-                <span className="text-lg font-semibold">tools</span>
+                <span className="text-lg font-semibold">Tools</span>
                 <div className="flex flex-row w-2/3 flex-wrap justify-end">
                   {project.tools.sort().map((tool, idx) => (
                     <div key={idx}>
-                      <Chip
-                        className="gap-2 m-1"
-                        color="secondary"
-                        radius="full"
-                        variant="flat"
-                      >
+                      <Chip className="gap-2 m-1" color="secondary" radius="full" variant="flat">
                         {tool}
                       </Chip>
                     </div>
