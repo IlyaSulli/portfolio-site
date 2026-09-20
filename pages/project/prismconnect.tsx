@@ -8,21 +8,7 @@ export default function PrismConnect() {
 
   return (
     <Project url="prismconnect">
-      <SplitHeading heading={"Poster"} size="lg">
-        <p>
-          Below is the poster intended to show to stakeholders in order to market them to invest in
-          the product, showing off our prototype favourably while keeping details high-level.
-        </p>
-      </SplitHeading>
       <Image src="/image/projects/prismconnect/prismconnectposter.png" />
-      <SplitHeading heading={"Development"} size="lg">
-        <p>
-          The project itself was intended as an assignment to test our ability to work as a team to
-          work from a single overarching problem, and narrowing down the issue through interviews,
-          questionnaries and market research to create a product - to show evidence of this, we made
-          a presentation to show the full process and present the features of the product in detail:
-        </p>
-      </SplitHeading>
       <div className="mb-16">
         <object
           data={pdfUrl}
