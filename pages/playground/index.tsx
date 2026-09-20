@@ -15,6 +15,7 @@ const playgroundCategories = [
   "All",
   ...Array.from(new Set(playgroundImages.flatMap((image) => image.category))),
 ];
+const isVideo = (src: string) => /\.(mp4|webm|ogg)$/i.test(src);
 
 export default function PlaygroundPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -156,7 +157,7 @@ export default function PlaygroundPage() {
 
   return (
     <div className="relative h-dvh w-screen overflow-hidden">
-      <div className="absolute inset-x-0 top-0 z-20">
+      <div className="absolute inset-x-0 top-0 z-40">
         <AppNavbar />
       </div>
 
@@ -193,20 +194,39 @@ export default function PlaygroundPage() {
         </div>
       </div>
 
-      <DraggableContainer variant="polaroid">
+      <DraggableContainer key={selectedCategory} variant="polaroid">
         <GridBody>
           {filteredImages.map((image) => (
             <GridItem key={image.id} className="w-64" onClick={() => handleImageOpen(image)}>
-              <img
-                src={image.src}
-                alt={image.alt}
-                ref={(element) => {
-                  if (element?.complete) handleImageSettled(image.id);
-                }}
-                onLoad={() => handleImageSettled(image.id)}
-                onError={() => handleImageSettled(image.id)}
-                className="pointer-events-none block h-auto w-full"
-              />
+              {isVideo(image.src) ? (
+                <video
+                  src={image.src}
+                  aria-label={image.alt || image.title}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  ref={(element) => {
+                    if (element && element.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+                      handleImageSettled(image.id);
+                    }
+                  }}
+                  onLoadedData={() => handleImageSettled(image.id)}
+                  onError={() => handleImageSettled(image.id)}
+                  className="pointer-events-none block h-auto w-full"
+                />
+              ) : (
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  ref={(element) => {
+                    if (element?.complete) handleImageSettled(image.id);
+                  }}
+                  onLoad={() => handleImageSettled(image.id)}
+                  onError={() => handleImageSettled(image.id)}
+                  className="pointer-events-none block h-auto w-full"
+                />
+              )}
             </GridItem>
           ))}
         </GridBody>
@@ -250,55 +270,70 @@ export default function PlaygroundPage() {
             <X size={18} />
           </button>
 
-          <div className="fixed bottom-5 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2 rounded-full border border-divider bg-background/80 p-1 shadow-medium backdrop-blur-md">
-            <button
-              type="button"
-              aria-label="Zoom out"
-              title="Zoom out"
-              onClick={(event) => {
-                event.stopPropagation();
-                changeZoom(-0.25);
-              }}
-              className="rounded-full p-3 text-foreground transition-colors hover:bg-default-100"
-            >
-              <Minus size={18} />
-            </button>
+          {isVideo(selectedImage.src) ? (
+            <video
+              src={selectedImage.src}
+              aria-label={selectedImage.alt || selectedImage.title}
+              controls
+              autoPlay
+              muted
+              playsInline
+              onClick={(event) => event.stopPropagation()}
+              className="max-h-full max-w-full object-contain"
+            />
+          ) : (
+            <>
+              <div className="fixed bottom-5 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2 rounded-full border border-divider bg-background/80 p-1 shadow-medium backdrop-blur-md">
+                <button
+                  type="button"
+                  aria-label="Zoom out"
+                  title="Zoom out"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    changeZoom(-0.25);
+                  }}
+                  className="rounded-full p-3 text-foreground transition-colors hover:bg-default-100"
+                >
+                  <Minus size={18} />
+                </button>
 
-            <div className="flex min-w-20 items-center justify-center gap-2 px-2 text-sm text-foreground/70">
-              <Maximize2 size={14} />
-              <span>{Math.round(zoom * 100)}%</span>
-            </div>
+                <div className="flex min-w-20 items-center justify-center gap-2 px-2 text-sm text-foreground/70">
+                  <Maximize2 size={14} />
+                  <span>{Math.round(zoom * 100)}%</span>
+                </div>
 
-            <button
-              type="button"
-              aria-label="Zoom in"
-              title="Zoom in"
-              onClick={(event) => {
-                event.stopPropagation();
-                changeZoom(0.25);
-              }}
-              className="rounded-full p-3 text-foreground transition-colors hover:bg-default-100"
-            >
-              <Plus size={18} />
-            </button>
-          </div>
+                <button
+                  type="button"
+                  aria-label="Zoom in"
+                  title="Zoom in"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    changeZoom(0.25);
+                  }}
+                  className="rounded-full p-3 text-foreground transition-colors hover:bg-default-100"
+                >
+                  <Plus size={18} />
+                </button>
+              </div>
 
-          <img
-            src={selectedImage.src}
-            alt={selectedImage.alt}
-            draggable={false}
-            onClick={(event) => event.stopPropagation()}
-            onPointerDown={handlePointerDown}
-            onPointerMove={handlePointerMove}
-            onPointerUp={handlePointerEnd}
-            onPointerLeave={handlePointerEnd}
-            onPointerCancel={handlePointerEnd}
-            className="max-h-full max-w-full select-none object-contain touch-none"
-            style={{
-              transform: `translate(${position.x}px, ${position.y}px) scale(${zoom})`,
-              cursor: zoom > 1 ? "grab" : "default",
-            }}
-          />
+              <img
+                src={selectedImage.src}
+                alt={selectedImage.alt}
+                draggable={false}
+                onClick={(event) => event.stopPropagation()}
+                onPointerDown={handlePointerDown}
+                onPointerMove={handlePointerMove}
+                onPointerUp={handlePointerEnd}
+                onPointerLeave={handlePointerEnd}
+                onPointerCancel={handlePointerEnd}
+                className="max-h-full max-w-full select-none object-contain touch-none"
+                style={{
+                  transform: `translate(${position.x}px, ${position.y}px) scale(${zoom})`,
+                  cursor: zoom > 1 ? "grab" : "default",
+                }}
+              />
+            </>
+          )}
         </div>
       )}
     </div>
