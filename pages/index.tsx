@@ -90,10 +90,8 @@ export default function IndexPage() {
       <section>
         <div className="md:w-1/2 p-4 mb-4">
           <span className="font-sans font-medium text-2xl">
-            Solving everyday problems with unique and{" "}
-            <span className="text-primary font-medium text-2xl italic">
-              personalised experiences
-            </span>
+            Imagining a better future...
+            
           </span>
         </div>
         <GridProjects featuredOnly nItems={3} />
@@ -107,7 +105,7 @@ export default function IndexPage() {
             size="lg"
             variant="bordered"
           >
-            All Pr ojects
+            All Projects
           </Button>
         </div>
       </section>
