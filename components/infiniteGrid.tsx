@@ -234,11 +234,22 @@ export const GridBody = memo(
       };
     }
 
+    const columnCount = Math.min(6, Math.max(items.length, 1));
+    const masonryColumnClass = [
+      "columns-1",
+      "columns-2",
+      "columns-3",
+      "columns-4",
+      "columns-5",
+      "columns-6",
+    ][columnCount - 1];
+
     // Each row gets the same base layout plus variant-specific spacing.
     const gridBodyStyles = clsx(
       variant === "default" &&
         "grid grid-cols-[repeat(6,1fr)] h-fit w-fit gap-7 p-7 md:gap-28 md:p-14",
-      (variant === "masonry" || variant === "polaroid") && "columns-6 h-fit w-fit gap-x-28 px-14",
+      (variant === "masonry" || variant === "polaroid") &&
+        `${masonryColumnClass} h-fit w-fit gap-x-28 px-14`,
       className,
     );
 
