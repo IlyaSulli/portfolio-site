@@ -7,11 +7,7 @@ export default function ScrollingTitle() {
   const phrases = [
     "Product Designer",
     "Software Engineer",
-    "UI/UX Designer",
     "Graphic Designer",
-    "Artist",
-    "Web Developer",
-    "Researcher",
   ];
   const longPhrases = Array(2).fill(phrases).flat();
 
