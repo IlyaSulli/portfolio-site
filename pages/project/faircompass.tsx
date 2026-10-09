@@ -39,10 +39,10 @@ export default function FairCompass() {
         </SplitHeading>
         <div className="mb-16">
           <object
+            className="rounded-lg aspect-square"
             data={pdfUrl2}
             type="application/pdf"
             width="100%"
-            className="rounded-lg aspect-square"
           >
             <div className="flex flex-col items-center justify-center gap-4 p-8 bg-default-100 rounded-lg h-48">
               <p className="text-default-600 text-center">
